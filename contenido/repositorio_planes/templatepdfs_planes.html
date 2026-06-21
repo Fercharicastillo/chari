@@ -31,15 +31,9 @@
                 <p><a class="toc-part" href="../simuladores/simuladores.html">Simuladores</a></p>
                 <p><a class="toc-part" href="../graficadores/graficadores.html">Graficadores</a></p>
                 <p><a class="toc-part" href="../proyectos/proyectos.html">Proyectos</a></p>
-                <p class="current-part"><a href="repositorio_formulas.html">Repositorio de Ecuaciones</a></p>
-                    <p class="current current-part"><a class="toc-section" href="rf_mecanica_newtoniana.html">Mecánica Newtoniana</a></p>
-                    <!--<p class="current-part"><a class="toc-section" href="#">Ondas y Acústica</a></p>
-                    <p class="current-part"><a class="toc-section" href="#">Termodinámica</a></p>
-                    <p class="current-part"><a class="toc-section" href="#">Electromagnetismo</a></p>
-                    <p class="current-part"><a class="toc-section" href="#">Óptica</a></p>
-                    <p class="current-part"><a class="toc-section" href="#">Física Moderna</a></p>-->
-                <p><a class="toc-part" href="#">Repositorio de Planes de Clase</a></p>
-                <p><a class="toc-part" href="#">Repositorio de Materia</a></p>
+                <p class="current-part"><a href="repositorio_planes.html">Repositorio de Planes de Clase</a></p>
+                    <p id="mecanica" class="current-part"><a class="toc-section" href="rp_mecanica_newtoniana.html">Mecánica Newtoniana</a></p>
+                    <p id="calculo"  class="current-part"><a class="toc-section" href="rp_mecanica_cálculo diferencial.html">Cálculo Diferencial</a></p>
                 <p><a class="toc-part" href="../repositorio_libros/repositorio_libros.html">Repositorio de Libros</a></p>
                 <p><a class="toc-part" href="../autores/autores.html">Hoja de vida</a></p></div>
                 <!--<div class="content__Lenguaje-formulas">
@@ -87,23 +81,20 @@
                     if (pdfSrc) {
                     document.getElementById('pdfViewer').src = pdfSrc;
                     }
-                });
-                function setPdfSrcAndRedirect(pdfSrc) {
-                    sessionStorage.setItem('pdfSrc', pdfSrc);
-                    window.location.href = "templatepdfs_formulas.html";
-                }
 
-                document.addEventListener("DOMContentLoaded", function() {
-                var gotoTopBtns = document.querySelectorAll('.goto-top-btn');
-                gotoTopBtns.forEach(function(btn) {
-                btn.addEventListener('click', function() {
-                    var pdfSrc = this.getAttribute('data-pdf');
-                    if (pdfSrc) {
-                    setPdfSrcAndRedirect(pdfSrc);
-            }
-        });
-    });
-});
+                    var origen = sessionStorage.getItem("origen");
+                    
+                    document.querySelectorAll(".current-part").forEach(function(item) {
+                    item.classList.remove("current");
+                    });
+
+                    var menu = document.getElementById(origen);
+
+                    if (menu) {
+                        menu.classList.add("current");
+                    }
+
+                });
 </script>
 </body>
 </html>

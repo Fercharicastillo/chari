@@ -22,11 +22,37 @@ var gotoTopBtnTmpl = $('<div>') /* Se crea un elemento div*/
   .append(gotoTopBtn)
   .append(youtubeBtn); // Se añade dentro del div el elemento gotoToBtn creado anteriormente
 
+var subtemaBtnTmpl = $('<div>')
+  .addClass('subtema-actions')
+  .append(
+      $('<a>')
+        .addClass('subtema-view-btn')
+        .html('👁 Ver')
+  )
+  .append(
+      $('<a>')
+        .addClass('subtema-expand-btn')
+        .html('⛶')
+  );  
+
 var toggleFormulasBtnTmpl = $('<span>') // Se crea un elemento span
   .html(openSymbol) // Tendra como contenido el simbolo Carpeta abierta
   .addClass(toggleFormulasCssClass); // Se le añade la clase toggle-formulas-btn
 
-
+const origen = document.body.dataset.origen;
+const nombresArchivosformulas = [
+  "Capitulo_1_Cinematica_en_y_3_dimensiones.pdf",
+  "Capitulo_2_Dinamica_Traslacional_y_Rotacional.pdf",
+  "Capitulo_3_Estatica.pdf",
+  "Capitulo_4_Trabajo_y_Energia.pdf",
+  "Capitulo_5_Gravitacion.pdf",
+  "Capitulo_6_Movimiento_Oscilatorio.pdf",
+  "Capitulo_7_Fluidos.pdf"
+];
+const domaini = "https://fercharicastillo.github.io/chari/";
+const enterfolderi = "visor_pdfs/web/viewer.html?file=pdfs/";
+const namefolderi = "pdfs_repositorio_formulas/mecanica_newtoniana/";
+  
 $(document).ready(bootstrap); // Ejecuta la funcion boostrap una vez cargada la pagina y no antes
 
 function scrollToSection(sectionId) {
@@ -41,20 +67,6 @@ $('.header a[href^="#"]').on('click', function(event) {
   scrollToSection(target); // Llama a la función para desplazar la página a la sección correspondiente
 });
 
-const nombresArchivosformulas = [
-  "Capitulo_1_Cinematica_en_y_3_dimensiones.pdf",
-  "Capitulo_2_Dinamica_Traslacional_y_Rotacional.pdf",
-  "Capitulo_3_Estatica.pdf",
-  "Capitulo_4_Trabajo_y_Energia.pdf",
-  "Capitulo_5_Gravitacion.pdf",
-  "Capitulo_6_Movimiento_Oscilatorio.pdf",
-  "Capitulo_7_Fluidos.pdf"
-];
-
-const domaini = "https://fercharicastillo.github.io/chari/";
-const enterfolderi = "visor_pdfs/web/viewer.html?file=pdfs/";
-const namefolderi = "pdfs_repositorio_formulas/mecanica_newtoniana/";
-
 function addGotoTopBtn(index, h2Elem) {
   var pdfSrc = domaini + enterfolderi + namefolderi + nombresArchivosformulas[index]; // Generar la ruta del PDF correspondiente
   var gotoTopBtnContainer = gotoTopBtnTmpl.clone(); // Clonar el contenedor que contiene ambos botones
@@ -64,7 +76,7 @@ function addGotoTopBtn(index, h2Elem) {
     event.preventDefault();
     var pdfSrc = $(this).attr('data-pdf');
     if (pdfSrc) {
-      setPdfSrcAndRedirect(pdfSrc);
+      setPdfSrcAndRedirect(pdfSrc, origen);
     }
   });
   $(h2Elem).prepend(gotoTopBtnContainer); // Añadir el contenedor clonado al encabezado
@@ -105,33 +117,53 @@ function unfoldTarget(ev) {
   }
 }
 
+// Funcion para añadir botones para ver videos
+function pruebaSubtemas() {
+
+    $(".grupo-formulas").each(function(index) {
+
+        const recurso = recursosSubtemas[index];
+
+        var botones = subtemaBtnTmpl.clone();
+
+        botones
+          .removeClass(titleRightBtnsCssClass)
+          .addClass("subtema-actions");
+
+        var pdfBtn = botones.find(".goto-top-btn");
+        var videoBtn = botones.find(".view-video-btn");
+        var verBtn = botones.find(".subtema-view-btn");
+        var expandBtn = botones.find(".subtema-expand-btn");
+
+        pdfBtn.attr("title", recurso ? "PDF: " + recurso.nombre : "PDF no disponible");
+        videoBtn.attr("title", recurso ? "Video: " + recurso.nombre : "Video no disponible");
+
+        pdfBtn.on("click", function (event) {
+            event.preventDefault();
+
+            if (recurso && recurso.pdf) {
+                setPdfSrcAndRedirect(
+                    domaini + enterfolderi + namefolderi + "capitulo_1/" + recurso.pdf
+                );
+            }
+        });
+
+        $(this).append(botones);
+
+    });
+
+}
+
+/*Funcionamiento del BTN de PDF */
 function bootstrap() {
   toggleFormulasBtnElems = $('h2')
     .each(addGotoTopBtn)
     .map(addToggleBtn);
 
+    pruebaSubtemas();
+
   $('.formulas-title').mousedown(unfoldTarget);
   handleInitialSection();
-  
-  $('.goto-top-btn').on('click', function(event) {
-  event.preventDefault();
-  var pdfSrc = $(this).attr('data-pdf'); // Obtener la ruta del PDF desde el atributo de datos
-  if (pdfSrc) {
-    window.location.href = "templatepdfs_formulas.html";
-    var pdfViewer = $('#pdfViewer');
-    if (pdfViewer.length === 0) {
-      pdfViewer = $('#main-despleglabe').find('iframe');
-    }
-    pdfViewer.attr('src', pdfSrc);
-  }
-});
-}
-
-function setPdfSrcAndRedirect(pdfSrc) {
-  // Guardar el valor de data-pdf
-  sessionStorage.setItem('pdfSrc', pdfSrc);
-  // Redirigir a la plantilla
-  window.location.href = "templatepdfs_formulas.html";
 }
 
 function handleInitialSection() {
@@ -152,3 +184,11 @@ function handleInitialSection() {
 function getIdFromHref(elem) {
   return elem.href.match(/#(.*)/)[1];
 }
+
+//Funcion capturar el origen desde donde se clickea el mostrar pdf
+function setPdfSrcAndRedirect(pdfSrc) {
+    sessionStorage.setItem('pdfSrc', pdfSrc);
+    sessionStorage.setItem('origen', origen);
+    window.location.href = "templatepdfs_planes.html";
+}
+

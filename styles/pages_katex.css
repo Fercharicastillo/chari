@@ -886,12 +886,38 @@ h2 a.formulas-title {
 }
 
 .grupo-formulas {
-  display: inline-block;
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
   vertical-align: top;
   border: dotted 1px var(--bdr-grupo-formulas);
   border-top: solid 1px var(--bdr-top-grupo-formulas);
   margin-bottom: 8px;
   text-align: center;
+  overflow: hidden;
+}
+
+.subtema-actions {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 8px;
+  background: #eaf3ff;
+  border-top: 1px solid var(--bdr-grupo-formulas);
+}
+
+.subtema-actions a {
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 120%;
+  font-weight: normal;
+  color: #0860a8;
+}
+
+a.subtema-expand-btn{
+    font-size: 150%;
 }
 
 span.formula{
