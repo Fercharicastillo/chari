@@ -1,9 +1,6 @@
-.main_s2_evaluaciones{
+.main_s2_evaluaciones {
     display: grid;
-    grid-template-areas: 
-    "evaluaciones-header evaluaciones-header"
-    "evaluaciones-formulario evaluaciones-temporizador"
-    ;
+    /* Creamos 3 filas: header, el bloque principal/botones y el final */
     grid-template-columns: 3fr 1fr;
     width: 95%;
     margin: 30px auto;
@@ -13,36 +10,57 @@
 }
 
 .evaluaciones-header {
-  grid-area: evaluaciones-header;
-  background-color: #d7e8f6;; 
-  grid-column: span 2; 
-  padding: 20px;
-  text-align: center;
-  font-size: 2.2em;
+    grid-column: span 2; /* Ocupa las dos columnas de la primera fila */
+    background-color: #d7e8f6; 
+    padding: 20px;
+    text-align: center;
+    font-size: 2.2em;
 }
 
+/* El formulario ocupa la columna 1 */
 .evaluaciones-formulario {
-  grid-area: evaluaciones-formulario;
-  background-color: #4472c4;
-  padding: 40px;
-  display: contents;
+    grid-column: 1;
+    padding: 40px 40px 0px 40px;
+    /* Eliminamos display: contents para que respete su espacio */
 }
 
+/* Los botones también se quedan alineados en la columna 1 */
+.botones_preguntas {
+    grid-column: 1;
+    /* Activamos flexbox de forma horizontal */
+    display: flex;
+    justify-content: space-between; /* Empuja los elementos a los extremos y distribuye el espacio */
+    align-items: center;            /* Los alinea perfectamente al centro vertical */
+}
+
+/* Opcional: Para asegurarte de que todos tengan una forma uniforme */
+.botones_preguntas button {
+    min-width: 120px; /* Le da un ancho mínimo estético a cada botón */
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+/* ¡Aquí está el truco! Hacemos que la barra lateral abarque desde la fila 2 hasta la 4 */
 .evaluaciones-temporizador {
-  grid-area: evaluaciones-temporizador;
+    grid-column: 2;
+    grid-row: 2 / span 2; 
+    padding: 20px;
+    border-left: 1px solid var(--border); /* Opcional: una bonita línea divisoria */
 }
 
 .quiz-panel-card {
   position: sticky;
   background: #ffffff;
-  padding: 1.2em;
+  padding: 1rem !important;
 }
 
 .quiz-panel-card h3 {
+  display: inline !important;
   text-align: center;
-  margin-bottom: 1em;
-  font-size: 1.5em;
-  font-weight: 100;
+  margin-bottom: 0.25rem;
+  font-size: 1.25rem;
+  font-weight: 350;
+  line-height: 1.2;
 }
 
 .quiz-timer {
@@ -50,9 +68,10 @@
 }
 
 .navegar_respuestas {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: .5em;
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 0.5em;     
+    margin-top: 1rem !important;
 }
 
 .navegar_opciones{
@@ -60,12 +79,20 @@
 }
 
 .quiz-num {
-  height: 38px;
-  border: 1px solid #0860a8;
-  border-radius: 8px;
+  flex: 0 0 auto;
+  height: 40px;
+  width: 30px;
+  border: 1px solid #2b3238;
+  border-radius: 3px;
   background: white;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  text-decoration: none;
+  overflow: hidden;
+  white-space: wrap;
+  margin: 0 6px 6px o;
 }
 
 .quiz-num.active {
@@ -77,17 +104,6 @@
   background: #2e9f5b;
   color: white;
   border-color: #2e9f5b;
-}
-
-/* Responsive */
-@media only screen and (max-width: 768px) {
-  .quiz-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .quiz-panel-card {
-    position: static;
-  }
 }
 
 /*Formularios*/
@@ -109,7 +125,6 @@
 }
 .pregunta {
   margin-bottom: 25px;
-  border-right: 1px solid var(--border);
 }
 
 .afirmaciones li {
@@ -131,7 +146,7 @@
   background: #f0f4ff;
 }
 
-.evaluaciones-formulario button {
+.botones_preguntas button{
   display: block;
   margin: 25px auto;
   padding: 12px 28px;
@@ -143,7 +158,7 @@
   cursor: pointer;
 }
 
-.evaluaciones-formulario button:hover {
+.botones_preguntas button:hover {
   background: #163aa0;
 }
 
@@ -158,4 +173,26 @@
     list-style-type: lower-alpha;
 }
 
+.finalizar_intento {
+  display: block;
+  margin: 1em auto;
+  border: none;
+  padding: 12px 28px;
+  text-transform: none;
+  cursor: pointer;
+  background-color: #ced4da;
+  border-radius: 12px;
+  font-size: 16px;
+  align-content: center;
+}
+
+.finalizar_intento:hover {
+  background-color: #cacdcf;
+}
+
+.estado-quiz, .quiz-timer {
+  font-size: 1rem;
+  font-weight: 350;
+  line-height: 1.2;
+}
 /*AQUI ACABA LO DE FORMULARIOS*/
