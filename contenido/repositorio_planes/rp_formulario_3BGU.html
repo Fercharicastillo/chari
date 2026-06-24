@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physikós</title>
+    <link rel="stylesheet" href="../../styles/pages_katex.css">
+    <link rel="stylesheet" href="../../styles/evaluaciones.css">
+    <link rel="icon" href="../../img/iconHeadW.svg">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+</head>
+
+<body data-origen="calculo">
+    <h1 id="top"></h1>
+    <div class="container__grid__sim">
+        <div class="header" id="header">
+            <div class="header_content-namePage">
+                <a href="../../index.html">
+                    <div class="imgname"></div>
+                </a>
+                <div id="btn_menu" class="btn-menu" title=""></div>
+            </div>
+            <div class="header_content-img"><a href="https://www.uce.edu.ec/" target="_BLANK"><img src="https://aka-cdn.uce.edu.ec/ares/tmp/logo3.png" alt=""></a></div>
+        </div>
+
+        <div class="menu menu_dsm   ">
+            <nav class="menu_nav">
+                <!--<div class="content__search"></div>-->
+                <div class="content__content">
+                <p><a class="toc-part" href="../../index.html">Introducción</a></p>
+                <p><a class="toc-part" href="../simuladores/simuladores.html">Simuladores</a></p>
+                <p><a class="toc-part" href="../graficadores/graficadores.html">Graficadores</a></p>
+                <p><a class="toc-part" href="../proyectos/proyectos.html">Proyectos</a></p>
+                <p class="current-part"><a href="repositorio_planes.html">Repositorio de Planes de Clase</a></p>
+                    <p class="current-part"><a class="toc-section" href="rp_mecanica_newtoniana.html">Mecánica Newtoniana</a></p>
+                    <p class="current current-part"><a class="toc-section" href="rp_mecanica_cálculo diferencial.html">Cálculo Diferencial</a></p>
+                <p><a class="toc-part" href="../repositorio_libros/repositorio_libros.html">Repositorio de Libros</a></p>
+                <p><a class="toc-part" href="../autores/autores.html">Hoja de vida</a></p></div>
+                <div class="BtnNav">
+                    <!--<div class="content__Lenguaje">
+                    <span>Lenguaje</span>
+                    <label class="lenguaje-btn-content" for="click-lenguaje">
+                        <span class="before">EN</span>
+                        <input type="checkbox" id="click-lenguaje">
+                        <span class="before">ES</span>
+                    </label>
+                    </div>-->
+                    <div class="content__DarkMode">
+                    <span>DarkMode</span>
+                    <label class="darmode-btn-content" for="click-DarkMode">
+                        <i class="btn-sun"></i>
+                        <input type="checkbox" id="click-DarkMode">
+                        <i class="btn-moon"></i>
+                    </label>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div class="main" id="main-despleglabe">
+            <section class="main_s1">
+                <div class="manual-title">
+                        Universidad Central del Ecuador
+                    </div>
+
+                    <div class="manual-version">
+                        Facultad de Filosofía, Letras y Ciencias de la Educación
+                    </div>
+
+                    <div class="manual-html-title">
+                        Carrera de Pedagogía en las Ciencias Experimentales Matemática y Física
+                    </div>
+
+                    <div class="manual-mantenimiento">
+                        <span>Mantenida por:<a href="#" class="pepsi"> Chari Castillo Fernando Javier.</a></span>
+                    </div>
+
+                    <div class="manual-html-explanation">
+                        Planes de Clase de Cálculo Diferencial
+                </div>
+            </section>
+            
+            <section class="main_s2_evaluaciones">
+            <div class="evaluaciones-header">Evaluación: MRU, MRUA y Dinámica</div>
+
+            <div id="quizForm" class="evaluaciones-formulario">
+            <div class="pregunta">
+                <h3>1. Identifique cuántas afirmaciones son verdaderas y cuántas son falsas.</h3>
+                <ol class="afirmaciones">
+                    <li> En el MRU, la velocidad permanece constante y la aceleración es igual a cero.</li>
+                    <li> En el MRUA, la aceleración permanece constante durante todo el movimiento.</li>
+                    <li> Si un vehículo cambia su velocidad de $50 \ \text{km/h}$ a $70 \ \text{km/h}$, existe aceleración.</li>
+                    <li> En el MRU, la distancia recorrida es directamente proporcional al tiempo transcurrido.</li>
+                    <li> En el Diagrama de Cuerpo Libre de un objeto en reposo sobre una superficie horizontal, actúan el peso y la fuerza normal en el eje vertical.</li>
+                    <li> Es correcto expresar el peso de una persona como $25 \ \text{kg}$.</li>
+                    <li> Un mismo objeto puede presentar dos coeficientes de fricción diferentes: uno estático y otro cinético.</li>
+                    <li> La primera ley de Newton es conocida como la Ley de Acción y Reacción.</li>
+                </ol>
+                <div class="opciones_respuesta">
+                <label>
+                    <input type="radio" name="p1" value="A">
+                    Existen seis verdaderas y dos falsas
+                </label>
+
+                <label>
+                    <input type="radio" name="p1" value="B">
+                    Existen cinco verdaderas y tres falsas
+                </label>
+
+                <label>
+                    <input type="radio" name="p1" value="C">
+                    Existen cuatro verdaderas y cuatro falsas
+                </label>
+
+                <label>
+                    <input type="radio" name="p1" value="D">
+                    Todas son verdaderas
+                </label>
+                </div>
+                <div class="botones_preguntas">
+                <button type="button" onclick="calificarQuiz()">Calificar</button>
+                <div id="resultadoQuiz"></div>
+                </div>
+            </div>
+            </div>
+
+            <div class="evaluaciones-temporizador">
+                <div class="quiz-panel-card">
+                <h3>Navegación por el Cuestionario</h3>
+
+                <div class="quiz-nav">
+                    <div class="navegar_respuestas">
+                        <button class="quiz-num active" data-pregunta="1">1</button>
+                        <button class="quiz-num" data-pregunta="2">2</button>
+                        <button class="quiz-num" data-pregunta="3">3</button>
+                        <button class="quiz-num" data-pregunta="4">4</button>
+                        <button class="quiz-num" data-pregunta="5">5</button>   
+                    </div>
+                    <div class="navegar_opciones">
+                        <p class="estado-quiz">Respondidas: <span id="respondidas">0</span> / <span id="totalPreguntas">5</span></p>
+                        <button type="button" onclick="limpiarRespuesta('p1')">Limpiar respuesta</button>
+                        <button type="button" onclick="confirmarCalificacion()">Finalizar intento</button>
+                        <p class="quiz-timer">Tiempo: <span id="timer">20:00</span></p>
+                    </div>
+                </div>
+
+                </div>
+            </div>
+            </section>
+        </div>
+        <div class="footer">
+            <div class="footer-left">
+                <a href="#">Licencia</a>
+                <a href="#">| Git Hub</a> 
+            </div>
+            <div class="footer-right"></div>
+        </div>
+
+        <div class="indicador_container">
+            <div class="indicador_scroll"></div>
+        </div>
+        
+        <div id="btn-top" class="ocultar" title="Subir">
+            <i class="btn-up"></i>
+        </div> 
+
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<script defer src="../../script/repositorio_planes/run_katex.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="../../script/menu.js" defer></script>
+<script src="../../script/flecha.js" defer></script>
+<script defer>
+function calificarQuiz() {
+  const respuestaCorrecta = "A";
+  const seleccionada = document.querySelector('input[name="p1"]:checked');
+  const resultado = document.getElementById("resultadoQuiz");
+
+  if (!seleccionada) {
+    resultado.innerHTML = "Seleccione una respuesta antes de calificar.";
+    resultado.style.color = "orange";
+    return;
+  }
+
+  if (seleccionada.value === respuestaCorrecta) {
+    resultado.innerHTML = "Correcto. Puntaje: 1/1";
+    resultado.style.color = "green";
+  } else {
+    resultado.innerHTML = "Incorrecto. La respuesta correcta es: Existen seis verdaderas y dos falsas.";
+    resultado.style.color = "red";
+  }
+
+  if (typeof renderMathInElement === "function") {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ]
+    });
+  }
+}
+let tiempo = 20 * 60;
+const timer = document.getElementById("timer");
+
+const intervalo = setInterval(() => {
+  const minutos = Math.floor(tiempo / 60);
+  const segundos = tiempo % 60;
+
+  timer.textContent =
+    String(minutos).padStart(2, "0") + ":" +
+    String(segundos).padStart(2, "0");
+
+  if (tiempo <= 0) {
+    clearInterval(intervalo);
+    calificarQuiz();
+    alert("El tiempo ha terminado.");
+  }
+
+  tiempo--;
+}, 1000);
+document.querySelectorAll('input[type="radio"]').forEach(input => {
+  input.addEventListener("change", () => {
+    const numeroPregunta = input.name.replace("p", "");
+    const boton = document.querySelector(`.quiz-num[data-pregunta="${numeroPregunta}"]`);
+
+    if (boton) {
+      boton.classList.add("respondida");
+    }
+  });
+});
+function limpiarRespuesta(nombrePregunta) {
+  document.querySelectorAll(`input[name="${nombrePregunta}"]`)
+    .forEach(input => input.checked = false);
+}
+function confirmarCalificacion() {
+  const confirmar = confirm("¿Está seguro de finalizar el intento?");
+  if (confirmar) {
+    calificarQuiz();
+    bloquearQuiz();
+  }
+}
+function bloquearQuiz() {
+  document.querySelectorAll("#quizForm input").forEach(input => {
+    input.disabled = true;
+  });
+}
+</script>
+</body>
+</html>

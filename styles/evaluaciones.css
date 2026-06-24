@@ -1,0 +1,161 @@
+.main_s2_evaluaciones{
+    display: grid;
+    grid-template-areas: 
+    "evaluaciones-header evaluaciones-header"
+    "evaluaciones-formulario evaluaciones-temporizador"
+    ;
+    grid-template-columns: 3fr 1fr;
+    width: 95%;
+    margin: 30px auto;
+    background: #ffffff;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.12);
+    border: 1px solid var(--border);
+}
+
+.evaluaciones-header {
+  grid-area: evaluaciones-header;
+  background-color: #d7e8f6;; 
+  grid-column: span 2; 
+  padding: 20px;
+  text-align: center;
+  font-size: 2.2em;
+}
+
+.evaluaciones-formulario {
+  grid-area: evaluaciones-formulario;
+  background-color: #4472c4;
+  padding: 40px;
+  display: contents;
+}
+
+.evaluaciones-temporizador {
+  grid-area: evaluaciones-temporizador;
+}
+
+.quiz-panel-card {
+  position: sticky;
+  background: #ffffff;
+  padding: 1.2em;
+}
+
+.quiz-panel-card h3 {
+  text-align: center;
+  margin-bottom: 1em;
+  font-size: 1.5em;
+  font-weight: 100;
+}
+
+.quiz-timer {
+  font-size: 1.4em;
+}
+
+.navegar_respuestas {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: .5em;
+}
+
+.navegar_opciones{
+    margin-top: 1em;
+}
+
+.quiz-num {
+  height: 38px;
+  border: 1px solid #0860a8;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.quiz-num.active {
+  background: #0860a8;
+  color: white;
+}
+
+.quiz-num.respondida {
+  background: #2e9f5b;
+  color: white;
+  border-color: #2e9f5b;
+}
+
+/* Responsive */
+@media only screen and (max-width: 768px) {
+  .quiz-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .quiz-panel-card {
+    position: static;
+  }
+}
+
+/*Formularios*/
+.evaluaciones-formulario h2 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.evaluaciones-formulario h3 {
+  margin: 1em;
+}
+
+.evaluaciones-formulario ol {
+  padding-left: 2.5em;
+  margin: 1em;
+}
+.opciones_respuesta{
+  margin: 2em;
+}
+.pregunta {
+  margin-bottom: 25px;
+  border-right: 1px solid var(--border);
+}
+
+.afirmaciones li {
+  margin-bottom: 5px;
+  line-height: 1.5;
+}
+
+.evaluaciones-formulario label {
+  display: block;
+  margin: 12px 0;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.evaluaciones-formulario label:hover {
+  background: #f0f4ff;
+}
+
+.evaluaciones-formulario button {
+  display: block;
+  margin: 25px auto;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 12px;
+  background: #1f4fd8;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.evaluaciones-formulario button:hover {
+  background: #163aa0;
+}
+
+#resultadoQuiz {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.afirmaciones {
+    list-style-type: lower-alpha;
+}
+
+/*AQUI ACABA LO DE FORMULARIOS*/
