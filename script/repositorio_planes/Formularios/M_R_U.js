@@ -143,6 +143,8 @@ const preguntas = [
 
 let preguntaActual = 0;
 let respuestas = {};
+// Guardamos el momento exacto en el que el estudiante inicia el cuestionario
+const horaInicio = new Date();
 
 function mostrarPregunta() {
   const p = preguntas[preguntaActual];
@@ -295,18 +297,63 @@ function calificarQuiz() {
     `;
   });
 
-  // 1. Mostramos la calificación e inyectamos el enlace de Finalizar Revisión
+  const horaFin = new Date();
+
+  // Opciones para formatear la fecha en español de forma elegante
+  const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+  const fechaComenzado = horaInicio.toLocaleDateString('es-ES', opcionesFecha);
+  const fechaCompletado = horaFin.toLocaleDateString('es-ES', opcionesFecha);
+
+  // Calcular la diferencia de tiempo (Duración)
+  const diferenciaMs = horaFin - horaInicio;
+  const totalSegundos = Math.floor(diferenciaMs / 1000);
+  const minutosDuracion = Math.floor(totalSegundos / 60);
+  const segundosDuracion = totalSegundos % 60;
+  const textoDuracion = `${minutosDuracion} minutos ${segundosDuracion} segundos`;
+
+  // Calcular el porcentaje alcanzado
+  const porcentaje = ((puntaje / preguntas.length) * 100).toFixed(0);
+
+  // 🌟 INYECTAMOS LA TABLA RESUMEN Y EL BOTÓN DE FINALIZAR REVISIÓN
   document.getElementById("resultadoQuiz").innerHTML = `
-    <a href="rp_mecanica_newtoniana.html" class="btn-finalizar-revision">Finalizar Revisión</a>
+    <table class="tabla-resumen-intento">
+      <tr>
+        <td><strong>Estado</strong></td>
+        <td>Finalizado</td>
+      </tr>
+      <tr>
+        <td><strong>Comenzado</strong></td>
+        <td>${fechaComenzado}</td>
+      </tr>
+      <tr>
+        <td><strong>Completado</strong></td>
+        <td>${fechaCompletado}</td>
+      </tr>
+        <td><strong>Duración</strong></td>
+        <td>${textoDuracion}</td>
+      </tr>
+      <tr>
+        <td><strong>Puntos</strong></td>
+        <td>${puntaje},00/${preguntas.length},00</td>
+      </tr>
+      <tr>
+        <td><strong>Calificación</strong></td>
+        <td><strong>${puntaje},00</strong> de 10,00 (${porcentaje}%)</td>
+      </tr>
+    </table>
   `;
 
-  // 2. Ocultamos la barra inferior de botones de navegación (Anterior/Siguiente)
-  const barraBotones = document.querySelector(".botones_preguntas");
-  if (barraBotones) {
-      barraBotones.style.display = "none";
-  }
+  document.getElementById("resultadoQuizFinal").innerHTML = `
+    <div style="text-align: center">
+      <a href="rp_mecanica_newtoniana.html" class="btn-finalizar-revision">Finalizar Revisión</a>
+    </div>
+  `;
 
-  // 3. Detener el temporizador y limpiar la barra lateral
+  // Ocultamos la barra inferior de navegación
+  const barraBotones = document.querySelector(".botones_preguntas");
+  if (barraBotones) barraBotones.style.display = "none";
+
+  // Detenemos el reloj y limpiamos el panel derecho
   finalizarInterfazLateral();
 
   renderizarLatex();

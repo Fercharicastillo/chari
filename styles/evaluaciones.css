@@ -20,7 +20,7 @@
 /* El formulario ocupa la columna 1 */
 .evaluaciones-formulario {
     grid-column: 1;
-    padding: 40px 40px 0px 40px;
+    padding: 0 40px 0px 40px;
     /* Eliminamos display: contents para que respete su espacio */
 }
 
@@ -169,6 +169,10 @@
 }
 
 #resultadoQuiz {
+  font-size: 18px;
+}
+
+#resultadoQuizFinal {
   text-align: center;
   font-size: 18px;
   font-weight: bold;
@@ -263,4 +267,40 @@
 
 .btn-finalizar-revision:hover {
     background-color: #1a1e22;
+}
+
+.tabla-resumen-intento {
+    width: 100%;
+    margin: 0 auto 25px auto;
+    border-collapse: collapse;
+    font-family: sans-serif;
+    font-size: 14px;
+}
+
+.tabla-resumen-intento tr {
+    border-bottom: 1px solid #e9ecef;
+}
+
+/* Colores intercalados para las filas */
+.tabla-resumen-intento tr:nth-child(odd) {
+    background-color: #f8f9fa;
+}
+
+.tabla-resumen-intento tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+/* Estilo de las celdas */
+.tabla-resumen-intento td {
+    padding: 5px 15px;
+    color: #333333;
+}
+
+/* La primera columna va alineada a la derecha y con un fondo sutil gris */
+.tabla-resumen-intento td:first-child {
+    width: 30%;
+    text-align: right;
+    font-weight: bold;
+    background-color: #f1f3f5;
+    color: #495057;
 }
