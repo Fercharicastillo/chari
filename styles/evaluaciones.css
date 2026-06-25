@@ -24,13 +24,13 @@
     /* Eliminamos display: contents para que respete su espacio */
 }
 
-/* Los botones también se quedan alineados en la columna 1 */
+/* 1. CONTENEDOR PADRE: Configura la fila y la distribución */
 .botones_preguntas {
     grid-column: 1;
-    /* Activamos flexbox de forma horizontal */
+    padding: 20px 40px;
     display: flex;
-    justify-content: space-between; /* Empuja los elementos a los extremos y distribuye el espacio */
-    align-items: center;            /* Los alinea perfectamente al centro vertical */
+    justify-content: space-between;
+    align-items: center;
 }
 
 /* Opcional: Para asegurarte de que todos tengan una forma uniforme */
@@ -92,7 +92,7 @@
   text-decoration: none;
   overflow: hidden;
   white-space: wrap;
-  margin: 0 6px 6px o;
+  margin: 0 6px 6px 0;
 }
 
 .quiz-num.active {
@@ -146,27 +146,33 @@
   background: #f0f4ff;
 }
 
-.botones_preguntas button{
-  display: block;
-  margin: 25px auto;
-  padding: 12px 28px;
-  border: none;
-  border-radius: 12px;
-  background: #1f4fd8;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
+/* 2. BOTONES: Configura el aspecto visual de los botones */
+.botones_preguntas button {
+    min-width: 120px; 
+    padding: 12px 28px;
+    border: none;
+    border-radius: 12px;
+    background: #1f4fd8;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
 }
 
 .botones_preguntas button:hover {
-  background: #163aa0;
+    background: #163aa0;
+}
+
+/* 3. TRUCO DE LOGIC: Si "Anterior" desaparece (display: none), empuja "Siguiente" a la derecha */
+.botones_preguntas #btnSiguiente {
+    margin-left: auto;
 }
 
 #resultadoQuiz {
   text-align: center;
   font-size: 18px;
   font-weight: bold;
-  margin-top: 20px;
+  margin-bottom: 1em;
 }
 
 .afirmaciones {
@@ -196,3 +202,65 @@
   line-height: 1.2;
 }
 /*AQUI ACABA LO DE FORMULARIOS*/
+
+.resultado-pregunta {
+  margin-bottom: 2em;
+  padding-bottom: 1.5em;
+  border-bottom: 1px solid #ddd;
+}
+
+.retroalimentacion {
+  margin-top: 1em;
+  padding: 1em;
+  background: #fff3cd;
+  border: 1px solid #f1d28a;
+  border-radius: 10px;
+  color: #7a5200;
+  font-size: 1em;
+}
+
+.opcion-correcta {
+  border-color: #2e9f5b !important;
+  background: #e9f8ef !important;
+}
+
+.opcion-incorrecta {
+  border-color: #d93025 !important;
+  background: #fdecea !important;
+}
+
+/* Si el botón "Anterior" no está, empujamos el botón "Siguiente" a la derecha */
+.botones_preguntas #btnSiguiente {
+    margin-left: auto;
+}
+
+#btnSiguiente,
+#btnAnterior{
+    transition:.3s;
+}
+
+.oculto{
+    opacity:0;
+    pointer-events:none;
+}
+
+.visible{
+    opacity:1;
+}
+
+.btn-finalizar-revision {
+    display: inline-block;
+    margin: 15px auto;
+    padding: 12px 28px;
+    background-color: #2b3238; /* Un tono oscuro elegante */
+    color: white !important;
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.btn-finalizar-revision:hover {
+    background-color: #1a1e22;
+}

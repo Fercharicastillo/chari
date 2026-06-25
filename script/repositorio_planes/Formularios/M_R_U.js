@@ -15,7 +15,8 @@ const preguntas = [
       "1a, 2b, 3c, 4d",
       "1d, 2c, 3b, 4a"
     ],
-    correcta: "B"
+    correcta: "B",
+    retroalimentacion: "La respuesta correcta es B, porque la propiedad conmutativa."
   },
   {
     id: 2,
@@ -33,7 +34,8 @@ const preguntas = [
       "1d, 2c, 3b, 4a",
       "1b, 2a, 3d, 4c"
     ],
-    correcta: "B"
+    correcta: "B",
+    retroalimentacion: "La respuesta correcta es B, porque la propiedad conmutativa."
   },
   {
     id: 3,
@@ -45,7 +47,8 @@ const preguntas = [
       "$x_1 = 3, x_2 = -6$",
       "$x_1 = 0, x_2 = 1$"
     ],
-    correcta: "A"
+    correcta: "A",
+    retroalimentacion: "La respuesta correcta es B, porque la propiedad conmutativa."
   },
   {
     id: 4,
@@ -57,7 +60,8 @@ const preguntas = [
       "$6.28$",
       "$6.4$"
     ],
-    correcta: "B"
+    correcta: "B",
+    retroalimentacion: "La respuesta correcta es B, porque la propiedad conmutativa."
   },
   {
     id: 5,
@@ -69,7 +73,8 @@ const preguntas = [
       "$\\frac{(x+y)^2}{2}$",
       "$x^2 + \\frac{y^2}{2}$"
     ],
-    correcta: "A"
+    correcta: "A",
+    retroalimentacion: "La respuesta correcta es B, porque la propiedad conmutativa."
   },
   {
     id: 6,
@@ -79,7 +84,8 @@ const preguntas = [
       "Verdadero (V)",
       "Falso (F)"
     ],
-    correcta: "A"
+    correcta: "A",
+    retroalimentacion: "La respuesta correcta es B, porque la propiedad conmutativa."
   },
   {
     id: 7,
@@ -91,7 +97,8 @@ const preguntas = [
       "$(4, 6)$",
       "$(0, 6)$"
     ],
-    correcta: "A"
+    correcta: "A",
+    retroalimentacion: "La respuesta correcta es B, porque la propiedad conmutativa."
   },
   {
     id: 8,
@@ -103,7 +110,8 @@ const preguntas = [
       "$502.7\\text{ cm}^2$",
       "$1100\\text{ cm}^2$"
     ],
-    correcta: "A"
+    correcta: "A",
+    retroalimentacion: "La respuesta correcta es B, porque la propiedad conmutativa."
   },
   {
     id: 9,
@@ -115,7 +123,8 @@ const preguntas = [
       "$5\\text{ cm}$ y $15\\text{ cm}$",
       "$9\\text{ cm}$ y $27\\text{ cm}$"
     ],
-    correcta: "A"
+    correcta: "A",
+    retroalimentacion: "La respuesta correcta es B, porque la propiedad conmutativa."
   },
   {
     id: 10,
@@ -127,7 +136,8 @@ const preguntas = [
       "$f_i = 6, F_i = 18$",
       "$f_i = 3, F_i = 10$"
     ],
-    correcta: "A"
+    correcta: "A",
+    retroalimentacion: "La respuesta correcta es B, porque la propiedad conmutativa."
   }
 ];
 
@@ -172,12 +182,14 @@ function mostrarPregunta() {
 
   actualizarBotonesLaterales();
   renderizarLatex();
+  actualizarBotones();
 }
 
 let tiempo = 20 * 60;
 const timer = document.getElementById("timer");
 
-const intervalo = setInterval(() => {
+let intervalo = setInterval(() => {
+  // ... Tu código actual del temporizador ...
   const minutos = Math.floor(tiempo / 60);
   const segundos = tiempo % 60;
 
@@ -193,6 +205,7 @@ const intervalo = setInterval(() => {
 
   tiempo--;
 }, 1000);
+
 
 function preguntaSiguiente() {
   if (preguntaActual < preguntas.length - 1) {
@@ -234,15 +247,69 @@ function actualizarContador() {
 
 function calificarQuiz() {
   let puntaje = 0;
+  const contenedor = document.getElementById("quizForm");
+  const letras = ["A", "B", "C", "D"];
+
+  contenedor.innerHTML = "";
 
   preguntas.forEach(p => {
-    if (respuestas[p.id] === p.correcta) {
-      puntaje++;
-    }
+    const respuestaUsuario = respuestas[p.id];
+    const esCorrecta = respuestaUsuario === p.correcta;
+
+    if (esCorrecta) puntaje++;
+
+    contenedor.innerHTML += `
+      <div class="pregunta resultado-pregunta">
+        <h3>Pregunta ${p.id}. ${p.enunciado}</h3>
+
+        ${p.afirmaciones.length > 0 ? `
+          <ol class="afirmaciones">
+            ${p.afirmaciones.map(a => `<li>${a}</li>`).join("")}
+          </ol>
+        ` : ""}
+
+        <div class="opciones_respuesta">
+          ${p.opciones.map((opcion, i) => {
+            const letra = letras[i];
+            const marcada = respuestaUsuario === letra;
+            const correcta = p.correcta === letra;
+
+            return `
+              <label class="
+                ${correcta ? "opcion-correcta" : ""}
+                ${marcada && !correcta ? "opcion-incorrecta" : ""}
+              ">
+                <input type="radio" disabled ${marcada ? "checked" : ""}>
+                ${letra}) ${opcion}
+              </label>
+            `;
+          }).join("")}
+        </div>
+
+        <div class="retroalimentacion">
+          <strong>${esCorrecta ? "Respuesta correcta." : "Respuesta incorrecta."}</strong><br>
+          La respuesta correcta es: <strong>${p.correcta}</strong><br>
+          ${p.retroalimentacion || ""}
+        </div>
+      </div>
+    `;
   });
 
-  document.getElementById("resultadoQuiz").innerHTML =
-    `Puntaje: ${puntaje}/${preguntas.length}`;
+  // 1. Mostramos la calificación e inyectamos el enlace de Finalizar Revisión
+  document.getElementById("resultadoQuiz").innerHTML = `
+    <a href="rp_mecanica_newtoniana.html" class="btn-finalizar-revision">Finalizar Revisión</a>
+  `;
+
+  // 2. Ocultamos la barra inferior de botones de navegación (Anterior/Siguiente)
+  const barraBotones = document.querySelector(".botones_preguntas");
+  if (barraBotones) {
+      barraBotones.style.display = "none";
+  }
+
+  // 3. Detener el temporizador y limpiar la barra lateral
+  finalizarInterfazLateral();
+
+  renderizarLatex();
 }
 
 function confirmarCalificacion() {
@@ -270,11 +337,52 @@ function renderizarLatex() {
   }
 }
 
+function actualizarBotones() {
+    const btnAnterior = document.getElementById("btnAnterior");
+    const btnSiguiente = document.getElementById("btnSiguiente");
+
+    // Control del botón Anterior
+    if (preguntaActual === 0) {
+        btnAnterior.classList.add("oculto");
+        btnAnterior.classList.remove("visible");
+    } else {
+        btnAnterior.classList.add("visible");
+        btnAnterior.classList.remove("oculto");
+    }
+
+    // Control del botón Siguiente
+    if (preguntaActual === preguntas.length - 1) {
+        btnSiguiente.classList.add("oculto");
+        btnSiguiente.classList.remove("visible");
+    } else {
+        btnSiguiente.classList.add("visible");
+        btnSiguiente.classList.remove("oculto");
+    }
+}
+
 document.querySelectorAll(".quiz-num").forEach(boton => {
   boton.addEventListener("click", () => {
     irAPregunta(Number(boton.dataset.pregunta));
   });
 });
 
+function finalizarInterfazLateral() {
+  // 1. Detener el reloj permanentemente
+  clearInterval(intervalo);
+  
+  // 2. Ocultar el texto del temporizador (opcional, o puedes dejarlo congelado)
+  const timerText = document.querySelector(".quiz-timer");
+  if (timerText) {
+      timerText.innerHTML = "Tiempo detenido"; 
+  }
+
+  // 3. Ocultar el botón "Finalizar intento" de la esquina inferior derecha
+  const btnFinalizarIntento = document.querySelector(".finalizar_intento");
+  if (btnFinalizarIntento) {
+      btnFinalizarIntento.style.display = "none";
+  }
+}
+
 actualizarContador();
 mostrarPregunta();
+actualizarBotones();
