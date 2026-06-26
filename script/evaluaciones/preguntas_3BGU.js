@@ -345,7 +345,7 @@ function calificarQuiz() {
 
   document.getElementById("resultadoQuizFinal").innerHTML = `
     <div style="text-align: center">
-      <a href="rp_mecanica_newtoniana.html" class="btn-finalizar-revision">Finalizar Revisión</a>
+      <a href="../repositorio_planes/rp_mecanica_newtoniana.html" class="btn-finalizar-revision">Finalizar Revisión</a>
     </div>
   `;
 
@@ -407,9 +407,78 @@ function actualizarBotones() {
     }
 }
 
+// CODEX: modificado para conectar la navegacion movil superior y flotante al mismo panel lateral
+const quizMobileNavBtns = document.querySelectorAll(".quiz-mobile-nav-btn, .quiz-floating-nav-btn");
+const quizPanel = document.querySelector(".evaluaciones-temporizador");
+const quizPanelCloseBtn = document.querySelector(".quiz-panel-close");
+const quizPanelOverlay = document.querySelector(".quiz-nav-overlay");
+const quizMobileMedia = window.matchMedia("(max-width: 768px)");
+
+function actualizarEstadoPanelQuiz(abierto) {
+  if (!quizPanel || !quizPanelOverlay) return;
+
+  quizPanel.classList.toggle("is-open", abierto);
+  quizPanelOverlay.classList.toggle("is-open", abierto);
+  quizPanelOverlay.hidden = !abierto;
+  document.body.classList.toggle("quiz-panel-open", abierto);
+
+  quizMobileNavBtns.forEach(boton => {
+    boton.setAttribute("aria-expanded", abierto ? "true" : "false");
+  });
+
+  quizPanel.setAttribute("aria-hidden", quizMobileMedia.matches ? String(!abierto) : "false");
+}
+
+function abrirPanelQuizMovil() {
+  if (!quizMobileMedia.matches) return;
+  actualizarEstadoPanelQuiz(true);
+}
+
+function cerrarPanelQuizMovil() {
+  actualizarEstadoPanelQuiz(false);
+}
+
+function sincronizarPanelQuizResponsive() {
+  if (!quizMobileMedia.matches) {
+    actualizarEstadoPanelQuiz(false);
+    if (quizPanel) quizPanel.setAttribute("aria-hidden", "false");
+  } else if (quizPanel && !quizPanel.classList.contains("is-open")) {
+    quizPanel.setAttribute("aria-hidden", "true");
+  }
+}
+
+quizMobileNavBtns.forEach(boton => {
+  boton.addEventListener("click", abrirPanelQuizMovil);
+});
+
+if (quizPanelCloseBtn) {
+  quizPanelCloseBtn.addEventListener("click", cerrarPanelQuizMovil);
+}
+
+if (quizPanelOverlay) {
+  quizPanelOverlay.addEventListener("click", cerrarPanelQuizMovil);
+}
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    cerrarPanelQuizMovil();
+  }
+});
+
+if (typeof quizMobileMedia.addEventListener === "function") {
+  quizMobileMedia.addEventListener("change", sincronizarPanelQuizResponsive);
+} else if (typeof quizMobileMedia.addListener === "function") {
+  quizMobileMedia.addListener(sincronizarPanelQuizResponsive);
+}
+
+sincronizarPanelQuizResponsive();
+
 document.querySelectorAll(".quiz-num").forEach(boton => {
   boton.addEventListener("click", () => {
     irAPregunta(Number(boton.dataset.pregunta));
+    if (quizMobileMedia.matches) {
+      cerrarPanelQuizMovil();
+    }
   });
 });
 

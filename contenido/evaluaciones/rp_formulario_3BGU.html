@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Physikós</title>
     <link rel="stylesheet" href="../../styles/pages_katex.css">
-    <link rel="stylesheet" href="../../styles/evaluaciones.css">
+    <link rel="stylesheet" href="../../styles/evaluaciones/evaluaciones.css">
     <link rel="icon" href="../../img/iconHeadW.svg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
 </head>
@@ -34,8 +34,8 @@
                 <p><a class="toc-part" href="../graficadores/graficadores.html">Graficadores</a></p>
                 <p><a class="toc-part" href="../proyectos/proyectos.html">Proyectos</a></p>
                 <p class="current-part"><a href="repositorio_planes.html">Repositorio de Planes de Clase</a></p>
-                    <p class="current-part"><a class="toc-section" href="rp_mecanica_newtoniana.html">Mecánica Newtoniana</a></p>
-                    <p class="current current-part"><a class="toc-section" href="rp_mecanica_cálculo diferencial.html">Cálculo Diferencial</a></p>
+                    <p class="current current-part"><a class="toc-section" href="../repositorio_planes/rp_mecanica_newtoniana.html">Mecánica Newtoniana</a></p>
+                    <p class="current-part"><a class="toc-section" href="../repositorio_planes/rp_mecanica_cálculo diferencial.html">Cálculo Diferencial</a></p>
                 <p><a class="toc-part" href="../repositorio_libros/repositorio_libros.html">Repositorio de Libros</a></p>
                 <p><a class="toc-part" href="../autores/autores.html">Hoja de vida</a></p></div>
                 <div class="BtnNav">
@@ -84,6 +84,10 @@
             
             <section class="main_s2_evaluaciones">
             <div class="evaluaciones-header">Evaluación: MRU, MRUA y Dinámica</div>
+
+            <button class="quiz-mobile-nav-btn" type="button" aria-controls="quizNavigationPanel" aria-expanded="false">
+                Navegación del cuestionario
+            </button>
             
             <div id="resultadoQuiz"></div>
             
@@ -131,8 +135,11 @@
 
             <div id="resultadoQuizFinal"></div>
 
-            <div class="evaluaciones-temporizador">
+            <div class="quiz-nav-overlay" hidden></div>
+
+            <div class="evaluaciones-temporizador" id="quizNavigationPanel" aria-hidden="true">
                 <div class="quiz-panel-card">
+                <button class="quiz-panel-close" type="button" aria-label="Cerrar navegación del cuestionario">Cerrar</button>
                 <h3>Navegación por el Cuestionario</h3>
 
                 <div class="quiz-nav">
@@ -172,6 +179,12 @@
             <div class="indicador_scroll"></div>
         </div>
         
+        <!-- CODEX: añadido para abrir la navegación del cuestionario desde un botón flotante móvil -->
+        <button class="quiz-floating-nav-btn ocultar" data-floating-scroll type="button" aria-controls="quizNavigationPanel" aria-expanded="false" aria-label="Abrir navegación del cuestionario">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         <div id="btn-top" class="ocultar" title="Subir">
             <i class="btn-up"></i>
         </div> 
@@ -183,6 +196,6 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="../../script/menu.js" defer></script>
 <script src="../../script/flecha.js" defer></script>
-<script defer src="../../script/repositorio_planes/Formularios/M_R_U.js"></script>
+<script defer src="../../script/evaluaciones/preguntas_3BGU.js"></script>
 </body>
 </html>

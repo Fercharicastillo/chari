@@ -1,5 +1,5 @@
 addEventListener('DOMContentLoaded', () => {
-    const botonIrArriba = document.querySelector('#btn-top');
+    const botonesFlotantes = [];
 
     const obtenerPixelesInicio = () => document.documentElement.scrollTop || document.body.scrollTop;
 
@@ -19,15 +19,31 @@ addEventListener('DOMContentLoaded', () => {
         animacion();
     };
 
-    const indicadorScroll = () => {
-        if (obtenerPixelesInicio() > 200) {
-            botonIrArriba.classList.add('mostrar');
-        } else {
-            botonIrArriba.classList.remove('mostrar');
+    // CODEX: modificado para registrar botones flotantes que aparecen con el mismo scroll
+    const registrarBotonFlotante = (boton, accionClick) => {
+        if (!boton) return;
+
+        botonesFlotantes.push(boton);
+
+        if (typeof accionClick === 'function') {
+            boton.addEventListener('click', accionClick);
         }
     };
 
-    botonIrArriba.addEventListener('click', irArriba);
-    window.addEventListener('scroll', indicadorScroll);
-});
+    const indicadorScroll = () => {
+        const debeMostrarse = obtenerPixelesInicio() > 200;
 
+        botonesFlotantes.forEach(boton => {
+            boton.classList.toggle('mostrar', debeMostrarse);
+        });
+    };
+
+    registrarBotonFlotante(document.querySelector('#btn-top'), irArriba);
+
+    document.querySelectorAll('[data-floating-scroll]').forEach(boton => {
+        registrarBotonFlotante(boton);
+    });
+
+    window.addEventListener('scroll', indicadorScroll);
+    indicadorScroll();
+});
