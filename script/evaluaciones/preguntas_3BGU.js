@@ -1,146 +1,3 @@
-const preguntas = [
-  {
-    id: 1,
-    enunciado: "Relaciona el proceso con la propiedad aplicada. Luego, selecciona la respuesta correcta.",
-    afirmaciones: [
-      "a) $-0.17 + 0.17 = 0$",
-      "b) $-8\\sqrt[5]{3} + 2e = 2e - 8\\sqrt[5]{3}$",
-      "c) $\\frac{3}{4} + \\sqrt{2} - \\pi = \\frac{3}{4} + (\\sqrt{2} - \\pi)$",
-      "d) $-7\\sqrt{89} + 6\\sqrt{89} = -\\sqrt{89}$",
-      "<strong>Propiedad Aplicada:</strong> 1) Conmutativa, 2) Clausurativa, 3) Cancelativa, 4) Asociativa"
-    ],
-    opciones: [
-      "1c, 2a, 3d, 4b",
-      "1b, 2d, 3a, 4c",
-      "1a, 2b, 3c, 4d",
-      "1d, 2c, 3b, 4a"
-    ],
-    correcta: "B",
-    retroalimentacion: "La respuesta correcta es B, porque la propiedad conmutativa."
-  },
-  {
-    id: 2,
-    enunciado: "Relaciona cada operación con su resultado.",
-    afirmaciones: [
-      "a) $(-2)(-3)(-4)$",
-      "b) $(-36) \\div (-9)$",
-      "c) $(-5) + (-8)$",
-      "d) $(-12) - (-15)$",
-      "<strong>Resultado:</strong> 1) $-13$, 2) $4$, 3) $-24$, 4) $3$"
-    ],
-    opciones: [
-      "1a, 2b, 3c, 4d",
-      "1c, 2b, 3a, 4d",
-      "1d, 2c, 3b, 4a",
-      "1b, 2a, 3d, 4c"
-    ],
-    correcta: "B",
-    retroalimentacion: "La respuesta correcta es B, porque la propiedad conmutativa."
-  },
-  {
-    id: 3,
-    enunciado: "Las soluciones de la función cuadrática $y = 3x^2 + 3x - 6$ son:",
-    afirmaciones: [],
-    opciones: [
-      "$x_1 = 1, x_2 = -2$",
-      "$x_1 = -1, x_2 = 2$",
-      "$x_1 = 3, x_2 = -6$",
-      "$x_1 = 0, x_2 = 1$"
-    ],
-    correcta: "A",
-    retroalimentacion: "La respuesta correcta es B, porque la propiedad conmutativa."
-  },
-  {
-    id: 4,
-    enunciado: "Al aproximar el número irracional $2\\pi$ a las décimas, se obtiene:",
-    afirmaciones: [],
-    opciones: [
-      "$6.2$",
-      "$6.3$",
-      "$6.28$",
-      "$6.4$"
-    ],
-    correcta: "B",
-    retroalimentacion: "La respuesta correcta es B, porque la propiedad conmutativa."
-  },
-  {
-    id: 5,
-    enunciado: "Escoja la respuesta que corresponde a la siguiente expresión: La mitad de la suma de dos cuadrados.",
-    afirmaciones: [],
-    opciones: [
-      "$\\frac{x^2 + y^2}{2}$",
-      "$(\\frac{x+y}{2})^2$",
-      "$\\frac{(x+y)^2}{2}$",
-      "$x^2 + \\frac{y^2}{2}$"
-    ],
-    correcta: "A",
-    retroalimentacion: "La respuesta correcta es B, porque la propiedad conmutativa."
-  },
-  {
-    id: 6,
-    enunciado: "Selecciona el valor de verdad correcto para la proposición: Si todo número entero es racional, entonces algunos números reales son irracionales.",
-    afirmaciones: [],
-    opciones: [
-      "Verdadero (V)",
-      "Falso (F)"
-    ],
-    correcta: "A",
-    retroalimentacion: "La respuesta correcta es B, porque la propiedad conmutativa."
-  },
-  {
-    id: 7,
-    enunciado: "El vértice de la parábola $y = 2x^2 - 8x + 6$ es el punto:",
-    afirmaciones: [],
-    opciones: [
-      "$(2, -2)$",
-      "$(-2, 2)$",
-      "$(4, 6)$",
-      "$(0, 6)$"
-    ],
-    correcta: "A",
-    retroalimentacion: "La respuesta correcta es B, porque la propiedad conmutativa."
-  },
-  {
-    id: 8,
-    enunciado: "Calcular el área del polígono regular de la figura. Lado = $22\\text{ cm}$, apotema = $22.85\\text{ cm}$, pentágono.",
-    afirmaciones: [],
-    opciones: [
-      "$1256.75\\text{ cm}^2$",
-      "$2513.5\\text{ cm}^2$",
-      "$502.7\\text{ cm}^2$",
-      "$1100\\text{ cm}^2$"
-    ],
-    correcta: "A",
-    retroalimentacion: "La respuesta correcta es B, porque la propiedad conmutativa."
-  },
-  {
-    id: 9,
-    enunciado: "El área de un rectángulo es $147\\text{ cm}^2$. Si un lado mide el triple que el otro, ¿cuáles son las medidas de los lados?",
-    afirmaciones: [],
-    opciones: [
-      "$7\\text{ cm}$ y $21\\text{ cm}$",
-      "$6\\text{ cm}$ y $18\\text{ cm}$",
-      "$5\\text{ cm}$ y $15\\text{ cm}$",
-      "$9\\text{ cm}$ y $27\\text{ cm}$"
-    ],
-    correcta: "A",
-    retroalimentacion: "La respuesta correcta es B, porque la propiedad conmutativa."
-  },
-  {
-    id: 10,
-    enunciado: "Analicen los siguientes datos y escojan los números que completan correctamente la tabla de frecuencias absolutas y acumuladas.",
-    afirmaciones: [],
-    opciones: [
-      "$f_i = 5, F_i = 12$",
-      "$f_i = 4, F_i = 15$",
-      "$f_i = 6, F_i = 18$",
-      "$f_i = 3, F_i = 10$"
-    ],
-    correcta: "A",
-    retroalimentacion: "La respuesta correcta es B, porque la propiedad conmutativa."
-  }
-];
-
 let preguntaActual = 0;
 let respuestas = {};
 // Guardamos el momento exacto en el que el estudiante inicia el cuestionario
@@ -202,7 +59,7 @@ let intervalo = setInterval(() => {
   if (tiempo <= 0) {
     clearInterval(intervalo);
     calificarQuiz();
-    alert("El tiempo ha terminado.");
+    mostrarMensajeTiempoTerminado();
   }
 
   tiempo--;
@@ -359,13 +216,67 @@ function calificarQuiz() {
   renderizarLatex();
 }
 
+// CODEX: añadido para reemplazar la confirmacion nativa por un modal interno de Physikos
+const quizConfirmModal = document.getElementById("quizConfirmModal");
+const quizConfirmCancel = document.querySelector(".quiz-confirm-cancel");
+const quizConfirmSubmit = document.querySelector(".quiz-confirm-submit");
+
+function abrirModalConfirmacionQuiz() {
+  if (!quizConfirmModal) return;
+
+  quizConfirmModal.hidden = false;
+  quizConfirmModal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("quiz-confirm-open");
+}
+
+function cerrarModalConfirmacionQuiz() {
+  if (!quizConfirmModal) return;
+
+  quizConfirmModal.hidden = true;
+  quizConfirmModal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("quiz-confirm-open");
+}
+
 function confirmarCalificacion() {
-  const confirmar = confirm("¿Está seguro de finalizar el intento?");
-  if (confirmar) {
-    calificarQuiz();
-    bloquearQuiz();
+  abrirModalConfirmacionQuiz();
+}
+
+function finalizarIntentoConfirmado() {
+  cerrarModalConfirmacionQuiz();
+  calificarQuiz();
+  bloquearQuiz();
+}
+
+function mostrarMensajeTiempoTerminado() {
+  const resultadoFinal = document.getElementById("resultadoQuizFinal");
+  if (resultadoFinal) {
+    resultadoFinal.innerHTML = `<p class="quiz-time-ended">El tiempo ha terminado.</p>`;
   }
 }
+
+
+// CODEX: añadido para manejar las acciones del modal de finalización
+if (quizConfirmCancel) {
+  quizConfirmCancel.addEventListener("click", cerrarModalConfirmacionQuiz);
+}
+
+if (quizConfirmSubmit) {
+  quizConfirmSubmit.addEventListener("click", finalizarIntentoConfirmado);
+}
+
+if (quizConfirmModal) {
+  quizConfirmModal.addEventListener("click", (event) => {
+    if (event.target === quizConfirmModal) {
+      cerrarModalConfirmacionQuiz();
+    }
+  });
+}
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && quizConfirmModal && !quizConfirmModal.hidden) {
+    cerrarModalConfirmacionQuiz();
+  }
+});
 
 function bloquearQuiz() {
   document.querySelectorAll("#quizForm input").forEach(input => {
@@ -382,6 +293,16 @@ function renderizarLatex() {
       ]
     });
   }
+}
+
+// CODEX: anadido para construir la navegacion segun el banco de preguntas cargado
+function renderizarNavegacionPreguntas() {
+  const contenedorNavegacion = document.querySelector(".navegar_respuestas");
+  if (!contenedorNavegacion || typeof preguntas === "undefined" || !Array.isArray(preguntas)) return;
+
+  contenedorNavegacion.innerHTML = preguntas.map((pregunta, index) => `
+    <button class="quiz-num${index === 0 ? " active" : ""}" data-pregunta="${pregunta.id}">${pregunta.id}</button>
+  `).join("");
 }
 
 function actualizarBotones() {
@@ -472,6 +393,8 @@ if (typeof quizMobileMedia.addEventListener === "function") {
 }
 
 sincronizarPanelQuizResponsive();
+
+renderizarNavegacionPreguntas();
 
 document.querySelectorAll(".quiz-num").forEach(boton => {
   boton.addEventListener("click", () => {

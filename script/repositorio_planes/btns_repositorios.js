@@ -31,6 +31,11 @@ var subtemaBtnTmpl = $('<div>')
   )
   .append(
       $('<a>')
+        .addClass('view-test-btn')
+        .html('☰')
+  )
+  .append(
+      $('<a>')
         .addClass('subtema-expand-btn')
         .html('⛶')
   );  
@@ -132,6 +137,7 @@ function pruebaSubtemas() {
 
         var pdfBtn = botones.find(".goto-top-btn");
         var videoBtn = botones.find(".view-video-btn");
+        var TestBtn = botones.find(".view-test-btn"); //Crear boton destinado para los cuestionarios
         var verBtn = botones.find(".subtema-view-btn");
         var expandBtn = botones.find(".subtema-expand-btn");
 
@@ -146,6 +152,19 @@ function pruebaSubtemas() {
                     domaini + enterfolderi + namefolderi + "capitulo_1/" + recurso.pdf
                 );
             }
+        });
+
+        // CODEX: modificado para abrir la plantilla universal con el banco configurado en recursosSubtemas
+        const evaluacionId = recurso && recurso.evaluacion;
+        TestBtn.attr("title", evaluacionId && recurso ? "Evaluacion: " + recurso.nombre : "Evaluacion no disponible");
+        TestBtn.on("click", function (event) {
+            event.preventDefault();
+
+            if (!evaluacionId) {
+                return;
+            }
+
+            window.location.href = "../evaluaciones/rp_formulario_3BGU.html?banco=" + encodeURIComponent(evaluacionId);
         });
 
         $(this).append(botones);

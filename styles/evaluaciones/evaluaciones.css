@@ -467,3 +467,88 @@
     background: #ffffff;
   }
 }
+
+/* CODEX: añadido para mostrar un modal interno al finalizar el intento */
+.quiz-confirm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.52);
+}
+
+.quiz-confirm-overlay[hidden] {
+  display: none;
+}
+
+.quiz-confirm-modal {
+  width: min(92vw, 430px);
+  padding: 24px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.25);
+  color: #1a1e22;
+}
+
+.quiz-confirm-modal h3 {
+  margin: 0 0 12px;
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.quiz-confirm-modal p {
+  margin: 0 0 22px;
+  line-height: 1.45;
+  color: #495057;
+}
+
+.quiz-confirm-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.quiz-confirm-actions button {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.quiz-confirm-cancel {
+  background: #ced4da;
+  color: #1a1e22;
+}
+
+.quiz-confirm-submit {
+  background: #1f4fd8;
+  color: #ffffff;
+}
+
+body.quiz-confirm-open {
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .quiz-confirm-actions {
+    flex-direction: column-reverse;
+  }
+
+  .quiz-confirm-actions button {
+    width: 100%;
+  }
+}
+
+/* CODEX: añadido para mostrar el aviso interno cuando termina el tiempo */
+.quiz-time-ended {
+  margin: 12px auto;
+  padding: 12px 18px;
+  border-radius: 10px;
+  background: #fff3cd;
+  color: #7a5200;
+  font-weight: 600;
+}
