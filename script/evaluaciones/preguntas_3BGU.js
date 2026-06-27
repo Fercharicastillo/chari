@@ -1,8 +1,10 @@
 let preguntaActual = 0;
+//Guarda las respuestas
 let respuestas = {};
 // Guardamos el momento exacto en el que el estudiante inicia el cuestionario
 const horaInicio = new Date();
 
+/*Muestra las preguntas*/
 function mostrarPregunta() {
   const p = preguntas[preguntaActual];
   const contenedor = document.getElementById("quizForm");
@@ -65,21 +67,21 @@ let intervalo = setInterval(() => {
   tiempo--;
 }, 1000);
 
-
+/*Avenza de Pregunta*/
 function preguntaSiguiente() {
   if (preguntaActual < preguntas.length - 1) {
     preguntaActual++;
     mostrarPregunta();
   }
 }
-
+/*Retrocede de Pregunta*/
 function preguntaAnterior() {
   if (preguntaActual > 0) {
     preguntaActual--;
     mostrarPregunta();
   }
 }
-
+/*salta desde el panel lateral.*/
 function irAPregunta(numero) {
   preguntaActual = numero - 1;
   mostrarPregunta();
@@ -103,7 +105,7 @@ function actualizarContador() {
   document.getElementById("respondidas").textContent = Object.keys(respuestas).length;
   document.getElementById("totalPreguntas").textContent = preguntas.length;
 }
-
+/*calcula puntaje y muestra retroalimentación. */
 function calificarQuiz() {
   let puntaje = 0;
   const contenedor = document.getElementById("quizForm");
@@ -236,11 +238,11 @@ function cerrarModalConfirmacionQuiz() {
   quizConfirmModal.setAttribute("aria-hidden", "true");
   document.body.classList.remove("quiz-confirm-open");
 }
-
+/*abre el ventana interno. */
 function confirmarCalificacion() {
   abrirModalConfirmacionQuiz();
 }
-
+/*ejecuta calificarQuiz() y bloquearQuiz() */
 function finalizarIntentoConfirmado() {
   cerrarModalConfirmacionQuiz();
   calificarQuiz();

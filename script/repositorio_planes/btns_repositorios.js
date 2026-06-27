@@ -22,6 +22,7 @@ var gotoTopBtnTmpl = $('<div>') /* Se crea un elemento div*/
   .append(gotoTopBtn)
   .append(youtubeBtn); // Se añade dentro del div el elemento gotoToBtn creado anteriormente
 
+//Estructura de los tres botones de cada cada capitulo
 var subtemaBtnTmpl = $('<div>')
   .addClass('subtema-actions')
   .append(
@@ -44,6 +45,7 @@ var toggleFormulasBtnTmpl = $('<span>') // Se crea un elemento span
   .html(openSymbol) // Tendra como contenido el simbolo Carpeta abierta
   .addClass(toggleFormulasCssClass); // Se le añade la clase toggle-formulas-btn
 
+/*Se construye el nombre de los pdfs Deberia estar en un Js separado*/
 const origen = document.body.dataset.origen;
 const nombresArchivosformulas = [
   "Capitulo_1_Cinematica_en_y_3_dimensiones.pdf",
@@ -122,7 +124,7 @@ function unfoldTarget(ev) {
   }
 }
 
-// Funcion para añadir botones para ver videos
+// Funcion para añadir botones para ver videos, pdfs, y evaluaciones
 function pruebaSubtemas() {
 
     $(".grupo-formulas").each(function(index) {

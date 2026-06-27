@@ -140,5 +140,44 @@ const preguntas = [
     ],
     correcta: "B",
     retroalimentacion: "La respuesta correcta es B, porque la propiedad conmutativa."
+  },
+  {
+    id: 11,
+    enunciado: "Al aproximar el número irracional $2\\pi$ a las décimas, se obtiene:",
+    afirmaciones: [],
+    opciones: [
+      "$6.2$",
+      "$6.3$",
+      "$6.28$",
+      "$6.4$"
+    ],
+    correcta: "B",
+    retroalimentacion: "La respuesta correcta es B, porque la propiedad conmutativa."
+  },
+  {
+    id: 12,
+    enunciado: "Al aproximar el número irracional $2\\pi$ a las décimas, se obtiene:",
+    afirmaciones: [],
+    opciones: [
+      "$6.2$",
+      "$6.3$",
+      "$6.28$",
+      "$6.4$"
+    ],
+    correcta: "B",
+    retroalimentacion: "La respuesta correcta es B, porque la propiedad conmutativa."
+  },
+  {
+    id: 13,
+    enunciado: "Al aproximar el número irracional $2\\pi$ a las décimas, se obtiene:",
+    afirmaciones: [],
+    opciones: [
+      "$6.2$",
+      "$6.3$",
+      "$6.28$",
+      "$6.4$"
+    ],
+    correcta: "B",
+    retroalimentacion: "La respuesta correcta es B, porque la propiedad conmutativa."
   }
 ];

@@ -6,7 +6,7 @@
 | btns_repositorios.js únicamente leerá esta información.
 |--------------------------------------------------------------------------
 */
-
+/*Esta constante se utiliza en btns_repositorios en la funcion pruebaSubtemas*/
 const recursosSubtemas = [
 
     {
