@@ -124,7 +124,8 @@ function unfoldTarget(ev) {
   }
 }
 
-// Funcion para añadir botones para ver videos, pdfs, y evaluaciones
+// Funcion para añadir botones para ver videos, pdfs, y evaluaciones.Y se encarga de capturar 
+// el evento que muestra el simulador correspondiente
 function pruebaSubtemas() {
 
     $(".grupo-formulas").each(function(index) {
@@ -143,9 +144,10 @@ function pruebaSubtemas() {
         var verBtn = botones.find(".subtema-view-btn");
         var expandBtn = botones.find(".subtema-expand-btn");
 
-        pdfBtn.attr("title", recurso ? "PDF: " + recurso.nombre : "PDF no disponible");
-        videoBtn.attr("title", recurso ? "Video: " + recurso.nombre : "Video no disponible");
-
+        videoBtn.attr("title", recurso ? "Video: " + recurso.nombre : "Video no disponible"); /*Video General del Capitulo */
+        
+        /*Pdf General del Capitulo */
+        pdfBtn.attr("title", recurso ? "PDF: " + recurso.nombre : "PDF no disponible"); /*Pdf General del Capitulo */
         pdfBtn.on("click", function (event) {
             event.preventDefault();
 
@@ -156,7 +158,7 @@ function pruebaSubtemas() {
             }
         });
 
-        // CODEX: modificado para abrir la plantilla universal con el banco configurado en recursosSubtemas
+        /*Evaluacion de cada SubCapitulo */
         const evaluacionId = recurso && recurso.evaluacion;
         TestBtn.attr("title", evaluacionId && recurso ? "Evaluacion: " + recurso.nombre : "Evaluacion no disponible");
         TestBtn.on("click", function (event) {
@@ -167,6 +169,33 @@ function pruebaSubtemas() {
             }
 
             window.location.href = "../evaluaciones/rp_formulario_3BGU.html?banco=" + encodeURIComponent(evaluacionId);
+        });
+
+         /*Video de cada SubCapitulo */
+        const videoId = recurso && recurso.video;
+        verBtn.attr("title", videoId && recurso ? "Video: " + recurso.nombre : "Video no disponible");
+        verBtn.on("click", function (event) {
+            event.preventDefault();
+
+            if (!videoId) {
+              return;
+            }
+            window.open(videoId, "_blank");
+        });
+
+        /*Plan de clase de cada Subcapitulo*/
+        const nameSUBpdf = "pdfs_repositorio_planes_de_clase/mecanica_newtoniana/";
+        const pdfId = recurso && recurso.pdf;
+        expandBtn.attr("title", pdfId && recurso ? "Plan de Clase: " + recurso.nombre : "Plan de Clase no disponible");
+        expandBtn.on("click", function(event) {
+          event.preventDefault();
+
+          if (!pdfId) {
+              return;
+            }
+            setPdfSrcAndRedirect(
+              domaini + enterfolderi + nameSUBpdf + "capitulo_1/" + pdfId
+            );
         });
 
         $(this).append(botones);
