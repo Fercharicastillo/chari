@@ -44,6 +44,7 @@
     --hover-btn-menu: #a9aeb38c;
     
     --btn-menu: url(../img/botones/btn-menuW.svg);
+    --btn-menu-repositorio: url(../img/botones/btn-menuBN.svg);
     --icon-logo-index: url(../img/namepageW.svg);
     --icon-bn-moon: url(../img/botones/btn-bn-darkmode.svg);
     --icon-top: url(../img/botones/btn-wh-flecha-hueca.svg);
@@ -52,6 +53,8 @@
     --icon-closefolder: url(../img/botones/btn-wh-close-folder.svg);
     --icon-btnyoutube: url(../img/botones/btn-wh-youtube-libros.svg);
     --icon-btnadobepdf: url(../img/botones/btn-wh-pdf.svg);
+    --btn-ver: url(../img/botones/btn-ver.svg);
+    --btn-expandir: url(../img/botones/btn-expandir.svg);
 
     --icon-opacity: 1;
 }
@@ -880,6 +883,8 @@ h2 a.formulas-title {
 }
 
 .formulas {
+  /* CODEX: modificado para que los capitulos nazcan plegados sin parpadeo visual */
+  display: none;
   font-size: 100%;
   padding: 6px;
   background-color: var(--bg-space-of-formulas);
@@ -904,7 +909,7 @@ h2 a.formulas-title {
   justify-content: space-between;
   align-items: center;
   padding: 6px 8px;
-  background: #eaf3ff;
+  background: var(--bg-formula-titulo);
   border-top: 1px solid var(--bdr-grupo-formulas);
 }
 
@@ -925,6 +930,43 @@ span.formula{
   font-size: 130%;
   color: var(--cl-ecuaciones);
 }
+
+.view-test-btn{
+    float: right;
+    width: 25px;
+    height: 25px;
+    background-image: var(--btn-menu-repositorio);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 1.1em 1.1em;
+}
+
+.subtema-view-btn{
+    float: right;
+    width: 25px;
+    height: 25px;
+    background-image: var(--btn-ver);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 1.2em 1.2em;
+}
+
+.subtema-expand-btn{
+    float: right;
+    width: 25px;
+    height: 25px;
+    background-image: var(--btn-expandir);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 0.8em 0.8em;
+}
+
+.subtema-actions a:hover {
+    background-color: var(--bg-buttons);
+    border-radius: 3px;
+    border: solid 1px var(--bdr-buttons);
+}
+
 
 .view-video-btn,
 .toggle-formulas-btn {
@@ -1025,4 +1067,12 @@ span.formula{
 
 .title-right-btns {
   float: right;
+}
+
+body.katex-loading .formula {
+    visibility: hidden;
+}
+
+body.katex-ready .formula {
+    visibility: visible;
 }

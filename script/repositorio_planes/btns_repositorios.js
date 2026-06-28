@@ -5,7 +5,8 @@ var gotoTopSymbol = ''; // simbolo de pdf
 var toggleFormulasCssClass = 'toggle-formulas-btn'; // clase para botono de alternancia
 var titleRightBtnsCssClass = 'title-right-btns'; // clase de botones a la derecha youtube y pdf
 
-var formulasElems = $('.formulas').hide(); // oculta inicialmente el contenido de todos los elementos con clase formulas
+// CODEX: modificado para que el ocultamiento inicial de formulas dependa de CSS y no de JavaScript
+var formulasElems = $('.formulas');
 
 var gotoTopBtn = $('<a>') /*crea una etiqueta a, con ciertos atributos, para el boton de Menu hacia arriba */
   .attr('href', '#top')
@@ -28,80 +29,27 @@ var subtemaBtnTmpl = $('<div>')
   .append(
       $('<a>')
         .addClass('subtema-view-btn')
-        .html('👁 Ver')
   )
   .append(
       $('<a>')
         .addClass('view-test-btn')
-        .html('☰')
   )
   .append(
       $('<a>')
         .addClass('subtema-expand-btn')
-        .html('⛶')
   );  
 
 var toggleFormulasBtnTmpl = $('<span>') // Se crea un elemento span
-  .html(openSymbol) // Tendra como contenido el simbolo Carpeta abierta
+  // CODEX: modificado para que el boton nazca con el estado cerrado
+  .html(closeSymbol)
   .addClass(toggleFormulasCssClass); // Se le añade la clase toggle-formulas-btn
 
 /*Se construye el nombre de los pdfs Deberia estar en un Js separado*/
 const origen = document.body.dataset.origen;
-const nombresArchivosformulas = [
-  "Capitulo_1_Cinematica_en_y_3_dimensiones.pdf",
-  "Capitulo_2_Dinamica_Traslacional_y_Rotacional.pdf",
-  "Capitulo_3_Estatica.pdf",
-  "Capitulo_4_Trabajo_y_Energia.pdf",
-  "Capitulo_5_Gravitacion.pdf",
-  "Capitulo_6_Movimiento_Oscilatorio.pdf",
-  "Capitulo_7_Fluidos.pdf"
-];
-const nameCHAPTER= [
-  {
-    NombreCapitulo: "Cinematica_en_y_3_dimensiones",
-    PdfCapitulo: "Capitulo_1_Cinematica_en_y_3_dimensiones.pdf",
-    VideoYTubePlaylist: "https://www.youtube.com/watch?v=75xi6aasdw4&list=PLeySRPnY35dF7yGgUKWV2L-03TK1TlBNY"
-  },
-
-  {
-    NombreCapitulo: "Dinamica_Traslacional_y_Rotacional",
-    PdfCapitulo: "Dinamica_Traslacional_y_Rotacional.pdf",
-    VideoYTubePlaylist: "https://www.youtube.com/watch?v=0WNWab2b5jU&list=PLRenu6lMxFiLyoy7VGtQ1oZxjO-9Z666g"
-  },
-
-  {
-    NombreCapitulo: "Estatica",
-    PdfCapitulo: "Capitulo_3_Estatica.pdf",
-    VideoYTubePlaylist: " "
-  },
-
-  {
-    NombreCapitulo: "Trabajo_y_Energia",
-    PdfCapitulo: "Capitulo_4_Trabajo_y_Energia.pdf",
-    VideoYTubePlaylist: " "
-  },
-
-  {
-    NombreCapitulo: "Gravitacion",
-    PdfCapitulo: "Capitulo_5_Gravitacion.pdf",
-    VideoYTubePlaylist: " "
-  },
-
-  {
-    NombreCapitulo: "Movimiento_Oscilatorio",
-    PdfCapitulo: "Capitulo_6_Movimiento_Oscilatorio.pdf",
-    VideoYTubePlaylist: " "
-  },
-
-  {
-    NombreCapitulo: "Fluidos",
-    PdfCapitulo: "Capitulo_7_Fluidos.pdf",
-    VideoYTubePlaylist: " "
-  }
-];
 const domaini = "https://fercharicastillo.github.io/chari/";
 const enterfolderi = "visor_pdfs/web/viewer.html?file=pdfs/";
-const namefolderi = "pdfs_repositorio_formulas/mecanica_newtoniana/";
+// CODEX: modificado para mantener en este archivo solo la ruta base usada por la logica de botones
+const rutaBasePlanes = "pdfs_repositorio_planes_de_clase/mecanica_newtoniana/";
   
 $(document).ready(bootstrap); // Ejecuta la funcion boostrap una vez cargada la pagina y no antes
 
@@ -117,19 +65,41 @@ $('.header a[href^="#"]').on('click', function(event) {
   scrollToSection(target); // Llama a la función para desplazar la página a la sección correspondiente
 });
 
+// CODEX: anadido para construir rutas de PDF desde la carpeta declarada en recursosCapitulos
+function construirRutaPdfPlanes(carpeta, archivo) {
+  if (!carpeta || !archivo) return "";
+  return domaini + enterfolderi + rutaBasePlanes + carpeta + "/" + archivo;
+}
+
+// CODEX: modificado para crear botones generales del capitulo desde recursosCapitulos
 function addGotoTopBtn(index, h2Elem) {
-  var pdfSrc = domaini + enterfolderi + namefolderi + nombresArchivosformulas[index]; // Generar la ruta del PDF correspondiente
-  var gotoTopBtnContainer = gotoTopBtnTmpl.clone(); // Clonar el contenedor que contiene ambos botones
-  var gotoTopBtnClone = gotoTopBtnContainer.find('.goto-top-btn'); // Seleccionar el botón "Ir arriba" dentro del contenedor clonado
-  gotoTopBtnClone.attr('data-pdf', pdfSrc); // Asignar la ruta del PDF como atributo de datos al botón "Ir arriba"
-  $(gotoTopBtnClone).on('click', function(event) {
-    event.preventDefault();
-    var pdfSrc = $(this).attr('data-pdf');
-    if (pdfSrc) {
-      setPdfSrcAndRedirect(pdfSrc, origen);
-    }
-  });
-  $(h2Elem).prepend(gotoTopBtnContainer); // Añadir el contenedor clonado al encabezado
+  const capitulo = typeof recursosCapitulos !== "undefined" ? recursosCapitulos[index] : null;
+  var gotoTopBtnContainer = gotoTopBtnTmpl.clone();
+  var gotoTopBtnClone = gotoTopBtnContainer.find('.goto-top-btn');
+  var youtubeBtnClone = gotoTopBtnContainer.find('.view-video-btn');
+
+  if (capitulo && capitulo.pdfGeneral) {
+    var pdfSrc = construirRutaPdfPlanes(capitulo.carpeta, capitulo.pdfGeneral);
+    gotoTopBtnClone.attr('data-pdf', pdfSrc);
+    gotoTopBtnClone.attr('title', 'PDF general: ' + capitulo.nombre);
+    $(gotoTopBtnClone).on('click', function(event) {
+      event.preventDefault();
+      var pdfSrc = $(this).attr('data-pdf');
+      if (pdfSrc) {
+        setPdfSrcAndRedirect(pdfSrc, origen);
+      }
+    });
+  }
+
+  if (capitulo && capitulo.videoPlaylist) {
+    youtubeBtnClone.attr('title', 'Playlist: ' + capitulo.nombre);
+    youtubeBtnClone.on('click', function(event) {
+      event.preventDefault();
+      window.open(capitulo.videoPlaylist, '_blank');
+    });
+  }
+
+  $(h2Elem).prepend(gotoTopBtnContainer);
 }
 
 /*Clona el boton de alternancia y añade la accion de mostrar contenido toggleFolding al dar click*/
@@ -169,83 +139,84 @@ function unfoldTarget(ev) {
 
 // Funcion para añadir botones para ver videos, pdfs, y evaluaciones.Y se encarga de capturar 
 // el evento que muestra el simulador correspondiente
+// CODEX: anadido para validar que la fuente oficial de datos este disponible
+function obtenerCapitulosRepositorio() {
+  if (typeof recursosCapitulos !== "undefined" && Array.isArray(recursosCapitulos)) {
+    return recursosCapitulos;
+  }
+
+  console.error("No se encontro recursosCapitulos. Verifica que el archivo de datos del repositorio este cargado antes de btns_repositorios.js.");
+  return [];
+}
+
+// CODEX: modificado para crear botones de subtema usando la estructura jerarquica de capitulos
 function pruebaSubtemas() {
 
-    $(".grupo-formulas").each(function(index) {
+    const capitulos = obtenerCapitulosRepositorio();
 
-        const recurso = recursosSubtemas[index];
+    $('h2').each(function(capituloIndex) {
 
-        var botones = subtemaBtnTmpl.clone();
+        const capitulo = capitulos[capituloIndex];
+        if (!capitulo) return;
 
-        botones
-          .removeClass(titleRightBtnsCssClass)
-          .addClass("subtema-actions");
+        const formulasElem = $('.' + this.id);
 
-        var pdfBtn = botones.find(".goto-top-btn");
-        var videoBtn = botones.find(".view-video-btn");
-        var TestBtn = botones.find(".view-test-btn"); //Crear boton destinado para los cuestionarios
-        var verBtn = botones.find(".subtema-view-btn");
-        var expandBtn = botones.find(".subtema-expand-btn");
+        formulasElem.find('.grupo-formulas').each(function(subtemaIndex) {
 
-        videoBtn.attr("title", recurso ? "Video: " + recurso.nombre : "Video no disponible"); 
-        /*Video General 
-         ... Aqui debe estar el codigo para conectar con la Playlist de Youtub
-        ...
-        del Capitulo */
-        
-        /*Pdf General del Capitulo */
-        pdfBtn.attr("title", recurso ? "PDF: " + recurso.nombre : "PDF no disponible"); /*Pdf General del Capitulo */
-        pdfBtn.on("click", function (event) {
-            event.preventDefault();
+            const recurso = capitulo.subtemas[subtemaIndex];
 
-            if (recurso && recurso.pdf) {
+            var botones = subtemaBtnTmpl.clone();
+
+            botones
+              .removeClass(titleRightBtnsCssClass)
+              .addClass("subtema-actions");
+
+            var TestBtn = botones.find(".view-test-btn");
+            var verBtn = botones.find(".subtema-view-btn");
+            var expandBtn = botones.find(".subtema-expand-btn");
+
+            /*Evaluacion de cada SubCapitulo */
+            const evaluacionId = recurso && recurso.evaluacion;
+            TestBtn.attr("title", evaluacionId && recurso ? "Evaluacion: " + recurso.nombre : "Evaluacion no disponible");
+            TestBtn.on("click", function (event) {
+                event.preventDefault();
+
+                if (!evaluacionId) {
+                    return;
+                }
+
+                window.location.href = "../evaluaciones/rp_formulario_3BGU.html?banco=" + encodeURIComponent(evaluacionId);
+            });
+
+             /*Video de cada SubCapitulo */
+            const videoId = recurso && recurso.video;
+            verBtn.attr("title", videoId && recurso ? "Video: " + recurso.nombre : "Video no disponible");
+            verBtn.on("click", function (event) {
+                event.preventDefault();
+
+                if (!videoId) {
+                  return;
+                }
+                window.open(videoId, "_blank");
+            });
+
+            /*Plan de clase de cada Subcapitulo*/
+            const pdfId = recurso && recurso.pdf;
+            expandBtn.attr("title", pdfId && recurso ? "Plan de Clase: " + recurso.nombre : "Plan de Clase no disponible");
+            expandBtn.on("click", function(event) {
+              event.preventDefault();
+
+              if (!pdfId) {
+                  return;
+                }
                 setPdfSrcAndRedirect(
-                    domaini + enterfolderi + namefolderi + "capitulo_1/" + recurso.pdf
+                  construirRutaPdfPlanes(capitulo.carpeta, pdfId)
                 );
-            }
+            });
+
+            $(this).append(botones);
+
         });
-
-        /*Evaluacion de cada SubCapitulo */
-        const evaluacionId = recurso && recurso.evaluacion;
-        TestBtn.attr("title", evaluacionId && recurso ? "Evaluacion: " + recurso.nombre : "Evaluacion no disponible");
-        TestBtn.on("click", function (event) {
-            event.preventDefault();
-
-            if (!evaluacionId) {
-                return;
-            }
-
-            window.location.href = "../evaluaciones/rp_formulario_3BGU.html?banco=" + encodeURIComponent(evaluacionId);
-        });
-
-         /*Video de cada SubCapitulo */
-        const videoId = recurso && recurso.video;
-        verBtn.attr("title", videoId && recurso ? "Video: " + recurso.nombre : "Video no disponible");
-        verBtn.on("click", function (event) {
-            event.preventDefault();
-
-            if (!videoId) {
-              return;
-            }
-            window.open(videoId, "_blank");
-        });
-
-        /*Plan de clase de cada Subcapitulo*/
-        const nameSUBpdf = "pdfs_repositorio_planes_de_clase/mecanica_newtoniana/";
-        const pdfId = recurso && recurso.pdf;
-        expandBtn.attr("title", pdfId && recurso ? "Plan de Clase: " + recurso.nombre : "Plan de Clase no disponible");
-        expandBtn.on("click", function(event) {
-          event.preventDefault();
-
-          if (!pdfId) {
-              return;
-            }
-            setPdfSrcAndRedirect(
-              domaini + enterfolderi + nameSUBpdf + "capitulo_1/" + pdfId
-            );
-        });
-
-        $(this).append(botones);
 
     });
 

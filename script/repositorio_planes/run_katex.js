@@ -17,3 +17,17 @@ document.addEventListener("DOMContentLoaded", function() {
           throwOnError : false
         });
     });
+
+document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+        delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "\\(", right: "\\)", display: false },
+            { left: "\\[", right: "\\]", display: true }
+        ],
+        throwOnError: false
+    });
+
+    document.body.classList.remove("katex-loading");
+    document.body.classList.add("katex-ready");
+});
