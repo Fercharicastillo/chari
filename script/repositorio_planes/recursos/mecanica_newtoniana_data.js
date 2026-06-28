@@ -15,14 +15,14 @@ const recursosSubtemas = [
         nombre: "Movimiento Rectilíneo Uniforme",
         evaluacion: "cinematica_mru",
         pdf: "1.1_movimiento_rectilineo_uniforme.pdf",
-        video: "https://www.youtube.com/watch?v=75xi6aasdw4&list=PLeySRPnY35dF7yGgUKWV2L-03TK1TlBNY"
+        video: "https://youtu.be/ylErHxQjodw?si=wTFq1rUxeyG_qtLq"
     },
 
     {
         nombre: "Movimiento Rectilíneo Uniformemente Variado",
         evaluacion: "cinematica_mruv",
         pdf: "1.2_movimiento_rectilineo_uniforme_variado.pdf",
-        video: "https://www.youtube.com/watch?v=_HVgknQ1CXQ&list=PLeySRPnY35dGlWnfMQ-xC_qtn-xO5RWcF"
+        video: "https://www.youtube.com/watch?v=_HVgknQ1CXQ"
     },
 
     {

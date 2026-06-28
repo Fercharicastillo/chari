@@ -56,6 +56,49 @@ const nombresArchivosformulas = [
   "Capitulo_6_Movimiento_Oscilatorio.pdf",
   "Capitulo_7_Fluidos.pdf"
 ];
+const nameCHAPTER= [
+  {
+    NombreCapitulo: "Cinematica_en_y_3_dimensiones",
+    PdfCapitulo: "Capitulo_1_Cinematica_en_y_3_dimensiones.pdf",
+    VideoYTubePlaylist: "https://www.youtube.com/watch?v=75xi6aasdw4&list=PLeySRPnY35dF7yGgUKWV2L-03TK1TlBNY"
+  },
+
+  {
+    NombreCapitulo: "Dinamica_Traslacional_y_Rotacional",
+    PdfCapitulo: "Dinamica_Traslacional_y_Rotacional.pdf",
+    VideoYTubePlaylist: "https://www.youtube.com/watch?v=0WNWab2b5jU&list=PLRenu6lMxFiLyoy7VGtQ1oZxjO-9Z666g"
+  },
+
+  {
+    NombreCapitulo: "Estatica",
+    PdfCapitulo: "Capitulo_3_Estatica.pdf",
+    VideoYTubePlaylist: " "
+  },
+
+  {
+    NombreCapitulo: "Trabajo_y_Energia",
+    PdfCapitulo: "Capitulo_4_Trabajo_y_Energia.pdf",
+    VideoYTubePlaylist: " "
+  },
+
+  {
+    NombreCapitulo: "Gravitacion",
+    PdfCapitulo: "Capitulo_5_Gravitacion.pdf",
+    VideoYTubePlaylist: " "
+  },
+
+  {
+    NombreCapitulo: "Movimiento_Oscilatorio",
+    PdfCapitulo: "Capitulo_6_Movimiento_Oscilatorio.pdf",
+    VideoYTubePlaylist: " "
+  },
+
+  {
+    NombreCapitulo: "Fluidos",
+    PdfCapitulo: "Capitulo_7_Fluidos.pdf",
+    VideoYTubePlaylist: " "
+  }
+];
 const domaini = "https://fercharicastillo.github.io/chari/";
 const enterfolderi = "visor_pdfs/web/viewer.html?file=pdfs/";
 const namefolderi = "pdfs_repositorio_formulas/mecanica_newtoniana/";
@@ -144,7 +187,11 @@ function pruebaSubtemas() {
         var verBtn = botones.find(".subtema-view-btn");
         var expandBtn = botones.find(".subtema-expand-btn");
 
-        videoBtn.attr("title", recurso ? "Video: " + recurso.nombre : "Video no disponible"); /*Video General del Capitulo */
+        videoBtn.attr("title", recurso ? "Video: " + recurso.nombre : "Video no disponible"); 
+        /*Video General 
+         ... Aqui debe estar el codigo para conectar con la Playlist de Youtub
+        ...
+        del Capitulo */
         
         /*Pdf General del Capitulo */
         pdfBtn.attr("title", recurso ? "PDF: " + recurso.nombre : "PDF no disponible"); /*Pdf General del Capitulo */
