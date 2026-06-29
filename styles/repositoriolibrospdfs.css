@@ -1,82 +1,13 @@
-* {
-    margin: 0;
-    padding: 0;
-    font-family: system-ui, apple-system, BlinkMacSystemFont, Roboto, 'Segoe UI', "Source Sans Pro", sans-serif;
-    font-size: 12px;
-    box-sizing: border-box;
-}
-
 :root{
-   --color: #fff;
-    --color2:#333;
-    --color3:#000;
-    --border: #d1d1d1;
-    --bG: #fff;
-    --bGf: #fff;
-    --bGh: #0860a8;
-    --a1dm: #D8E9F7;
-    --color-enlaces: #17254d;
-    --color-fa-brands: #0860a8;
-    --color-h4: #6e6e6e; 
-    --color-linea: #3b3b3b;  
-    --color-shdow-img: #3d3a3a; 
-    --color-input-DM: #00000033;
-    --btn-menu-bg-color: rgb(29, 29, 29);
-    --bg-img-toc-card: #ffff;
-    --btn-top: #0000004d;
-    --btn-top-axis: #ffff;
-    --menu-current-part: #66a8df41;
-    --menu-current: #6187a873;
-    --menu-border-content: #4b4e72;
-    --bg-menu: #ffffff;
+    /* CODEX: modificado para conservar solo variables especificas de esta seccion */
     --bg-scroll: #8b8b8b;
     --bg-bg-scroll: #F5F5F5;
-    --text-color-hapter-name: #787878;
-
-    --hover-index: #0860a841;
-    --hover-btn-menu: #a9aeb38c;
-    
-    --btn-menu: url(../img/botones/btn-menuW.svg);
-    --icon-logo-index: url(../img/namepageW.svg);
-    --icon-bn-moon: url(../img/botones/btn-bn-darkmode.svg);
-    --icon-top: url(../img/botones/btn-wh-flecha-hueca.svg);
-
-    --icon-opacity: 1;
 }
 
 [cambio = "darkMode"]{
-    --color: #121617;
-    --color2:#d2d2d2;
-    --color3:#fff;
-    --border: #9baaaf;
-    --bGh: #9fadb2;
-    --bG: #121617;
-    --bGf: #9fadb2;
-	--a1dm: #404344;
-    --color-enlaces: #bbc2d4; 
-    --color-fa-brands: #9fadb2; 
-    --color-h4: #fff9a3;
-    --color-linea: #a7a7a7; 
-    --color-shdow-img: #5f5e5e; 
-    --color-input-DM: #ffffff33; 
-    --bg-img-toc-card: #dadada66;
-    --btn-top: #cbc6c64d;
-    --btn-top-axis: #ffff;
-    --menu-current-part: #7e96aac0;
-    --menu-current: #3a52689a;
-    --menu-border-content: #cdcdcf;
-    --text-color-hapter-name: #ffff;
+    /* CODEX: modificado para conservar solo variables especificas de esta seccion */
     --bg-scroll: #9f9f9f;
     --bg-bg-scroll: #2c2c2c;
-
-    --hover-btn-menu: #b8c2c7;
-    --hover-index: #557188ad;
-    --bg-menu: #000000;
-
-    --btn-menu: url(../img/botones/btn-menuBN.svg);
-    --icon-logo-index: url(../img/namepageBN.svg);
-    --icon-bn-moon: url(../img/botones/btn-wh-sun.svg);
-    --icon-top: url(../img/botones/btn-wh-flecha-hueca.svg);
 }
 
 .container__grid{
@@ -720,7 +651,6 @@
 }
 
 
-
 /*FOOTER */
 .footer{
     grid-column: 1 / 3;
@@ -896,11 +826,5 @@ nav.menu_nav-libros .content__content a {
     }
     
 }
-
-
-
-
-
-
 
 
