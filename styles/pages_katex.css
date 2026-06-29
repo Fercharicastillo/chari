@@ -44,7 +44,6 @@
     --hover-btn-menu: #a9aeb38c;
     
     --btn-menu: url(../img/botones/btn-menuW.svg);
-    --btn-menu-repositorio: url(../img/botones/btn-menuBN.svg);
     --icon-logo-index: url(../img/namepageW.svg);
     --icon-bn-moon: url(../img/botones/btn-bn-darkmode.svg);
     --icon-top: url(../img/botones/btn-wh-flecha-hueca.svg);
@@ -55,6 +54,8 @@
     --icon-btnadobepdf: url(../img/botones/btn-wh-pdf.svg);
     --btn-ver: url(../img/botones/btn-ver.svg);
     --btn-expandir: url(../img/botones/btn-expandir.svg);
+    --btn-menu-subchaption: url(../img/botones/btn-menu-subchaption.svg);
+
 
     --icon-opacity: 1;
 }
@@ -107,9 +108,8 @@
     --icon-closefolder: url(../img/botones/btn-close-folder.svg);
     --icon-btnyoutube: url(../img/botones/btn-bn-youtube-libros.svg);
     --icon-btnadobepdf: url(../img/botones/btn-bn-pdf.svg);
-
+    --btn-menu-subchaption: url(../img/botones/btn-BN-menu-subchaption.svg);
 }
-
 
 .container__grid{
     width: 100%;
@@ -935,7 +935,7 @@ span.formula{
     float: right;
     width: 25px;
     height: 25px;
-    background-image: var(--btn-menu-repositorio);
+    background-image: var(--btn-menu-subchaption);
     background-position: center;
     background-repeat: no-repeat;
     background-size: 1.1em 1.1em;

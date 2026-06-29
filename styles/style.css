@@ -204,6 +204,9 @@
      background-color: var(--bg-menu);
 }
 
+/*CCS de iconos del menu*/
+
+
 .menu p a{
     display: block;
     /* width: 100%; Se sobresale del borde del menu*/

@@ -1,4 +1,4 @@
-// CODEX: modificado para centralizar bancos de preguntas cargables desde la plantilla universal
+// CODEX: modificado para centralizar bancos de preguntas cargables desde la plantilla universal rp_formulario_3BGU.html
 const EVALUACIONES_INDEX = {
   cinematica_mru: {
     titulo: "(1.1) Movimiento Rectilineo Uniforme",

@@ -1,0 +1,67 @@
+/* CODEX: anadido para centralizar los iconos compartidos del menu lateral */
+:root {
+    --icon-intrudction-menu: url(../img/botones/btn_introduccion.svg);
+    --icon-simuladores-menu: url(../img/botones/btn_simuladores.svg);
+    --icon-graficadores-menu: url(../img/botones/btn-graficadores.svg);
+    --icon-proyectos-menu: url(../img/botones/btn_proyectos.svg);
+    --icon-repplanesclass-menu: url(../img/botones/btn_forms.svg);
+    --icon-repbooks-menu: url(../img/botones/btn_repositorio_libros.svg);
+    --icon-paperlife-menu: url(../img/botones/btn_paperlife.svg);
+}
+
+/* CODEX: anadido para mantener iconos del menu compatibles con modo oscuro */
+[cambio = "darkMode"] {
+    --icon-intrudction-menu: url(../img/botones/btn_BN_introduccion.svg);
+    --icon-simuladores-menu: url(../img/botones/btn_BN_simuladores.svg);
+    --icon-graficadores-menu: url(../img/botones/btn-BN-graficadores.svg);
+    --icon-proyectos-menu: url(../img/botones/btn_BTN_proyectos.svg);
+    --icon-repplanesclass-menu: url(../img/botones/btn_BN_forms.svg);
+    --icon-repbooks-menu: url(../img/botones/btn_BN_repositorio_libros.svg);
+    --icon-paperlife-menu: url(../img/botones/btn_BN_paperlife.svg);
+}
+
+/* CODEX: anadido para alinear iconos y texto del menu lateral en todas las paginas */
+.menu p a {
+    display: flex;
+    align-items: center;
+}
+
+.content__content p a::before {
+    content: "";
+    display: inline-block;
+    width: 1.35em;
+    height: 1.35em;
+    flex: 0 0 1.35em;
+    margin-right: 1em;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.menu-introduccion a::before {
+    background-image: var(--icon-intrudction-menu);
+}
+
+.menu-simuladores a::before {
+    background-image: var(--icon-simuladores-menu);
+}
+
+.menu-graficadores a::before {
+    background-image: var(--icon-graficadores-menu);
+}
+
+.menu-proyectos a::before {
+    background-image: var(--icon-proyectos-menu);
+}
+
+.menu-repositorio-planes a::before {
+    background-image: var(--icon-repplanesclass-menu);
+}
+
+.menu-repositorio-libros a::before {
+    background-image: var(--icon-repbooks-menu);
+}
+
+.menu-hoja-vida a::before {
+    background-image: var(--icon-paperlife-menu);
+}

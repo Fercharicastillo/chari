@@ -222,6 +222,7 @@
     padding-left: 10px;
 }
 
+
 .content__content p:hover,
 nav.menu_nav .content__content > p.current-part:hover {
   background-color: var(--hover-index);
