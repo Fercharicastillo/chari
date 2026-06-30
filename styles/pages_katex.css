@@ -259,7 +259,7 @@ nav.menu_nav .content__content > p.current-part:hover {
     justify-content: space-between;
     align-items: center;
 }
-
+/*TODO ESTO PERTENECE AL DARKMODO Y ESTA REPETIDO EN STYLE CSS Y EN SIMULADORES.CSS
 .lenguaje-btn-content,.darmode-btn-content,.btn-cambio-after{
     width: 4.5em;
     height: 2.2em;
@@ -304,7 +304,7 @@ nav.menu_nav .content__content > p.current-part:hover {
     box-shadow: 0px 0px 2px 2px #d2d2d2;
 }
 
-/*MENU  BTN-DARKMODE*/
+MENU  BTN-DARKMODE
 .content__DarkMode{
     position: absolute;
     bottom: 0em;
@@ -360,7 +360,7 @@ nav.menu_nav .content__content > p.current-part:hover {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-}
+}*/
 
 
 /*MAIN CONTANTAINER*/

@@ -252,7 +252,7 @@
 }
 
 
-/*MENU  BTN-LENGUAJE*/
+/*MENU  BTN-LENGUAJE
 .content__Lenguaje-libros{
     position: relative;
     bottom: 3em;
@@ -311,7 +311,7 @@
     box-shadow: 0px 0px 2px 2px #d2d2d2;
 }
 
-/*MENU  BTN-DARKMODE*/
+MENU  BTN-DARKMODE
 .content__DarkMode-libros{
     position: relative;
     bottom: 0em;
@@ -367,7 +367,7 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-}
+}*/
 
 /*MAIN CONTANTAINER*/
 .main{

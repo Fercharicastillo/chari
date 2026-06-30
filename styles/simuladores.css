@@ -153,10 +153,11 @@
     padding-left: 10px;
 }
 
+/* CODIGO QUE ESTA SOBREESCRITO
 .content__content p:hover,
 nav.menu_nav .content__content > p.current-part:hover {
   background-color: var(--hover-index);
-}
+}*/
 
 /*MENU SEARH*/
 .search{
@@ -222,7 +223,8 @@ nav.menu_nav .content__content > p.current-part:hover {
 }
 
 
-/*MENU  BTN-LENGUAJE*/
+/* TODO ESTO ESTA SOBREESCRITO EN STYLE CSS
+MENU  BTN-LENGUAJE
 .content__Lenguaje{
     position: absolute;
     bottom: 3em;
@@ -280,7 +282,7 @@ nav.menu_nav .content__content > p.current-part:hover {
     box-shadow: 0px 0px 2px 2px #d2d2d2;
 }
 
-/*MENU  BTN-DARKMODE*/
+
 .content__DarkMode{
     position: absolute;
     bottom: 0em;
@@ -336,7 +338,7 @@ nav.menu_nav .content__content > p.current-part:hover {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-}
+}*/
 
 /*MAIN CONTANTAINER*/
 .main{
@@ -808,10 +810,12 @@ nav.menu_nav-libros .content__content a.toc-section {
     border-left: 1px solid var(--menu-border-content);
 }
 
+/*
 .content__content p:hover,
 nav.menu_nav-libros .content__content > p.current-part:hover {
   background-color: var(--hover-index);
-}
+}*/
+
 
 nav.menu_nav-libros .content__content a {
     font-weight: bold;

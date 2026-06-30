@@ -10,6 +10,69 @@ click_btn.addEventListener('click', e=>{
 	main.classList.toggle('main_ds');
 });
 
+// CODEX: modificado para plegar cualquier submenu del menu lateral sin alterar el boton principal
+function inicializarSubmenusMenu() {
+  const seccionesConSubmenu = [
+    'menu-simuladores',
+    'menu-graficadores',
+    'menu-proyectos',
+    'menu-repositorio-planes',
+    'menu-repositorio-libros',
+    'menu-hoja-vida'
+  ];
+
+  seccionesConSubmenu.forEach((claseSeccion) => {
+    const encabezadoSubmenu = document.querySelector(`.content__content .${claseSeccion}`);
+
+    if (!encabezadoSubmenu || encabezadoSubmenu.querySelector('.menu-submenu-toggle')) {
+      return;
+    }
+
+    const subelementos = [];
+    let siguienteElemento = encabezadoSubmenu.nextElementSibling;
+
+    while (siguienteElemento && siguienteElemento.querySelector('a.toc-section')) {
+      subelementos.push(siguienteElemento);
+      siguienteElemento = siguienteElemento.nextElementSibling;
+    }
+
+    if (subelementos.length === 0) {
+      return;
+    }
+
+    const enlaceEncabezado = encabezadoSubmenu.querySelector('a.toc-part');
+    const nombreSubmenu = enlaceEncabezado ? enlaceEncabezado.textContent.trim() : 'submenu';
+    const submenu = document.createElement('div');
+    submenu.className = `menu-submenu menu-submenu-${claseSeccion.replace('menu-', '')}`;
+    submenu.setAttribute('aria-hidden', 'false');
+
+    subelementos[0].parentNode.insertBefore(submenu, subelementos[0]);
+    subelementos.forEach((subelemento) => submenu.appendChild(subelemento));
+
+    const botonToggle = document.createElement('button');
+    botonToggle.className = 'menu-submenu-toggle';
+    botonToggle.type = 'button';
+    botonToggle.setAttribute('aria-label', `Contraer ${nombreSubmenu}`);
+    botonToggle.setAttribute('aria-expanded', 'true');
+
+    encabezadoSubmenu.classList.add('menu-submenu-header');
+    encabezadoSubmenu.appendChild(botonToggle);
+
+    botonToggle.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const estaCerrado = submenu.classList.toggle('menu-submenu-cerrado');
+      encabezadoSubmenu.classList.toggle('menu-submenu-header-cerrado', estaCerrado);
+      submenu.setAttribute('aria-hidden', estaCerrado ? 'true' : 'false');
+      botonToggle.setAttribute('aria-expanded', estaCerrado ? 'false' : 'true');
+      botonToggle.setAttribute('aria-label', estaCerrado ? `Expandir ${nombreSubmenu}` : `Contraer ${nombreSubmenu}`);
+    });
+  });
+}
+
+inicializarSubmenusMenu();
+
 // CREAR FECHA
 const containerfecha = document.querySelector('.footer-right');
 
@@ -55,7 +118,6 @@ menu.addEventListener("mouseenter", () => {
 menu.addEventListener("mouseleave", () => {
   menu.classList.remove("overflow-visible");
 });
-
 
 
 

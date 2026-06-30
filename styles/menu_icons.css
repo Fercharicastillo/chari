@@ -1,4 +1,4 @@
-/* CODEX: anadido para centralizar los iconos compartidos del menu lateral */
+/* CODEX: añadido para centralizar los iconos compartidos del menu lateral */
 :root {
     --icon-intrudction-menu: url(../img/botones/btn_introduccion.svg);
     --icon-simuladores-menu: url(../img/botones/btn_simuladores.svg);
@@ -9,7 +9,7 @@
     --icon-paperlife-menu: url(../img/botones/btn_paperlife.svg);
 }
 
-/* CODEX: anadido para mantener iconos del menu compatibles con modo oscuro */
+/* CODEX: añadido para mantener iconos del menu compatibles con modo oscuro */
 [cambio = "darkMode"] {
     --icon-intrudction-menu: url(../img/botones/btn_BN_introduccion.svg);
     --icon-simuladores-menu: url(../img/botones/btn_BN_simuladores.svg);
@@ -20,7 +20,7 @@
     --icon-paperlife-menu: url(../img/botones/btn_BN_paperlife.svg);
 }
 
-/* CODEX: anadido para alinear iconos y texto del menu lateral en todas las paginas */
+/* CODEX: añadido para alinear iconos y texto del menu lateral en todas las paginas */
 .menu p a {
     display: flex;
     align-items: center;
@@ -64,4 +64,99 @@
 
 .menu-hoja-vida a::before {
     background-image: var(--icon-paperlife-menu);
+}
+
+/* CODEX: modificado para reutilizar submenus desplegables con arbol visual en cualquier seccion del menu */
+.content__content .menu-submenu-header {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    min-height: 2em;
+}
+
+.content__content .menu-submenu-header > a {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.menu-submenu-toggle {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    flex: 0 0 1em;
+    margin-right: 0.55em;
+    border: 0;
+    border-radius: 2px;
+    background-color: transparent;
+    background-image: var(--icon-openchaption);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.menu-submenu-toggle:hover,
+.menu-submenu-toggle:focus-visible {
+    background-color: var(--hover-index);
+    outline: none;
+}
+
+.menu-submenu-toggle:active {
+    transform: translateY(2px);
+}
+
+.menu-submenu-header-cerrado .menu-submenu-toggle {
+    transform: rotate(-180deg);
+}
+
+.menu .content__content .menu-submenu {
+    position: relative;
+    max-height: 32em;
+    overflow: hidden;
+    background-color: var(--menu-current-part);
+    transition: max-height 0.2s ease;
+}
+
+.menu .content__content .menu-submenu-cerrado {
+    max-height: 0;
+}
+
+.menu .content__content .menu-submenu p {
+    position: relative;
+    margin: 0;
+}
+
+.menu .content__content .menu-submenu p::before {
+    content: "";
+    position: absolute;
+    top: 1em;
+    left: 1.3em;
+    width: 0.6em;
+    height: 1px;
+    background-color: var(--menu-border-content);
+    opacity: 0.75;
+}
+
+.menu .content__content .menu-submenu p.current {
+    background-color: var(--menu-current);
+}
+
+.menu .content__content .menu-submenu p a.toc-section {
+    min-width: 0;
+    border-left: 1px solid var(--menu-border-content);
+}
+
+.menu .content__content .menu-submenu p a.toc-section::before {
+    width: 0.72em;
+    height: 0.72em;
+    flex: 0 0 0.72em;
+    margin-right: 1.1em;
+    border-radius: 50%;
+    background-color: var(--bGmenu);
+    background-image: none;
+    box-shadow: 0 0 0 2px var(--menu-current-part);
 }
