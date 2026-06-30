@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Physikós</title>
-    <link rel="stylesheet" href="../../styles/style.css">
-    <link rel="stylesheet" href="../../styles/simuladores.css">
+    <link rel="stylesheet" href="../../styles/style.css"> <!--Estilos Generales-->
+    <link rel="stylesheet" href="../../styles/simuladores.css"> <!--Estilos de simuladores-->
     <link rel="stylesheet" href="../../styles/menu_icons.css">
     <link rel="icon" href="../../img/iconHeadW.svg">
 </head>
@@ -33,7 +33,7 @@
                 </div>
                 <div class="header_content-img"><a href="https://www.uce.edu.ec/" target="_BLANK"><img src="https://aka-cdn.uce.edu.ec/ares/tmp/logo3.png" alt="El servidor ha fallado."></a></div>
             </div>
-        </div>
+        </div>    
 
         <div class="menu menu_dsm">
             <nav class="menu_nav">
@@ -43,14 +43,16 @@
                     <p class="toc'part menu-introduccion"><a href="../../index.html">Introducción</a></p>
                     <p class="current-part menu-simuladores"><a class="toc-part" href="simuladores.html">Simuladores</a></p>
                         <p class="current-part"><a class="toc-section" href="pendulo_simple.html">Péndulo Simple</a></p>
+                        <p class="current current-part"><a class="toc-section" href="sim_mru.html">MRU</a></p>
                         <!--<p class="current-part"><a class="toc-section" href="pendulo_doble.html">Péndulo Doble</a></p>
-                        <p class="current current-part"><a class="toc-section" href="pendulo_triple.html">Péndulo Triple</a></p>-->
+                        <p class="current-part"><a class="toc-section" href="pendulo_triple.html">Péndulo Triple</a></p>-->
                     <p class="menu-graficadores"><a class="toc-part" href="../graficadores/graficadores.html">Graficadores</a></p>
                     <p class="menu-proyectos"><a class="toc-part" href="../proyectos/proyectos.html">Proyectos</a></p>
                     <p class="menu-repositorio-planes"><a class="toc-part" href="../repositorio_planes/repositorio_planes.html">Repositorio de Planes de Clase</a></p>
                     <p class="menu-repositorio-libros"><a class="toc-part" href="../repositorio_libros/repositorio_libros.html">Repositorio de Libros</a></p>
                     <p class="menu-hoja-vida"><a class="toc-part" href="../autores/autores.html">Hoja de vida</a></p>
                 </div>
+                
                 <!--<div class="content__Lenguaje">
                     <span>Lenguaje</span>
                     <label class="lenguaje-btn-content" for="click-lenguaje">
@@ -82,15 +84,13 @@
                     </div>
 
                     <div class="manual-html-explanation">
-                        Simulador Péndulo Triple
+                        Simulador Péndulo Simple
                     </div>
             </section>
-            <section class="main_s2">
-                    
+            <section class="main_s2_pendulo">
+                
             </section>
-            <section class="main_s3" id="introducion">
-                    
-            </section>
+            <section class="main_s3" id="introducion"></section>
         </div>
 
         <div class="footer">
@@ -107,10 +107,10 @@
             <i class="btn-up"></i>
         </div>   
     </div>
-   <!--<script src="script/search.js"></script>
-    <script src="script/langEn.js"></script>-->
     <script src="../../script/menu.js" defer></script>
-    <script src="../../script/flecha.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> <!--Script para utilizar jquerys para el loaderpage-->
+    <script src="../../script/simuladores/menu_sim.js" defer></script> <!--Script para el menu desplegable-->
+    <script src="../../script/flecha.js" defer></script> <!--Script para la flecha de subir al inicio de la pagina-->
+    <script src="../../script/simuladores/sim_mru.js" defer></script> <!--Script para la flecha de subir al inicio de la pagina-->   
 </body>
-
 </html>

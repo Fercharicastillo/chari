@@ -13,7 +13,7 @@ body {
     --color: #fff;
     --color2:#333;
     --color3:#000;
-    --border: #d1d1d1;
+    --border: #000000;
     --bG: #fff;
     --bGf: #fff;
     --bGh: #0860a8;
@@ -167,13 +167,20 @@ body {
     background-position: center;
     cursor: pointer;
     padding-top: 5px;
+    border-radius: 50%;
+
+    transition:
+        transform 0.15s cubic-bezier(.22, .61, .36, 1),
+        background-color 0.2s ease,
+        opacity 0.2s ease;
 }
 
 .btn-menu:hover, .selected-btn-menu{
     background-color: var(--hover-btn-menu);
-    width: 3em;
-    height: 3em;
-    border-radius: 50%;
+}
+
+.btn-menu:active{
+    transform: scale(0.92) translateY(1px);
 }
 
 /*Hover del menu*/
@@ -192,18 +199,25 @@ nav.menu_nav .content__content > p.current-part:hover {
 }
 
 /*MENU CONTAIENER*/
+/* CODEX: modificado para animar el menu lateral con transform en escritorio */
 .menu {
     grid-column: 1 / 2;
     grid-row: 2 / 3;
+    width: 19.91em;
     height: calc(100% - 8.5em);
     position: fixed;
     top: 5em;
+    left: 0;
     z-index: 3;
-    border-right: 1px solid var(--border); 
+    background-color: var(--bg-menu);
+    transform: translateX(0);
+    transition: transform 0.2s cubic-bezier(.22, .61, .36, 1);
+    will-change: transform;
 }
 
 .menu_ds {
-    display: none;
+    transform: translateX(-100%);
+    pointer-events: none;
 }
 
 .menu_nav{
@@ -213,9 +227,10 @@ nav.menu_nav .content__content > p.current-part:hover {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-     -webkit-user-select: none;
-     user-select: none;
-     background-color: var(--bg-menu);
+    -webkit-user-select: none;
+    user-select: none;
+    background-color: var(--bg-menu);
+    border-right: 1px solid var(--border); 
 }
 
 /*CCS de iconos del menu*/
@@ -230,6 +245,7 @@ nav.menu_nav .content__content > p.current-part:hover {
     font-weight: 600;
     color: var(--color3);
     padding-left: 10px;
+    border-right: #3b3b3b;
 }
 
 
@@ -807,8 +823,16 @@ nav.menu_nav .content__content a {
     }
 
     /*RESPONSIVE MENU*/
+    /* CODEX: modificado para conservar la animacion del menu lateral en pantallas pequenas */
     .menu{
-        display: none;
+        display: block;
+        width: 100%;
+        height: calc(100vh - 5em);
+        left: 0;
+        border-right: 0;
+        background-color: var(--bg-menu);
+        transform: translateX(-100%);
+        pointer-events: none;
     }
     .container-autor-1{
         flex-direction: column-reverse;
@@ -824,15 +848,18 @@ nav.menu_nav .content__content a {
     
     .menu_nav{
         width: 100%;
+        height: 100%;
+        background-color: var(--bg-menu);
         overflow-x: hidden;
         overflow-y: scroll;
     }
 
     .menu_ds{       
         width: 100%;
-        display: block;
         grid-column: 1 / 3;
         grid-row: 2 / 3;
+        transform: translateX(0);
+        pointer-events: auto;
     }
 
     .content__Lenguaje{
