@@ -784,23 +784,26 @@ nav.menu_nav-libros .content__content a {
     .menu_nav-libros{
         width: 100%;
     }
+    /*SE SOBREESCRIBE YA ESTA EN STYLE.CSS
     .menu_ds{       
         width: 100%;
         display: block;
         grid-column: 1 / 3;
         grid-row: 2 / 3;
     }
-
+    */
     /*RESPONSIVE MAIN*/
     .main{
         grid-column: 1 / 3;
         grid-row: 2 / 3;
     }
+    /*
     .main_ds{           
         display: none;
         height: 100%;
     }
-
+    */
+    
     .home-toc-section{
         width: initial;
     }

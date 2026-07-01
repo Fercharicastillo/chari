@@ -1,0 +1,39 @@
+/* CODEX: añadido para ofrecer un overlay global reutilizable en menus, modales y paneles */
+.ui-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 900;
+    background: var(--backgroundmenu);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.ui-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.ui-overlay[hidden] {
+    display: none;
+}
+
+.ui-overlay-host {
+    position: relative;
+}
+
+.ui-overlay.ui-overlay--content {
+    position: absolute;
+    z-index: 20;
+}
+
+body.ui-overlay-open {
+    overflow: hidden;
+}
+
+/* CODEX: añadido para mantener el menu movil abierto por encima del overlay global */
+@media only screen and (max-width: 430px) {
+    .menu.menu_ds {
+        z-index: 901 !important;
+    }
+}

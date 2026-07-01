@@ -10,6 +10,8 @@
     <script src="../../script/menu_estado_inicial.js"></script>
     <!-- CODEX: añadido para cargar estilos base comunes antes del CSS especifico -->
     <link rel="stylesheet" href="../../styles/style.css">
+    <!-- CODEX: añadido para cargar el overlay global reutilizable -->
+    <link rel="stylesheet" href="../../styles/overlay.css">
     <link rel="stylesheet" href="../../styles/pages_katex.css">
     <link rel="stylesheet" href="../../styles/menu_icons.css">
     <link rel="stylesheet" href="../../styles/evaluaciones/evaluaciones.css">
@@ -146,8 +148,6 @@
 
             <div id="resultadoQuizFinal"></div>
 
-            <div class="quiz-nav-overlay" hidden></div>
-
             <div class="evaluaciones-temporizador" id="quizNavigationPanel" aria-hidden="true">
                 <div class="quiz-panel-card">
                 <button class="quiz-panel-close" type="button" aria-label="Cerrar navegación del cuestionario">Cerrar</button>
@@ -217,6 +217,7 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
 <script defer src="../../script/repositorio_planes/run_katex.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="../../script/ui/overlay.js" defer></script>
 <script src="../../script/menu.js" defer></script>
 <script src="../../script/flecha.js" defer></script>
 <!-- CODEX: anadido para cargar el banco de preguntas antes del motor del cuestionario -->

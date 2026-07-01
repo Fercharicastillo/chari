@@ -14,6 +14,18 @@ function aplicarEstadoMenu(usarClaseMenuDs, guardarEstadoMovil = true) {
   if (guardarEstadoMovil && menuMovilMedia.matches) {
     sessionStorage.setItem('menuMovilAbierto', usarClaseMenuDs ? 'true' : 'false');
   }
+
+  // CODEX: añadido para reutilizar el overlay global cuando el menu movil esta abierto
+  if (window.PhysikosOverlay && menuMovilMedia.matches) {
+    if (usarClaseMenuDs) {
+      window.PhysikosOverlay.mostrar({
+        target: '.main',
+        onClick: () => aplicarEstadoMenu(false)
+      });
+    } else {
+      window.PhysikosOverlay.ocultar();
+    }
+  }
 }
 
 // CODEX: añadido para restaurar el menu movil abierto despues de navegar desde una opcion del menu
@@ -102,14 +114,20 @@ inicializarSubmenusMenu();
 
 // CREAR FECHA
 const containerfecha = document.querySelector('.footer-right');
+/*Obtener la fecha */
+const Fecha = new Date();
+const textoFecha = 
+      String(Fecha.getDate()).padStart(2, "0") + "-" + 
+      (String((Fecha.getMonth() + 1)).padStart(2, "0")) + "-" +
+      Fecha.getFullYear();
 
-function applydate() {
+function applydate(textoFecha) {
   const emdate = document.createElement('em'); 
-  emdate.textContent = 'Ultima actualización: 2024-03-23';
+  emdate.textContent = 'Ultima actualización: ' + textoFecha;
   containerfecha.appendChild(emdate); 
 }
 
-applydate();
+applydate(textoFecha);
 
 //MENU BTN-DARKMODE
 

@@ -216,3 +216,6 @@ JavaScript:
 `// CODEX: añadido para describir la función`
 
 Los comentarios deben ser breves y funcionales. No deben colocarse en cada línea, solo en bloques relevantes.
+
+## Versiones
+2023-04-25: http://charnando.surge.sh/

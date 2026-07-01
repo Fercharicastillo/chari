@@ -13,6 +13,7 @@ body {
     --color: #fff;
     --color2:#333;
     --color3:#000;
+    --backgroundmenu: rgba(0, 0, 0, 0.48);
     --border: #000000;
     --bG: #fff;
     --bGf: #fff;
@@ -63,6 +64,7 @@ body {
     --color: #121617;
     --color2:#d2d2d2;
     --color3:#fff;
+    --backgroundmenu: rgba(255, 255, 255, 0.48);
     --border: #9baaaf;
     --bGh: #9fadb2;
     --bGmenu: #ffffff;
@@ -824,10 +826,11 @@ nav.menu_nav .content__content a {
     /* CODEX: modificado para conservar la animacion del menu lateral en pantallas pequenas */
     .menu{
         display: block;
-        width: 100%;
+        width: min(86vw, 22em);;
         height: calc(100vh - 5em);
         left: 0;
         border-right: 0;
+        z-index: 901;
         background-color: var(--bg-menu);
         transform: translateX(-100%);
         pointer-events: none;
@@ -854,7 +857,6 @@ nav.menu_nav .content__content a {
     }
 
     .menu_ds{       
-        width: 100%;
         grid-column: 1 / 3;
         grid-row: 2 / 3;
         transform: translateX(0);
@@ -869,7 +871,7 @@ nav.menu_nav .content__content a {
     }
 
     .menu-movil-inicial-abierto .main {
-        display: none;
+        display: flex;
     }
 
     .content__Lenguaje{
@@ -887,9 +889,10 @@ nav.menu_nav .content__content a {
         grid-row: 2 / 3;
         padding-bottom: 3em;
     }
+    /*
     .main_ds{           
         display: none;
-    }
+    }*/
 
     .home-toc-section{
         width: initial;

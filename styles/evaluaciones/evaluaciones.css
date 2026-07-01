@@ -312,10 +312,6 @@
   display: none;
 }
 
-.quiz-nav-overlay[hidden] {
-  display: none;
-}
-
 @media (max-width: 768px) {
   .main_s2_evaluaciones {
     grid-template-columns: 1fr;
@@ -378,7 +374,7 @@
     top: 0;
     right: 0;
     z-index: 1001;
-    width: min(86vw, 360px);
+    width: min(86vw, 22em);
     height: 100vh;
     padding: 0;
     border-left: 1px solid var(--border);
@@ -413,7 +409,7 @@
     font-size: 15px;
     cursor: pointer;
   }
-
+/*Para el menu lateral de preguntas con fondo obscuro transparente*/
   .quiz-nav-overlay {
     position: fixed;
     inset: 0;

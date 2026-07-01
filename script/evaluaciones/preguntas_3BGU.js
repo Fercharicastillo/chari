@@ -334,16 +334,24 @@ function actualizarBotones() {
 const quizMobileNavBtns = document.querySelectorAll(".quiz-mobile-nav-btn, .quiz-floating-nav-btn");
 const quizPanel = document.querySelector(".evaluaciones-temporizador");
 const quizPanelCloseBtn = document.querySelector(".quiz-panel-close");
-const quizPanelOverlay = document.querySelector(".quiz-nav-overlay");
 const quizMobileMedia = window.matchMedia("(max-width: 768px)");
 
 function actualizarEstadoPanelQuiz(abierto) {
-  if (!quizPanel || !quizPanelOverlay) return;
+  if (!quizPanel) return;
 
   quizPanel.classList.toggle("is-open", abierto);
-  quizPanelOverlay.classList.toggle("is-open", abierto);
-  quizPanelOverlay.hidden = !abierto;
   document.body.classList.toggle("quiz-panel-open", abierto);
+
+  // CODEX: modificado para usar el overlay global reutilizable en el panel del cuestionario
+  if (window.PhysikosOverlay && quizMobileMedia.matches) {
+    if (abierto) {
+      window.PhysikosOverlay.mostrar({
+        onClick: cerrarPanelQuizMovil
+      });
+    } else {
+      window.PhysikosOverlay.ocultar();
+    }
+  }
 
   quizMobileNavBtns.forEach(boton => {
     boton.setAttribute("aria-expanded", abierto ? "true" : "false");
@@ -376,10 +384,6 @@ quizMobileNavBtns.forEach(boton => {
 
 if (quizPanelCloseBtn) {
   quizPanelCloseBtn.addEventListener("click", cerrarPanelQuizMovil);
-}
-
-if (quizPanelOverlay) {
-  quizPanelOverlay.addEventListener("click", cerrarPanelQuizMovil);
 }
 
 document.addEventListener("keydown", (event) => {
