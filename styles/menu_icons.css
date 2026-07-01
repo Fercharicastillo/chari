@@ -83,7 +83,8 @@
 }
 
 .menu-submenu-toggle {
-    display: inline-block;
+    /* CODEX: modificado para ocultar flechas de submenus cerrados por defecto */
+    display: none;
     width: 1em;
     height: 1em;
     flex: 0 0 1em;
@@ -97,6 +98,11 @@
     background-size: contain;
     cursor: pointer;
     transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+/* CODEX: añadido para mostrar solamente la flecha del submenu abierto */
+.menu-submenu-toggle.is-visible {
+    display: inline-block;
 }
 
 .menu-submenu-toggle:hover,

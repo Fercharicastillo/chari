@@ -43,18 +43,8 @@
         <div class="menu menu_dsm">
             <nav class="menu_nav-libros">
                 <!--<div class="content__search"></div>-->
-                <div class="content__content">
-                    <!-- CODEX: añadido para asociar iconos semanticos a cada opcion del menu lateral -->
-                    <p class="toc-part menu-introduccion"><a href="../../index.html">Introducción</a></p>
-                    <p class="menu-simuladores"><a class="toc-part" href="../simuladores/simuladores.html">Simuladores</a></p>
-                    <p class="menu-graficadores"><a class="toc-part" href="../graficadores/graficadores.html">Graficadores</a></p>
-                    <p class="menu-proyectos"><a class="toc-part" href="../proyectos/proyectos.html">Proyectos</a></p>
-                    <p class="current-part menu-repositorio-planes"><a class="toc-part" href="../repositorio_planes/repositorio_planes.html">Repositorio de Planes de Clase</a></p>
-                        <p id="mecanica" class="current-part"><a class="toc-section" href="rp_mecanica_newtoniana.html">Mecánica Newtoniana</a></p>
-                        <p id="calculo"  class="current-part"><a class="toc-section" href="rp_mecanica_cálculo diferencial.html">Cálculo Diferencial</a></p>
-                    <p class="menu-repositorio-libros"><a class="toc-part" href="../repositorio_libros/repositorio_libros.html">Repositorio de Libros</a></p>
-                    <p class="menu-hoja-vida"><a class="toc-part" href="../autores/autores.html">Hoja de vida</a></p>
-                </div>
+                <!-- CODEX: modificado para renderizar el menu lateral del visor de planes desde datos reutilizables -->
+                <div class="content__content" data-menu-render data-menu-base="../../" data-menu-current="repositorio-planes" data-menu-submenus="true"></div>
                 
                 <!--<div class="content__Lenguaje-formulas">
                     <span>Lenguaje</span>
@@ -87,9 +77,12 @@
         </div>   
     </div>
 <script src="../../script/ui/overlay.js" defer></script>
+<script src="../../script/menu_datos.js" defer></script>
+<script src="../../script/menu_render.js" defer></script>
 <script src="../../script/menu.js" defer></script>
 <script src="../../script/flecha.js" defer></script>
 <script defer type="text/javascript">
+                // CODEX: modificado para marcar el subitem activo del visor PDF sin borrar el encabezado activo del menu
                 document.addEventListener("DOMContentLoaded", function() {
                     var pdfSrc = sessionStorage.getItem('pdfSrc');
                     if (pdfSrc) {
@@ -97,12 +90,17 @@
                     }
 
                     var origen = sessionStorage.getItem("origen");
-                    
-                    document.querySelectorAll(".current-part").forEach(function(item) {
+                    var subitemsPorOrigen = {
+                        mecanica: "mecanica-newtoniana",
+                        calculo: "calculo-diferencial"
+                    };
+
+                    document.querySelectorAll("[data-menu-subitem-id]").forEach(function(item) {
                     item.classList.remove("current");
                     });
 
-                    var menu = document.getElementById(origen);
+                    var subitemActivo = subitemsPorOrigen[origen];
+                    var menu = document.querySelector('[data-menu-subitem-id="' + subitemActivo + '"]');
 
                     if (menu) {
                         menu.classList.add("current");

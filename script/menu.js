@@ -83,29 +83,81 @@ function inicializarSubmenusMenu() {
     const nombreSubmenu = enlaceEncabezado ? enlaceEncabezado.textContent.trim() : 'submenu';
     const submenu = document.createElement('div');
     submenu.className = `menu-submenu menu-submenu-${claseSeccion.replace('menu-', '')}`;
-    submenu.setAttribute('aria-hidden', 'false');
 
     subelementos[0].parentNode.insertBefore(submenu, subelementos[0]);
     subelementos.forEach((subelemento) => submenu.appendChild(subelemento));
 
+    // CODEX: añadido para que solo el submenu activo inicie abierto y los demas puedan abrirse manualmente
+    const submenuActivo = encabezadoSubmenu.classList.contains('current') ||
+      subelementos.some((subelemento) => subelemento.classList.contains('current'));
+    const iniciarCerrado = !submenuActivo;
+    const flechaVisible = encabezadoSubmenu.classList.contains('current');
+
+    submenu.classList.toggle('menu-submenu-cerrado', iniciarCerrado);
+    submenu.setAttribute('aria-hidden', iniciarCerrado ? 'true' : 'false');
+
     const botonToggle = document.createElement('button');
     botonToggle.className = 'menu-submenu-toggle';
     botonToggle.type = 'button';
-    botonToggle.setAttribute('aria-label', `Contraer ${nombreSubmenu}`);
-    botonToggle.setAttribute('aria-expanded', 'true');
+    // CODEX: añadido para mostrar la flecha solo en el submenu activo y conservar limpio el menu lateral
+    botonToggle.classList.toggle('is-visible', flechaVisible);
+    botonToggle.setAttribute('aria-label', iniciarCerrado ? `Expandir ${nombreSubmenu}` : `Contraer ${nombreSubmenu}`);
+    botonToggle.setAttribute('aria-expanded', iniciarCerrado ? 'false' : 'true');
 
     encabezadoSubmenu.classList.add('menu-submenu-header');
+    encabezadoSubmenu.classList.toggle('menu-submenu-header-cerrado', iniciarCerrado);
     encabezadoSubmenu.appendChild(botonToggle);
+
+    // CODEX: añadido para cerrar otros submenus y mantener una sola flecha visible
+    function cerrarOtrosSubmenus() {
+      document.querySelectorAll('.menu .content__content .menu-submenu').forEach((otroSubmenu) => {
+        if (otroSubmenu === submenu) return;
+
+        const otroEncabezado = otroSubmenu.previousElementSibling;
+        const otroToggle = otroEncabezado ? otroEncabezado.querySelector('.menu-submenu-toggle') : null;
+
+        otroSubmenu.classList.add('menu-submenu-cerrado');
+        otroSubmenu.setAttribute('aria-hidden', 'true');
+
+        if (otroEncabezado) {
+          otroEncabezado.classList.add('menu-submenu-header-cerrado');
+        }
+
+        if (otroToggle) {
+          otroToggle.classList.toggle('is-visible', otroEncabezado && otroEncabezado.classList.contains('current'));
+          otroToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
 
     botonToggle.addEventListener('click', (event) => {
       event.preventDefault();
       event.stopPropagation();
 
+      if (submenu.classList.contains('menu-submenu-cerrado')) {
+        cerrarOtrosSubmenus();
+      }
+
       const estaCerrado = submenu.classList.toggle('menu-submenu-cerrado');
       encabezadoSubmenu.classList.toggle('menu-submenu-header-cerrado', estaCerrado);
+      botonToggle.classList.toggle('is-visible', flechaVisible);
       submenu.setAttribute('aria-hidden', estaCerrado ? 'true' : 'false');
       botonToggle.setAttribute('aria-expanded', estaCerrado ? 'false' : 'true');
       botonToggle.setAttribute('aria-label', estaCerrado ? `Expandir ${nombreSubmenu}` : `Contraer ${nombreSubmenu}`);
+    });
+
+    // CODEX: añadido para permitir abrir submenus cerrados desde el encabezado sin mostrar flechas extra
+    encabezadoSubmenu.addEventListener('click', (event) => {
+      if (event.target.closest('a') || event.target.closest('.menu-submenu-toggle')) return;
+      if (!submenu.classList.contains('menu-submenu-cerrado')) return;
+
+      cerrarOtrosSubmenus();
+      submenu.classList.remove('menu-submenu-cerrado');
+      encabezadoSubmenu.classList.remove('menu-submenu-header-cerrado');
+      botonToggle.classList.toggle('is-visible', flechaVisible);
+      submenu.setAttribute('aria-hidden', 'false');
+      botonToggle.setAttribute('aria-expanded', 'true');
+      botonToggle.setAttribute('aria-label', `Contraer ${nombreSubmenu}`);
     });
   });
 }

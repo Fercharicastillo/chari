@@ -44,18 +44,8 @@
         <div class="menu menu_dsm">
             <nav class="menu_nav">
                 <!--<div class="content__search"></div>-->
-                <div class="content__content">
-                    <!-- CODEX: añadido para asociar iconos semanticos a cada opcion del menu lateral -->
-                    <p class="toc-part menu-introduccion"><a href="../../index.html">Introducción</a></p>
-                    <p class="menu-simuladores"><a class="toc-part" href="../simuladores/simuladores.html">Simuladores</a></p>
-                    <p class="menu-graficadores"><a class="toc-part" href="../graficadores/graficadores.html">Graficadores</a></p>
-                    <p class="menu-proyectos"><a class="toc-part" href="../proyectos/proyectos.html">Proyectos</a></p>
-                    <p class="current-part menu-repositorio-planes"><a class="toc-part" href="../repositorio_planes/repositorio_planes.html">Repositorio de Planes de Clase</a></p>
-                        <p class="current current-part"><a class="toc-section" href="rp_mecanica_newtoniana.html">Mecánica Newtoniana</a></p>
-                        <p class="current-part"><a class="toc-section" href="rp_mecanica_cálculo diferencial.html">Cálculo Diferencial</a></p>
-                    <p class="menu-repositorio-libros"><a class="toc-part" href="../repositorio_libros/repositorio_libros.html">Repositorio de Libros</a></p>
-                    <p class="menu-hoja-vida"><a class="toc-part" href="../autores/autores.html">Hoja de vida</a></p>
-                </div>
+                <!-- CODEX: modificado para renderizar el menu lateral y marcar Mecánica Newtoniana desde datos reutilizables -->
+                <div class="content__content" data-menu-render data-menu-base="../../" data-menu-current="repositorio-planes" data-menu-submenus="true" data-menu-subcurrent="mecanica-newtoniana"></div>
 
                 <div class="BtnNav">
                     <!--<div class="content__Lenguaje">
@@ -643,6 +633,9 @@
 <script defer src="../../script/repositorio_planes/recursos/mecanica_newtoniana_data.js"></script>
 <script defer src="../../script/repositorio_planes/btns_repositorios.js"></script>
 <script src="../../script/ui/overlay.js" defer></script>
+<!-- CODEX: añadido para cargar datos y renderizador reutilizable del menu lateral -->
+<script src="../../script/menu_datos.js" defer></script>
+<script src="../../script/menu_render.js" defer></script>
 <script src="../../script/menu.js" defer></script>
 <script src="../../script/flecha.js" defer></script>
 </body>

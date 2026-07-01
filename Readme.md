@@ -78,6 +78,19 @@ Antes de crear una nueva función verificar si ya existe una implementación sim
 
 Si una funcionalidad puede reutilizarse, debe convertirse en un componente común.
 
+Para páginas nuevas con menú lateral, no crear una versión propia del menú ni duplicar lógica de apertura, cierre, submenús, dark mode u overlay. Mientras el menú no esté convertido en un componente único, reutilizar el patrón existente y cargar los archivos comunes:
+
+```
+script/menu_estado_inicial.js
+styles/style.css
+styles/overlay.css
+styles/menu_icons.css
+script/ui/overlay.js
+script/menu.js
+```
+
+Si una nueva sección necesita modificar el menú, primero evaluar si el cambio pertenece al sistema común antes de agregar reglas locales.
+
 ---
 
 ## 5. Los datos no deben mezclarse con la lógica
@@ -114,12 +127,13 @@ Evitar que un solo archivo CSS crezca indefinidamente.
 
 ## 7. Convención para nombres
 
-Para archivos nuevos utilizar:
+Para archivos y carpetas nuevos utilizar:
 
 * minúsculas
 * sin espacios
 * sin tildes
 * guion bajo (_)
+* nombres descriptivos y estables para URLs
 
 Ejemplos:
 
@@ -127,7 +141,13 @@ Ejemplos:
 pendulo_simple.html
 series_de_balmer.html
 preguntas_3bgu.js
+mecanica_newtoniana_data.js
+capitulo_1/
 ```
+
+Esta regla aplica a páginas HTML, archivos CSS, archivos JavaScript, imágenes, PDFs y carpetas nuevas.
+
+No renombrar archivos existentes sin revisar antes todos los enlaces, rutas relativas, scripts y referencias asociadas.
 
 ---
 
