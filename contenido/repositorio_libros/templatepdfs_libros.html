@@ -43,42 +43,8 @@
         <div class="menu menu_dsm">
             <nav class="menu_nav-libros">
                 <!--<div class="content__search"></div>-->
-                <div class="content__content">
-                <p class="toc-part menu-introduccion"><a href="../../index.html">Introducción</a></p>
-                <p class="menu-simuladores"><a class="toc-part" href="../simuladores/simuladores.html">Simuladores</a></p>
-                <p class="menu-graficadores"><a class="toc-part" href="../graficadores/graficadores.html">Graficadores</a></p>
-                <p class="menu-proyectos"><a class="toc-part" href="../proyectos/proyectos.html">Proyectos</a></p>
-                <p class="menu-repositorio-planes"><a class="toc-part" href="../repositorio_planes/repositorio_planes.html">Repositorio de Planes de Clase</a></p>
-                <p class="current-part menu-repositorio-libros"><a class="toc-part" href="repositorio_libros.html">Repositorio de Libros</a></p>
-                    <p class="current current-part"><a class="toc-section" href="rl_algebralineal.html">Álgebra Lineal</a></p>
-                    <p class="current-part"><a class="toc-section" href="#">Análisis Complejo</a></p>
-                    <p class="current-part"><a class="toc-section" href="#">Análisis Funcional</a></p>
-                    <p class="current-part"><a class="toc-section" href="#">Cálculo en 1 variable</a></p>
-                    <p class="current-part"><a class="toc-section" href="#">Cálculo vectorial</a></p>
-                    <p class="current-part"><a class="toc-section" href="#">EDO</a></p>
-                    <p class="current-part"><a class="toc-section" href="#">EDP</a></p>
-                    <p class="current-part"><a class="toc-section" href="#">Electrodinámica Clásica</a></p>
-                    <p class="current-part"><a class="toc-section" href="#">Estadística y Probabilidad</a></p>
-                    <p class="current-part"><a class="toc-section" href="#">Estado Sólido</a></p>
-                    <p class="current-part"><a class="toc-section" href="#">Física Atómica</a></p>
-                    <p class="current-part"><a class="toc-section" href="#">Física Molecular</a></p>
-                    <p class="current-part"><a class="toc-section" href="#">Física Nuclear</a></p>
-                    <p class="current-part"><a class="toc-section" href="#">Física Térmica</a></p>
-                    <p class="current-part"><a class="toc-section" href="#">Instrumentación con Arduino</a></p>
-                    <p class="current-part"><a class="toc-section" href="#">Mecánica Clásica</a></p>
-                    <p class="current-part"><a class="toc-section" href="#">Mecánica Cuántica</a></p>
-                    <p class="current-part"><a class="toc-section" href="#">Mecánica Estadística</a></p>
-                    <p class="current-part"><a class="toc-section" href="#">Mecánica Newtoniana</a></p>
-                    <p class="current-part"><a class="toc-section" href="#">Métodos para la Física</a></p>
-                    <p class="current-part"><a class="toc-section" href="#">Óptica</a></p>
-                    <p class="current-part"><a class="toc-section" href="#">Oscilaciones y Ondas</a></p>
-                    <p class="current-part"><a class="toc-section" href="#">Química General</a></p>
-                    <p class="current-part"><a class="toc-section" href="#">Radiaciones Ionizantes</a></p>
-                    <p class="current-part"><a class="toc-section" href="#">Relatividad y Física Cuántica</a></p>
-                    <p class="current-part"><a class="toc-section" href="#">Sistemas Complejos</a></p>
-                    <p class="current-part"><a class="toc-section" href="#">Astrofísica Galáctica</a></p>
-                <p class="menu-hoja-vida"><a class="toc-part" href="../autores/autores.html">Hoja de vida</a></p>
-                </div>
+                <!-- CODEX: modificado para renderizar el menu lateral del visor de libros desde datos reutilizables -->
+                <div class="content__content" data-menu-render data-menu-base="../../" data-menu-current="repositorio-libros" data-menu-submenus="true" data-menu-subcurrent="algebra-lineal"></div>
                 <!--<div class="content__Lenguaje-libros">
                     <span>Lenguaje</span>
                     <label class="lenguaje-btn-content" for="click-lenguaje">
@@ -110,6 +76,8 @@
         </div>   
     </div>
 <script src="../../script/ui/overlay.js" defer></script>
+<script src="../../script/menu_datos.js" defer></script>
+<script src="../../script/menu_render.js" defer></script>
 <script src="../../script/menu.js" defer></script>
 <script src="../../script/flecha.js" defer></script>
 <script defer type="text/javascript">
