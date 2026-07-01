@@ -1,7 +1,3 @@
-const domain = "https://fercharicastillo.github.io/chari/";
-const enterfolder = "visor_pdfs/web/viewer.html?file=pdfs/";
-const namefolder = "pdfs_repositorio_libros/algebra_lineal/";
-
 const nombresArchivos = [
   "Axler_Sheldon_Lineal_Algebra_Done_Right.pdf",
   "Kunze_and_Hoffman_Lineal_Algebra.pdf",
@@ -27,10 +23,14 @@ nombresArchivos.forEach((nombre, index) => {
     divCard.classList.add('home-toc-card');
 
     const enlace = document.createElement('a');
-    enlace.href = domain + enterfolder + namefolder + nombresArchivos[index];
+    // CODEX: modificado para construir URLs publicas del visor PDF desde el helper global
+    const pdfSrc = window.PhysikosRutasPdf
+      ? window.PhysikosRutasPdf.construirPdfLibroAlgebraLineal(nombresArchivos[index])
+      : "";
+
+    enlace.href = pdfSrc;
     enlace.addEventListener('click', function(event) {
         event.preventDefault();
-        var pdfSrc = domain + enterfolder + namefolder + nombresArchivos[index]; 
         if (pdfSrc) {
             // Guardar el valor de data-pdf
             setPdfSrcAndRedirect(pdfSrc);

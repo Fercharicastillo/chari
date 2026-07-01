@@ -46,10 +46,6 @@ var toggleFormulasBtnTmpl = $('<span>') // Se crea un elemento span
 
 /*Se construye el nombre de los pdfs Deberia estar en un Js separado*/
 const origen = document.body.dataset.origen;
-const domaini = "https://fercharicastillo.github.io/chari/";
-const enterfolderi = "visor_pdfs/web/viewer.html?file=pdfs/";
-// CODEX: modificado para mantener en este archivo solo la ruta base usada por la logica de botones
-const rutaBasePlanes = "pdfs_repositorio_planes_de_clase/mecanica_newtoniana/";
   
 $(document).ready(bootstrap); // Ejecuta la funcion boostrap una vez cargada la pagina y no antes
 
@@ -65,10 +61,15 @@ $('.header a[href^="#"]').on('click', function(event) {
   scrollToSection(target); // Llama a la función para desplazar la página a la sección correspondiente
 });
 
-// CODEX: anadido para construir rutas de PDF desde la carpeta declarada en recursosCapitulos
+// CODEX: modificado para construir rutas publicas de PDF con el helper global de PDF.js Viewer
 function construirRutaPdfPlanes(carpeta, archivo) {
   if (!carpeta || !archivo) return "";
-  return domaini + enterfolderi + rutaBasePlanes + carpeta + "/" + archivo;
+  if (!window.PhysikosRutasPdf) {
+    console.error("No se encontro PhysikosRutasPdf. Verifica que rutas_pdf.js cargue antes de btns_repositorios.js.");
+    return "";
+  }
+
+  return window.PhysikosRutasPdf.construirPdfPlanesMecanica(carpeta, archivo);
 }
 
 // CODEX: modificado para crear botones generales del capitulo desde recursosCapitulos
@@ -185,7 +186,13 @@ function pruebaSubtemas() {
                     return;
                 }
 
-                window.location.href = "../evaluaciones/rp_formulario_3BGU.html?banco=" + encodeURIComponent(evaluacionId);
+                // CODEX: modificado para construir la URL de evaluacion desde el helper centralizado
+                if (!window.PhysikosRutasEvaluaciones) {
+                    console.error("No se encontro PhysikosRutasEvaluaciones. Verifica que rutas_evaluaciones.js cargue antes de btns_repositorios.js.");
+                    return;
+                }
+
+                window.location.href = window.PhysikosRutasEvaluaciones.construirUrlPlantilla(evaluacionId);
             });
 
              /*Video de cada SubCapitulo */
