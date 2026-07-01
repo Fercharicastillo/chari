@@ -134,7 +134,7 @@
 }
 
 
-/*MENU CONTAIENER*/
+/*MENU CONTAIENER CODIGO SOBREESCRITO DEL MENU (YA ESTA EN STYLE CSS)
 body{
     font-family: system-ui, apple-system, BlinkMacSystemFont, Roboto, 'Segoe UI', "Source Sans Pro", sans-serif;
     font-size: 12px;
@@ -150,7 +150,7 @@ body{
     border-right: 1px solid var(--border);
 }
 
-.menu_ds{        /*SCRIPTS CLASES AGREGADAS MENU DESPEGABLE*/
+.menu_ds{        /*SCRIPTS CLASES AGREGADAS MENU DESPEGABLE
     display: none;
 }
 
@@ -168,14 +168,14 @@ body{
 
 .menu p a{
     display: block;
-    /* width: 100%; Se sobresale del borde del menu*/
+    /* width: 100%; Se sobresale del borde del menu
     height: 2em;
     line-height: 2em;
     text-decoration: none;
     font-weight: 600;
     color: var(--color3);
     padding-left: 10px;
-}
+}*/
 
 .content__content p:hover,
 nav.menu_nav .content__content > p.current-part:hover {
@@ -697,10 +697,10 @@ MENU  BTN-DARKMODE
         display: none;   
     }
 
-    /*RESPONSIVE MENU*/
+    /*RESPONSIVE MENU ESTA SOBREESCRITO EN STYLE.CSS
     .menu{
         display: none;
-    }
+    }*/
 
     .menu_nav{
         width: 100%;

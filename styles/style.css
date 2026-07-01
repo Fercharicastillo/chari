@@ -332,7 +332,6 @@ nav.menu_nav .content__content > p.current-part:hover {
     height: 2.2em;
     font-weight: 600;
     color: var(--color3);
-    margin-right: 1em;
     border: 1px solid var(--color-input-DM);
     display: flex;
     justify-content: space-between;
@@ -381,7 +380,6 @@ nav.menu_nav .content__content > p.current-part:hover {
 .topactions {
     display: flex;
     align-items: center;
-    gap: 18px;
     margin-left: auto;
 }
 
@@ -390,7 +388,6 @@ nav.menu_nav .content__content > p.current-part:hover {
     bottom: 0em;
     width: auto;
     height: auto;
-    padding-left: 0;
     font-weight: 600;
     color: var(--color3);
     padding-left: 10px;
@@ -398,6 +395,7 @@ nav.menu_nav .content__content > p.current-part:hover {
     justify-content: space-between;
     align-items: center;
     border-radius: 10px;
+    margin-right: 1em;
 }
 
 .darmode-btn-content i::after{
@@ -852,6 +850,7 @@ nav.menu_nav .content__content a {
         background-color: var(--bg-menu);
         overflow-x: hidden;
         overflow-y: scroll;
+        border-right: none;
     }
 
     .menu_ds{       
@@ -862,16 +861,25 @@ nav.menu_nav .content__content a {
         pointer-events: auto;
     }
 
+    /* CODEX: añadido para evitar parpadeo al restaurar el menu movil antes de cargar menu.js */
+    .menu-movil-inicial-abierto .menu {
+        transform: translateX(0);
+        pointer-events: auto;
+        transition: none;
+    }
+
+    .menu-movil-inicial-abierto .main {
+        display: none;
+    }
+
     .content__Lenguaje{
         position: relative;
         bottom: 0em;
     }
 
-    .content__DarkMode{
-        position: relative;
-        bottom: 0em;
+    .header .content__DarkMode{
+        margin-right: 0em;
     }
-
 
     /*RESPONSIVE MAIN*/
     .main{

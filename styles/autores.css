@@ -284,7 +284,7 @@ hr {
 	margin-right: .5em;
 	margin-left: .5em;
 }
-
+/* MENU SOBREESCRITO YA ESTA EN STYLE.CSS
 .menu_nav-libros{
     width: 19.91em;
     height: 100%;
@@ -295,7 +295,7 @@ hr {
     -webkit-user-select: none;
     user-select: none;
 	background-color: var(--bg-menu);
-}
+}*/
 
 .content__Lenguaje-libros{
     position: relative;

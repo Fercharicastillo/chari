@@ -3,12 +3,39 @@ let click_btn = document.getElementById('btn_menu');
 const btnmenu = document.querySelector('.btn-menu');
 const menu = document.querySelector('.menu');
 let main = document.querySelector('.main');
+const menuMovilMedia = window.matchMedia('(max-width: 430px)');
+
+// CODEX: añadido para conservar el estado del menu movil entre navegaciones sin cerrar enlaces automaticamente
+function aplicarEstadoMenu(usarClaseMenuDs, guardarEstadoMovil = true) {
+  btnmenu.classList.toggle('selected-btn-menu', usarClaseMenuDs);
+  menu.classList.toggle('menu_ds', usarClaseMenuDs);
+  main.classList.toggle('main_ds', usarClaseMenuDs);
+
+  if (guardarEstadoMovil && menuMovilMedia.matches) {
+    sessionStorage.setItem('menuMovilAbierto', usarClaseMenuDs ? 'true' : 'false');
+  }
+}
+
+// CODEX: añadido para restaurar el menu movil abierto despues de navegar desde una opcion del menu
+function restaurarEstadoMenuMovil() {
+  if (!menuMovilMedia.matches) {
+    return;
+  }
+
+  const menuMovilAbierto = sessionStorage.getItem('menuMovilAbierto') === 'true';
+
+  if (menuMovilAbierto) {
+    aplicarEstadoMenu(true, false);
+  }
+
+  document.documentElement.classList.remove('menu-movil-inicial-abierto');
+}
 
 click_btn.addEventListener('click', e=>{
-  btnmenu.classList.toggle('selected-btn-menu')
-	menu.classList.toggle('menu_ds');
-	main.classList.toggle('main_ds');
+  aplicarEstadoMenu(!menu.classList.contains('menu_ds'));
 });
+
+restaurarEstadoMenuMovil();
 
 // CODEX: modificado para plegar cualquier submenu del menu lateral sin alterar el boton principal
 function inicializarSubmenusMenu() {
@@ -118,6 +145,3 @@ menu.addEventListener("mouseenter", () => {
 menu.addEventListener("mouseleave", () => {
   menu.classList.remove("overflow-visible");
 });
-
-
-

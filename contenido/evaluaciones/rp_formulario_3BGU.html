@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Physikós</title>
+    <!-- CODEX: añadido para restaurar el estado visual del menu movil antes del primer render -->
+    <script src="../../script/menu_estado_inicial.js"></script>
     <!-- CODEX: añadido para cargar estilos base comunes antes del CSS especifico -->
     <link rel="stylesheet" href="../../styles/style.css">
     <link rel="stylesheet" href="../../styles/pages_katex.css">
@@ -25,7 +27,17 @@
                 </a>
                 <div id="btn_menu" class="btn-menu" title=""></div>
             </div>
-            <div class="header_content-img"><a href="https://www.uce.edu.ec/" target="_BLANK"><img src="https://aka-cdn.uce.edu.ec/ares/tmp/logo3.png" alt=""></a></div>
+            <div class="topactions">
+                <div class="content__DarkMode">
+                    <label class="darmode-btn-content" for="click-DarkMode">
+                        <i class="btn-sun"></i>
+                        <label for="click-DarkMode"></label>
+                        <input type="checkbox" id="click-DarkMode">
+                        <i class="btn-moon"></i>
+                    </label>
+                </div>
+                <div class="header_content-img"><a href="https://www.uce.edu.ec/" target="_BLANK"><img src="https://aka-cdn.uce.edu.ec/ares/tmp/logo3.png" alt="El servidor ha fallado."></a></div>
+            </div>
         </div>
 
         <div class="menu menu_dsm   ">
@@ -43,7 +55,7 @@
                     <p class="menu-repositorio-libros"><a class="toc-part" href="../repositorio_libros/repositorio_libros.html">Repositorio de Libros</a></p>
                     <p class="menu-hoja-vida"><a class="toc-part" href="../autores/autores.html">Hoja de vida</a></p>
                 </div>
-              
+
                 <div class="BtnNav">
                     <!--<div class="content__Lenguaje">
                     <span>Lenguaje</span>
@@ -53,14 +65,7 @@
                         <span class="before">ES</span>
                     </label>
                     </div>-->
-                    <div class="content__DarkMode">
-                    <span>DarkMode</span>
-                    <label class="darmode-btn-content" for="click-DarkMode">
-                        <i class="btn-sun"></i>
-                        <input type="checkbox" id="click-DarkMode">
-                        <i class="btn-moon"></i>
-                    </label>
-                    </div>
+
                 </div>
             </nav>
         </div>
@@ -87,16 +92,16 @@
                         Planes de Clase de Cálculo Diferencial
                 </div>
             </section>
-            
+
             <section class="main_s2_evaluaciones">
             <div class="evaluaciones-header">Evaluación: MRU, MRUA y Dinámica</div>
 
             <button class="quiz-mobile-nav-btn" type="button" aria-controls="quizNavigationPanel" aria-expanded="false">
                 Navegación del cuestionario
             </button>
-            
+
             <div id="resultadoQuiz"></div>
-            
+
             <div id="quizForm" class="evaluaciones-formulario">
             <div class="pregunta">
                 <h3>1. Identifique cuántas afirmaciones son verdaderas y cuántas son falsas.</h3>
@@ -159,7 +164,7 @@
                         <button class="quiz-num" data-pregunta="7">7</button>
                         <button class="quiz-num" data-pregunta="8">8</button>
                         <button class="quiz-num" data-pregunta="9">9</button>
-                        <button class="quiz-num" data-pregunta="10">10</button>  
+                        <button class="quiz-num" data-pregunta="10">10</button>
                     </div>
                     <div class="navegar_opciones">
                         <p class="estado-quiz">Respondidas: <span id="respondidas">0</span> / <span id="totalPreguntas">5</span></p>
@@ -188,7 +193,7 @@
         <div class="footer">
             <div class="footer-left">
                 <a href="#">Licencia</a>
-                <a href="#">| Git Hub</a> 
+                <a href="#">| Git Hub</a>
             </div>
             <div class="footer-right"></div>
         </div>
@@ -196,7 +201,7 @@
         <div class="indicador_container">
             <div class="indicador_scroll"></div>
         </div>
-        
+
         <!-- CODEX: añadido para abrir la navegación del cuestionario desde un botón flotante móvil -->
         <button class="quiz-floating-nav-btn ocultar" data-floating-scroll type="button" aria-controls="quizNavigationPanel" aria-expanded="false" aria-label="Abrir navegación del cuestionario">
             <span></span>
@@ -205,7 +210,7 @@
         </button>
         <div id="btn-top" class="ocultar" title="Subir">
             <i class="btn-up"></i>
-        </div> 
+        </div>
 
     </div>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
