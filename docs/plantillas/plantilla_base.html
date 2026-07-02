@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- CODEX: añadido para documentar la plantilla base estándar de Physikós -->
+    <!--
+        PLANTILLA BASE DE PHYSIKÓS
+        Objetivo:
+        Usar esta estructura como punto de partida para cualquier página nueva.
+
+        No es una página funcional del sitio actual.
+        Es una referencia documental.
+
+        Reemplazar:
+        - [BASE] por la ruta relativa hacia la raíz del proyecto.
+          Ejemplos:
+          - "" si la página está en la raíz.
+          - "../../" si la página está dentro de contenido/seccion/.
+        - [SECCION_ACTUAL] por el id de la sección del menú.
+        - [SUBSECCION_ACTUAL] por el id del submenú activo, si aplica.
+    -->
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Página educativa de Physikós.">
+    <title>Physikós | Título de la página</title>
+
+    <!--
+        NO MODIFICAR EN PÁGINAS NUEVAS:
+        Este script restaura el estado visual del menú móvil antes del primer render.
+        Debe cargarse temprano y sin defer.
+    -->
+    <script src="[BASE]script/menu_estado_inicial.js"></script>
+
+    <!--
+        CSS COMUNES:
+        Mantener este orden para conservar la base visual, overlay e iconos del menú.
+    -->
+    <link rel="stylesheet" href="[BASE]styles/style.css">
+    <link rel="stylesheet" href="[BASE]styles/overlay.css">
+    <link rel="stylesheet" href="[BASE]styles/menu_icons.css">
+
+    <!-- MODIFICAR SI LA PÁGINA NECESITA CSS ESPECÍFICO -->
+    <!-- <link rel="stylesheet" href="[BASE]styles/archivo_especifico.css"> -->
+
+    <link rel="icon" href="[BASE]img/iconHeadW.svg">
+</head>
+
+<body>
+    <div class="container__grid">
+        <!--
+            HEADER COMÚN:
+            No cambiar la estructura general.
+            Solo ajustar textos, títulos o acciones si una página realmente lo necesita.
+        -->
+        <header class="header" id="header">
+            <div class="header_content-namePage">
+                <a href="[BASE]index.html" aria-label="Ir al inicio de Physikós">
+                    <div class="imgname"></div>
+                </a>
+
+                <!-- NO MODIFICAR: botón principal del menú responsive -->
+                <div id="btn_menu" class="btn-menu" title=""></div>
+            </div>
+
+            <div class="topactions">
+                <!-- NO MODIFICAR: DarkMode lo controla script/darkmode.js cargado desde menu.js -->
+                <div class="content__DarkMode">
+                    <label class="darmode-btn-content" for="click-DarkMode">
+                        <i class="btn-sun"></i>
+                        <label for="click-DarkMode"></label>
+                        <input type="checkbox" id="click-DarkMode">
+                        <i class="btn-moon"></i>
+                    </label>
+                </div>
+
+                <!-- MODIFICABLE: logo institucional o enlace externo -->
+                <div class="header_content-img">
+                    <a href="https://www.uce.edu.ec/" target="_BLANK">
+                        <img src="https://aka-cdn.uce.edu.ec/ares/tmp/logo3.png" alt="Universidad Central del Ecuador">
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!--
+            MENÚ RENDERIZADO:
+            No escribir manualmente los enlaces del menú.
+            El contenido se genera desde script/menu_datos.js y script/menu_render.js.
+
+            Modificar únicamente los atributos data-menu-*.
+        -->
+        <aside class="menu menu_dsm">
+            <nav class="menu_nav" aria-label="Menú principal">
+                <div
+                    class="content__content"
+                    data-menu-render
+                    data-menu-base="[BASE]"
+                    data-menu-current="[SECCION_ACTUAL]"
+                    data-menu-submenus="true"
+                    data-menu-subcurrent="[SUBSECCION_ACTUAL]">
+                </div>
+            </nav>
+        </aside>
+
+        <!--
+            MAIN:
+            Esta es la zona principal modificable.
+            Cada tipo de página debe reemplazar este contenido por su estructura específica.
+        -->
+        <main class="main" id="main-despleglabe">
+            <section class="main_s1">
+                <div class="manual-title">Universidad Central del Ecuador</div>
+                <div class="manual-version">Facultad de Filosofía, Letras y Ciencias de la Educación</div>
+                <div class="manual-html-title">Carrera de Pedagogía de las Ciencias Experimentales Matemática y Física</div>
+                <div class="manual-mantenimiento">
+                    <span>Mantenida por:<a href="#" class="pepsi"> Chari Castillo Fernando Javier.</a></span>
+                </div>
+                <div class="manual-html-explanation">
+                    Descripción breve de la página.
+                </div>
+            </section>
+
+            <section class="main_s2">
+                <!-- CONTENIDO ESPECÍFICO DE LA PÁGINA -->
+            </section>
+        </main>
+
+        <!--
+            FOOTER COMÚN:
+            Mantener la estructura para conservar consistencia visual.
+        -->
+        <footer class="footer">
+            <div class="footer-left">
+                <a href="#">Licencia</a>
+                <a href="#">| Git Hub</a>
+            </div>
+            <div class="footer-right"></div>
+        </footer>
+
+        <!-- NO MODIFICAR: indicador visual de scroll si la página lo usa -->
+        <div class="indicador_container">
+            <div class="indicador_scroll"></div>
+        </div>
+
+        <!-- NO MODIFICAR: botón común para volver al inicio -->
+        <div id="btn-top" class="ocultar" title="Subir">
+            <i class="btn-up"></i>
+        </div>
+    </div>
+
+    <!--
+        SCRIPTS COMUNES:
+        Mantener este orden:
+        1. overlay.js
+        2. menu_datos.js
+        3. menu_render.js
+        4. menu.js
+        5. flecha.js
+    -->
+    <script src="[BASE]script/ui/overlay.js" defer></script>
+    <script src="[BASE]script/menu_datos.js" defer></script>
+    <script src="[BASE]script/menu_render.js" defer></script>
+    <script src="[BASE]script/menu.js" defer></script>
+    <script src="[BASE]script/flecha.js" defer></script>
+
+    <!-- MODIFICAR: scripts específicos de la página, siempre después de los comunes -->
+    <!-- <script src="[BASE]script/seccion/archivo_especifico.js" defer></script> -->
+</body>
+
+</html>

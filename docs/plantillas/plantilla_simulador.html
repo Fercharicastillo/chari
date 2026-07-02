@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- CODEX: añadido para documentar la plantilla estándar de futuros simuladores de Physikós -->
+    <!--
+        PLANTILLA DE SIMULADOR
+        Usar para cualquier simulador nuevo.
+
+        Objetivo:
+        Separar visualmente:
+        - canvas
+        - panel de controles
+        - descripción
+        - resultados
+        - scripts del motor físico
+        - scripts de render
+        - scripts de interfaz
+    -->
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Simulador educativo de Physikós.">
+    <title>Physikós | Simulador</title>
+
+    <script src="[BASE]script/menu_estado_inicial.js"></script>
+    <link rel="stylesheet" href="[BASE]styles/style.css">
+    <link rel="stylesheet" href="[BASE]styles/overlay.css">
+    <link rel="stylesheet" href="[BASE]styles/menu_icons.css">
+    <link rel="stylesheet" href="[BASE]styles/simuladores.css">
+
+    <!-- MODIFICAR: CSS propio del simulador solo si es necesario -->
+    <!-- <link rel="stylesheet" href="[BASE]styles/simuladores/nombre_simulador.css"> -->
+
+    <link rel="icon" href="[BASE]img/iconHeadW.svg">
+</head>
+
+<body>
+    <div class="container__grid">
+        <header class="header" id="header">
+            <div class="header_content-namePage">
+                <a href="[BASE]index.html" aria-label="Ir al inicio de Physikós">
+                    <div class="imgname"></div>
+                </a>
+                <div id="btn_menu" class="btn-menu" title=""></div>
+            </div>
+
+            <div class="topactions">
+                <div class="content__DarkMode">
+                    <label class="darmode-btn-content" for="click-DarkMode">
+                        <i class="btn-sun"></i>
+                        <label for="click-DarkMode"></label>
+                        <input type="checkbox" id="click-DarkMode">
+                        <i class="btn-moon"></i>
+                    </label>
+                </div>
+                <div class="header_content-img">
+                    <a href="https://www.uce.edu.ec/" target="_BLANK">
+                        <img src="https://aka-cdn.uce.edu.ec/ares/tmp/logo3.png" alt="Universidad Central del Ecuador">
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- MODIFICAR data-menu-subcurrent con el id del simulador registrado en menu_datos.js -->
+        <aside class="menu menu_dsm">
+            <nav class="menu_nav" aria-label="Menú principal">
+                <div
+                    class="content__content"
+                    data-menu-render
+                    data-menu-base="[BASE]"
+                    data-menu-current="simuladores"
+                    data-menu-submenus="true"
+                    data-menu-subcurrent="[ID_SIMULADOR]">
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main" id="main-despleglabe">
+            <section class="simulator-page" data-simulador="[ID_SIMULADOR]">
+                <!--
+                    ENCABEZADO DEL SIMULADOR:
+                    Debe explicar en pocas líneas qué fenómeno se simula.
+                -->
+                <header class="simulator-page__header">
+                    <h1>Nombre del simulador</h1>
+                    <p>
+                        Descripción breve del fenómeno físico o matemático.
+                    </p>
+                </header>
+
+                <!--
+                    ÁREA DE TRABAJO:
+                    Mantener canvas y controles separados.
+                    Esto facilita responsive y mantenimiento.
+                -->
+                <section class="simulator-page__workspace">
+                    <!--
+                        CANVAS:
+                        El render visual del simulador debe ocurrir aquí.
+                        El script de render debe buscar este canvas por id o data attribute.
+                    -->
+                    <div class="simulator-page__canvas">
+                        <canvas id="canvas_simulador" width="800" height="500">
+                            Tu navegador no soporta canvas.
+                        </canvas>
+                    </div>
+
+                    <!--
+                        PANEL DE CONTROLES:
+                        Colocar sliders, inputs, selects y botones de ejecución.
+                    -->
+                    <aside class="simulator-page__controls" aria-label="Controles del simulador">
+                        <form id="simulator-controls">
+                            <fieldset>
+                                <legend>Parámetros</legend>
+
+                                <label for="parametro-1">Parámetro 1</label>
+                                <input id="parametro-1" name="parametro-1" type="range" min="0" max="100" value="50">
+                                <output for="parametro-1" id="valor-parametro-1">50</output>
+
+                                <label for="parametro-2">Parámetro 2</label>
+                                <input id="parametro-2" name="parametro-2" type="number" value="1">
+                            </fieldset>
+
+                            <fieldset>
+                                <legend>Controles</legend>
+
+                                <button type="button" id="btn-simular">Simular</button>
+                                <button type="button" id="btn-pausar">Pausar</button>
+                                <button type="button" id="btn-reiniciar">Reiniciar</button>
+                            </fieldset>
+                        </form>
+                    </aside>
+                </section>
+
+                <!--
+                    DESCRIPCIÓN:
+                    Explicación conceptual, fórmulas, supuestos físicos y uso educativo.
+                -->
+                <section class="simulator-page__description">
+                    <h2>Descripción</h2>
+                    <p>
+                        Explicación del modelo utilizado, variables principales y objetivo didáctico.
+                    </p>
+                </section>
+
+                <!--
+                    RESULTADOS:
+                    Tablas, valores calculados, gráficas auxiliares o datos experimentales.
+                -->
+                <section class="simulator-page__results" aria-label="Resultados del simulador">
+                    <h2>Resultados</h2>
+                    <div id="simulator-results">
+                        <!-- El script de interfaz puede actualizar este bloque. -->
+                    </div>
+                </section>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-left">
+                <a href="#">Licencia</a>
+                <a href="#">| Git Hub</a>
+            </div>
+            <div class="footer-right"></div>
+        </footer>
+
+        <div class="indicador_container">
+            <div class="indicador_scroll"></div>
+        </div>
+
+        <div id="btn-top" class="ocultar" title="Subir">
+            <i class="btn-up"></i>
+        </div>
+    </div>
+
+    <script src="[BASE]script/ui/overlay.js" defer></script>
+    <script src="[BASE]script/menu_datos.js" defer></script>
+    <script src="[BASE]script/menu_render.js" defer></script>
+    <script src="[BASE]script/menu.js" defer></script>
+    <script src="[BASE]script/flecha.js" defer></script>
+
+    <!--
+        SCRIPTS ESPECÍFICOS DEL SIMULADOR:
+        Mantener este orden recomendado:
+        1. Helpers matemáticos o físicos.
+        2. Motor físico: calcula el estado del sistema.
+        3. Render: dibuja en canvas.
+        4. Interfaz: conecta controles con motor y render.
+        5. Inicializador: arranca el simulador.
+    -->
+    <!-- <script src="[BASE]script/simuladores/nombre_simulador/modelo.js" defer></script> -->
+    <!-- <script src="[BASE]script/simuladores/nombre_simulador/render.js" defer></script> -->
+    <!-- <script src="[BASE]script/simuladores/nombre_simulador/ui.js" defer></script> -->
+    <!-- <script src="[BASE]script/simuladores/nombre_simulador/main.js" defer></script> -->
+</body>
+
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- CODEX: añadido para documentar la plantilla de subpáginas de contenido de Physikós -->
+    <!--
+        PLANTILLA DE SUBPÁGINA DE CONTENIDO
+        Usar para:
+        - artículos
+        - proyectos
+        - autores individuales
+        - recursos explicativos
+        - páginas de lectura
+
+        Esta plantilla mantiene navegación global y estructura común,
+        pero deja libre el cuerpo del contenido.
+    -->
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contenido educativo individual de Physikós.">
+    <title>Physikós | Título del contenido</title>
+
+    <script src="[BASE]script/menu_estado_inicial.js"></script>
+    <link rel="stylesheet" href="[BASE]styles/style.css">
+    <link rel="stylesheet" href="[BASE]styles/overlay.css">
+    <link rel="stylesheet" href="[BASE]styles/menu_icons.css">
+
+    <!-- MODIFICAR: agregar CSS especializado solo si el contenido lo requiere -->
+    <!-- <link rel="stylesheet" href="[BASE]styles/pages_katex.css"> -->
+    <!-- <link rel="stylesheet" href="[BASE]styles/contenido.css"> -->
+
+    <link rel="icon" href="[BASE]img/iconHeadW.svg">
+</head>
+
+<body>
+    <div class="container__grid">
+        <header class="header" id="header">
+            <div class="header_content-namePage">
+                <a href="[BASE]index.html" aria-label="Ir al inicio de Physikós">
+                    <div class="imgname"></div>
+                </a>
+                <div id="btn_menu" class="btn-menu" title=""></div>
+            </div>
+
+            <div class="topactions">
+                <div class="content__DarkMode">
+                    <label class="darmode-btn-content" for="click-DarkMode">
+                        <i class="btn-sun"></i>
+                        <label for="click-DarkMode"></label>
+                        <input type="checkbox" id="click-DarkMode">
+                        <i class="btn-moon"></i>
+                    </label>
+                </div>
+                <div class="header_content-img">
+                    <a href="https://www.uce.edu.ec/" target="_BLANK">
+                        <img src="https://aka-cdn.uce.edu.ec/ares/tmp/logo3.png" alt="Universidad Central del Ecuador">
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!--
+            MODIFICAR:
+            data-menu-current indica la sección principal.
+            data-menu-subcurrent indica el contenido activo dentro del submenú.
+        -->
+        <aside class="menu menu_dsm">
+            <nav class="menu_nav" aria-label="Menú principal">
+                <div
+                    class="content__content"
+                    data-menu-render
+                    data-menu-base="[BASE]"
+                    data-menu-current="[SECCION_ACTUAL]"
+                    data-menu-submenus="true"
+                    data-menu-subcurrent="[SUBSECCION_ACTUAL]">
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main" id="main-despleglabe">
+            <!--
+                ARTICLE:
+                Usar article cuando la página representa una unidad de contenido independiente.
+            -->
+            <article class="content-page">
+                <header class="content-page__header">
+                    <p class="content-page__section">Nombre de la sección</p>
+                    <h1>Título del contenido</h1>
+                    <p class="content-page__summary">
+                        Resumen breve del contenido, proyecto, autor o recurso.
+                    </p>
+                </header>
+
+                <!--
+                    CUERPO PRINCIPAL:
+                    Colocar aquí texto, imágenes, fórmulas, tablas, iframes o explicaciones.
+                -->
+                <section class="content-page__body">
+                    <h2>Subtítulo principal</h2>
+                    <p>
+                        Desarrollo del contenido. Si esta página usa fórmulas,
+                        cargar KaTeX y pages_katex.css según corresponda.
+                    </p>
+
+                    <!-- Ejemplo de bloque multimedia opcional -->
+                    <figure>
+                        <img src="[BASE]img/imagen_recurso.png" alt="Descripción de la imagen">
+                        <figcaption>Descripción o fuente de la imagen.</figcaption>
+                    </figure>
+                </section>
+
+                <!--
+                    RECURSOS RELACIONADOS:
+                    Usar para PDF, video, evaluación, enlaces complementarios o repositorios.
+                -->
+                <aside class="content-page__resources" aria-label="Recursos relacionados">
+                    <h2>Recursos relacionados</h2>
+                    <ul>
+                        <li><a href="[RUTA_PDF]">PDF relacionado</a></li>
+                        <li><a href="[RUTA_VIDEO]">Video relacionado</a></li>
+                        <li><a href="[RUTA_EVALUACION]">Evaluación relacionada</a></li>
+                    </ul>
+                </aside>
+
+                <!--
+                    NAVEGACIÓN ENTRE CONTENIDOS:
+                    Mantener si la página pertenece a una secuencia.
+                -->
+                <nav class="content-page__nav" aria-label="Navegación entre contenidos">
+                    <a href="[RUTA_ANTERIOR]">Anterior</a>
+                    <a href="[RUTA_INDICE]">Volver al índice</a>
+                    <a href="[RUTA_SIGUIENTE]">Siguiente</a>
+                </nav>
+            </article>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-left">
+                <a href="#">Licencia</a>
+                <a href="#">| Git Hub</a>
+            </div>
+            <div class="footer-right"></div>
+        </footer>
+
+        <div class="indicador_container">
+            <div class="indicador_scroll"></div>
+        </div>
+
+        <div id="btn-top" class="ocultar" title="Subir">
+            <i class="btn-up"></i>
+        </div>
+    </div>
+
+    <script src="[BASE]script/ui/overlay.js" defer></script>
+    <script src="[BASE]script/menu_datos.js" defer></script>
+    <script src="[BASE]script/menu_render.js" defer></script>
+    <script src="[BASE]script/menu.js" defer></script>
+    <script src="[BASE]script/flecha.js" defer></script>
+
+    <!-- MODIFICAR: scripts específicos del contenido -->
+    <!-- <script src="[BASE]script/helpers/rutas_pdf.js" defer></script> -->
+    <!-- <script src="[BASE]script/contenido/archivo_especifico.js" defer></script> -->
+</body>
+
+</html>

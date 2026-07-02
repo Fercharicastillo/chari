@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- CODEX: añadido para documentar la plantilla de páginas índice de Physikós -->
+    <!--
+        PLANTILLA DE SECCIÓN ÍNDICE
+        Usar para páginas como:
+        - Simuladores
+        - Graficadores
+        - Proyectos
+        - Repositorio de Planes
+        - Repositorio de Libros
+        - Autores
+
+        Esta plantilla es documental y no reemplaza ninguna página existente.
+    -->
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Índice de recursos educativos de Physikós.">
+    <title>Physikós | Índice de sección</title>
+
+    <script src="[BASE]script/menu_estado_inicial.js"></script>
+    <link rel="stylesheet" href="[BASE]styles/style.css">
+    <link rel="stylesheet" href="[BASE]styles/overlay.css">
+    <link rel="stylesheet" href="[BASE]styles/menu_icons.css">
+
+    <!-- MODIFICAR: CSS propio de la sección -->
+    <!-- <link rel="stylesheet" href="[BASE]styles/seccion.css"> -->
+
+    <link rel="icon" href="[BASE]img/iconHeadW.svg">
+</head>
+
+<body>
+    <div class="container__grid">
+        <!-- NO MODIFICAR: header común -->
+        <header class="header" id="header">
+            <div class="header_content-namePage">
+                <a href="[BASE]index.html" aria-label="Ir al inicio de Physikós">
+                    <div class="imgname"></div>
+                </a>
+                <div id="btn_menu" class="btn-menu" title=""></div>
+            </div>
+
+            <div class="topactions">
+                <div class="content__DarkMode">
+                    <label class="darmode-btn-content" for="click-DarkMode">
+                        <i class="btn-sun"></i>
+                        <label for="click-DarkMode"></label>
+                        <input type="checkbox" id="click-DarkMode">
+                        <i class="btn-moon"></i>
+                    </label>
+                </div>
+                <div class="header_content-img">
+                    <a href="https://www.uce.edu.ec/" target="_BLANK">
+                        <img src="https://aka-cdn.uce.edu.ec/ares/tmp/logo3.png" alt="Universidad Central del Ecuador">
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- MODIFICAR SOLO data-menu-current y, si aplica, data-menu-subcurrent -->
+        <aside class="menu menu_dsm">
+            <nav class="menu_nav" aria-label="Menú principal">
+                <div
+                    class="content__content"
+                    data-menu-render
+                    data-menu-base="[BASE]"
+                    data-menu-current="[SECCION_ACTUAL]"
+                    data-menu-submenus="true">
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main" id="main-despleglabe">
+            <!--
+                ENCABEZADO DE SECCIÓN:
+                Común para todas las páginas índice.
+                Modificar textos según la sección.
+            -->
+            <section class="main_s1 section-index-hero">
+                <div class="manual-title">Nombre de la sección</div>
+                <div class="manual-version">Categoría de recursos educativos</div>
+                <div class="manual-html-title">Matemática y Física</div>
+                <div class="manual-mantenimiento">
+                    <span>Mantenida por:<a href="#" class="pepsi"> Chari Castillo Fernando Javier.</a></span>
+                </div>
+                <div class="manual-html-explanation">
+                    Descripción breve de lo que el estudiante encontrará en esta sección.
+                </div>
+            </section>
+
+            <!--
+                ZONA DE RECURSOS:
+                Elegir una o varias estructuras según el tipo de índice.
+            -->
+            <section class="main_s2 section-index-content">
+                <header class="section-index-header">
+                    <h1>Título visible de la sección</h1>
+                    <p>Resumen de la sección, público objetivo o forma de uso.</p>
+                </header>
+
+                <!--
+                    OPCIÓN A: grid de tarjetas.
+                    Ideal para simuladores, proyectos, autores o categorías de libros.
+                -->
+                <div class="section-index-grid" aria-label="Recursos disponibles">
+                    <article class="section-card">
+                        <a href="[RUTA_RECURSO]">
+                            <img src="[BASE]img/imagen_recurso.png" alt="Descripción visual del recurso">
+                            <h2>Nombre del recurso</h2>
+                            <p>Descripción breve del recurso.</p>
+                        </a>
+                    </article>
+
+                    <article class="section-card">
+                        <a href="[RUTA_RECURSO]">
+                            <img src="[BASE]img/imagen_recurso.png" alt="Descripción visual del recurso">
+                            <h2>Nombre del recurso</h2>
+                            <p>Descripción breve del recurso.</p>
+                        </a>
+                    </article>
+                </div>
+
+                <!--
+                    OPCIÓN B: listado estructurado.
+                    Ideal para repositorios con muchos elementos.
+                -->
+                <div class="section-index-list" aria-label="Listado de recursos">
+                    <article class="section-list-item">
+                        <h2>Grupo o capítulo</h2>
+                        <p>Descripción breve del grupo.</p>
+                        <div class="section-list-actions">
+                            <!-- Botones o enlaces: PDF, video, evaluación, abrir recurso -->
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-left">
+                <a href="#">Licencia</a>
+                <a href="#">| Git Hub</a>
+            </div>
+            <div class="footer-right"></div>
+        </footer>
+
+        <div class="indicador_container">
+            <div class="indicador_scroll"></div>
+        </div>
+
+        <div id="btn-top" class="ocultar" title="Subir">
+            <i class="btn-up"></i>
+        </div>
+    </div>
+
+    <script src="[BASE]script/ui/overlay.js" defer></script>
+    <script src="[BASE]script/menu_datos.js" defer></script>
+    <script src="[BASE]script/menu_render.js" defer></script>
+    <script src="[BASE]script/menu.js" defer></script>
+    <script src="[BASE]script/flecha.js" defer></script>
+
+    <!-- MODIFICAR: scripts de datos o renderizado propios de la sección -->
+    <!-- <script src="[BASE]script/seccion/datos.js" defer></script> -->
+    <!-- <script src="[BASE]script/seccion/render.js" defer></script> -->
+</body>
+
+</html>

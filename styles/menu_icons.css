@@ -66,6 +66,11 @@
     background-image: var(--icon-paperlife-menu);
 }
 
+/* CODEX: añadido para ocultar subitems renderizados antes de que menu_submenus.js los agrupe y evitar parpadeo inicial */
+.content__content[data-menu-render] > p[data-menu-subitem-id] {
+    display: none;
+}
+
 /* CODEX: modificado para reutilizar submenus desplegables con arbol visual en cualquier seccion del menu */
 .content__content .menu-submenu-header {
     display: flex;
