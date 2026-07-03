@@ -2,30 +2,37 @@
 <html lang="es">
 
 <head>
+    <!-- CODEX: añadido para documentar la plantilla estándar de futuros simuladores de Physikós -->
+ 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Physikós</title>
-    <!-- CODEX: añadido para restaurar el estado visual del menu movil antes del primer render -->
+    <meta name="description" content="Simulador educativo de Physikós.">
+    <title>Physikós | Simuladores</title>
+
     <script src="../../script/menu_estado_inicial.js"></script>
-    <link rel="stylesheet" href="../../styles/style.css"> <!--Estilos Generales-->
-    <!-- CODEX: añadido para cargar el overlay global reutilizable -->
+    <link rel="stylesheet" href="../../styles/style.css">
     <link rel="stylesheet" href="../../styles/overlay.css">
-    <link rel="stylesheet" href="../../styles/simuladores.css"> <!--Estilos de simuladores-->
     <link rel="stylesheet" href="../../styles/menu_icons.css">
+    <link rel="stylesheet" href="../../styles/simuladores/mru.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+
+    <!-- MODIFICAR: CSS propio del simulador solo si es necesario -->
+    <!-- <link rel="stylesheet" href="[BASE]styles/simuladores/nombre_simulador.css"> -->
+
     <link rel="icon" href="../../img/iconHeadW.svg">
 </head>
 
-<body >
+<body>
     <div class="container__grid">
-        <div class="header" id="header">
+        <header class="header" id="header">
             <div class="header_content-namePage">
-                <a href="../../index.html">
+                <a href="../../index.html" aria-label="Ir al inicio de Physikós">
                     <div class="imgname"></div>
                 </a>
                 <div id="btn_menu" class="btn-menu" title=""></div>
             </div>
-            
+
             <div class="topactions">
                 <div class="content__DarkMode">
                     <label class="darmode-btn-content" for="click-DarkMode">
@@ -35,78 +42,209 @@
                         <i class="btn-moon"></i>
                     </label>
                 </div>
-                <div class="header_content-img"><a href="https://www.uce.edu.ec/" target="_BLANK"><img src="https://aka-cdn.uce.edu.ec/ares/tmp/logo3.png" alt="El servidor ha fallado."></a></div>
+                <div class="header_content-img">
+                    <a href="https://www.uce.edu.ec/" target="_BLANK">
+                        <img src="https://aka-cdn.uce.edu.ec/ares/tmp/logo3.png" alt="Universidad Central del Ecuador">
+                    </a>
+                </div>
             </div>
-        </div>    
+        </header>
 
-        <div class="menu menu_dsm">
-            <nav class="menu_nav">
-                <!--<div class="content__search"></div>-->
-                <!-- CODEX: modificado para renderizar el menu lateral y marcar el simulador activo desde datos reutilizables -->
-                <div class="content__content" data-menu-render data-menu-base="../../" data-menu-current="simuladores" data-menu-submenus="true" data-menu-subcurrent="sim-mru"></div>
-                
-                <!--<div class="content__Lenguaje">
-                    <span>Lenguaje</span>
-                    <label class="lenguaje-btn-content" for="click-lenguaje">
-                        <span class="before">EN</span>
-                        <input type="checkbox" id="click-lenguaje">
-                        <span class="before">ES</span>
-                    </label>
-                </span></div>-->
-                
+        <!-- MODIFICAR data-menu-subcurrent con el id del simulador registrado en menu_datos.js -->
+        <aside class="menu menu_dsm">
+            <nav class="menu_nav" aria-label="Menú principal">
+                <div
+                    class="content__content"
+                    data-menu-render
+                    data-menu-base="../../"
+                    data-menu-current="simuladores"
+                    data-menu-submenus="true"
+                    data-menu-subcurrent="sim-mru">
+                </div>
             </nav>
-        </div>
+        </aside>
 
-        <div class="main" id="main-despleglabe">
-            <section class="main_s1">
-             <div class="manual-title">
-                        Universidad Central del Ecuador
+        <main class="main" id="main-despleglabe">
+            <section class="simulator-page mru-page" data-simulador="sim-mru">
+                <!--
+                    ENCABEZADO DEL SIMULADOR:
+                    Debe explicar en pocas líneas qué fenómeno se simula.
+                -->
+                <header class="simulator-page__header mru-header">
+                    <div>
+                        <h1>Simulador de Movimiento Rectilíneo Uniforme (MRU)</h1>
+                        <p>Explora el movimiento de un cuerpo en línea recta con velocidad constante.</p>
                     </div>
 
-                    <div class="manual-version">
-                        Facultad de Filosofía, Letras y Ciencias de la Educación
+                    <div class="mru-header-actions">
+                        <button type="button" class="mru-button mru-button-instrucciones">
+                            <span class="img-button-instrucciones"></span>
+                            <span>Instrucciones</span>
+                        </button>
+                        <button type="button" class="mru-button mru-button-fullscreen">
+                            <span class="img-button-fullscreen"></span>
+                            <span>Pantalla completa</span>
+                        </button>
                     </div>
+                </header>
 
-                    <div class="manual-html-title">
-                        Carrera de Pedagogía en las Ciencias Experimentales Matemática y Física
-                    </div>
+                <!--
+                    ÁREA DE TRABAJO:
+                    Mantener canvas y controles separados.
+                    Esto facilita responsive y mantenimiento.
+                -->
+                <section class="simulator-page__workspace mru-card">
 
-                    <div class="manual-mantenimiento">
-                        <span>Mantenida por:<a href="#" class="pepsi"> Chari Castillo Fernando Javier.</a></span>
-                    </div>
+                    <nav class="mru-tabs" aria-label="Vistas del simulador MRU">
+                        <button type="button" class="active mru-button-simulacion">
+                            <span class="img-button-simulacion"></span>
+                            <span>Simulación</span>
+                        </button>
+                        <button type="button" class="no-active mru-button-graficas">
+                            <span class="img-button-graficas"></span>
+                            <span>Gráfica posición - tiempo</span>
+                        </button>
+                        <!--<button type="button">Tabla de datos</button>-->
+                    </nav>
 
-                    <div class="manual-html-explanation">
-                        Simulador Péndulo Simple
+                    <div class="mru-layout">
+
+                        <section class="mru-canvas-panel">
+                            <div class="mru-time">
+                                Tiempo: <strong id="mru-tiempo">00:00.00 s</strong>
+                            </div>
+
+                            <canvas id="canvas_simulador" width="800" height="175">
+                                Tu navegador no soporta canvas.
+                            </canvas>
+
+                            <div class="mru-controls-row">
+                                <div class="mru-checkbox-controls">
+                                    <label><input id="mru-rastro" type="checkbox" checked> Rastro</label>
+                                    <label><input id="mru-ejes" type="checkbox" checked> Ejes</label>
+                                </div>
+
+                                <div class="mru-play-controls">
+                                    <button type="button" id="btn-play">
+                                        <span class="img-btn-play"></span>
+                                    </button>
+                                    <button type="button" id="btn-pausar">
+                                        <span class="img-btn-pausar"></span>
+                                    </button>
+                                    <button type="button" id="btn-simular">
+                                        <span class="img-btn-simular"></span>
+                                    </button>
+                                </div>
+
+                                <button type="button" id="btn-reiniciar" class="btn-reiniciar">
+                                    <span class="img-btn-reiniciar"></span>
+                                    <span>Reiniciar</span>    
+                                </button>
+                            </div>
+                        </section>
+
+                        <aside class="mru-side-panel" aria-label="Controles del simulador">
+                            <div class="mru-control-box">
+                            <h3>Parámetros</h3>
+                                <div class="param-initial-position">
+                                    <label for="mru-x0">Posición inicial x₀ (m):</label>
+                                    <input id="mru-x0" name="x0" type="number" value="-10">
+                                </div>
+                                <input id="mru-x0-range" type="range" min="-50" max="50" value="-10">
+                                
+                                <div class="param-velocity-position">
+                                    <label for="mru-v">Velocidad v (m/s)</label>
+                                    <input id="mru-v" name="v" type="number" value="10">
+                                </div>
+                                <input id="mru-v-range" type="range" min="-30" max="30" value="10">
+                            </div>
+
+                            <div class="mru-control-box">
+                                <h3>Unidades</h3>
+                                <label><input name="mru-unidades" type="radio" checked> Sistema Internacional (SI)</label>
+                                <label><input name="mru-unidades" type="radio"> Unidades personalizadas</label>
+                            </div>
+                        </aside>
+
                     </div>
+                </section>
+
+                <section class="mru-info-grid">
+                    <!--
+                        DESCRIPCIÓN:
+                        Explicación conceptual, fórmulas, supuestos físicos y uso educativo.
+                    -->
+                    <section class="simulator-page__description">
+                        <article class="mru-info-card">
+                            <h3>Ecuaciones del MRU</h3>
+                            <div class="mru-equation">$$x(t) = x₀ + v · t$$</div>
+                            <div class="infor-mru-description">
+                                <li>$x_o$ = posición inicial ($m$)</li>
+                                <li>$v$ = velocidad constante ($m/s$)</li>
+                                <li>$t$ = tiempo ($s$)</li>
+                                <li>$x$ = posición final ($m$)</li>
+                            </div>
+                        </article>
+                    </section>
+
+                    <!--
+                        RESULTADOS:
+                        Tablas, valores calculados, gráficas auxiliares o datos experimentales.
+                    -->
+                    <section class="simulator-page__results" aria-label="Resultados del simulador">
+                        <article class="mru-info-card">
+                            <h3>Valores en tiempo actual</h3>
+                            <p>Tiempo (t): <strong id="mru-valor-t">0.00 $s$</strong></p>
+                            <p>Posición (x): <strong id="mru-valor-x">-10.00 $m$</strong></p>
+                            <p>Velocidad (v): <strong id="mru-valor-v">10.00 $m/s$</strong></p>
+                        </article>
+
+                        <article class="mru-info-card-img">
+                            <h3>Gráfica posición - tiempo</h3>
+                            <!--<canvas id="mruGraph" width="1110" height="240">
+                                Tu navegador no soporta canvas.
+                            </canvas>-->
+                        </article>
+                    </section>
+                </section>
+
+                <div class="mru-note">
+                    <span class="img-mru-note"></span>
+                    <span>En el MRU la velocidad es constante, por lo que la gráfica posición - tiempo es una línea recta.</span>
+                </div>
             </section>
-            <section class="main_s2_pendulo">
-                
-            </section>
-            <section class="main_s3" id="introducion"></section>
-        </div>
+        </main>
 
-        <div class="footer">
+        <footer class="footer">
             <div class="footer-left">
                 <a href="#">Licencia</a>
-                <a href="#">| Git Hub</a> 
+                <a href="#">| Git Hub</a>
             </div>
             <div class="footer-right"></div>
-        </div>
+        </footer>
+
         <div class="indicador_container">
             <div class="indicador_scroll"></div>
         </div>
+
         <div id="btn-top" class="ocultar" title="Subir">
             <i class="btn-up"></i>
-        </div>   
+        </div>
     </div>
-<script src="../../script/ui/overlay.js" defer></script>
-    <!-- CODEX: añadido para cargar datos y renderizador reutilizable del menu lateral -->
+
+    <script src="../../script/ui/overlay.js" defer></script>
     <script src="../../script/menu_datos.js" defer></script>
     <script src="../../script/menu_render.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+    <script src="../../script/repositorio_planes/run_katex.js" defer></script>
     <script src="../../script/menu.js" defer></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> <!--Script para utilizar jquerys para el loaderpage-->
-    <!-- CODEX: modificado para retirar la carga obsoleta de menu_sim.js; el menu lo controla script/menu.js -->
-    <script src="../../script/flecha.js" defer></script> <!--Script para la flecha de subir al inicio de la pagina-->
-    <script src="../../script/simuladores/sim_mru.js" defer></script> <!--Script para la flecha de subir al inicio de la pagina-->   
+    <script src="../../script/flecha.js" defer></script>
+
+    <!-- <script src="[BASE]script/simuladores/nombre_simulador/modelo.js" defer></script> -->
+    <!-- <script src="[BASE]script/simuladores/nombre_simulador/render.js" defer></script> -->
+    <!-- <script src="[BASE]script/simuladores/nombre_simulador/ui.js" defer></script> -->
+    <!-- <script src="[BASE]script/simuladores/nombre_simulador/main.js" defer></script> -->
 </body>
+
 </html>

@@ -1,0 +1,431 @@
+:root {
+  --btn-alldisplay: url(../../img/botones/btn-expandir.svg);
+  --btn-instrucciones: url(../../img/botones/btn-instrucciones.svg);
+  --btn-play-simulacion: url(../../img/botones/btn-start-clock.svg);
+  --btn-graficadores: url(../../img/botones/btn-graficadores-mru.svg);
+  --btn-graficadores-hover: url(../../img/botones/btn-graficadores.svg);
+  --btn-play: url(../../img/botones/btn-detener-mru.svg);
+  --btn-pausar: url(../../img/botones/btn-pausa-mru.svg);
+  --btn-reproducir: url(../../img/botones/btn-reproducir-mru.svg);
+  --btn-reiniciar: url(../../img/botones/btn-restart-clock.svg);
+  --img-mru: url(../../img/mru.png);
+  --img-mru-grafica: url(../../img/mru-grafica.png);
+  
+}
+
+[cambio=darkmode]{
+  --btn-alldisplay: url(../../img/botones/btn-expandir.svg);
+  --btn-instrucciones: url(../../img/botones/btn-instrucciones.svg);
+}
+
+.mru-page {
+  padding: 24px;
+  color: #06164a;
+}
+
+.mru-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
+  align-items: center;
+}
+
+.mru-header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.mru-header p {
+  margin-top: 8px;
+  color: #40527a;
+}
+
+.mru-header-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.mru-controls-row button {
+  border: 1px solid #c9d8f5;
+  background: #fff;
+  color: #0646c8;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.mru-header-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.mru-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  border: 1px solid #c9d8f5;
+  border-radius: 8px;
+  padding: 7px 10px;
+  font-weight: 600;
+  background: #fff;
+  color: inherit;
+  transition:
+    transform 0.15s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.mru-button:hover {
+  color: #0646c8;
+  background: #f8fbff;
+  border-color: #9ebcf0;
+}
+
+.mru-button:active {
+  transform: scale(0.96) translateY(1px);
+}
+
+.img-button-fullscreen {
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  background-image: var(--btn-alldisplay);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 1.1em 1.1em;
+}
+
+.img-button-instrucciones, .img-mru-note{
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  background-image: var(--btn-instrucciones);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 1.3em 1.3em;
+}
+
+.mru-card,
+.mru-info-card,
+.mru-control-box,
+.mru-note {
+  border: 1px solid #dbe6f7;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.mru-card {
+  padding: 0 18px 18px 18px;
+}
+
+.mru-tabs {
+  display: flex;
+  gap: 24px;
+  border-bottom: 1px solid #dbe6f7;
+  margin-bottom: 18px;
+}
+
+.mru-tabs button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  padding: 10px 18px;
+  margin-top: 0.5em;
+  border-radius: 0%;
+  color: #27385f;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.mru-tabs button.active {
+  color: #0646c8;
+  border-bottom: 3px solid #0646c8;
+}
+
+.mru-tabs button.no-active {
+  background-color: #7171710f;
+  color: #4744445e;
+}
+
+.mru-tabs button:active {
+  transform: scale(0.96) translateY(1px);
+}
+
+.mru-tabs button:hover {
+  color: #0646c8;
+  border-bottom: 3px solid #0646c8;
+}
+
+.mru-tabs button.no-active:hover {
+  color: #474444b6;
+  border-bottom: 3px solid #4744445e;
+}
+
+.img-button-simulacion {
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  background-image: var(--btn-play-simulacion);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 2em 2em;
+}
+
+.img-button-graficas {
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  background-image: var(--btn-graficadores);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 2em 2em;
+}
+
+.mru-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 18px;
+}
+
+.mru-canvas-panel {
+  border: 1px solid #dbe6f7;
+  border-radius: 12px;
+  padding: 16px;
+  background-image: var(--img-mru);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.mru-time {
+  display: inline-block;
+  padding: 8px 12px;
+  border: 1px solid #dbe6f7;
+  border-radius: 8px;
+  color: #0646c8;
+  margin-bottom: 12px;
+}
+
+#mruCanvas {
+  width: 100%;
+  height: 360px;
+  display: block;
+  border-radius: 10px;
+  background: linear-gradient(#ffffff, #f7faff);
+}
+
+.mru-controls-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.mru-play-controls {
+  display: flex;
+  gap: 4px;
+}
+
+.mru-play-controls button {
+  padding: 3px 7px 0px 7px;
+}
+
+.img-btn-play {
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  background-image: var(--btn-play);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 2.7em 2.7em;
+}
+
+.img-btn-pausar {
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  background-image: var(--btn-pausar);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 2.7em 2.7em;
+}
+
+.img-btn-simular{
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  padding-bottom: 0;
+  background-image: var(--btn-reproducir);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 2.7em 2.7em;
+}
+
+.btn-reiniciar {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px;
+  background: none;
+  border: none;
+}
+
+.img-btn-reiniciar{
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  padding-bottom: 0;
+  background-image: var(--btn-reiniciar);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 1.2em 1.2em;
+}
+
+.mru-checkbox-controls{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 16px;
+  padding: 10px;
+  border: 1px solid #c9d8f5;
+  background: #fff;
+  color: #001e6c;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.mru-side-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mru-control-box {
+  padding: 18px;
+}
+
+.mru-control-box h3,
+.mru-info-card h3 {
+  margin-top: 0;
+  color: #0646c8;
+}
+
+.mru-control-box label {
+  display: block;
+  width: 75%;
+  margin: 14px 0 8px;
+}
+
+.param-initial-position, .param-velocity-position{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 16px;
+}
+
+.mru-control-box input[type="number"] {
+  width: 25%;
+}
+
+.mru-control-box input[type="range"] {
+  width: 100%;
+  appearance: auto;
+  height: 3px;
+}
+
+.mru-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.simulator-page__results{
+  display: flex;
+  gap: 18px;
+}
+
+.mru-info-card {
+  padding: 18px;
+}
+
+.mru-info-card-img{
+  width: 500px;
+  height: 275px;
+  padding: 18px;
+  border: 1px solid #dbe6f7;
+  border-radius: 12px;
+  background: #fff;
+  background-image: var(--img-mru-grafica);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.mru-info-card h3 {
+  margin-bottom: 1em;
+}
+
+.mru-info-card p{
+  display: flex;
+  border-bottom: 1px solid #dbe6f7;
+  margin-bottom: 1em;
+  justify-content: space-between;
+  padding: 0px 0px 18px 0px;
+}
+
+.mru-info-card strong{
+    color: #0646c8;
+}
+
+.infor-mru-description{
+  padding: 18px 18px 0px 18px;
+}
+
+.mru-equation {
+  border: 1px solid #dbe6f7;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  font-size: 130%;
+  color: #0646c8;
+  background: #f8fbff;
+}
+
+#mruGraph {
+  width: 100%;
+  height: 140px;
+  background: #ffffff;
+}
+
+.mru-note {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 18px;
+  padding: 16px 20px;
+  color: #0646c8;
+  background: #f4f8ff;
+}
+
+@media (max-width: 1000px) {
+  .mru-layout,
+  .mru-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mru-header {
+    flex-direction: column;
+  }
+}
