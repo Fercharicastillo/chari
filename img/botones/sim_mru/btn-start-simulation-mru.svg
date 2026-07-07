@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Start-Simulation" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 208">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #001e6c;
+      }
+    </style>
+  </defs>
+  <path class="cls-1" d="M26.5,26.01C26.5,5.17,49.9-7.18,67.22,4.53l114.62,77.43c15.55,10.58,15.55,33.5,0,44.09l-114.62,77.43c-17.31,11.7-40.72-.64-40.72-21.48V26.01Z"/>
+</svg>

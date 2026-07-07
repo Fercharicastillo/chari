@@ -110,22 +110,49 @@
                     <div class="mru-layout">
 
                         <section class="mru-canvas-panel">
-                            <div class="mru-time">
-                                Tiempo: <strong id="mru-tiempo">00:00.00 s</strong>
+                            <!-- CODEX: añadido para mostrar un cronometro visual del MRU alimentado por el tiempo fisico de la simulacion -->
+                            <div class="mru-chronometer" id="mru-cronometro" aria-label="Cronometro del simulador MRU">
+                                <div class="mru-chronometer-display">
+                                    <span id="mru-crono-min">00</span>
+                                    <span>:</span>
+                                    <span id="mru-crono-sec">00</span>
+                                    <span>.</span>
+                                    <span id="mru-crono-ms">00</span>
+                                </div>
+                                <!-- CODEX: añadido para controlar el cronometro MRU con botones visuales inspirados en el pendulo simple -->
+                                <div class="mru-chronometer-actions">
+                                    <button type="button" id="mru-crono-start" class="mru-crono-start" aria-label="Iniciar cronometro"></button>
+                                    <button type="button" id="mru-crono-stop" class="mru-crono-stop" aria-label="Pausar cronometro" hidden></button>
+                                    <button type="button" id="mru-crono-restart" class="mru-crono-restart" aria-label="Reiniciar cronometro" hidden></button>
+                                    <button type="button" id="mru-crono-restart-disabled" class="mru-crono-restart-disabled" aria-label="Reiniciar cronometro no disponible" disabled></button>
+                                </div>
                             </div>
 
-                            <canvas id="canvas_simulador" width="800" height="175">
+                            <canvas id="canvas_simulador" width="800" height="300">
                                 Tu navegador no soporta canvas.
                             </canvas>
 
                             <div class="mru-controls-row">
-                                <div class="mru-checkbox-controls">
-                                    <label><input id="mru-rastro" type="checkbox" checked> Rastro</label>
-                                    <label><input id="mru-ejes" type="checkbox" checked> Ejes</label>
+                                <div class="mru-checkbox-container">
+                                    <label class="checkbox-lable">
+                                        <input id="mru-rastro" type="checkbox" checked>
+                                        <span class="ckeckmark"></span>
+                                        Rastro
+                                    </label>
+                                    <label class="checkbox-lable">
+                                        <input id="mru-ejes" type="checkbox" checked>
+                                        <span class="ckeckmark"></span>
+                                        Ejes
+                                    </label>
+                                    <label class="checkbox-lable">
+                                        <input id="mru-check-cronometro" type="checkbox" checked>
+                                        <span class="ckeckmark"></span>
+                                        Cronometro
+                                    </label>
                                 </div>
 
                                 <div class="mru-play-controls">
-                                    <button type="button" id="btn-play">
+                                    <button class="mru-play-button" type="button" id="btn-play">
                                         <span class="img-btn-play"></span>
                                     </button>
                                     <button type="button" id="btn-pausar">
@@ -148,9 +175,9 @@
                             <h3>Parámetros</h3>
                                 <div class="param-initial-position">
                                     <label for="mru-x0">Posición inicial x₀ (m):</label>
-                                    <input id="mru-x0" name="x0" type="number" value="-10">
+                                    <input id="mru-x0" name="x0" type="number" value="0">
                                 </div>
-                                <input id="mru-x0-range" type="range" min="-50" max="50" value="-10">
+                                <input id="mru-x0-range" type="range" min="-50" max="50" value="0">
                                 
                                 <div class="param-velocity-position">
                                     <label for="mru-v">Velocidad v (m/s)</label>
@@ -201,9 +228,10 @@
 
                         <article class="mru-info-card-img">
                             <h3>Gráfica posición - tiempo</h3>
-                            <!--<canvas id="mruGraph" width="1110" height="240">
+                            <!-- CODEX: añadido para dibujar la grafica posicion-tiempo en tiempo real -->
+                            <canvas id="mruGraph" width="1110" height="240">
                                 Tu navegador no soporta canvas.
-                            </canvas>-->
+                            </canvas>
                         </article>
                     </section>
                 </section>
@@ -240,6 +268,8 @@
     <script src="../../script/repositorio_planes/run_katex.js" defer></script>
     <script src="../../script/menu.js" defer></script>
     <script src="../../script/flecha.js" defer></script>
+    <!-- CODEX: añadido para activar la logica del simulador MRU con canvas nativo -->
+    <script src="../../script/simuladores/sim_mru.js" defer></script>
 
     <!-- <script src="[BASE]script/simuladores/nombre_simulador/modelo.js" defer></script> -->
     <!-- <script src="[BASE]script/simuladores/nombre_simulador/render.js" defer></script> -->
