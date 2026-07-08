@@ -17,8 +17,16 @@
     valorV: document.getElementById("mru-valor-v"),
     x0: document.getElementById("mru-x0"),
     x0Range: document.getElementById("mru-x0-range"),
+    x0Output: document.getElementById("mru-x0-output"),
+    x0Selector: document.getElementById("mru-x0-selector"),
+    x0Less: document.getElementById("mru-x0-less"),
+    x0More: document.getElementById("mru-x0-more"),
     v: document.getElementById("mru-v"),
     vRange: document.getElementById("mru-v-range"),
+    vOutput: document.getElementById("mru-v-output"),
+    vSelector: document.getElementById("mru-v-selector"),
+    vLess: document.getElementById("mru-v-less"),
+    vMore: document.getElementById("mru-v-more"),
     rastro: document.getElementById("mru-rastro"),
     ejes: document.getElementById("mru-ejes"),
     checkCronometro: document.getElementById("mru-check-cronometro"),
@@ -35,7 +43,7 @@
 
   const ctx = elementos.canvas.getContext("2d");
   const graphCtx = elementos.grafica.getContext("2d");
-  const mundo = { min: -50, max: 50 };
+  const mundo = { min: 0, max: 80 };
   const estado = {
     x0: 0,
     v: 10,
@@ -108,14 +116,90 @@
   }
 
   // CODEX: añadido para mantener sincronizados inputs numericos y sliders del simulador
+  // CODEX: añadido para sincronizar valor, output y selector del range personalizado de posicion inicial
+  function obtenerPorcentajeRange(input) {
+    const valor = Number(input.value);
+    const minimo = Number(input.min);
+    const maximo = Number(input.max);
+
+    if (!Number.isFinite(valor) || !Number.isFinite(minimo) || !Number.isFinite(maximo) || maximo === minimo) {
+      return 0;
+    }
+
+    return ((valor - minimo) / (maximo - minimo)) * 100;
+  }
+
+  // CODEX: modificado para reutilizar la misma logica en los deslizadores personalizados de x0 y velocidad
+  function actualizarRangePersonalizado(configuracion) {
+    const { range, input, output, selector, less, more, respaldo } = configuracion;
+
+    if (!range) return respaldo;
+
+    const valor = numeroDesdeInput(range, respaldo);
+    const porcentaje = obtenerPorcentajeRange(range);
+
+    if (input) {
+      input.value = valor;
+    }
+
+    if (output) {
+      output.textContent = valor.toFixed(0);
+    }
+
+    if (selector) {
+      // CODEX: modificado para que la linea blanca central coincida con las tarjas del range
+      selector.style.left = `${porcentaje}%`;
+    }
+
+    if (less) {
+      less.disabled = valor <= Number(range.min);
+    }
+
+    if (more) {
+      more.disabled = valor >= Number(range.max);
+    }
+
+    return valor;
+  }
+
+  function actualizarControlesPersonalizados() {
+    estado.x0 = actualizarRangePersonalizado({
+      range: elementos.x0Range,
+      input: elementos.x0,
+      output: elementos.x0Output,
+      selector: elementos.x0Selector,
+      less: elementos.x0Less,
+      more: elementos.x0More,
+      respaldo: estado.x0
+    });
+
+    estado.v = actualizarRangePersonalizado({
+      range: elementos.vRange,
+      input: elementos.v,
+      output: elementos.vOutput,
+      selector: elementos.vSelector,
+      less: elementos.vLess,
+      more: elementos.vMore,
+      respaldo: estado.v
+    });
+  }
+
+  function cambiarRangePersonalizado(range, respaldo, cambio) {
+    const valorActual = numeroDesdeInput(range, respaldo);
+    const valorMinimo = Number(range.min);
+    const valorMaximo = Number(range.max);
+    const nuevoValor = Math.min(Math.max(valorActual + cambio, valorMinimo), valorMaximo);
+
+    range.value = nuevoValor;
+    leerParametros();
+    dibujarTodo();
+  }
+
   function leerParametros() {
-    estado.x0 = numeroDesdeInput(elementos.x0, estado.x0);
-    estado.v = numeroDesdeInput(elementos.v, estado.v);
+    actualizarControlesPersonalizados();
     estado.x = estado.x0 + estado.v * estado.t;
 
-    elementos.x0.value = estado.x0;
     elementos.x0Range.value = estado.x0;
-    elementos.v.value = estado.v;
     elementos.vRange.value = estado.v;
   }
 
@@ -568,10 +652,18 @@
 
   // CODEX: añadido para conectar eventos de controles sin modificar la estructura visual existente
   function registrarEventos() {
-    elementos.x0.addEventListener("input", () => sincronizarDesde(elementos.x0, elementos.x0Range));
-    elementos.x0Range.addEventListener("input", () => sincronizarDesde(elementos.x0Range, elementos.x0));
-    elementos.v.addEventListener("input", () => sincronizarDesde(elementos.v, elementos.vRange));
-    elementos.vRange.addEventListener("input", () => sincronizarDesde(elementos.vRange, elementos.v));
+    elementos.x0Range.addEventListener("input", () => {
+      leerParametros();
+      dibujarTodo();
+    });
+    elementos.vRange.addEventListener("input", () => {
+      leerParametros();
+      dibujarTodo();
+    });
+    elementos.x0Less.addEventListener("click", () => cambiarRangePersonalizado(elementos.x0Range, estado.x0, -Number(elementos.x0Range.step || 1)));
+    elementos.x0More.addEventListener("click", () => cambiarRangePersonalizado(elementos.x0Range, estado.x0, Number(elementos.x0Range.step || 1)));
+    elementos.vLess.addEventListener("click", () => cambiarRangePersonalizado(elementos.vRange, estado.v, -Number(elementos.vRange.step || 1)));
+    elementos.vMore.addEventListener("click", () => cambiarRangePersonalizado(elementos.vRange, estado.v, Number(elementos.vRange.step || 1)));
     elementos.rastro.addEventListener("change", dibujarTodo);
     elementos.ejes.addEventListener("change", dibujarTodo);
     elementos.checkCronometro.addEventListener("change", actualizarVisibilidadCronometro);
@@ -618,4 +710,5 @@
   }
 
   iniciarSimulador();
+  
 })();

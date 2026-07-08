@@ -172,18 +172,56 @@
 
                         <aside class="mru-side-panel" aria-label="Controles del simulador">
                             <div class="mru-control-box">
-                            <h3>Parámetros</h3>
-                                <div class="param-initial-position">
-                                    <label for="mru-x0">Posición inicial x₀ (m):</label>
-                                    <input id="mru-x0" name="x0" type="number" value="0">
+                                <h3>Parámetros</h3>
+                                <!-- DESDE AQUI SE PUEDE UTILIZAR PARA LOS INPUTS RANGE EN OTROS SIMULADORES-->
+                                <div class="title-sim">
+                                    <p class="parrafo">Posición inicial (x₀):
+                                        <span><output id="mru-x0-output">0</output>m
+                                        </span>
+                                    </p>
                                 </div>
-                                <input id="mru-x0-range" type="range" min="-50" max="50" value="0">
-                                
-                                <div class="param-velocity-position">
-                                    <label for="mru-v">Velocidad v (m/s)</label>
-                                    <input id="mru-v" name="v" type="number" value="10">
+                                <!-- CODEX: modificado para convertir el range personalizado en el control real de posicion inicial x0 -->
+                                <input id="mru-x0" name="x0" type="hidden" value="0">
+                                <div class="caja-sim mru-range-control">
+                                    <button type="button" class="btnless" id="mru-x0-less" aria-label="Disminuir posicion inicial"></button>
+                                    <div class="deslizador">
+                                        <div class="raya-horizontal">
+                                            <input type="range" id="mru-x0-range" name="x0-range" min="10" max="70" value="0" step="5">
+                                            <div class="tarjas1"><span class="l1min">10</span></div>
+                                            <div class="tarjas2"><span class="l1max">70</span></div>
+                                            <div id="mru-x0-selector" class="mru-range-selector">
+                                                <div class="Btnselector">
+                                                    <div class="raya"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btnmore" id="mru-x0-more" aria-label="Aumentar posicion inicial"></button>
                                 </div>
-                                <input id="mru-v-range" type="range" min="-30" max="30" value="10">
+                                <!-- CODEX: añadido para usar en velocidad el mismo deslizador personalizado de posicion inicial -->
+                                <div class="title-sim">
+                                    <p class="parrafo">Velocidad v:
+                                        <span><output id="mru-v-output">10</output>m/s
+                                        </span>
+                                    </p>
+                                </div>
+                                <input id="mru-v" name="v" type="hidden" value="10">
+                                <div class="caja-sim mru-range-control">
+                                    <button type="button" class="btnless" id="mru-v-less" aria-label="Disminuir velocidad"></button>
+                                    <div class="deslizador">
+                                        <div class="raya-horizontal">
+                                            <input type="range" id="mru-v-range" name="v-range" min="0" max="70" value="10" step="1">
+                                            <div class="tarjas1"><span class="l1min">0</span></div>
+                                            <div class="tarjas2"><span class="l1max">70</span></div>
+                                            <div id="mru-v-selector" class="mru-range-selector">
+                                                <div class="Btnselector">
+                                                    <div class="raya"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btnmore" id="mru-v-more" aria-label="Aumentar velocidad"></button>
+                                </div>
                             </div>
 
                             <div class="mru-control-box">
