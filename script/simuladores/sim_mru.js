@@ -184,23 +184,42 @@
     });
   }
 
-  function cambiarRangePersonalizado(range, respaldo, cambio) {
+  function cambiarRangePersonalizado(range, respaldo, cambio, alCambiar) {
     const valorActual = numeroDesdeInput(range, respaldo);
     const valorMinimo = Number(range.min);
     const valorMaximo = Number(range.max);
     const nuevoValor = Math.min(Math.max(valorActual + cambio, valorMinimo), valorMaximo);
 
     range.value = nuevoValor;
-    leerParametros();
-    dibujarTodo();
+
+    if (typeof alCambiar === "function") {
+      alCambiar();
+    }
   }
 
-  function leerParametros() {
+  // CODEX: modificado para separar lectura de controles y recalculo de posicion del carro
+  function leerParametros(opciones = {}) {
+    const { actualizarPosicion = true } = opciones;
     actualizarControlesPersonalizados();
-    estado.x = estado.x0 + estado.v * estado.t;
+
+    if (actualizarPosicion) {
+      estado.x = estado.x0 + estado.v * estado.t;
+    }
 
     elementos.x0Range.value = estado.x0;
     elementos.vRange.value = estado.v;
+  }
+
+  function actualizarDesdeX0() {
+    leerParametros({ actualizarPosicion: false });
+    estado.x = estado.x0;
+    estado.rastro = [estado.x];
+    dibujarTodo();
+  }
+
+  function actualizarDesdeVelocidad() {
+    leerParametros({ actualizarPosicion: false });
+    dibujarTodo();
   }
 
   function sincronizarDesde(origen, destino) {
@@ -549,7 +568,8 @@
 
   function actualizarMovimiento(delta) {
     estado.t += delta;
-    estado.x = estado.x0 + estado.v * estado.t;
+    // CODEX: modificado para que cambiar velocidad en pausa no recalcule la posicion previa del carro
+    estado.x += estado.v * delta;
 
     if (estado.rastro.length === 0 || Math.abs(estado.rastro[estado.rastro.length - 1] - estado.x) > 0.12) {
       estado.rastro.push(estado.x);
@@ -575,7 +595,7 @@
   }
 
   function iniciar() {
-    leerParametros();
+    leerParametros({ actualizarPosicion: false });
     if (estado.ejecutando) return;
     estado.ejecutando = true;
     estado.ultimoTiempo = null;
@@ -652,18 +672,12 @@
 
   // CODEX: añadido para conectar eventos de controles sin modificar la estructura visual existente
   function registrarEventos() {
-    elementos.x0Range.addEventListener("input", () => {
-      leerParametros();
-      dibujarTodo();
-    });
-    elementos.vRange.addEventListener("input", () => {
-      leerParametros();
-      dibujarTodo();
-    });
-    elementos.x0Less.addEventListener("click", () => cambiarRangePersonalizado(elementos.x0Range, estado.x0, -Number(elementos.x0Range.step || 1)));
-    elementos.x0More.addEventListener("click", () => cambiarRangePersonalizado(elementos.x0Range, estado.x0, Number(elementos.x0Range.step || 1)));
-    elementos.vLess.addEventListener("click", () => cambiarRangePersonalizado(elementos.vRange, estado.v, -Number(elementos.vRange.step || 1)));
-    elementos.vMore.addEventListener("click", () => cambiarRangePersonalizado(elementos.vRange, estado.v, Number(elementos.vRange.step || 1)));
+    elementos.x0Range.addEventListener("input", actualizarDesdeX0);
+    elementos.vRange.addEventListener("input", actualizarDesdeVelocidad);
+    elementos.x0Less.addEventListener("click", () => cambiarRangePersonalizado(elementos.x0Range, estado.x0, -Number(elementos.x0Range.step || 1), actualizarDesdeX0));
+    elementos.x0More.addEventListener("click", () => cambiarRangePersonalizado(elementos.x0Range, estado.x0, Number(elementos.x0Range.step || 1), actualizarDesdeX0));
+    elementos.vLess.addEventListener("click", () => cambiarRangePersonalizado(elementos.vRange, estado.v, -Number(elementos.vRange.step || 1), actualizarDesdeVelocidad));
+    elementos.vMore.addEventListener("click", () => cambiarRangePersonalizado(elementos.vRange, estado.v, Number(elementos.vRange.step || 1), actualizarDesdeVelocidad));
     elementos.rastro.addEventListener("change", dibujarTodo);
     elementos.ejes.addEventListener("change", dibujarTodo);
     elementos.checkCronometro.addEventListener("change", actualizarVisibilidadCronometro);
@@ -712,3 +726,35 @@
   iniciarSimulador();
   
 })();
+
+function hidebtnpausar() {
+    document.getElementById('btn-pausar').style.display = 'none';
+    document.getElementById('btn-simular').style.display = 'inline-block';
+};
+
+function hidebtnpaso() {
+    document.getElementById('btn-paso').style.display = 'inline-block';
+    document.getElementById('hide-btn-paso').style.display = 'none';
+};
+
+function btnpaso() {
+    document.getElementById('btn-paso').style.display = 'none';
+    document.getElementById('hide-btn-paso').style.display = 'inline-block';
+};
+
+function hidesimular() {
+    document.getElementById('btn-pausar').style.display = 'inline-block';
+    document.getElementById('btn-simular').style.display = 'none';
+};
+
+// Evento 6: Click en el boton ▌▌ del simulador en general
+document.getElementById("btn-pausar").addEventListener("click", function () {
+    hidebtnpausar();
+    hidebtnpaso();
+});
+
+// Evento 7: Click en el boton ▶ del simulador en general
+document.getElementById("btn-simular").addEventListener("click", function() {
+    btnpaso();
+    hidesimular();
+});

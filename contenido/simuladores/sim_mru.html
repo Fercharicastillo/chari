@@ -135,7 +135,7 @@
                             <div class="mru-controls-row">
                                 <div class="mru-checkbox-container">
                                     <label class="checkbox-lable">
-                                        <input id="mru-rastro" type="checkbox" checked>
+                                        <input id="mru-rastro" type="checkbox">
                                         <span class="ckeckmark"></span>
                                         Rastro
                                     </label>
@@ -145,28 +145,33 @@
                                         Ejes
                                     </label>
                                     <label class="checkbox-lable">
-                                        <input id="mru-check-cronometro" type="checkbox" checked>
+                                        <input id="mru-check-cronometro" type="checkbox">
                                         <span class="ckeckmark"></span>
                                         Cronometro
                                     </label>
                                 </div>
 
                                 <div class="mru-play-controls">
-                                    <button class="mru-play-button" type="button" id="btn-play">
+                                    <button class="mru-play-button" type="button" id="btn-play"> <!--Este boton debe reiniciar solo la simulacion del carro-->
                                         <span class="img-btn-play"></span>
                                     </button>
                                     <button type="button" id="btn-pausar">
                                         <span class="img-btn-pausar"></span>
                                     </button>
-                                    <button type="button" id="btn-simular">
+                                    <button type="button" id="btn-simular" style="display: none;">
                                         <span class="img-btn-simular"></span>
+                                    </button>
+                                    <button type="button" id="btn-paso" style="display: none;">
+                                        <span class="img-btn-paso"></span>
+                                    </button>
+                                    <button type="button" id="hide-btn-paso" style="transform: none;">
+                                        <span class="img-hide-btn-paso"></span>
                                     </button>
                                 </div>
 
-                                <button type="button" id="btn-reiniciar" class="btn-reiniciar">
+                                <button type="button" id="btn-reiniciar" class="btn-reiniciar"> <!--Este boton debe reiniciar todo el canvas-->
                                     <span class="img-btn-reiniciar"></span>
-                                    <span>Reiniciar</span>    
-                                </button>
+                                </button>   
                             </div>
                         </section>
 
@@ -186,7 +191,7 @@
                                     <button type="button" class="btnless" id="mru-x0-less" aria-label="Disminuir posicion inicial"></button>
                                     <div class="deslizador">
                                         <div class="raya-horizontal">
-                                            <input type="range" id="mru-x0-range" name="x0-range" min="10" max="70" value="0" step="5">
+                                            <input type="range" id="mru-x0-range" name="x0-range" min="10" max="70" value="10" step="5">
                                             <div class="tarjas1"><span class="l1min">10</span></div>
                                             <div class="tarjas2"><span class="l1max">70</span></div>
                                             <div id="mru-x0-selector" class="mru-range-selector">
