@@ -33,6 +33,8 @@
     btnPlay: document.getElementById("btn-play"),
     btnPausar: document.getElementById("btn-pausar"),
     btnSimular: document.getElementById("btn-simular"),
+    btnPaso: document.getElementById("btn-paso"),
+    hideBtnPaso: document.getElementById("hide-btn-paso"),
     btnReiniciar: document.getElementById("btn-reiniciar")
   };
 
@@ -53,6 +55,15 @@
     ultimoTiempo: null,
     animacionId: null,
     rastro: []
+  };
+
+  // CODEX: añadido para restaurar el simulador completo desde los valores declarados en el HTML
+  const valoresIniciales = {
+    x0: numeroDesdeInput(elementos.x0Range, estado.x0),
+    v: numeroDesdeInput(elementos.vRange, estado.v),
+    rastro: elementos.rastro ? elementos.rastro.defaultChecked : true,
+    ejes: elementos.ejes ? elementos.ejes.defaultChecked : true,
+    cronometroVisible: elementos.checkCronometro ? elementos.checkCronometro.defaultChecked : true
   };
   // CODEX: añadido para que el cronometro visual funcione independiente de la simulacion MRU
   const cronometro = {
@@ -566,6 +577,19 @@
     actualizarResultados();
   }
 
+  // CODEX: añadido para habilitar el avance manual solo cuando la simulacion esta pausada
+  function actualizarBotonPaso() {
+    if (elementos.btnPaso) {
+      elementos.btnPaso.style.display = estado.ejecutando ? "none" : "inline-block";
+      elementos.btnPaso.disabled = estado.ejecutando;
+    }
+
+    if (elementos.hideBtnPaso) {
+      elementos.hideBtnPaso.style.display = estado.ejecutando ? "inline-block" : "none";
+      elementos.hideBtnPaso.disabled = true;
+    }
+  }
+
   function actualizarMovimiento(delta) {
     estado.t += delta;
     // CODEX: modificado para que cambiar velocidad en pausa no recalcule la posicion previa del carro
@@ -589,7 +613,8 @@
 
     const delta = Math.min((timestamp - estado.ultimoTiempo) / 1000, 0.05);
     estado.ultimoTiempo = timestamp;
-    actualizarMovimiento(delta);
+    const escalaTiempo = timeselect();
+    actualizarMovimiento(delta * escalaTiempo);
     dibujarTodo();
     estado.animacionId = requestAnimationFrame(animar);
   }
@@ -599,6 +624,7 @@
     if (estado.ejecutando) return;
     estado.ejecutando = true;
     estado.ultimoTiempo = null;
+    actualizarBotonPaso();
     estado.animacionId = requestAnimationFrame(animar);
   }
 
@@ -609,14 +635,80 @@
       cancelAnimationFrame(estado.animacionId);
       estado.animacionId = null;
     }
+
+    actualizarBotonPaso();
   }
 
-  function reiniciar() {
+  function avanzarUnPaso() {
+    if (estado.ejecutando) return;
+
+    leerParametros({ actualizarPosicion: false });
+    actualizarMovimiento(0.01);
+    dibujarTodo();
+    actualizarBotonPaso();
+  }
+
+  // CODEX: añadido para normalizar los botones visuales cuando se reinicia el movimiento o el simulador completo
+  function restaurarBotonesMovimiento() {
+    if (elementos.btnPausar) {
+      elementos.btnPausar.style.display = "none";
+    }
+
+    if (elementos.btnSimular) {
+      elementos.btnSimular.style.display = "inline-block";
+    }
+
+    const btnPaso = document.getElementById("btn-paso");
+    const hideBtnPaso = document.getElementById("hide-btn-paso");
+
+    if (btnPaso) {
+      btnPaso.style.display = "inline-block";
+    }
+
+    if (hideBtnPaso) {
+      hideBtnPaso.style.display = "none";
+    }
+  }
+
+  // CODEX: añadido para reiniciar solo el movimiento del carro con los parametros actuales
+  function reiniciarMovimientoCarro() {
     pausar();
-    leerParametros();
+    leerParametros({ actualizarPosicion: false });
     estado.t = 0;
     estado.x = estado.x0;
     estado.rastro = [estado.x0];
+    restaurarBotonesMovimiento();
+    actualizarBotonPaso();
+    dibujarTodo();
+  }
+
+  // CODEX: añadido para restaurar por completo el simulador MRU y sus controles visuales
+  function reiniciarSimuladorCompleto() {
+    pausar();
+    reiniciarCronometro();
+
+    elementos.x0Range.value = valoresIniciales.x0;
+    elementos.vRange.value = valoresIniciales.v;
+
+    if (elementos.rastro) {
+      elementos.rastro.checked = valoresIniciales.rastro;
+    }
+
+    if (elementos.ejes) {
+      elementos.ejes.checked = valoresIniciales.ejes;
+    }
+
+    if (elementos.checkCronometro) {
+      elementos.checkCronometro.checked = valoresIniciales.cronometroVisible;
+    }
+
+    actualizarVisibilidadCronometro();
+    leerParametros({ actualizarPosicion: false });
+    estado.t = 0;
+    estado.x = estado.x0;
+    estado.rastro = [estado.x0];
+    restaurarBotonesMovimiento();
+    actualizarBotonPaso();
     dibujarTodo();
   }
 
@@ -633,6 +725,17 @@
     elementos.cronometro.style.top = `${top}px`;
   }
 
+  // CODEX: modificado para proteger el selector de camara si los radios no estan disponibles
+  const timeselect = () => {
+    const Cslow = document.getElementById("Cslow");
+
+    if (Cslow && Cslow.checked) {
+      return 0.1;
+    }
+
+    return 1;
+  };
+  
   function habilitarArrastreCronometro() {
     if (!elementos.canvasPanel || !elementos.cronometro) return;
 
@@ -681,10 +784,11 @@
     elementos.rastro.addEventListener("change", dibujarTodo);
     elementos.ejes.addEventListener("change", dibujarTodo);
     elementos.checkCronometro.addEventListener("change", actualizarVisibilidadCronometro);
-    elementos.btnPlay.addEventListener("click", iniciar);
+    elementos.btnPlay.addEventListener("click", reiniciarMovimientoCarro);
     elementos.btnSimular.addEventListener("click", iniciar);
     elementos.btnPausar.addEventListener("click", pausar);
-    elementos.btnReiniciar.addEventListener("click", reiniciar);
+    elementos.btnPaso.addEventListener("click", avanzarUnPaso);
+    elementos.btnReiniciar.addEventListener("click", reiniciarSimuladorCompleto);
 
     if (elementos.cronoStart) {
       elementos.cronoStart.addEventListener("click", iniciarCronometro);
@@ -718,9 +822,7 @@
 
     registrarEventos();
     habilitarArrastreCronometro();
-    reiniciarCronometro();
-    actualizarVisibilidadCronometro();
-    reiniciar();
+    reiniciarSimuladorCompleto();
   }
 
   iniciarSimulador();

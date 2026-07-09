@@ -155,16 +155,16 @@
                                     <button class="mru-play-button" type="button" id="btn-play"> <!--Este boton debe reiniciar solo la simulacion del carro-->
                                         <span class="img-btn-play"></span>
                                     </button>
-                                    <button type="button" id="btn-pausar">
+                                    <button type="button" id="btn-pausar" style="display: none;">
                                         <span class="img-btn-pausar"></span>
                                     </button>
-                                    <button type="button" id="btn-simular" style="display: none;">
+                                    <button type="button" id="btn-simular">
                                         <span class="img-btn-simular"></span>
                                     </button>
-                                    <button type="button" id="btn-paso" style="display: none;">
+                                    <button type="button" id="btn-paso">
                                         <span class="img-btn-paso"></span>
                                     </button>
-                                    <button type="button" id="hide-btn-paso" style="transform: none;">
+                                    <button type="button" id="hide-btn-paso" style="display: none; transform: none;">
                                         <span class="img-hide-btn-paso"></span>
                                     </button>
                                 </div>
@@ -177,10 +177,10 @@
 
                         <aside class="mru-side-panel" aria-label="Controles del simulador">
                             <div class="mru-control-box">
-                                <h3>Parámetros</h3>
+                                <!--<h3>Parámetros</h3>-->
                                 <!-- DESDE AQUI SE PUEDE UTILIZAR PARA LOS INPUTS RANGE EN OTROS SIMULADORES-->
                                 <div class="title-sim">
-                                    <p class="parrafo">Posición inicial (x₀):
+                                    <p class="parrafo1">Posición inicial (x₀):
                                         <span><output id="mru-x0-output">0</output>m
                                         </span>
                                     </p>
@@ -229,10 +229,18 @@
                                 </div>
                             </div>
 
-                            <div class="mru-control-box">
-                                <h3>Unidades</h3>
-                                <label><input name="mru-unidades" type="radio" checked> Sistema Internacional (SI)</label>
-                                <label><input name="mru-unidades" type="radio"> Unidades personalizadas</label>
+                            <div class="mru-control-box selected">
+                                <!--<h3>Unidades</h3>-->
+                                <label class="opcion-radio">
+                                    <input type="radio" name="mru-unidades" value="normal" checked id="Cnormal"> 
+                                    <span class="radio-visual"></span>
+                                    <span>Cámara Normal</span>
+                                </label>
+                                <label class="opcion-radio">
+                                    <input name="mru-unidades" type="radio" id="Cslow">
+                                    <span class="radio-visual"></span>
+                                    <span>Cámara Lenta</span>
+                                </label>
                             </div>
                         </aside>
 
