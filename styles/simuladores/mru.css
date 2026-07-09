@@ -881,7 +881,7 @@ input[type="range"]::-webkit-slider-thumb { /*linea del deslizador
     width: 15px;
     height: 2em;
     transform: translate(-50%, -50%);
-    z-index: 2;
+    z-index: 1;
     pointer-events: none;
 }
 
@@ -984,14 +984,18 @@ input[type="range"]::-webkit-slider-thumb { /*linea del deslizador
 
 /*CARGANDO LA PAGINA*/
 .loader-page {
-    position: absolute;
+    /* CODEX: modificado para cubrir toda el area main del simulador sin tapar menu ni header */
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    align-self: stretch;
+    justify-self: stretch;
+    position: relative;
     z-index: 2;
     background: #e9e9e9;
-    border: 1px solid #3f3f3f;
-    border-radius: 5px;
     left: 0px;
     top: 0px;
     height: 100%;
+    min-height: calc(100vh - 8.5em);
     width: 100%;
     display: flex;
     align-items: center;

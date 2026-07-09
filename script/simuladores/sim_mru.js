@@ -965,10 +965,32 @@ window.addEventListener("load", () => {
     loader.classList.add("loader-page--hidden");
   };
 
-  setTimeout(ocultarLoader, 400);
-  setTimeout(ocultarLoader, 2500);
+  setTimeout(ocultarLoader, 2000);
+  setTimeout(ocultarLoader, 2000);
 
   loader.addEventListener("transitionend", () => {
     loader.hidden = true;
   }, { once: true });
 });
+
+// Funcion Pantalla Completa 
+
+const btnPantallaCompleta = document.getElementById("btn-pantallacompleta");
+const contenedorsimulador = document.getElementById("main-despleglabe");
+
+btnPantallaCompleta.addEventListener ("click", () => {
+  if (!document.fullscreenElement) {
+    contenedorsimulador.requestFullscreen();
+  } else {
+    document.exitFullscreen();
+  }
+});
+
+document.addEventListener ("fullscreenchange", () => {
+  if (document.fullscreenElement) {
+    console.log("Pantalla Completa")
+  } else {
+    console.log("Pantalla Normal")
+  }
+});
+
