@@ -498,6 +498,43 @@
     contexto.lineTo(x0 + anchoUtil, y0 + altoUtil);
     contexto.stroke();
 
+    // CODEX: añadido para marcar divisiones del eje x y flechas al final de los ejes en las graficas MRU
+    const yEjeX = y0 + altoUtil;
+    contexto.fillStyle = "#1f3359";
+    contexto.strokeStyle = "#1f3359";
+    contexto.lineWidth = 1.2;
+
+    for (let i = 0; i <= 5; i += 1) {
+      const tValor = (tMax * i) / 5;
+      const x = xGrafica(tValor);
+
+      contexto.beginPath();
+      contexto.moveTo(x, yEjeX - 4);
+      contexto.lineTo(x, yEjeX + 4);
+      contexto.stroke();
+
+      if (i < 5) {
+        contexto.font = "11px system-ui, sans-serif";
+        contexto.textAlign = "center";
+        contexto.textBaseline = "top";
+        contexto.fillText(String(Number(tValor.toFixed(1))), x, yEjeX + 7);
+      }
+    }
+
+    contexto.beginPath();
+    contexto.moveTo(x0 + anchoUtil + 8, yEjeX);
+    contexto.lineTo(x0 + anchoUtil - 3, yEjeX - 5);
+    contexto.lineTo(x0 + anchoUtil - 3, yEjeX + 5);
+    contexto.closePath();
+    contexto.fill();
+
+    contexto.beginPath();
+    contexto.moveTo(x0, y0 - 8);
+    contexto.lineTo(x0 - 5, y0 + 3);
+    contexto.lineTo(x0 + 5, y0 + 3);
+    contexto.closePath();
+    contexto.fill();
+
     contexto.strokeStyle = "#6f7f99";
     contexto.beginPath();
     contexto.moveTo(x0, yBase);
@@ -509,7 +546,7 @@
     contexto.textAlign = "left";
     contexto.textBaseline = "alphabetic";
     contexto.fillText(titulo, area.x + anchoUtil * 0.5, area.y + 16);
-    contexto.fillText(ejeY, area.x + 25, y0 - 7);
+    contexto.fillText(ejeY, area.x + 25, y0 - 15);
     contexto.textAlign = "right";
     contexto.fillText("t (s)", area.x + area.ancho - 6, y0 + altoUtil + 22);
 
@@ -994,7 +1031,7 @@
 
     leerParametros({ actualizarPosicion: false });
     // CODEX: modificado para que el avance manual represente exactamente un segundo de simulacion
-    actualizarMovimiento(1);
+    actualizarMovimiento(0.01);
     dibujarTodo();
     actualizarBotonPaso();
   }

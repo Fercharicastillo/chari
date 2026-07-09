@@ -566,7 +566,7 @@
 }
 
 .mru-note {
-  display: flex;
+  display: none; /*Momentanteamente se queda con none, es flex*/
   align-items: center;
   gap: 5px;
   margin-top: 18px;
