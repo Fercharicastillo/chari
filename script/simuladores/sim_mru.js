@@ -1,9 +1,15 @@
 // CODEX: añadido para implementar el simulador MRU con canvas nativo y movimiento x(t)=x0+v*t
 (function () {
   const elementos = {
+    page: document.querySelector(".mru-page"),
     canvas: document.getElementById("canvas_simulador"),
     grafica: document.getElementById("mruGraph"),
     canvasPanel: document.querySelector(".mru-canvas-panel"),
+    sidePanel: document.querySelector(".mru-side-panel"),
+    resultsPanel: document.querySelector(".simulator-page__results"),
+    valuesCard: document.querySelector(".simulator-page__results .mru-info-card"),
+    tabSimulacion: document.getElementById("mru-tab-simulacion"),
+    tabGraficas: document.getElementById("mru-tab-graficas"),
     cronometro: document.getElementById("mru-cronometro"),
     cronoMin: document.getElementById("mru-crono-min"),
     cronoSec: document.getElementById("mru-crono-sec"),
@@ -51,6 +57,7 @@
     v: 10,
     t: 0,
     x: 0,
+    vistaActiva: "simulacion",
     ejecutando: false,
     ultimoTiempo: null,
     animacionId: null,
@@ -65,6 +72,13 @@
     ejes: elementos.ejes ? elementos.ejes.defaultChecked : true,
     cronometroVisible: elementos.checkCronometro ? elementos.checkCronometro.defaultChecked : true
   };
+  // CODEX: añadido para restaurar la tarjeta de valores al volver desde la vista de graficas
+  const posicionOriginalValores = elementos.valuesCard && elementos.resultsPanel
+    ? {
+      contenedor: elementos.resultsPanel,
+      siguiente: elementos.valuesCard.nextElementSibling
+    }
+    : null;
   // CODEX: añadido para que el cronometro visual funcione independiente de la simulacion MRU
   const cronometro = {
     t: 0,
@@ -417,6 +431,199 @@
     ctx.restore();
   }
 
+  // CODEX: añadido para dibujar el canvas principal en modo simulación sin mezclarlo con la vista de gráficas
+  function dibujarVistaSimulacion(ancho, alto) {
+    dibujarFondo(ancho, alto);
+    dibujarEjeX(ancho, alto);
+    dibujarRastro(ancho, alto);
+    dibujarCarro(ancho, alto);
+  }
+
+  // CODEX: añadido para reutilizar un mismo sistema visual en las gráficas MRU del canvas principal
+  function dibujarPanelGraficaMRU(contexto, configuracion) {
+    const {
+      area,
+      titulo,
+      ejeY,
+      yMin,
+      yMax,
+      puntos,
+      sombrear = false,
+      color = "#0646c8"
+    } = configuracion;
+    const margenIzq = 44;
+    const margenDer = 18;
+    const margenSup = 24;
+    const margenInf = 28;
+    const x0 = area.x + margenIzq;
+    const y0 = area.y + margenSup;
+    const anchoUtil = area.ancho - margenIzq - margenDer;
+    const altoUtil = area.alto - margenSup - margenInf;
+    const tMax = Math.max(10, Math.ceil(estado.t / 2) * 2, 1);
+    const yRango = Math.max(1, yMax - yMin);
+    const yBase = Math.min(Math.max(y0 + altoUtil - ((0 - yMin) / yRango) * altoUtil, y0), y0 + altoUtil);
+    const xGrafica = (t) => x0 + (t / tMax) * anchoUtil;
+    const yGrafica = (valor) => y0 + altoUtil - ((valor - yMin) / yRango) * altoUtil;
+
+    contexto.save();
+    contexto.fillStyle = "#ffffff";
+    contexto.strokeStyle = "#dbe3ef";
+    contexto.lineWidth = 1;
+    contexto.fillRect(area.x, area.y, area.ancho, area.alto);
+
+    for (let i = 0; i <= 5; i += 1) {
+      const x = x0 + (anchoUtil * i) / 5;
+      contexto.setLineDash(i === 0 ? [] : [4, 3]);
+      contexto.beginPath();
+      contexto.moveTo(x, y0);
+      contexto.lineTo(x, y0 + altoUtil);
+      contexto.stroke();
+    }
+
+    for (let i = 0; i <= 4; i += 1) {
+      const y = y0 + (altoUtil * i) / 4;
+      contexto.setLineDash(i === 4 ? [] : [4, 3]);
+      contexto.beginPath();
+      contexto.moveTo(x0, y);
+      contexto.lineTo(x0 + anchoUtil, y);
+      contexto.stroke();
+    }
+
+    contexto.setLineDash([]);
+    contexto.strokeStyle = "#8d9bb3";
+    contexto.lineWidth = 1.3;
+    contexto.beginPath();
+    contexto.moveTo(x0, y0);
+    contexto.lineTo(x0, y0 + altoUtil);
+    contexto.lineTo(x0 + anchoUtil, y0 + altoUtil);
+    contexto.stroke();
+
+    contexto.strokeStyle = "#6f7f99";
+    contexto.beginPath();
+    contexto.moveTo(x0, yBase);
+    contexto.lineTo(x0 + anchoUtil, yBase);
+    contexto.stroke();
+
+    contexto.fillStyle = "#1f3359";
+    contexto.font = "bold 12px system-ui, sans-serif";
+    contexto.textAlign = "left";
+    contexto.textBaseline = "alphabetic";
+    contexto.fillText(titulo, area.x + anchoUtil * 0.5, area.y + 16);
+    contexto.fillText(ejeY, area.x + 25, y0 - 7);
+    contexto.textAlign = "right";
+    contexto.fillText("t (s)", area.x + area.ancho - 6, y0 + altoUtil + 22);
+
+    contexto.font = "11px system-ui, sans-serif";
+    contexto.fillStyle = "#40527a";
+    contexto.textAlign = "right";
+    contexto.textBaseline = "middle";
+    for (let i = 0; i <= 4; i += 1) {
+      const valor = yMin + ((yMax - yMin) * i) / 4;
+      const y = yGrafica(valor);
+      if (i < 4) {
+        contexto.fillText(String(Number(valor.toFixed(1))), x0 - 8, y);
+      }
+    }
+
+    const puntosCanvas = puntos.map((punto) => ({
+      x: xGrafica(punto.t),
+      y: yGrafica(punto.valor)
+    }));
+
+    if (puntosCanvas.length > 1 && sombrear) {
+      contexto.fillStyle = "rgba(6, 70, 200, 0.14)";
+      contexto.beginPath();
+      contexto.moveTo(puntosCanvas[0].x, yBase);
+      puntosCanvas.forEach((punto) => contexto.lineTo(punto.x, punto.y));
+      contexto.lineTo(puntosCanvas[puntosCanvas.length - 1].x, yBase);
+      contexto.closePath();
+      contexto.fill();
+    }
+
+    if (puntosCanvas.length > 0) {
+      contexto.strokeStyle = color;
+      contexto.lineWidth = 2.4;
+      contexto.beginPath();
+      puntosCanvas.forEach((punto, indice) => {
+        if (indice === 0) {
+          contexto.moveTo(punto.x, punto.y);
+        } else {
+          contexto.lineTo(punto.x, punto.y);
+        }
+      });
+      contexto.stroke();
+
+      const puntoFinal = puntosCanvas[puntosCanvas.length - 1];
+      contexto.fillStyle = color;
+      contexto.strokeStyle = "#ffffff";
+      contexto.lineWidth = 2;
+      contexto.beginPath();
+      contexto.arc(puntoFinal.x, puntoFinal.y, 4.5, 0, Math.PI * 2);
+      contexto.fill();
+      contexto.stroke();
+    }
+
+    contexto.restore();
+  }
+
+  // CODEX: añadido para mostrar en el canvas principal las gráficas x(t), v(t) y a(t) del MRU
+  function dibujarVistaGraficasMRU(ancho, alto) {
+    ctx.clearRect(0, 0, ancho, alto);
+    ctx.fillStyle = "#f7fbff";
+    ctx.fillRect(0, 0, ancho, alto);
+
+    const separacion = 10;
+    const margen = 12;
+    const altoPanel = (alto - margen * 2 - separacion * 2) / 3;
+    const areaBase = {
+      x: margen,
+      ancho: ancho - margen * 2,
+      alto: altoPanel
+    };
+    const tActual = Math.max(estado.t, 0);
+    // CODEX: modificado para que la vista de graficas MRU use el estado fisico actual sin depender del rastro visual
+    const puntosX = tActual > 0
+      ? [{ t: 0, valor: estado.x0 }, { t: tActual, valor: estado.x }]
+      : [{ t: 0, valor: estado.x }];
+    const puntosVelocidad = tActual > 0
+      ? [{ t: 0, valor: estado.v }, { t: tActual, valor: estado.v }]
+      : [{ t: 0, valor: estado.v }];
+    const puntosAceleracion = tActual > 0
+      ? [{ t: 0, valor: 0 }, { t: tActual, valor: 0 }]
+      : [{ t: 0, valor: 0 }];
+    const vRango = Math.max(10, Math.abs(estado.v) + 5);
+
+    dibujarPanelGraficaMRU(ctx, {
+      area: { ...areaBase, y: margen },
+      titulo: "Posición vs tiempo  x(t)",
+      ejeY: "x (m)",
+      yMin: Math.min(mundo.min, 0),
+      yMax: Math.max(mundo.max, 1),
+      puntos: puntosX,
+      sombrear: true
+    });
+
+    dibujarPanelGraficaMRU(ctx, {
+      area: { ...areaBase, y: margen + altoPanel + separacion },
+      titulo: "Velocidad vs tiempo  v(t)",
+      ejeY: "v (m/s)",
+      yMin: -vRango,
+      yMax: vRango,
+      puntos: puntosVelocidad,
+      color: "#0b7fab"
+    });
+
+    dibujarPanelGraficaMRU(ctx, {
+      area: { ...areaBase, y: margen + altoPanel * 2 + separacion * 2 },
+      titulo: "Aceleración vs tiempo  a(t)",
+      ejeY: "a (m/s²)",
+      yMin: -1,
+      yMax: 1,
+      puntos: puntosAceleracion,
+      color: "#5c6f8f"
+    });
+  }
+
   // CODEX: añadido para dibujar la grafica posicion-tiempo en tiempo real
   function dibujarGrafica() {
     const { ancho, alto } = dimensionesCanvas(elementos.grafica);
@@ -658,16 +865,64 @@
     elementos.cronometro.hidden = !elementos.checkCronometro.checked;
   }
 
+  // CODEX: añadido para alternar entre vista de simulación y vista comparativa de gráficas MRU
+  function actualizarPestanasVista() {
+    const vistaGraficas = estado.vistaActiva === "graficas";
+
+    if (elementos.tabSimulacion) {
+      elementos.tabSimulacion.classList.toggle("active", !vistaGraficas);
+      elementos.tabSimulacion.classList.toggle("no-active", vistaGraficas);
+      elementos.tabSimulacion.setAttribute("aria-selected", String(!vistaGraficas));
+    }
+
+    if (elementos.tabGraficas) {
+      elementos.tabGraficas.classList.toggle("active", vistaGraficas);
+      elementos.tabGraficas.classList.toggle("no-active", !vistaGraficas);
+      elementos.tabGraficas.setAttribute("aria-selected", String(vistaGraficas));
+    }
+
+    if (elementos.canvasPanel) {
+      elementos.canvasPanel.classList.toggle("mru-canvas-panel--graphs", vistaGraficas);
+    }
+
+    if (elementos.page) {
+      elementos.page.classList.toggle("mru-page--graphs", vistaGraficas);
+    }
+
+    if (elementos.valuesCard && elementos.sidePanel && posicionOriginalValores) {
+      if (vistaGraficas && elementos.valuesCard.parentElement !== elementos.sidePanel) {
+        elementos.sidePanel.appendChild(elementos.valuesCard);
+      } else if (!vistaGraficas && elementos.valuesCard.parentElement !== posicionOriginalValores.contenedor) {
+        posicionOriginalValores.contenedor.insertBefore(elementos.valuesCard, posicionOriginalValores.siguiente);
+      }
+    }
+  }
+
+  function activarVistaSimulacion() {
+    estado.vistaActiva = "simulacion";
+    actualizarPestanasVista();
+    dibujarTodo();
+  }
+
+  function activarVistaGraficas() {
+    estado.vistaActiva = "graficas";
+    actualizarPestanasVista();
+    dibujarTodo();
+  }
+
   function dibujarTodo() {
     redimensionarCanvas(elementos.canvas, ctx);
     redimensionarCanvas(elementos.grafica, graphCtx);
-    prepararFondoCache();
 
     const { ancho, alto } = dimensionesCanvas(elementos.canvas);
-    dibujarFondo(ancho, alto);
-    dibujarEjeX(ancho, alto);
-    dibujarRastro(ancho, alto);
-    dibujarCarro(ancho, alto);
+
+    if (estado.vistaActiva === "graficas") {
+      dibujarVistaGraficasMRU(ancho, alto);
+    } else {
+      prepararFondoCache();
+      dibujarVistaSimulacion(ancho, alto);
+    }
+
     dibujarGrafica();
     actualizarResultados();
   }
@@ -738,7 +993,8 @@
     if (estado.ejecutando) return;
 
     leerParametros({ actualizarPosicion: false });
-    actualizarMovimiento(0.01);
+    // CODEX: modificado para que el avance manual represente exactamente un segundo de simulacion
+    actualizarMovimiento(1);
     dibujarTodo();
     actualizarBotonPaso();
   }
@@ -885,6 +1141,14 @@
     elementos.btnPaso.addEventListener("click", avanzarUnPaso);
     elementos.btnReiniciar.addEventListener("click", reiniciarSimuladorCompleto);
 
+    if (elementos.tabSimulacion) {
+      elementos.tabSimulacion.addEventListener("click", activarVistaSimulacion);
+    }
+
+    if (elementos.tabGraficas) {
+      elementos.tabGraficas.addEventListener("click", activarVistaGraficas);
+    }
+
     if (elementos.cronoStart) {
       elementos.cronoStart.addEventListener("click", iniciarCronometro);
     }
@@ -973,6 +1237,7 @@ window.addEventListener("load", () => {
   }, { once: true });
 });
 
+
 // Funcion Pantalla Completa 
 
 const btnPantallaCompleta = document.getElementById("btn-pantallacompleta");
@@ -993,4 +1258,3 @@ document.addEventListener ("fullscreenchange", () => {
     console.log("Pantalla Normal")
   }
 });
-

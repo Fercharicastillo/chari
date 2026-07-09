@@ -334,6 +334,28 @@
   background: transparent;
 }
 
+/* CODEX: añadido para dar más altura al canvas principal cuando muestra las tres gráficas MRU */
+.mru-canvas-panel.mru-canvas-panel--graphs #canvas_simulador {
+  aspect-ratio: 650 / 390;
+  background: #f7fbff;
+}
+
+/* CODEX: añadido para limpiar la vista de graficas y mover el panel de valores al costado de los controles */
+.mru-page.mru-page--graphs .mru-info-grid,
+.mru-page.mru-page--graphs .mru-note, 
+.mru-page.mru-page--graphs .mru-checkbox-container {
+  display: none;
+}
+
+.mru-page.mru-page--graphs .mru-controls-row {
+  display: flex;
+  justify-content: center;
+}
+
+.mru-page.mru-page--graphs .mru-side-panel > .mru-info-card {
+  width: 100%;
+}
+
 .mru-controls-row {
   display: flex;
   justify-content: space-between;

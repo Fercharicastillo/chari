@@ -98,13 +98,15 @@
                 <section class="simulator-page__workspace mru-card">
 
                     <nav class="mru-tabs" aria-label="Vistas del simulador MRU">
-                        <button type="button" class="active mru-button-simulacion">
+                        <!-- CODEX: modificado para conectar la pestaña con la vista de simulación del canvas -->
+                        <button type="button" class="active mru-button-simulacion" id="mru-tab-simulacion" aria-selected="true">
                             <span class="img-button-simulacion"></span>
                             <span>Simulación</span>
                         </button>
-                        <button type="button" class="no-active mru-button-graficas">
+                        <!-- CODEX: modificado para conectar la pestaña con la vista comparativa de gráficas MRU -->
+                        <button type="button" class="no-active mru-button-graficas" id="mru-tab-graficas" aria-selected="false">
                             <span class="img-button-graficas"></span>
-                            <span>Gráfica posición - tiempo</span>
+                            <span>Gráficas MRU</span>
                         </button>
                         <!--<button type="button">Tabla de datos</button>-->
                     </nav>
