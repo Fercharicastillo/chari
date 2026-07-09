@@ -66,6 +66,7 @@
 
         <main class="main" id="main-despleglabe">
             <section class="simulator-page mru-page" data-simulador="sim-mru">
+                
                 <!--
                     ENCABEZADO DEL SIMULADOR:
                     Debe explicar en pocas líneas qué fenómeno se simula.
@@ -108,8 +109,9 @@
                     </nav>
 
                     <div class="mru-layout">
-
+                        
                         <section class="mru-canvas-panel">
+                            <div class="loader-page"></div>
                             <!-- CODEX: añadido para mostrar un cronometro visual del MRU alimentado por el tiempo fisico de la simulacion -->
                             <div class="mru-chronometer" id="mru-cronometro" aria-label="Cronometro del simulador MRU">
                                 <div class="mru-chronometer-display">
@@ -179,11 +181,10 @@
                             <div class="mru-control-box">
                                 <!--<h3>Parámetros</h3>-->
                                 <!-- DESDE AQUI SE PUEDE UTILIZAR PARA LOS INPUTS RANGE EN OTROS SIMULADORES-->
+                                <div class="selecte-one">
                                 <div class="title-sim">
-                                    <p class="parrafo1">Posición inicial (x₀):
-                                        <span><output id="mru-x0-output">0</output>m
-                                        </span>
-                                    </p>
+                                    <p class="parrafo1">Posición inicial (x₀):</p>
+                                    <span><output id="mru-x0-output">0</output> m</span>
                                 </div>
                                 <!-- CODEX: modificado para convertir el range personalizado en el control real de posicion inicial x0 -->
                                 <input id="mru-x0" name="x0" type="hidden" value="0">
@@ -203,12 +204,11 @@
                                     </div>
                                     <button type="button" class="btnmore" id="mru-x0-more" aria-label="Aumentar posicion inicial"></button>
                                 </div>
+                                </div>
                                 <!-- CODEX: añadido para usar en velocidad el mismo deslizador personalizado de posicion inicial -->
                                 <div class="title-sim">
-                                    <p class="parrafo">Velocidad v:
-                                        <span><output id="mru-v-output">10</output>m/s
-                                        </span>
-                                    </p>
+                                    <p class="parrafo">Velocidad (v):</p>
+                                    <span><output id="mru-v-output">10</output> m/s</span>
                                 </div>
                                 <input id="mru-v" name="v" type="hidden" value="10">
                                 <div class="caja-sim mru-range-control">

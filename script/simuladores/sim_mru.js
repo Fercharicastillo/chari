@@ -422,52 +422,133 @@
     const { ancho, alto } = dimensionesCanvas(elementos.grafica);
     graphCtx.clearRect(0, 0, ancho, alto);
 
-    const margenIzq = 44;
-    const margenDer = 16;
-    const margenSup = 16;
-    const margenInf = 34;
+    // CODEX: modificado para mejorar la lectura visual de la grafica posicion-tiempo
+    const margenIzq = 54;
+    const margenDer = 28;
+    const margenSup = 18;
+    const margenInf = 38;
     const anchoUtil = ancho - margenIzq - margenDer;
     const altoUtil = alto - margenSup - margenInf;
-    const tMax = Math.max(10, estado.t, 1);
+    const tMax = Math.max(10, Math.ceil(estado.t / 2) * 2, 1);
+    const xMin = Math.min(mundo.min, 0);
+    const xMax = Math.max(mundo.max, 1);
+    const divisionesT = 5;
+    const divisionesX = 4;
+
+    const xGrafica = (t) => margenIzq + (t / tMax) * anchoUtil;
+    const yGrafica = (xValor) => margenSup + altoUtil - ((xValor - xMin) / (xMax - xMin)) * altoUtil;
+    const yBase = Math.min(Math.max(yGrafica(0), margenSup), margenSup + altoUtil);
 
     graphCtx.save();
-    graphCtx.strokeStyle = "#dbe6f7";
-    graphCtx.fillStyle = "#40527a";
+    graphCtx.fillStyle = "#ffffff";
+    graphCtx.fillRect(0, 0, ancho, alto);
+    graphCtx.font = "12px system-ui, sans-serif";
     graphCtx.lineWidth = 1;
-    graphCtx.font = "11px system-ui, sans-serif";
 
+    for (let i = 0; i <= divisionesT; i += 1) {
+      const tValor = (tMax * i) / divisionesT;
+      const x = xGrafica(tValor);
+
+      graphCtx.strokeStyle = "#dbe3ef";
+      graphCtx.setLineDash(i === 0 ? [] : [4, 3]);
+      graphCtx.beginPath();
+      graphCtx.moveTo(x, margenSup);
+      graphCtx.lineTo(x, margenSup + altoUtil);
+      graphCtx.stroke();
+
+      graphCtx.setLineDash([]);
+      graphCtx.fillStyle = "#263a63";
+      graphCtx.textAlign = "center";
+      graphCtx.textBaseline = "alphabetic";
+      if (i < divisionesT) {
+        graphCtx.fillText(String(Number(tValor.toFixed(1))), x, margenSup + altoUtil + 22);
+      }
+    }
+
+    for (let i = 0; i <= divisionesX; i += 1) {
+      const xValor = xMin + ((xMax - xMin) * i) / divisionesX;
+      const y = yGrafica(xValor);
+
+      graphCtx.strokeStyle = "#dbe3ef";
+      graphCtx.setLineDash(i === 0 ? [] : [4, 3]);
+      graphCtx.beginPath();
+      graphCtx.moveTo(margenIzq, y);
+      graphCtx.lineTo(margenIzq + anchoUtil, y);
+      graphCtx.stroke();
+
+      graphCtx.setLineDash([]);
+      graphCtx.fillStyle = "#263a63";
+      graphCtx.textAlign = "right";
+      graphCtx.textBaseline = "middle";
+      if (i < divisionesX) {
+        graphCtx.fillText(String(Number(xValor.toFixed(1))), margenIzq - 10, y);
+      }
+    }
+
+    graphCtx.setLineDash([]);
+    graphCtx.strokeStyle = "#8d9bb3";
+    graphCtx.lineWidth = 1.4;
     graphCtx.beginPath();
     graphCtx.moveTo(margenIzq, margenSup);
     graphCtx.lineTo(margenIzq, margenSup + altoUtil);
     graphCtx.lineTo(margenIzq + anchoUtil, margenSup + altoUtil);
     graphCtx.stroke();
 
-    for (let i = 0; i <= 4; i += 1) {
-      const x = margenIzq + (anchoUtil * i) / 4;
-      const y = margenSup + (altoUtil * i) / 4;
-      graphCtx.strokeStyle = "#eef3fb";
-      graphCtx.beginPath();
-      graphCtx.moveTo(margenIzq, y);
-      graphCtx.lineTo(margenIzq + anchoUtil, y);
-      graphCtx.moveTo(x, margenSup);
-      graphCtx.lineTo(x, margenSup + altoUtil);
-      graphCtx.stroke();
-    }
+    graphCtx.strokeStyle = "#6f7f99";
+    graphCtx.lineWidth = 1.6;
+    graphCtx.beginPath();
+    graphCtx.moveTo(margenIzq, yBase);
+    graphCtx.lineTo(margenIzq + anchoUtil, yBase);
+    graphCtx.stroke();
 
-    graphCtx.fillText("x (m)", 8, margenSup + 8);
-    graphCtx.fillText("t (s)", margenIzq + anchoUtil - 22, alto - 8);
+
+    graphCtx.fillStyle = "#1f3359";
+    graphCtx.font = "bold 13px system-ui, sans-serif";
+    graphCtx.textAlign = "left";
+    graphCtx.textBaseline = "alphabetic";
+    graphCtx.fillText("x (m)", 15, margenSup + 14);
+    graphCtx.textAlign = "right";
+    graphCtx.fillText("t (s)", ancho - 20, margenSup + altoUtil + 20);
+
+
+    const xInicio = margenIzq;
+    const xFin = margenIzq + anchoUtil;
+    const yArriba = margenSup;
+    const yAbajo = margenSup + altoUtil;
+
+    graphCtx.beginPath();
+    graphCtx.moveTo(xFin, yAbajo);
+    graphCtx.lineTo(xFin - 10, yAbajo - 5);
+    graphCtx.lineTo(xFin - 10, yAbajo + 5);
+    graphCtx.closePath();
+    graphCtx.fill();      
+
+    graphCtx.beginPath();
+    graphCtx.moveTo(xInicio, yArriba);
+    graphCtx.lineTo(xInicio - 5, yArriba + 10);
+    graphCtx.lineTo(xInicio + 5, yArriba + 10);
+    graphCtx.closePath();
+    graphCtx.fill();    
 
     const puntos = estado.rastro.map((xValor, indice) => {
       const tValor = estado.rastro.length === 1 ? 0 : (estado.t * indice) / (estado.rastro.length - 1);
       return {
-        x: margenIzq + (tValor / tMax) * anchoUtil,
-        y: margenSup + altoUtil - ((xValor - mundo.min) / (mundo.max - mundo.min)) * altoUtil
+        x: xGrafica(tValor),
+        y: yGrafica(xValor)
       };
     });
 
     if (puntos.length > 1) {
+      graphCtx.fillStyle = "rgba(6, 70, 200, 0.16)";
+      graphCtx.beginPath();
+      graphCtx.moveTo(puntos[0].x, yBase);
+      puntos.forEach((punto) => graphCtx.lineTo(punto.x, punto.y));
+      graphCtx.lineTo(puntos[puntos.length - 1].x, yBase);
+      graphCtx.closePath();
+      graphCtx.fill();
+
       graphCtx.strokeStyle = "#0646c8";
-      graphCtx.lineWidth = 2;
+      graphCtx.lineWidth = 3;
       graphCtx.beginPath();
       puntos.forEach((punto, indice) => {
         if (indice === 0) {
@@ -477,6 +558,20 @@
         }
       });
       graphCtx.stroke();
+
+      const puntoFinal = puntos[puntos.length - 1];
+      graphCtx.fillStyle = "#0646c8";
+      graphCtx.strokeStyle = "#ffffff";
+      graphCtx.lineWidth = 2;
+      graphCtx.beginPath();
+      graphCtx.arc(puntoFinal.x, puntoFinal.y, 6, 0, Math.PI * 2);
+      graphCtx.fill();
+      graphCtx.stroke();
+    } else if (puntos.length === 1) {
+      graphCtx.fillStyle = "#0646c8";
+      graphCtx.beginPath();
+      graphCtx.arc(puntos[0].x, puntos[0].y, 5, 0, Math.PI * 2);
+      graphCtx.fill();
     }
 
     graphCtx.restore();
@@ -859,4 +954,21 @@ document.getElementById("btn-pausar").addEventListener("click", function () {
 document.getElementById("btn-simular").addEventListener("click", function() {
     btnpaso();
     hidesimular();
+});
+
+// CODEX: modificado para ocultar el loader del MRU con JavaScript puro y sin depender de jQuery
+window.addEventListener("load", () => {
+  const loader = document.querySelector(".loader-page");
+  if (!loader) return;
+
+  const ocultarLoader = () => {
+    loader.classList.add("loader-page--hidden");
+  };
+
+  setTimeout(ocultarLoader, 400);
+  setTimeout(ocultarLoader, 2500);
+
+  loader.addEventListener("transitionend", () => {
+    loader.hidden = true;
+  }, { once: true });
 });
