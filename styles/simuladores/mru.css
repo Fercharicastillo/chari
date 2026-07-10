@@ -9,9 +9,8 @@
   --btn-pausar: url(../../img/botones/sim_mru/btn-stop-mru.svg);
   --btn-reproducir: url(../../img/botones/sim_mru/btn-start-simulation-mru.svg);
   --btn-reiniciar: url(../../img/botones/btn-restart-clock.svg);
-  --img-mru-fondo1: url(../../img/botones/sim_mru/fondo_sim_mru.svg);
-  --img-mru-fondo: url(../../img/botones/sim_mru/new-fondo_sim_mru-01-01.svg);
-  --img-mru-carro: url(../../img/botones/sim_mru/carro_azul_sim-mru.svg);
+  --img-mru-fondo: url(../../img/botones/sim_mru/fondo_sim_mru-01-01.png); /*new-fondo_sim_mru-01-01.svg*/
+  --img-mru-carro: url(../../img/botones/sim_mru/carro_azul_sim-mru-01.png); /*carro_azul_sim-mru.svg)*/
   --img-mru-grafica: url(../../img/mru-grafica.png);
   /* CODEX: añadido para reutilizar iconos visuales del cronometro en el MRU sin cargar simuladores.css */
   --icon-btnstartclock: url(../../img/botones/btn-start-clock.svg);
