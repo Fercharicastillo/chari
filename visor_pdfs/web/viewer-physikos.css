@@ -1,0 +1,103 @@
+/* CODEX: añadido para personalizar visualmente PDF.js con identidad Physikós sin tocar la lógica del visor */
+:root {
+  --physikos-blue: #0646c8;
+  --physikos-navy: #06164a;
+  --physikos-soft-blue: #f4f8ff;
+  --physikos-border: #dbe6f7;
+  --physikos-hover: #eaf2ff;
+
+  --main-color: var(--physikos-navy);
+  --body-bg-color: #eef5ff;
+  --progressBar-color: var(--physikos-blue);
+  --progressBar-indeterminate-bg-color: #dbe6f7;
+  --progressBar-indeterminate-blend-color: #79a8ff;
+  --toolbar-icon-bg-color: var(--physikos-navy);
+  --toolbar-icon-hover-bg-color: var(--physikos-blue);
+  --sidebar-toolbar-bg-color: #ffffff;
+  --toolbar-bg-color: #ffffff;
+  --toolbar-border-color: var(--physikos-border);
+  --button-hover-color: var(--physikos-hover);
+  --toggled-btn-color: var(--physikos-blue);
+  --toggled-btn-bg-color: rgba(6, 70, 200, 0.14);
+  --toggled-hover-active-btn-color: rgba(6, 70, 200, 0.2);
+  --dropdown-btn-bg-color: #ffffff;
+  --separator-color: rgba(6, 22, 74, 0.18);
+  --field-color: var(--physikos-navy);
+  --field-bg-color: #ffffff;
+  --field-border-color: #c9d8f5;
+  --findbar-nextprevious-btn-bg-color: var(--physikos-soft-blue);
+  --treeitem-color: rgba(6, 22, 74, 0.82);
+  --treeitem-hover-color: var(--physikos-navy);
+  --treeitem-selected-color: var(--physikos-blue);
+  --treeitem-selected-bg-color: rgba(6, 70, 200, 0.12);
+  --sidebaritem-bg-color: rgba(6, 70, 200, 0.12);
+  --doorhanger-bg-color: #ffffff;
+  --doorhanger-border-color: rgba(6, 70, 200, 0.22);
+  --doorhanger-hover-color: var(--physikos-blue);
+  --doorhanger-hover-bg-color: var(--physikos-hover);
+  --doorhanger-separator-color: var(--physikos-border);
+  --overlay-button-bg-color: var(--physikos-soft-blue);
+  --overlay-button-hover-bg-color: var(--physikos-hover);
+}
+
+/* CODEX: añadido para unificar tipografía y superficie general del visor PDF */
+body,
+input,
+button,
+select {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* CODEX: añadido para dar al toolbar y paneles flotantes una apariencia clara compatible con Physikós */
+#toolbarContainer,
+.findbar,
+.secondaryToolbar {
+  border-bottom: 1px solid var(--physikos-border);
+  box-shadow: 0 1px 8px rgba(6, 22, 74, 0.08);
+}
+
+.toolbarButton,
+.dropdownToolbarButton,
+.secondaryToolbarButton,
+.overlayButton {
+  border-radius: 6px;
+}
+
+.toolbarButton:hover,
+.toolbarButton:focus,
+.secondaryToolbarButton:hover,
+.secondaryToolbarButton:focus,
+.dropdownToolbarButton:hover,
+.dropdownToolbarButton:focus {
+  outline: none;
+}
+
+/* CODEX: añadido para suavizar campos del visor sin alterar sus dimensiones funcionales */
+.toolbarField,
+.dropdownToolbarButton {
+  border-color: var(--physikos-border);
+  border-radius: 6px;
+}
+
+.toolbarField:focus {
+  border-color: var(--physikos-blue);
+  box-shadow: 0 0 0 2px rgba(6, 70, 200, 0.12);
+}
+
+/* CODEX: añadido para acercar el panel lateral y miniaturas a la identidad azul/gris de Physikós */
+#sidebarContent {
+  background-color: rgba(244, 248, 255, 0.92);
+}
+
+.thumbnailImage {
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px rgba(6, 22, 74, 0.18), 0 4px 12px rgba(6, 22, 74, 0.16);
+}
+
+.thumbnail.selected > .thumbnailSelectionRing {
+  background-color: rgba(6, 70, 200, 0.16);
+}
+
+.thumbnail.selected > .thumbnailSelectionRing > .thumbnailImage {
+  box-shadow: 0 0 0 2px var(--physikos-blue), 0 4px 14px rgba(6, 70, 200, 0.22);
+}
