@@ -101,3 +101,86 @@ select {
 .thumbnail.selected > .thumbnailSelectionRing > .thumbnailImage {
   box-shadow: 0 0 0 2px var(--physikos-blue), 0 4px 14px rgba(6, 70, 200, 0.22);
 }
+
+/* CODEX: añadido para que los scrollbars del visor mantengan la identidad azul oscura de Physikós */
+* {
+  scrollbar-color: #06164a #eaf2ff;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #eaf2ff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #06164a;
+  border: 3px solid #eaf2ff;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0646c8;
+}
+
+/* CODEX: añadido para restaurar la paleta oscura original de PDF.js cuando Physikós activa dark mode */
+[cambio="darkMode"] {
+  --main-color: rgba(249, 249, 250, 1);
+  --body-bg-color: rgba(42, 42, 46, 1);
+  --errorWrapper-bg-color: rgba(169, 14, 14, 1);
+  --progressBar-color: rgba(0, 96, 223, 1);
+  --progressBar-indeterminate-bg-color: rgba(40, 40, 43, 1);
+  --progressBar-indeterminate-blend-color: rgba(20, 68, 133, 1);
+  --scrollbar-color: rgba(121, 121, 123, 1);
+  --scrollbar-bg-color: rgba(35, 35, 39, 1);
+  --toolbar-icon-bg-color: rgba(255, 255, 255, 1);
+  --toolbar-icon-hover-bg-color: rgba(255, 255, 255, 1);
+  --sidebar-narrow-bg-color: rgba(42, 42, 46, 0.9);
+  --sidebar-toolbar-bg-color: rgba(50, 50, 52, 1);
+  --toolbar-bg-color: rgba(56, 56, 61, 1);
+  --toolbar-border-color: rgba(12, 12, 13, 1);
+  --button-hover-color: rgba(102, 102, 103, 1);
+  --toggled-btn-color: rgba(255, 255, 255, 1);
+  --toggled-btn-bg-color: rgba(0, 0, 0, 0.3);
+  --toggled-hover-active-btn-color: rgba(0, 0, 0, 0.4);
+  --dropdown-btn-bg-color: rgba(74, 74, 79, 1);
+  --separator-color: rgba(0, 0, 0, 0.3);
+  --field-color: rgba(250, 250, 250, 1);
+  --field-bg-color: rgba(64, 64, 68, 1);
+  --field-border-color: rgba(115, 115, 115, 1);
+  --findbar-nextprevious-btn-bg-color: rgba(89, 89, 89, 1);
+  --treeitem-color: rgba(255, 255, 255, 0.8);
+  --treeitem-hover-color: rgba(255, 255, 255, 0.9);
+  --treeitem-selected-color: rgba(255, 255, 255, 0.9);
+  --treeitem-selected-bg-color: rgba(255, 255, 255, 0.25);
+  --sidebaritem-bg-color: rgba(255, 255, 255, 0.15);
+  --doorhanger-bg-color: rgba(74, 74, 79, 1);
+  --doorhanger-border-color: rgba(39, 39, 43, 1);
+  --doorhanger-hover-color: rgba(249, 249, 250, 1);
+  --doorhanger-hover-bg-color: rgba(93, 94, 98, 1);
+  --doorhanger-separator-color: rgba(92, 92, 97, 1);
+  --overlay-button-bg-color: rgba(92, 92, 97, 1);
+  --overlay-button-hover-bg-color: rgba(115, 115, 115, 1);
+}
+
+/* CODEX: añadido para que el dark mode use los scrollbars originales oscuros de PDF.js */
+[cambio="darkMode"] * {
+  scrollbar-color: rgba(121, 121, 123, 1) rgba(35, 35, 39, 1);
+}
+
+[cambio="darkMode"] ::-webkit-scrollbar-track {
+  background: rgba(35, 35, 39, 1);
+}
+
+[cambio="darkMode"] ::-webkit-scrollbar-thumb {
+  background: rgba(121, 121, 123, 1);
+  border-color: rgba(35, 35, 39, 1);
+}
+
+[cambio="darkMode"] ::-webkit-scrollbar-thumb:hover {
+  background: rgba(160, 160, 164, 1);
+}
