@@ -38,11 +38,14 @@
 }
 
 .mru-page {
-  padding: 24px;
+  padding: clamp(12px, 2vw, 24px);
   color: #06164a;
   /* CODEX: añadido para unificar la tipografia de toda la interfaz del simulador MRU */
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.45;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* CODEX: añadido para que controles y botones hereden la misma familia tipografica del simulador */
@@ -63,7 +66,7 @@
 
 .mru-header h1 {
   margin: 0;
-  font-size: 2rem;
+  font-size: clamp(1.45rem, 2.1vw, 2rem);
   font-weight: 750;
   letter-spacing: 0;
 }
@@ -161,14 +164,18 @@
 }
 
 .mru-card {
-  padding: 0 18px 18px 18px;
+  padding: 0 clamp(10px, 1.4vw, 18px) clamp(10px, 1.4vw, 18px);
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .mru-tabs {
   display: flex;
-  gap: 24px;
+  gap: clamp(8px, 1.5vw, 24px);
   border-bottom: 1px solid #dbe6f7;
   margin-bottom: 18px;
+  overflow-x: auto;
+  scrollbar-width: thin;
 }
 
 .mru-tabs button {
@@ -236,13 +243,15 @@
 
 .mru-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 300px;
-  gap: 18px;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
+  gap: clamp(12px, 1.4vw, 18px);
   border-radius: 12px;
-  padding: 1em;
+  padding: clamp(0.65rem, 1.2vw, 1rem);
   background:
   linear-gradient(180deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0) 38%),
   linear-gradient(180deg, #aac4e4 0%, #ffffff 48%, #ffffff77 100%);
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* CODEX: añadido para posicionar controles flotantes del canvas MRU sin reactivar el fondo CSS */
@@ -390,6 +399,7 @@
   align-items: center;
   gap: 12px;
   padding-top: 1em;
+  flex-wrap: wrap;
 }
 
 .mru-play-controls {
@@ -512,6 +522,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  min-width: 0;
 }
 
 .mru-info-card h3 {
@@ -529,27 +540,35 @@
 
 .mru-info-grid {
   display: grid;
-  grid-template-columns: 1fr 3fr;
-  gap: 18px;
+  grid-template-columns: minmax(240px, 1fr) minmax(0, 3fr);
+  gap: clamp(12px, 1.4vw, 18px);
   margin-top: 18px;
+  max-width: 100%;
 }
 
 .simulator-page__results{
   display: flex;
-  gap: 18px;
+  gap: clamp(12px, 1.4vw, 18px);
+  min-width: 0;
 }
 
 .mru-info-card {
   padding: 18px;
+  min-width: 0;
+  height: auto;
 }
 
 .mru-info-card-img{
-  width: 500px;
-  height: 275px;
+  flex: 1 1 420px;
+  width: auto;
+  max-width: 100%;
+  min-width: 0;
+  height: auto;
   padding: 18px;
   border: 1px solid #dbe6f7;
   border-radius: 12px;
   background: #fff;
+  box-sizing: border-box;
 }
 
 .mru-info-card-img h3 {
@@ -560,7 +579,7 @@
 #mruGraph {
   display: block;
   width: 100%;
-  height: 210px;
+  height: clamp(170px, 20vw, 210px);
   border-radius: 10px;
   background: #ffffff;
 }
@@ -679,11 +698,13 @@
 /*INICIA LOS ESTILOS DE LOS INPUTS*/
 
 .mru-control-box {
-  padding: 18px;
+  padding: clamp(12px, 1.3vw, 18px);
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select:none;
   user-select:none;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .mru-control-box h3 {
@@ -701,6 +722,8 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    gap: 0.75em;
+    align-items: center;
     margin-bottom:1.5em;
 }
 
@@ -710,6 +733,7 @@
     font-size: 1.2em;
     font-weight: 600;
     padding-left: 0em;
+    white-space: nowrap;
 }
 
 .selecte-one {
@@ -720,12 +744,16 @@
     font-size: 1.2em;
     font-weight: 600;
     padding-left: 0em;
+    margin: 0;
+    min-width: 0;
 }
 
 .parrafo1 {
     font-size: 1.2em;
     font-weight: 600;
     padding-left: 0em;
+    margin: 0;
+    min-width: 0;
 }
 
 .caja-sim{ /*Caja que contendra un input cualquiera*/
@@ -893,6 +921,7 @@ input[type="range"]::-webkit-slider-thumb { /*linea del deslizador
     gap: 0.8em;
     width: 100%;
     padding-left: 0;
+    min-width: 0;
 }
 
 .mru-range-control .deslizador {
@@ -1100,14 +1129,251 @@ input[type="range"]::-webkit-slider-thumb { /*linea del deslizador
     transform: rotate(0deg);
 }
 
-@media (max-width: 1000px) {
+/* CODEX: añadido para adaptar el simulador MRU a laptops con menor ancho sin cambiar su estructura */
+@media (max-width: 1200px) {
+  .mru-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 290px);
+  }
+
+  .mru-tabs button {
+    padding-inline: 14px;
+  }
+
+  .mru-side-panel {
+    gap: 12px;
+  }
+
+  .opcion-radio,
+  .checkbox-lable,
+  .parrafo,
+  .parrafo1,
+  .title-sim span {
+    font-size: 1.05em;
+  }
+}
+
+/* CODEX: añadido para apilar controles laterales en tablet y conservar ancho util del canvas */
+@media (max-width: 900px) {
+  .mru-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .mru-header-actions {
+    flex-wrap: wrap;
+  }
+
   .mru-layout,
   .mru-info-grid {
     grid-template-columns: 1fr;
   }
 
+  .mru-side-panel {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+  }
+
+  .mru-page.mru-page--graphs .mru-side-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .simulator-page__results {
+    flex-wrap: wrap;
+  }
+
+  .mru-info-card-img {
+    flex-basis: 100%;
+  }
+}
+
+/* CODEX: añadido para reorganizar el MRU en moviles sin superponer canvas, botones ni sliders */
+@media (max-width: 640px) {
+  .mru-page {
+    padding: 10px;
+  }
+
   .mru-header {
-    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .mru-header-actions,
+  .mru-button {
+    width: 100%;
+  }
+
+  .mru-button {
+    justify-content: center;
+  }
+
+  .mru-tabs {
+    margin-bottom: 12px;
+  }
+
+  .mru-tabs button {
+    flex: 0 0 auto;
+    padding: 9px 12px;
+    gap: 8px;
+  }
+
+  .img-button-simulacion,
+  .img-button-graficas {
+    width: 24px;
+    height: 24px;
+    background-size: 1.55em 1.55em;
+  }
+
+  #canvas_simulador {
+    aspect-ratio: 16 / 7;
+  }
+
+  .mru-canvas-panel.mru-canvas-panel--graphs #canvas_simulador {
+    aspect-ratio: 1 / 1.08;
+  }
+
+  .mru-chronometer {
+    top: 10px;
+    left: 10px;
+    width: 6.7em;
+    padding: 0.55em 0.65em 0.6em;
+  }
+
+  .mru-chronometer-display span {
+    font-size: 1.15em;
+  }
+
+  #mru-crono-ms {
+    font-size: 0.85em;
+  }
+
+  .mru-controls-row {
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .mru-checkbox-container {
+    width: 100%;
+    min-width: 0;
+    min-height: auto;
+    height: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 12px;
+  }
+
+  .checkbox-lable {
+    margin-bottom: 0;
+  }
+
+  .mru-side-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .title-sim {
+    flex-wrap: wrap;
+    margin-bottom: 1.1em;
+  }
+
+  .mru-range-control {
+    gap: 0.55em;
+  }
+
+  .mru-info-card,
+  .mru-info-card-img,
+  .mru-control-box {
+    padding: 12px;
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* CODEX: añadido para mantener controles legibles en telefonos estrechos */
+@media (max-width: 430px) {
+  .mru-card {
+    padding-inline: 8px;
+  }
+
+  .mru-layout {
+    padding: 0.5rem;
+  }
+
+  .mru-tabs button span:last-child,
+  .mru-button span:last-child {
+    font-size: 0.95em;
+  }
+
+  .mru-play-controls button {
+    padding: 2px 5px 0;
+  }
+
+  .img-btn-play,
+  .img-btn-pausar,
+  .img-btn-simular,
+  .img-btn-paso,
+  .img-hide-btn-paso,
+  .img-btn-reiniciar {
+    width: 26px;
+    height: 26px;
+    background-size: 1.65em 1.65em;
+  }
+
+  .mru-controls-row .btn-reiniciar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .opcion-radio,
+  .checkbox-lable,
+  .parrafo,
+  .parrafo1,
+  .title-sim span {
+    font-size: 0.98em;
+  }
+}
+
+/* CODEX: modificado para que pantalla completa conserve la informacion inferior en escritorio */
+#main-despleglabe:fullscreen {
+  overflow: auto;
+  background: #ffffff;
+}
+
+#main-despleglabe:fullscreen .mru-page {
+  min-height: 100vh;
+  padding: clamp(8px, 1.2vw, 18px);
+}
+
+#main-despleglabe:fullscreen .mru-header {
+  margin-bottom: 12px;
+}
+
+#main-despleglabe:fullscreen .mru-card {
+  min-height: auto;
+}
+
+#main-despleglabe:fullscreen .mru-layout {
+  align-items: start;
+}
+
+#main-despleglabe:fullscreen #canvas_simulador {
+  max-height: 58vh;
+}
+
+#main-despleglabe:fullscreen .mru-canvas-panel.mru-canvas-panel--graphs #canvas_simulador {
+  max-height: 70vh;
+}
+
+/* CODEX: añadido para ocultar informacion secundaria solo cuando pantalla completa no tiene alto suficiente */
+@media (max-height: 760px), (max-width: 900px) {
+  #main-despleglabe:fullscreen .mru-info-grid,
+  #main-despleglabe:fullscreen .mru-note {
+    display: none;
+  }
+
+  #main-despleglabe:fullscreen .mru-card {
+    min-height: calc(100vh - 120px);
   }
 }
 

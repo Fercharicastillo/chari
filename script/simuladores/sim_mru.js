@@ -99,6 +99,7 @@
     dpr: 0,
     listo: false
   };
+  let redibujoResponsivePendiente = null;
   // CODEX: añadido para unificar la tipografia usada dentro de los canvas del simulador MRU
   const tipografiaCanvasMRU = {
     familia: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
@@ -1215,6 +1216,23 @@
       limitarCronometroAlPanel();
       dibujarTodo();
     });
+
+    // CODEX: añadido para redibujar el canvas cuando el CSS responsive cambia el tamaño real del panel
+    if ("ResizeObserver" in window && elementos.canvasPanel) {
+      const observadorPanel = new ResizeObserver(() => {
+        if (redibujoResponsivePendiente) {
+          cancelAnimationFrame(redibujoResponsivePendiente);
+        }
+
+        redibujoResponsivePendiente = requestAnimationFrame(() => {
+          limitarCronometroAlPanel();
+          dibujarTodo();
+          redibujoResponsivePendiente = null;
+        });
+      });
+
+      observadorPanel.observe(elementos.canvasPanel);
+    }
   }
 
   // CODEX: añadido para exponer un redimensionado seguro del canvas al bloque de pantalla completa
