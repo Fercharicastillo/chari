@@ -99,6 +99,19 @@
     dpr: 0,
     listo: false
   };
+  // CODEX: añadido para unificar la tipografia usada dentro de los canvas del simulador MRU
+  const tipografiaCanvasMRU = {
+    familia: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    colorPrincipal: "#06164a",
+    colorSecundario: "#40527a",
+    titulo: "bold 13px",
+    etiqueta: "bold 12px",
+    numero: "12px"
+  };
+
+  function fuenteCanvasMRU(estilo) {
+    return `${estilo} ${tipografiaCanvasMRU.familia}`;
+  }
 
   // CODEX: añadido para leer URLs de assets declaradas como variables CSS y evitar duplicar rutas visuales
   function obtenerUrlCss(nombreVariable) {
@@ -384,7 +397,7 @@
   function dibujarVectorVelocidad(ancho, alto, xCarro) {
     if (Math.abs(estado.v) < 0.01) return;
 
-    const y = yEje(alto) - 55;
+    const y = yEje(alto) - 45;
     const direccion = estado.v >= 0 ? 1 : -1;
     const longitud = Math.min(84, Math.max(34, Math.abs(estado.v) * 2.4));
     const inicio = xCarro + direccion*1 - 25;
@@ -408,15 +421,15 @@
 
     ctx.font = "13px system-ui, sans-serif";
     ctx.textAlign = direccion > 0 ? "left" : "right";
-    ctx.fillText(`v = ${estado.v.toFixed(2)} m/s`, inicio, y - 12);
+    ctx.fillText(`v = ${estado.v.toFixed(2)} m/s`, inicio, y - 8);
     ctx.restore();
   }
 
   function dibujarCarro(ancho, alto) {
     const x = xAPixel(estado.x, ancho);
-    const y = yEje(alto) - 22;
-    const anchoCarro = Math.max(52, Math.min(86, ancho * 0.11));
-    const altoCarro = anchoCarro * 0.5;
+    const y = yEje(alto) - 18;
+    const anchoCarro = Math.max(52, Math.min(86, ancho * 0.2));
+    const altoCarro = anchoCarro * 0.4;
 
     dibujarVectorVelocidad(ancho, alto, x);
 
@@ -500,8 +513,8 @@
 
     // CODEX: añadido para marcar divisiones del eje x y flechas al final de los ejes en las graficas MRU
     const yEjeX = y0 + altoUtil;
-    contexto.fillStyle = "#1f3359";
-    contexto.strokeStyle = "#1f3359";
+    contexto.fillStyle = tipografiaCanvasMRU.colorPrincipal;
+    contexto.strokeStyle = tipografiaCanvasMRU.colorPrincipal;
     contexto.lineWidth = 1.2;
 
     for (let i = 0; i <= 5; i += 1) {
@@ -514,7 +527,7 @@
       contexto.stroke();
 
       if (i < 5) {
-        contexto.font = "11px system-ui, sans-serif";
+        contexto.font = fuenteCanvasMRU(tipografiaCanvasMRU.numero);
         contexto.textAlign = "center";
         contexto.textBaseline = "top";
         contexto.fillText(String(Number(tValor.toFixed(1))), x, yEjeX + 7);
@@ -541,8 +554,8 @@
     contexto.lineTo(x0 + anchoUtil, yBase);
     contexto.stroke();
 
-    contexto.fillStyle = "#1f3359";
-    contexto.font = "bold 12px system-ui, sans-serif";
+    contexto.fillStyle = tipografiaCanvasMRU.colorPrincipal;
+    contexto.font = fuenteCanvasMRU(tipografiaCanvasMRU.titulo);
     contexto.textAlign = "left";
     contexto.textBaseline = "alphabetic";
     contexto.fillText(titulo, area.x + anchoUtil * 0.5, area.y + 16);
@@ -550,8 +563,8 @@
     contexto.textAlign = "right";
     contexto.fillText("t (s)", area.x + area.ancho - 6, y0 + altoUtil + 22);
 
-    contexto.font = "11px system-ui, sans-serif";
-    contexto.fillStyle = "#40527a";
+    contexto.font = fuenteCanvasMRU(tipografiaCanvasMRU.numero);
+    contexto.fillStyle = tipografiaCanvasMRU.colorSecundario;
     contexto.textAlign = "right";
     contexto.textBaseline = "middle";
     for (let i = 0; i <= 4; i += 1) {
@@ -686,7 +699,7 @@
     graphCtx.save();
     graphCtx.fillStyle = "#ffffff";
     graphCtx.fillRect(0, 0, ancho, alto);
-    graphCtx.font = "12px system-ui, sans-serif";
+    graphCtx.font = fuenteCanvasMRU(tipografiaCanvasMRU.numero);
     graphCtx.lineWidth = 1;
 
     for (let i = 0; i <= divisionesT; i += 1) {
@@ -701,7 +714,7 @@
       graphCtx.stroke();
 
       graphCtx.setLineDash([]);
-      graphCtx.fillStyle = "#263a63";
+      graphCtx.fillStyle = tipografiaCanvasMRU.colorSecundario;
       graphCtx.textAlign = "center";
       graphCtx.textBaseline = "alphabetic";
       if (i < divisionesT) {
@@ -721,7 +734,7 @@
       graphCtx.stroke();
 
       graphCtx.setLineDash([]);
-      graphCtx.fillStyle = "#263a63";
+      graphCtx.fillStyle = tipografiaCanvasMRU.colorSecundario;
       graphCtx.textAlign = "right";
       graphCtx.textBaseline = "middle";
       if (i < divisionesX) {
@@ -746,8 +759,8 @@
     graphCtx.stroke();
 
 
-    graphCtx.fillStyle = "#1f3359";
-    graphCtx.font = "bold 13px system-ui, sans-serif";
+    graphCtx.fillStyle = tipografiaCanvasMRU.colorPrincipal;
+    graphCtx.font = fuenteCanvasMRU(tipografiaCanvasMRU.titulo);
     graphCtx.textAlign = "left";
     graphCtx.textBaseline = "alphabetic";
     graphCtx.fillText("x (m)", 15, margenSup + 14);
@@ -1204,6 +1217,12 @@
     });
   }
 
+  // CODEX: añadido para exponer un redimensionado seguro del canvas al bloque de pantalla completa
+  window.resizeCanvas = function resizeCanvas() {
+    limitarCronometroAlPanel();
+    dibujarTodo();
+  };
+
   async function iniciarSimulador() {
     try {
       const [fondo, carro] = await Promise.all([
@@ -1277,21 +1296,53 @@ window.addEventListener("load", () => {
 
 // Funcion Pantalla Completa 
 
-const btnPantallaCompleta = document.getElementById("btn-pantallacompleta");
-const contenedorsimulador = document.getElementById("main-despleglabe");
+const btnPantallaCompleta =
+  document.getElementById("btn-pantallacompleta");
 
-btnPantallaCompleta.addEventListener ("click", () => {
-  if (!document.fullscreenElement) {
-    contenedorsimulador.requestFullscreen();
-  } else {
-    document.exitFullscreen();
+const contenedorSimulador =
+  document.getElementById("main-despleglabe");
+
+btnPantallaCompleta.addEventListener("click", async () => {
+  try {
+    if (!document.fullscreenElement) {
+      await contenedorSimulador.requestFullscreen();
+    } else {
+      await document.exitFullscreen();
+    }
+  } catch (error) {
+    console.error("No se pudo cambiar el modo de pantalla completa:", error);
   }
 });
 
-document.addEventListener ("fullscreenchange", () => {
-  if (document.fullscreenElement) {
-    console.log("Pantalla Completa")
-  } else {
-    console.log("Pantalla Normal")
-  }
+document.addEventListener("fullscreenchange", () => {
+  const textoBoton =
+    btnPantallaCompleta.querySelector("span:last-child");
+
+  const iconoBoton =
+    btnPantallaCompleta.querySelector("span:first-child");
+
+  const estaEnPantallaCompleta = Boolean(document.fullscreenElement);
+
+  textoBoton.textContent = estaEnPantallaCompleta
+    ? "Salir de la pantalla completa"
+    : "Pantalla completa";
+
+  iconoBoton.classList.toggle(
+    "img-button-fullscreen",
+    !estaEnPantallaCompleta
+  );
+
+  iconoBoton.classList.toggle(
+    "img-button-exitfullscreen",
+    estaEnPantallaCompleta
+  );
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      // CODEX: modificado para redimensionar el canvas al entrar o salir de pantalla completa sin romper si el simulador no cargo
+      if (typeof window.resizeCanvas === "function") {
+        window.resizeCanvas();
+      }
+    });
+  });
 });

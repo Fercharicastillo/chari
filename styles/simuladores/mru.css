@@ -1,15 +1,16 @@
 :root {
   --btn-alldisplay: url(../../img/botones/sim_mru/btn-expandir.svg);
+  --btn-compirmirsidplay: url(../../img/botones/sim_mru/btn-comprimir-mru-01.svg);
   --btn-instrucciones: url(../../img/botones/sim_mru/btn-instrucciones.svg);
   --btn-play-simulacion: url(../../img/botones/sim_mru/btn-simulation-page-mru.svg);
   --btn-graficadores: url(../../img/botones/sim_mru/btn-graficadores-mru.svg);
   --btn-graficadores-hover: url(../../img/botones/sim_mru/btn-HV-graficadores-mru.svg);
-  --btn-play: url(../../img/botones/sim_mru/btn-start-mru.svg);
+  --btn-play: url(../../img/botones/sim_mru/btn-new-start-simulation-mru-01.svg);
   --btn-pausar: url(../../img/botones/sim_mru/btn-stop-mru.svg);
   --btn-reproducir: url(../../img/botones/sim_mru/btn-start-simulation-mru.svg);
   --btn-reiniciar: url(../../img/botones/btn-restart-clock.svg);
   --img-mru-fondo1: url(../../img/botones/sim_mru/fondo_sim_mru.svg);
-  --img-mru-fondo: url(../../img/botones/sim_mru/fondo_sim_mru.jpeg);
+  --img-mru-fondo: url(../../img/botones/sim_mru/new-fondo_sim_mru-01-01.svg);
   --img-mru-carro: url(../../img/botones/sim_mru/carro_azul_sim-mru.svg);
   --img-mru-grafica: url(../../img/mru-grafica.png);
   /* CODEX: añadido para reutilizar iconos visuales del cronometro en el MRU sin cargar simuladores.css */
@@ -20,8 +21,8 @@
   --icon-btnrestartclockhide: url(../../img/botones/btn-restart-clockhide.svg);
   --icon-btnmore: url(../../img/botones/btn-bn-right.svg);
   --icon-btnless: url(../../img/botones/btn-bn-left.svg);
-  --icon-btnstep: url(../../img/botones/btn-avanzar.svg);
-  --icon-btnstephide: url(../../img/botones/btn-avanzar-hide.svg);
+  --icon-btnstep: url(../../img/botones/sim_mru/btn-paso-01.svg);
+  --icon-btnstephide: url(../../img/botones/sim_mru/btn-pasostop-01.svg);
   
 }
 
@@ -39,6 +40,17 @@
 .mru-page {
   padding: 24px;
   color: #06164a;
+  /* CODEX: añadido para unificar la tipografia de toda la interfaz del simulador MRU */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.45;
+}
+
+/* CODEX: añadido para que controles y botones hereden la misma familia tipografica del simulador */
+.mru-page button,
+.mru-page input,
+.mru-page output,
+.mru-page label {
+  font-family: inherit;
 }
 
 .mru-header {
@@ -52,6 +64,8 @@
 .mru-header h1 {
   margin: 0;
   font-size: 2rem;
+  font-weight: 750;
+  letter-spacing: 0;
 }
 
 .mru-header p {
@@ -117,6 +131,16 @@
   background-size: 1.1em 1.1em;
 }
 
+.img-button-exitfullscreen{
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  background-image: var(--btn-compirmirsidplay);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 1.1em 1.1em;
+}
+
 .img-button-instrucciones, .img-mru-note{
   width: 25px;
   height: 25px;
@@ -157,7 +181,7 @@
   margin-top: 0.5em;
   border-radius: 0%;
   color: #27385f;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   transition:
     transform 0.15s ease,
@@ -214,6 +238,11 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) 300px;
   gap: 18px;
+  border-radius: 12px;
+  padding: 1em;
+  background:
+  linear-gradient(180deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0) 38%),
+  linear-gradient(180deg, #aac4e4 0%, #ffffff 48%, #ffffff77 100%);
 }
 
 /* CODEX: añadido para posicionar controles flotantes del canvas MRU sin reactivar el fondo CSS */
@@ -226,7 +255,7 @@
   position: absolute;
   top: 58px;
   left: 24px;
-  z-index: 2;
+  z-index: 1;
   width: 8em;
   padding: 0.7em 0.85em 0.75em;
   border: 2px solid #2f5fa8;
@@ -328,7 +357,7 @@
 #canvas_simulador {
   width: 100%;
   height: auto;
-  aspect-ratio: 650 / 175;
+  aspect-ratio: 650 / 200; /*Ancho y alto del canvas*/
   display: block;
   border-radius: 10px;
   background: transparent;
@@ -342,7 +371,6 @@
 
 /* CODEX: añadido para limpiar la vista de graficas y mover el panel de valores al costado de los controles */
 .mru-page.mru-page--graphs .mru-info-grid,
-.mru-page.mru-page--graphs .mru-note, 
 .mru-page.mru-page--graphs .mru-checkbox-container {
   display: none;
 }
@@ -361,6 +389,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 12px;
+  padding-top: 1em;
 }
 
 .mru-play-controls {
@@ -488,6 +517,7 @@
 .mru-info-card h3 {
   margin-top: 0;
   color: #0646c8;
+  font-weight: 750;
 }
 
 .param-initial-position, .param-velocity-position{
@@ -566,7 +596,7 @@
 }
 
 .mru-note {
-  display: none; /*Momentanteamente se queda con none, es flex*/
+  display: none;
   align-items: center;
   gap: 5px;
   margin-top: 18px;

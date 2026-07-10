@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="new-start-simulation" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 226.78 223.59">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        stroke: #000;
+        stroke-miterlimit: 10;
+        stroke-width: .5px;
+      }
+
+      .cls-2 {
+        fill: #0440dd;
+      }
+    </style>
+  </defs>
+  <polygon class="cls-1" points="162.22 0 226.78 65.49 226.78 158.1 162.22 223.59 64.57 223.59 0 158.1 0 65.49 64.57 0 162.22 0"/>
+  <polygon class="cls-2" points="158.88 4.01 223.21 67.15 223.21 156.44 158.88 219.58 67.9 219.58 3.57 156.44 3.57 67.15 67.9 4.01 158.88 4.01"/>
+</svg>
