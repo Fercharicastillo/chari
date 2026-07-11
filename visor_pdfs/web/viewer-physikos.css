@@ -1,5 +1,7 @@
 /* CODEX: añadido para personalizar visualmente PDF.js con identidad Physikós sin tocar la lógica del visor */
 :root {
+  color-scheme: light;
+
   --physikos-blue: #0646c8;
   --physikos-navy: #06164a;
   --physikos-soft-blue: #f4f8ff;
@@ -38,6 +40,11 @@
   --doorhanger-separator-color: var(--physikos-border);
   --overlay-button-bg-color: var(--physikos-soft-blue);
   --overlay-button-hover-bg-color: var(--physikos-hover);
+}
+
+/* CODEX: añadido para permitir que PDF.js use su rama oscura original solo cuando Physikós activa dark mode */
+[cambio="darkMode"] {
+  color-scheme: dark;
 }
 
 /* CODEX: añadido para unificar tipografía y superficie general del visor PDF */
@@ -89,12 +96,54 @@ select {
   background-color: rgba(244, 248, 255, 0.92);
 }
 
+/* CODEX: añadido para adaptar el nuevo panel lateral de PDF.js actualizado al modo claro de Physikós */
+#viewsManager {
+  --sidebar-bg-color: rgba(244, 248, 255, 0.94);
+  --header-bg: rgba(255, 255, 255, 0.94);
+  --text-color: var(--physikos-navy);
+  --button-fg: var(--physikos-navy);
+  --button-bg: rgba(6, 70, 200, 0.08);
+  --button-hover-bg: rgba(6, 70, 200, 0.14);
+  --button-active-bg: rgba(6, 70, 200, 0.2);
+  --button-focus-outline-color: var(--physikos-blue);
+  --indicator-color: var(--physikos-blue);
+  --image-border-color: rgba(6, 22, 74, 0.16);
+  --image-hover-border-color: rgba(6, 70, 200, 0.36);
+  --image-current-border-color: var(--physikos-blue);
+  --image-page-number-bg: var(--physikos-soft-blue);
+  --image-page-number-fg: var(--physikos-navy);
+  --image-current-page-number-bg: var(--physikos-blue);
+  --image-current-page-number-fg: #ffffff;
+}
+
+/* CODEX: añadido para conservar la paleta oscura original del nuevo panel lateral de PDF.js */
+[cambio="darkMode"] #viewsManager {
+  --sidebar-bg-color: rgba(66, 65, 77, 0.92);
+  --header-bg: #42414e;
+  --text-color: #fbfbfe;
+  --button-fg: var(--text-color);
+  --button-bg: rgba(251, 251, 254, 0.07);
+  --button-hover-bg: rgba(251, 251, 254, 0.14);
+  --button-active-bg: rgba(251, 251, 254, 0.21);
+  --button-focus-outline-color: #00cadb;
+  --indicator-color: #00cadb;
+  --image-border-color: #3a3944;
+  --image-hover-border-color: #bfbfc9;
+  --image-current-border-color: var(--button-focus-outline-color);
+  --image-page-number-bg: #42414d;
+  --image-page-number-fg: var(--text-color);
+  --image-current-page-number-bg: var(--image-current-border-color);
+  --image-current-page-number-fg: #15141a;
+}
+
 /* CODEX: añadido para que el panel de miniaturas recupere el fondo oscuro cuando Physikós activa dark mode */
 [cambio="darkMode"] #sidebarContent {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-.thumbnailImage {
+/* CODEX: modificado para cubrir miniaturas del visor anterior y del nuevo viewsManager */
+.thumbnailImage,
+.thumbnailImageContainer {
   border-radius: 4px;
   box-shadow: 0 0 0 1px rgba(6, 22, 74, 0.18), 0 4px 12px rgba(6, 22, 74, 0.16);
 }
@@ -105,6 +154,20 @@ select {
 
 .thumbnail.selected > .thumbnailSelectionRing > .thumbnailImage {
   box-shadow: 0 0 0 2px var(--physikos-blue), 0 4px 14px rgba(6, 70, 200, 0.22);
+}
+
+/* CODEX: añadido para resaltar la miniatura actual en el nuevo visor sin afectar su lógica interna */
+.thumbnailImageContainer[aria-current="page"] {
+  box-shadow: 0 0 0 6px var(--physikos-blue), 0 4px 14px rgba(6, 70, 200, 0.22);
+}
+
+/* CODEX: añadido para que las miniaturas del nuevo visor recuperen su sombra original en dark mode */
+[cambio="darkMode"] .thumbnailImageContainer {
+  box-shadow: var(--image-shadow);
+}
+
+[cambio="darkMode"] .thumbnailImageContainer[aria-current="page"] {
+  box-shadow: var(--image-current-shadow);
 }
 
 /* CODEX: añadido para que los scrollbars del visor mantengan la identidad azul oscura de Physikós */
