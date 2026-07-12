@@ -125,134 +125,24 @@ window.PhysikosMenuItems = [
         href: "contenido/repositorio_libros/rl_algebralineal.html"
       },
       {
-        id: "analisis-complejo",
-        texto: "Análisis Complejo",
-        href: "#"
+        id: "electromagnetismo",
+        texto: "Electromagnetismo",
+        href: "contenido/repositorio_libros/rl_electromagnetismo.html"
       },
       {
-        id: "analisis-funcional",
-        texto: "Análisis Funcional",
-        href: "#"
+        id: "fisica-moderna",
+        texto: "Física Moderna",
+        href: "contenido/repositorio_libros/rl_fisicamoderna.html"
       },
       {
-        id: "calculo-una-variable",
-        texto: "Cálculo en 1 variable",
-        href: "#"
+        id: "matematicas-discretas",
+        texto: "Matemáticas Discretas",
+        href: "contenido/repositorio_libros/rl_matematicasdiscretas.html"
       },
       {
-        id: "calculo-vectorial",
-        texto: "Cálculo vectorial",
-        href: "#"
-      },
-      {
-        id: "edo",
-        texto: "EDO",
-        href: "#"
-      },
-      {
-        id: "edp",
-        texto: "EDP",
-        href: "#"
-      },
-      {
-        id: "electrodinamica-clasica",
-        texto: "Electrodinámica Clásica",
-        href: "#"
-      },
-      {
-        id: "estadistica-probabilidad",
-        texto: "Estadística y Probabilidad",
-        href: "#"
-      },
-      {
-        id: "estado-solido",
-        texto: "Estado Sólido",
-        href: "#"
-      },
-      {
-        id: "fisica-atomica",
-        texto: "Física Atómica",
-        href: "#"
-      },
-      {
-        id: "fisica-molecular",
-        texto: "Física Molecular",
-        href: "#"
-      },
-      {
-        id: "fisica-nuclear",
-        texto: "Física Nuclear",
-        href: "#"
-      },
-      {
-        id: "fisica-termica",
-        texto: "Física Térmica",
-        href: "#"
-      },
-      {
-        id: "instrumentacion-arduino",
-        texto: "Instrumentación con Arduino",
-        href: "#"
-      },
-      {
-        id: "mecanica-clasica",
-        texto: "Mecánica Clásica",
-        href: "#"
-      },
-      {
-        id: "mecanica-cuantica",
-        texto: "Mecánica Cuántica",
-        href: "#"
-      },
-      {
-        id: "mecanica-estadistica",
-        texto: "Mecánica Estadística",
-        href: "#"
-      },
-      {
-        id: "mecanica-newtoniana-libros",
-        texto: "Mecánica Newtoniana",
-        href: "#"
-      },
-      {
-        id: "metodos-fisica",
-        texto: "Métodos para la Física",
-        href: "#"
-      },
-      {
-        id: "optica",
-        texto: "Óptica",
-        href: "#"
-      },
-      {
-        id: "oscilaciones-ondas",
-        texto: "Oscilaciones y Ondas",
-        href: "#"
-      },
-      {
-        id: "quimica-general",
-        texto: "Química General",
-        href: "#"
-      },
-      {
-        id: "radiaciones-ionizantes",
-        texto: "Radiaciones Ionizantes",
-        href: "#"
-      },
-      {
-        id: "relatividad-fisica-cuantica",
-        texto: "Relatividad y Física Cuántica",
-        href: "#"
-      },
-      {
-        id: "sistemas-complejos",
-        texto: "Sistemas Complejos",
-        href: "#"
-      },
-      {
-        id: "astrofisica-galactica",
-        texto: "Astrofísica Galáctica",
-        href: "#"
+        id: "termodinamica",
+        texto: "Termodinámica",
+        href: "contenido/repositorio_libros/rl_termodinamica.html"
       }
     ]
   },

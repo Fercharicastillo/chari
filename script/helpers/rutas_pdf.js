@@ -6,6 +6,7 @@
   const RUTAS_PDF = {
     planesMecanicaNewtoniana: "pdfs_repositorio_planes_de_clase/mecanica_newtoniana/",
     librosAlgebraLineal: "pdfs_repositorio_libros/algebra_lineal/",
+    librosRepositorio: "pdfs_repositorio_libros/",
     libroselectromagnetismo: "pdfs_repositorio_libros/electromagnetismo/",
   };
 
@@ -44,12 +45,21 @@
     );
   }
 
+  function construirPdfLibro(carpeta, archivo) {
+    if (!carpeta || !archivo) return "";
+
+    return construirUrlViewerPdf(
+      unirSegmentos([RUTAS_PDF.librosRepositorio, carpeta, archivo])
+    );
+  }
+
   window.PhysikosRutasPdf = {
     BASE_PUBLICA,
     RUTA_VISOR_PDF,
     RUTAS_PDF,
     construirUrlViewerPdf,
     construirPdfPlanesMecanica,
-    construirPdfLibroAlgebraLineal
+    construirPdfLibroAlgebraLineal,
+    construirPdfLibro
   };
 })(window);

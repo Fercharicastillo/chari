@@ -1,31 +1,3 @@
-const libros = [
-  {
-    id: "Clase_3_Vectores_y_Matrices",
-    titulo: "Vectores y Matrices",
-    autor: "Chari Fernando",
-    categoria: "Álgebra Lineal",
-    archivoPdf: "Clase_3_Vectores_y_Matrices.pdf",
-    portada: "Clase_3_Vectores_y_Matrices.jpg"
-  },
-  {
-    id: "Clase_4_Matrices_y_Sistemas_de_Ecuaciones",
-    titulo: "Matrices y Sistemas de Ecuaciones",
-    autor: "Chari Fernando",
-    categoria: "Álgebra Lineal",
-    archivoPdf: "Clase_4_Matrices_y_Sistemas_de_Ecuaciones.pdf",
-    portada: "Clase_4_Matrices_y_Sistemas_de_Ecuaciones.jpg"
-  },
-  {
-    id: "Clase_6_Matriz_Inversa_Matrices_Elementales",
-    titulo: "Matriz Inversa y Matrices Elementales",
-    autor: "Chari Fernando",
-    categoria: "Álgebra Lineal",
-    archivoPdf: "Clase_6_Matriz_Inversa_Matrices_Elementales.pdf",
-    portada: "Clase_6_Matriz_Inversa_Matrices_Elementales.jpg"
-  }
-];
-
-
 const contenedor = document.getElementById('home-toc-container');
 const contenedorCategorias = document.getElementById('books-category-tabs');
 const contadorLibros = document.getElementById('books-counter');
@@ -41,6 +13,12 @@ const detalleCategoriaValor = document.getElementById('book-detail-category-valu
 const detalleArchivo = document.getElementById('book-detail-file');
 const botonAbrirDetalle = document.getElementById('book-detail-open');
 const controlesCerrarDetalle = document.querySelectorAll('[data-book-detail-close]');
+const repositorioLibros = document.querySelector('.books-repository');
+const categoriaPagina = repositorioLibros ? repositorioLibros.dataset.booksCategory : '';
+const todosLosLibros = Array.isArray(window.PhysikosLibros) ? window.PhysikosLibros : [];
+const libros = categoriaPagina
+    ? todosLosLibros.filter((libro) => libro.carpeta === categoriaPagina || libro.categoriaId === categoriaPagina)
+    : todosLosLibros;
 let categoriaActiva = 'todos';
 let busquedaActiva = '';
 let ordenActivo = 'titulo-asc';
@@ -54,9 +32,8 @@ function crearTarjetaLibro(libro) {
     divCard.dataset.bookId = libro.id;
     divCard.dataset.bookCategory = libro.categoria;
 
-    // CODEX: modificado para construir URLs publicas del visor PDF desde el helper global
     const pdfSrc = window.PhysikosRutasPdf
-      ? window.PhysikosRutasPdf.construirPdfLibroAlgebraLineal(libro.archivoPdf)
+      ? window.PhysikosRutasPdf.construirPdfLibro(libro.carpeta, libro.archivoPdf)
       : "";
 
     const cover = document.createElement('div');
@@ -64,8 +41,11 @@ function crearTarjetaLibro(libro) {
 
     const imagen = document.createElement('img');
     imagen.classList.add('book-card__image');
-    imagen.src = '../../img/repositoriolibros/algebra_lineal' + libro.portada;
+    imagen.src = construirRutaPortada(libro);
     imagen.alt = libro.titulo;
+    imagen.onerror = () => {
+        imagen.src = '../../img/repositoriolibros/default.jpg';
+    };
 
     const contenido = document.createElement('div');
     contenido.classList.add('book-card__body');
@@ -119,6 +99,14 @@ function crearTarjetaLibro(libro) {
     divCard.appendChild(contenido);
 
     return divCard;
+}
+
+function construirRutaPortada(libro) {
+    if (!libro || !libro.carpeta || !libro.portada) {
+        return '../../img/repositoriolibros/default.jpg';
+    }
+
+    return `../../img/repositoriolibros/${libro.carpeta}/${libro.portada}`;
 }
 
 function obtenerCategorias() {
@@ -256,8 +244,11 @@ function abrirPanelDetalles(libro, pdfSrc) {
     pdfDetalleActivo = pdfSrc;
 
     if (detalleImagen) {
-        detalleImagen.src = '../../img/repositoriolibros/' + libro.portada;
+        detalleImagen.src = construirRutaPortada(libro);
         detalleImagen.alt = libro.titulo;
+        detalleImagen.onerror = () => {
+            detalleImagen.src = '../../img/repositoriolibros/default.jpg';
+        };
     }
 
     if (detalleCategoria) {
@@ -384,4 +375,3 @@ function setPdfSrcAndRedirect(pdfSrc) {
 }
 
 // Estructura para extraer los pdfs '?file=pdfs/pdfs_repositorio_libros/algebra_lineal/'
-
