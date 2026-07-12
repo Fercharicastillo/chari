@@ -5,7 +5,8 @@
 
   const RUTAS_PDF = {
     planesMecanicaNewtoniana: "pdfs_repositorio_planes_de_clase/mecanica_newtoniana/",
-    librosAlgebraLineal: "pdfs_repositorio_libros/algebra_lineal/"
+    librosAlgebraLineal: "pdfs_repositorio_libros/algebra_lineal/",
+    libroselectromagnetismo: "pdfs_repositorio_libros/electromagnetismo/",
   };
 
   function limpiarSegmento(segmento) {

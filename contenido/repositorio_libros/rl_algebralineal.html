@@ -58,10 +58,72 @@
         </div>
 
         <div class="main" id="main-despleglabe">
-            <section class="main_s2">
-                <div class="home-toc-section">
-                    <div class="home-toc-container" id="home-toc-container">
+            <section class="main_s2 books-repository" aria-labelledby="books-repository-title">
+                <header class="books-repository__header">
+                    <div class="books-repository__heading">
+                        <p class="books-repository__eyebrow">Repositorio de Libros</p>
+                        <h1 id="books-repository-title">Álgebra Lineal</h1>
+                        <p class="books-repository__description">
+                            Explora la colección de libros disponibles para esta categoría.
+                        </p>
                     </div>
+
+                    <div class="books-repository__summary" aria-live="polite">
+                        <span id="books-counter" class="books-repository__counter">0 libros disponibles</span>
+                    </div>
+                </header>
+
+                <div class="books-repository__toolbar" aria-label="Herramientas del repositorio de libros">
+                    <div class="books-repository__search" id="books-search-region">
+                        <label class="books-repository__visually-hidden" for="books-search-input">Buscar libros</label>
+                        <input id="books-search-input" class="books-repository__search-input" type="search" placeholder="Buscar libros..." autocomplete="off">
+                    </div>
+                    <div class="books-repository__view-options" id="books-view-options">
+                        <label class="books-repository__sort-label" for="books-sort-select">Ordenar</label>
+                        <select id="books-sort-select" class="books-repository__sort-select">
+                            <option value="titulo-asc">Título A-Z</option>
+                            <option value="titulo-desc">Título Z-A</option>
+                            <option value="autor-asc">Autor A-Z</option>
+                            <option value="autor-desc">Autor Z-A</option>
+                        </select>
+                        <div class="books-repository__view-toggle" role="group" aria-label="Vista">
+                            <button id="books-view-grid" class="books-repository__view-button is-active" type="button" data-view="grid" aria-pressed="true">Cuadrícula</button>
+                            <button id="books-view-list" class="books-repository__view-button" type="button" data-view="list" aria-pressed="false">Lista</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="books-repository__categories" id="books-category-tabs" aria-label="Categorías de libros"></div>
+
+                <div class="home-toc-section books-repository__content">
+                    <div class="home-toc-container books-repository__grid" id="home-toc-container">
+                    </div>
+                </div>
+
+                <div class="books-repository__detail-panel" id="book-detail-panel" role="dialog" aria-modal="true" aria-labelledby="book-detail-title" hidden>
+                    <div class="books-repository__detail-backdrop" data-book-detail-close></div>
+                    <article class="books-repository__detail-card">
+                        <button class="books-repository__detail-close" type="button" data-book-detail-close aria-label="Cerrar detalles">Cerrar</button>
+                        <div class="books-repository__detail-cover">
+                            <img id="book-detail-image" src="../../img/repositoriolibros/default.jpg" alt="">
+                        </div>
+                        <div class="books-repository__detail-content">
+                            <p id="book-detail-category" class="books-repository__detail-category"></p>
+                            <h2 id="book-detail-title"></h2>
+                            <p id="book-detail-author" class="books-repository__detail-author"></p>
+                            <dl class="books-repository__detail-list">
+                                <div>
+                                    <dt>Categoría</dt>
+                                    <dd id="book-detail-category-value"></dd>
+                                </div>
+                                <div>
+                                    <dt>Archivo PDF</dt>
+                                    <dd id="book-detail-file"></dd>
+                                </div>
+                            </dl>
+                            <button id="book-detail-open" class="books-repository__detail-open" type="button">Abrir PDF</button>
+                        </div>
+                    </article>
                 </div>
             </section>
         </div>
