@@ -1722,6 +1722,7 @@ nav.menu_nav-libros .content__content a {
     .books-repository__sort-select,
     .books-repository__view-toggle {
         width: 100%;
+        flex: none;
     }
 
     .books-repository__view-button {
