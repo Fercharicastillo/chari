@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Lista" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 225.43 160.69">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+      }
+    </style>
+  </defs>
+  <rect class="cls-1" x=".67" width="37.08" height="37.08"/>
+  <rect class="cls-1" x="66.72" width="158.04" height="37.08"/>
+  <rect class="cls-1" x="66.72" y="61.8" width="158.04" height="37.08"/>
+  <rect class="cls-1" x="66.72" y="123.61" width="158.04" height="37.08"/>
+  <rect class="cls-1" x=".67" y="61.8" width="37.08" height="37.08"/>
+  <rect class="cls-1" x=".67" y="123.61" width="37.08" height="37.08"/>
+</svg>

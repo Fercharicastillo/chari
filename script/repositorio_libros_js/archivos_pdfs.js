@@ -69,16 +69,16 @@ function crearTarjetaLibro(libro) {
     acciones.classList.add('book-card__actions');
 
     const botonDetalles = document.createElement('button');
-    botonDetalles.classList.add('book-card__details');
+    botonDetalles.classList.add('book-card__details', 'book-card__icon-button', 'book-card__icon-button--details');
     botonDetalles.type = 'button';
-    botonDetalles.textContent = 'Detalles';
+    botonDetalles.innerHTML = '<span class="book-card__button-icon" aria-hidden="true"></span><span>Detalles</span>';
     botonDetalles.addEventListener('click', () => abrirPanelDetalles(libro, pdfSrc));
 
     const enlacePdf = document.createElement('a');
-    enlacePdf.classList.add('book-card__action');
+    enlacePdf.classList.add('book-card__action', 'book-card__icon-button', 'book-card__icon-button--pdf');
     enlacePdf.href = pdfSrc;
     enlacePdf.setAttribute('aria-label', `Abrir ${libro.titulo} de ${libro.autor}`);
-    enlacePdf.textContent = 'Abrir PDF';
+    enlacePdf.innerHTML = '<span class="book-card__button-icon" aria-hidden="true"></span><span>Abrir PDF</span>';
     enlacePdf.addEventListener('click', function(event) {
         event.preventDefault();
         if (pdfSrc) {
@@ -203,7 +203,7 @@ function crearBotonCategoria(nombreCategoria, cantidad, activo) {
 
     const total = document.createElement('span');
     total.classList.add('books-repository__category-count');
-    total.textContent = String(cantidad);
+    total.textContent = String(cantidad) + " libros";
 
     boton.appendChild(etiqueta);
     boton.appendChild(total);

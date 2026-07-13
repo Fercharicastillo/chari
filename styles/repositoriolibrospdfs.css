@@ -2,6 +2,10 @@
     /* CODEX: modificado para conservar solo variables especificas de esta seccion */
     --bg-scroll: #8b8b8b;
     --bg-bg-scroll: #F5F5F5;
+    --bg-categorias: #0860a8;
+    --size-homecard: 600;
+    --size-categorias: 700;
+    --size-categorias-count: 600;
 }
 
 [cambio = "darkMode"]{
@@ -576,7 +580,8 @@ MENU  BTN-DARKMODE
     color: var(--color2);
 }
 
-.home-toc-card a:hover{
+.home-toc-card a:hover,
+.home-toc-card button:hover {
     background-color: #5cafcd1f;
 }
 
@@ -618,6 +623,30 @@ MENU  BTN-DARKMODE
     width: min(95%, 1220px);
     padding: 2em 0 6em;
     color: var(--color3);
+    --books-icon-search: url("../img/botones/btns-repositorio-libros/btn-buscar.svg");
+    --books-icon-search-dark: url("../img/botones/btns-repositorio-libros/btn-BN-buscar.svg");
+    --books-icon-grid: url("../img/botones/btns-repositorio-libros/btn-BN-cuadricula.svg");
+    --books-icon-grid-dark: url("../img/botones/btns-repositorio-libros/btn-cuadricula.svg");
+    --books-icon-list: url("../img/botones/btns-repositorio-libros/btn-lista.svg");
+    --books-icon-list-dark: url("../img/botones/btns-repositorio-libros/btn-BN-lista.svg");
+    --books-icon-view: url("../img/botones/btns-repositorio-libros/btn-ver.svg");
+    --books-icon-view-dark: url("../img/botones/btns-repositorio-libros/btn-BN-ver.svg");
+    --books-icon-pdf: url("../img/botones/btns-repositorio-libros/btn-descargar-01.svg");
+    --books-icon-pdf-dark: url("../img/botones/btns-repositorio-libros/btn-BN-descargar-01.svg");
+    --books-icon-categories: url("../img/botones/btns-repositorio-libros/btn-categorias.svg");
+    --books-icon-categories-dark: url("../img/botones/btns-repositorio-libros/btn-BN-categorias.svg");
+    --books-icon-count: url("../img/botones/btns-repositorio-libros/btn_librosdisponibles.svg");
+    --books-icon-count-dark: url("../img/botones/btns-repositorio-libros/btn_BN-librosdisponibles.svg");
+    --books-icon-algebra-lineal: url("../img/botones/btns-repositorio-libros/btn-algebralineal.svg");
+    --books-icon-algebra-lineal-dark: url("../img/botones/btns-repositorio-libros/btn-BN-algebralineal.svg");
+    --books-icon-electromagnetismo: url("../img/botones/btns-repositorio-libros/btn-electromagnetismo.svg");
+    --books-icon-electromagnetismo-dark: url("../img/botones/btns-repositorio-libros/btn-BN-electromagnetismo.svg");
+    --books-icon-fisica-moderna: url("../img/botones/btns-repositorio-libros/btn-fisicamoderna.svg");
+    --books-icon-fisica-moderna-dark: url("../img/botones/btns-repositorio-libros/btn-BN-fisicamoderna.svg");
+    --books-icon-matematicas-discretas: url("../img/botones/btns-repositorio-libros/btn-matematicasdiscretas.svg");
+    --books-icon-matematicas-discretas-dark: url("../img/botones/btns-repositorio-libros/btn-BN-matematicasdiscretas.svg");
+    --books-icon-termodinamica: url("../img/botones/btns-repositorio-libros/btn-temodinamica.svg");
+    --books-icon-termodinamica-dark: url("../img/botones/btns-repositorio-libros/btn-BN-temodinamica.svg");
 }
 
 .books-repository__header {
@@ -657,6 +686,7 @@ MENU  BTN-DARKMODE
 .books-repository__counter {
     display: inline-flex;
     align-items: center;
+    gap: .55em;
     min-height: 2.8em;
     padding: .65em 1em;
     border: 1px solid #cfe0f7;
@@ -664,8 +694,19 @@ MENU  BTN-DARKMODE
     color: #0646c8;
     background-color: #f7fbff;
     font-size: 1em;
-    font-weight: 800;
+    font-weight: var(--size-categorias);
     white-space: nowrap;
+}
+
+.books-repository__counter::before {
+    content: "";
+    width: 1.35em;
+    height: 1.35em;
+    flex: 0 0 1.35em;
+    background-image: var(--books-icon-count);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
 }
 
 .books-repository__toolbar {
@@ -680,6 +721,7 @@ MENU  BTN-DARKMODE
 .books-repository__search {
     flex: 1 1 18em;
     min-width: min(100%, 18em);
+    position: relative;
 }
 
 .books-repository__visually-hidden {
@@ -706,7 +748,22 @@ MENU  BTN-DARKMODE
 }
 
 .books-repository__search-input {
-    padding: 0 1em;
+    padding: 0 1em 0 3em;
+}
+
+.books-repository__search::before {
+    content: "";
+    position: absolute;
+    left: 1em;
+    top: 50%;
+    width: 1.25em;
+    height: 1.25em;
+    pointer-events: none;
+    transform: translateY(-50%);
+    background-image: var(--books-icon-search);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
 }
 
 .books-repository__search-input::placeholder {
@@ -722,7 +779,7 @@ MENU  BTN-DARKMODE
 
 .books-repository__sort-label {
     color: #52617d;
-    font-weight: 800;
+    font-weight: var(--size-categorias);
     white-space: nowrap;
 }
 
@@ -752,8 +809,30 @@ MENU  BTN-DARKMODE
     background-color: transparent;
     cursor: pointer;
     font: inherit;
-    font-weight: 800;
+    font-weight: var(--size-categorias);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .45em;
     transition: background-color .18s ease, color .18s ease;
+}
+
+.books-repository__view-button::before {
+    content: "";
+    width: 1.15em;
+    height: 1.15em;
+    flex: 0 0 1.15em;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.books-repository__view-button[data-view="grid"]::before {
+    background-image: var(--books-icon-grid-dark);
+}
+
+.books-repository__view-button[data-view="list"]::before {
+    background-image: var(--books-icon-list-dark);
 }
 
 .books-repository__view-button:hover {
@@ -762,7 +841,15 @@ MENU  BTN-DARKMODE
 
 .books-repository__view-button.is-active {
     color: #ffffff;
-    background-color: #0646c8;
+    background-color: var(--bg-categorias);
+}
+
+.books-repository__view-button[data-view="grid"].is-active::before {
+    background-image: var(--books-icon-grid);
+}
+
+.books-repository__view-button[data-view="list"].is-active::before {
+    background-image: var(--books-icon-list);
 }
 
 .books-repository__search-input:focus,
@@ -805,6 +892,81 @@ MENU  BTN-DARKMODE
     transition: background-color .18s ease, border-color .18s ease, box-shadow .18s ease, transform .18s ease;
 }
 
+.books-repository__category-filter[data-category="todos"]::before {
+    content: "";
+    width: 2em;
+    height: 2em;
+    background-image: var(--books-icon-categories-dark);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.books-repository__category-filter[data-category="todos"].is-active::before {
+    background-image: var(--books-icon-categories);
+}
+
+.books-repository__category-filter[data-category="todos"] {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    column-gap: .65em;
+    row-gap: .1em;
+    align-items: center;
+    justify-items: start;
+}
+
+.books-repository__category-filter[data-category="todos"]::before {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+}
+
+.books-repository__category-filter[data-category="todos"] .books-repository__category-name {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.books-repository__category-filter[data-category="todos"] .books-repository__category-count {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.books-repository .books-repository-title {
+    display: inline-flex;
+    align-items: center;
+    gap: .45em;
+}
+
+.books-repository .books-repository-title::before {
+    content: "";
+    width: 1.45em;
+    height: 1.45em;
+    flex: 0 0 1.45em;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.books-repository[data-books-category="algebra_lineal"] .books-repository-title::before {
+    background-image: var(--books-icon-algebra-lineal);
+}
+
+.books-repository[data-books-category="electromagnetismo"] .books-repository-title::before {
+    background-image: var(--books-icon-electromagnetismo);
+}
+
+.books-repository[data-books-category="fisica_moderna"] .books-repository-title::before {
+    background-image: var(--books-icon-fisica-moderna);
+}
+
+.books-repository[data-books-category="matematicas_discretas"] .books-repository-title::before {
+    background-image: var(--books-icon-matematicas-discretas);
+}
+
+.books-repository[data-books-category="termodinamica"] .books-repository-title::before {
+    background-image: var(--books-icon-termodinamica);
+}
+
 .books-repository__category-filter:hover {
     border-color: #a8c6f2;
     background-color: #f7fbff;
@@ -813,9 +975,9 @@ MENU  BTN-DARKMODE
 }
 
 .books-repository__category-filter.is-active {
-    border-color: #0646c8;
+    border-color: var(--bg-categorias);
     color: #ffffff;
-    background-color: #0646c8;
+    background-color: var(--bg-categorias);
     box-shadow: 0 10px 20px rgba(6, 70, 200, 0.18);
 }
 
@@ -825,12 +987,12 @@ MENU  BTN-DARKMODE
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 1.02em;
-    font-weight: 800;
+    font-weight: var(--size-categorias);
 }
 
 .books-repository__category-count {
     font-size: .92em;
-    font-weight: 700;
+    font-weight: var(--size-categorias-count);
     opacity: .82;
 }
 
@@ -943,7 +1105,7 @@ MENU  BTN-DARKMODE
     color: #071b5c;
     font-size: 1.18em;
     line-height: 1.18;
-    font-weight: 800;
+    font-weight: var(--size-homecard);
 }
 
 .books-repository .book-card__author {
@@ -969,7 +1131,7 @@ MENU  BTN-DARKMODE
     min-width: 0;
     border-radius: 999px;
     font-size: .92em;
-    font-weight: 700;
+    font-weight: var(--size-categorias);
     line-height: 1.2;
 }
 
@@ -988,12 +1150,13 @@ MENU  BTN-DARKMODE
     min-height: 2.7em;
     flex: 1 1 0;
     padding: .45em .75em;
+    border: 1px solid #cfe0f7;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: #ffffff;
-    background-color: #0646c8;
+    color: #071b5c;
     text-decoration: none;
+    font-weight: normal;
 }
 
 .books-repository .book-card__actions {
@@ -1008,19 +1171,39 @@ MENU  BTN-DARKMODE
     flex: 1 1 0;
     padding: .45em .75em;
     border: 1px solid #cfe0f7;
-    color: #0646c8;
+    color: #071b5c;
     background-color: #ffffff;
     cursor: pointer;
     font: inherit;
 }
 
-.books-repository .home-toc-card .book-card__action:hover {
-    background-color: #0646c8;
+.books-repository .book-card__icon-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .45em;
+}
+
+.books-repository .book-card__button-icon {
+    width: 1.12em;
+    height: 1.12em;
+    flex: 0 0 1.12em;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.books-repository .book-card__icon-button--details .book-card__button-icon {
+    background-image: var(--books-icon-view);
+}
+
+.books-repository .book-card__icon-button--pdf .book-card__button-icon {
+    background-image: var(--books-icon-pdf);
 }
 
 .books-repository .book-card__details:hover,
 .books-repository .book-card__action:hover {
-    filter: brightness(.96);
+    filter: brightness(0.96);
 }
 
 .books-repository .book-card__details:focus-visible,
@@ -1077,7 +1260,7 @@ MENU  BTN-DARKMODE
     background-color: #ffffff;
     cursor: pointer;
     font: inherit;
-    font-weight: 800;
+    font-weight: var(--size-categorias);
 }
 
 .books-repository__detail-cover {
@@ -1137,7 +1320,7 @@ MENU  BTN-DARKMODE
 
 .books-repository__detail-list dt {
     color: #52617d;
-    font-weight: 800;
+    font-weight: var(--size-categorias);
 }
 
 .books-repository__detail-list dd {
@@ -1153,10 +1336,10 @@ MENU  BTN-DARKMODE
     border: 0;
     border-radius: 8px;
     color: #ffffff;
-    background-color: #0646c8;
+    background-color: var(--bg-categorias);
     cursor: pointer;
     font: inherit;
-    font-weight: 800;
+    font-weight: var(--size-categorias);
 }
 
 [cambio="darkMode"] .books-repository__eyebrow,
@@ -1190,8 +1373,24 @@ MENU  BTN-DARKMODE
     color: #9fb1c9;
 }
 
+[cambio="darkMode"] .books-repository__counter::before {
+    background-image: var(--books-icon-count-dark);
+}
+
+[cambio="darkMode"] .books-repository__search::before {
+    background-image: var(--books-icon-search-dark);
+}
+
 [cambio="darkMode"] .books-repository__view-button {
     color: #eaf2ff;
+}
+
+[cambio="darkMode"] .books-repository__view-button[data-view="grid"]::before {
+    background-image: var(--books-icon-grid);
+}
+
+[cambio="darkMode"] .books-repository__view-button[data-view="list"]::before {
+    background-image: var(--books-icon-list);
 }
 
 [cambio="darkMode"] .books-repository__view-button:hover {
@@ -1203,6 +1402,14 @@ MENU  BTN-DARKMODE
     background-color: #79a8ff;
 }
 
+[cambio="darkMode"] .books-repository__view-button[data-view="grid"].is-active::before {
+    background-image: var(--books-icon-grid-dark);
+}
+
+[cambio="darkMode"] .books-repository__view-button[data-view="list"].is-active::before {
+    background-image: var(--books-icon-list-dark);
+}
+
 [cambio="darkMode"] .books-repository__category-filter:hover {
     border-color: #7fa7d9;
     background-color: #202c35;
@@ -1212,6 +1419,34 @@ MENU  BTN-DARKMODE
     border-color: #79a8ff;
     color: #071b5c;
     background-color: #79a8ff;
+}
+
+[cambio="darkMode"] .books-repository__category-filter[data-category="todos"]::before {
+    background-image: var(--books-icon-categories);
+}
+
+[cambio="darkMode"] .books-repository__category-filter[data-category="todos"].is-active::before {
+    background-image: var(--books-icon-categories-dark);
+}
+
+[cambio="darkMode"] .books-repository[data-books-category="algebra_lineal"] .books-repository-title::before {
+    background-image: var(--books-icon-algebra-lineal-dark);
+}
+
+[cambio="darkMode"] .books-repository[data-books-category="electromagnetismo"] .books-repository-title::before {
+    background-image: var(--books-icon-electromagnetismo-dark);
+}
+
+[cambio="darkMode"] .books-repository[data-books-category="fisica_moderna"] .books-repository-title::before {
+    background-image: var(--books-icon-fisica-moderna-dark);
+}
+
+[cambio="darkMode"] .books-repository[data-books-category="matematicas_discretas"] .books-repository-title::before {
+    background-image: var(--books-icon-matematicas-discretas-dark);
+}
+
+[cambio="darkMode"] .books-repository[data-books-category="termodinamica"] .books-repository-title::before {
+    background-image: var(--books-icon-termodinamica-dark);
 }
 
 [cambio="darkMode"] .books-repository .home-toc-card {
@@ -1247,6 +1482,14 @@ MENU  BTN-DARKMODE
 [cambio="darkMode"] .books-repository__detail-open {
     color: #071b5c;
     background-color: #79a8ff;
+}
+
+[cambio="darkMode"] .books-repository .book-card__icon-button--details .book-card__button-icon {
+    background-image: var(--books-icon-view-dark);
+}
+
+[cambio="darkMode"] .books-repository .book-card__icon-button--pdf .book-card__button-icon {
+    background-image: var(--books-icon-pdf-dark);
 }
 
 [cambio="darkMode"] .books-repository__detail-cover {
@@ -1542,5 +1785,3 @@ nav.menu_nav-libros .content__content a {
     }
     
 }
-
-

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="fisica_moderna" data-name="fisica moderna" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 226.78 223.59">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: 10px;
+      }
+    </style>
+  </defs>
+  <ellipse class="cls-1" cx="113.39" cy="111.8" rx="40.3" ry="107.14"/>
+  <ellipse class="cls-1" cx="113.39" cy="111.8" rx="40.3" ry="107.14" transform="translate(-43.77 137.41) rotate(-53.85)"/>
+  <ellipse class="cls-1" cx="113.39" cy="111.8" rx="107.14" ry="40.3" transform="translate(-39.05 65.76) rotate(-27.79)"/>
+  <circle class="cls-1" cx="113.39" cy="111.8" r="15.4"/>
+</svg>
