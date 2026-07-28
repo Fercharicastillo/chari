@@ -102,7 +102,8 @@
                         </div>
 
                         <div class="autores-main-author__actions">
-                            <a class="autores-button autores-button--primary autores-button--curriculum" href="Autor_1.html">Ver hoja de vida</a>
+                            <!-- CODEX: modificado para abrir la hoja de vida PDF del autor desde datos centralizados -->
+                            <a class="autores-button autores-button--primary autores-button--curriculum" href="templatepdfs_autores.html" data-autor-pdf="chari-fernando">Ver hoja de vida</a>
                             <a class="autores-button autores-button--ghost autores-button--trayectoria" href="Autor_1.html">Ver Perfil</a>
                         </div>
                     </div>
@@ -126,7 +127,11 @@
                                     <span class="autores-tag autores-tag--accent">Km 1/2 via al Tena</span>
                                 </div>
                                 <p class="autores-collaborator-card__description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.</p>
-                                <a class="autores-button autores-button--trayectoria" href="#">Ver perfil</a>
+                                <!-- CODEX: añadido para abrir la hoja de vida PDF del colaborador desde datos centralizados -->
+                                <div class="autores-collaborator-card__content-button">
+                                    <a class="autores-button autores-button--primary autores-button--curriculum" href="templatepdfs_autores.html" data-autor-pdf="chari-erick">Ver hoja de vida</a>
+                                    <a class="autores-button autores-button--trayectoria" href="#">Ver perfil</a>
+                                </div>
                             </div>
                         </article>
 
@@ -139,7 +144,11 @@
                                     <span class="autores-tag autores-tag--success">Pendiente</span>
                                 </div>
                                 <p class="autores-collaborator-card__description">Información profesional pendiente de actualización.</p>
-                                <a class="autores-button autores-button--trayectoria" href="#">Ver perfil</a>
+                                <!-- CODEX: añadido para abrir la hoja de vida PDF de la colaboradora desde datos centralizados -->
+                                <div class="autores-collaborator-card__content-button">
+                                    <a class="autores-button autores-button--primary autores-button--curriculum" href="templatepdfs_autores.html" data-autor-pdf="daniela-cordova">Ver hoja de vida</a>
+                                    <a class="autores-button autores-button--trayectoria" href="#">Ver perfil</a>
+                                </div>
                             </div>
                         </article>
                     </div>
@@ -196,6 +205,10 @@
     <script src="../../script/menu_datos.js" defer></script>
     <script src="../../script/menu_render.js" defer></script>
     <script src="../../script/menu.js" defer></script>
+    <!-- CODEX: añadido para cargar rutas y lógica de curriculums PDF de autores -->
+    <script src="../../script/helpers/rutas_pdf.js" defer></script>
+    <script src="../../script/autores/datosautores.js" defer></script>
+    <script src="../../script/autores/autorespdf.js" defer></script>
     <script src="../../script/flecha.js" defer></script>
 </body>
 

@@ -1,17 +1,18 @@
-const categoriasLibros = [
+// CODEX: modificado para centralizar los datos de curriculums PDF de autores
+window.PhysikosAutoresPdf = [
     {
         id: "chari-fernando",
-        autor: "chari-fernando",
-        archivo: "chari-fernando.pdf"
+        nombre: "Fernando Chari",
+        archivo: "chari_fernando.pdf"
     },
     {
         id: "chari-erick",
-        autor: "chari-erick",
+        nombre: "Erick Chari",
         archivo: "documento-prueba.pdf"
     },
     {
-        id: "autor3",
-        autor: "autor3",
+        id: "daniela-cordova",
+        nombre: "Daniela Cordova",
         archivo: "documento-prueba.pdf"
     }
-]
+];
