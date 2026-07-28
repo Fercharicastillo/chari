@@ -1094,3 +1094,597 @@ nav.menu_nav-libros .content__content a {
 		flex-basis: 2.6em;
 	}
 }
+
+
+.autores-profile-section__icon-autores {
+	background-image: var(--author-icon-autores);
+}
+
+[cambio="darkMode"] .autores-profile-section__icon-autores {
+	background-image: var(--author-icon-autores-dark);
+}
+
+/* CODEX: añadido para encapsular el rediseño piloto de la pagina principal de autores */
+.autores-page {
+	--author-blue: #0646c8;
+	--author-blue-dark: #eaf2ff;
+	--author-ink: #071b5c;
+	--author-muted: #46577d;
+	--author-line: #cfe0f7;
+	--author-soft: #f7fbff;
+	--author-card: #ffffff;
+
+
+	--author-section-size: 3.5em;
+	--author-section-weight: 400;
+	--author-principal-size: 2.5em;
+	--author-principal-weight: 500;
+	--author-categorias-weight: 600;
+	--author-categoriasbutton-weight: 700;
+	
+
+	--author-shadow: 0 14px 30px rgba(7, 27, 92, .1);
+	--author-icon-autores: url(../img/botones/btns-hoja-de-vida/btn-autores.svg);
+	--author-icon-autores-dark: url(../img/botones/btns-hoja-de-vida/btn-BN-autores.svg);
+	--author-icon-autorprincipal: url(../img/botones/btns-hoja-de-vida/btn-principal.svg);
+	--author-icon-autorprincipal-dark: url(../img/botones/btns-hoja-de-vida/btn-BN-principal.svg);
+	--author-icon-experiencia: url(../img/botones/btns-hoja-de-vida/btn-experiencia.svg);
+	--author-icon-experiencia-dark: url(../img/botones/btns-hoja-de-vida/btn-BN-experiencia.svg);
+	--author-icon-enfoque: url(../img/botones/btns-hoja-de-vida/btn-enfoque.svg);
+	--author-icon-enfoque-dark: url(../img/botones/btns-hoja-de-vida/btn-BN-enfoque.svg);
+	--author-icon-especialidad: url(../img/botones/btns-hoja-de-vida/btn-especialidad.svg);
+	--author-icon-especialidad-dark: url(../img/botones/btns-hoja-de-vida/btn-BN-especialidad.svg);
+	--author-icon-interes: url(../img/botones/btns-hoja-de-vida/btn-interes.svg);
+	--author-icon-interes-dark: url(../img/botones/btns-hoja-de-vida/btn-BN-interes.svg);
+	--author-icon-curriculum: url(../img/botones/btns-hoja-de-vida/btn-curriculum.svg);
+	--author-icon-curriculum-dark: url(../img/botones/btns-hoja-de-vida/btn-BN-curriculum.svg);
+	--author-icon-trayectoria: url(../img/botones/btns-hoja-de-vida/btn-trayectoria.svg);
+	--author-icon-trayectoria-dark: url(../img/botones/btns-hoja-de-vida/btn-BN-trayectoria.svg);
+	--author-fondo-autores: url(../img/botones/btns-hoja-de-vida/fondo-autores.svg);
+	--author-fondo-autores-dark: url(../img/botones/btns-hoja-de-vida/fondo-BN-autores.svg);
+	--author-icon-download-curriculum: url(../img/botones/btns-hoja-de-vida/btn-descargar-01.svg);
+	--author-icon-download-curriculum-dark: url(../img/botones/btns-hoja-de-vida/btn-BN-descargar-01.svg);
+	--author-icon-ver-curriculum: url(../img/botones/btns-hoja-de-vida/btn-ver.svg);
+	--author-icon-ver-curriculum-dark: url(../img/botones/btns-hoja-de-vida/btn-BN-ver.svg);
+	width: 100%;
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1.8em;
+	color: var(--author-ink);
+	background: linear-gradient(135deg, rgba(244, 250, 255, .9), var(--bG) 42%);
+}
+
+/* CODEX: modificado para mantener el borde base de Physikos y mejorar el encabezado de autores */
+.autores-page .autores-profile-section {
+	width: 95%;
+	margin-top: 1em;
+	border: 1px solid var(--border);
+	padding: 1.5em 1.5em;
+	display: grid;
+	border-radius: 5px;
+	grid-template-columns: 5em minmax(0, 1fr) minmax(180px, 28%);
+	gap: 1.8em;
+	background: linear-gradient(120deg, rgba(255, 255, 255, .96), rgba(234, 245, 255, .82));
+	box-shadow: 0 12px 28px rgba(7, 27, 92, .08);
+	color: var(--author-ink);
+}
+
+.autores-page .autores-profile-section__icon {
+	width: 5em;
+	height: 5em;
+	border: 1px solid var(--author-line);
+	border-radius: 50%;
+	background-color: rgba(255, 255, 255, .86);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 2.8em 2.8em;
+	box-shadow: var(--author-shadow);
+}
+
+.autores-page .autores-profile-section-title {
+	margin: 0;
+	color: var(--author-ink);
+	font-size: var(--author-section-size);
+	font-weight: var(--author-section-weight);
+	line-height: 1.05;
+}
+
+.autores-page .autores-profile-section-note {
+	margin: .8em 0 0;
+	padding: 0;
+	color: var(--author-blue);
+	font-size: 1.35em;
+	font-weight: 700;
+	line-height: 1.35;
+}
+
+.autores-page .autores-profile-section-introduction {
+	max-width: 660px;
+	margin: 1.15em 0 0;
+	padding: 0;
+	color: #1a2c62;
+	font-size: 1.25em;
+	font-weight: 400;
+	line-height: 1.5;
+}
+
+.autores-page__hero-illustration {
+	width: 100%;
+	min-height: 11em;
+	opacity: .52;
+	background-image: var(--author-fondo-autores);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+}
+
+/* CODEX: añadido para construir la tarjeta del autor principal con estructura clara y reutilizable */
+.autores-main-author {
+	width: 95%;
+	padding: 1.6em;
+	border: 1px solid var(--author-line);
+	border-radius: 8px;
+	display: grid;
+	grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+	gap: 2.4em;
+	background-color: var(--author-card);
+	box-shadow: var(--author-shadow);
+}
+
+.autores-main-author__photo {
+	margin: 0;
+	min-width: 0;
+}
+
+.autores-main-author__photo img {
+	width: 100%;
+	height: 100%;
+	min-height: 260px;
+	display: block;
+	border-radius: 8px;
+	object-fit: cover;
+	box-shadow: 0 10px 24px rgba(7, 27, 92, .16);
+}
+
+.autores-main-author__content {
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 1.15em;
+}
+
+.autores-main-author__name {
+	margin: 0;
+	color: var(--author-ink);
+	font-size: var(--author-principal-size);
+	font-weight: var(--author-principal-weight);
+	line-height: 1.08;
+}
+
+.autores-main-author__roles,
+.autores-collaborator-card__roles {
+	display: flex;
+	flex-wrap: wrap;
+	gap: .7em;
+}
+
+.autores-tag {
+	padding: .35em 1em;
+	border: 1px solid #c7dcff;
+	border-radius: 999px;
+	display: inline-flex;
+	align-items: center;
+	color: var(--author-blue);
+	background-color: #eaf3ff;
+	font-size: .95em;
+	font-weight: var(--author-categorias-weight);
+	line-height: 1;
+}
+
+.autores-tag--primary {
+	color: #ffffff;
+	background-color: var(--author-blue);
+}
+
+.autores-tag--success {
+	border-color: #bce7ca;
+	color: #14642a;
+	background-color: #e4f8e9;
+}
+
+.autores-tag--accent {
+	border-color: #dacbff;
+	color: #4d3192;
+	background-color: #efe8ff;
+}
+
+.autores-main-author__summary,
+.autores-collaborator-card__description {
+	margin: 0;
+	color: #14204a;
+	font-size: 1.12em;
+	line-height: 1.58;
+}
+
+.autores-main-author__metrics {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 1em;
+}
+
+.autores-main-author__metric {
+	min-width: 0;
+	padding-left: 2.7em;
+	position: relative;
+	border-right: 1px solid var(--author-line);
+}
+
+.autores-main-author__metric:last-child {
+	border-right: 0;
+}
+
+.autores-main-author__metric::before,
+.autores-button::before,
+.autores-collaborators__icon {
+	content: "";
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+}
+
+.autores-main-author__metric::before {
+	position: absolute;
+	left: 0;
+	top: .12em;
+	width: 1.75em;
+	height: 1.75em;
+}
+
+.autores-main-author__metric--experiencia::before {
+	background-image: var(--author-icon-experiencia);
+}
+
+.autores-main-author__metric--enfoque::before {
+	background-image: var(--author-icon-enfoque);
+}
+
+.autores-main-author__metric--especialidad::before {
+	background-image: var(--author-icon-especialidad);
+}
+
+.autores-main-author__metric--interes::before {
+	background-image: var(--author-icon-interes);
+}
+
+.autores-main-author__metric span {
+	display: block;
+	color: var(--author-muted);
+	font-size: .95em;
+	font-weight: bolder;
+	line-height: 1.2;
+}
+
+.autores-main-author__metric strong {
+	display: block;
+	margin-top: .2em;
+	color: var(--author-ink);
+	font-size: 1em;
+	font-weight: normal;
+	line-height: 1.25;
+}
+
+.autores-main-author__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1em;
+}
+
+.autores-button {
+	min-height: 3.1em;
+	padding: .75em 1.25em;
+	border: 1px solid var(--author-blue);
+	border-radius: 6px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: .65em;
+	color: var(--author-blue);
+	background-color: #ffffff;
+	font-weight: var(--author-categoriasbutton-weight);
+	text-decoration: none;
+	transition: background-color .2s ease, color .2s ease, transform .2s ease;
+}
+
+.autores-button::before {
+	width: 1.25em;
+	height: 1.25em;
+	flex: 0 0 1.25em;
+}
+
+
+.autores-button--curriculum::before {
+	background-image: var(--author-icon-ver-curriculum);
+}
+
+.autores-button--trayectoria::before {
+	background-image: var(--author-icon-trayectoria);
+}
+
+.autores-button:hover {
+	background-color: var(--author-blue-dark);
+	transform: translateY(-1px);
+}
+
+/* CODEX: añadido para crear el grid adaptable de autores colaboradores */
+.autores-collaborators {
+	width: 95%;
+}
+
+.autores-collaborators__heading {
+	margin-bottom: 1.2em;
+	display: grid;
+	grid-template-columns: auto auto 1fr;
+	align-items: center;
+	gap: .8em;
+	color: var(--author-ink);
+}
+
+.autores-collaborators__heading::after {
+	content: "";
+	height: 1px;
+	background-color: var(--author-line);
+}
+
+.autores-collaborators__icon {
+	width: 1.8em;
+	height: 1.8em;
+	background-image: var(--author-icon-autores);
+}
+
+.autores-collaborators__heading h2 {
+	margin: 0;
+	font-size: 1.65em;
+	font-weight: bolder;
+}
+
+.autores-collaborators__grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 1.5em;
+}
+
+.autores-collaborator-card {
+	min-width: 0;
+	padding: 1.25em;
+	border: 1px solid var(--author-line);
+	border-radius: 8px;
+	display: grid;
+	grid-template-columns: minmax(130px, 180px) minmax(0, 1fr);
+	gap: 1.45em;
+	background-color: var(--author-card);
+	box-shadow: 0 8px 20px rgba(7, 27, 92, .08);
+}
+
+.autores-collaborator-card__photo,
+.autores-collaborator-card__avatar {
+	width: 100%;
+	aspect-ratio: 1;
+	margin: 0;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.autores-collaborator-card__photo img {
+	width: 100%;
+	height: 100%;
+	display: block;
+	object-fit: cover;
+}
+
+.autores-collaborator-card__avatar {
+	display: grid;
+	place-items: center;
+	color: var(--author-ink);
+	background: radial-gradient(circle, #e6f2ff 0%, #cfe0f7 100%);
+	font-size: clamp(3.2em, 6vw, 5.8em);
+	font-weight: 500;
+}
+
+.autores-collaborator-card__content {
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: .85em;
+}
+
+.autores-collaborator-card__name {
+	margin: 0;
+	color: var(--author-ink);
+	font-size: 1.65em;
+	font-weight: var(--author-principal-weight);
+	line-height: 1.15;
+}
+
+.autores-collaborator-card .autores-button {
+	min-height: 2.8em;
+	margin-top: auto;
+	padding-inline: 1.1em;
+}
+
+.autores-closing-message {
+	width: min(1180px, 95%);
+	margin: .2em 0 0;
+	color: var(--author-muted);
+	font-size: 1.05em;
+	font-style: italic;
+	text-align: center;
+}
+
+/* CODEX: añadido para adaptar la pagina principal de autores al DarkMode existente */
+[cambio="darkMode"] .autores-page {
+	--author-ink: #eaf2ff;
+	--author-muted: #c6d1e5;
+	--author-line: #4c5d75;
+	--author-soft: #202c35;
+	--author-card: #182025;
+	--author-shadow: 0 14px 30px rgba(0, 0, 0, .24);
+	background: linear-gradient(135deg, #121617, #182025 100%);
+}
+
+[cambio="darkMode"] .autores-page .autores-profile-section,
+[cambio="darkMode"] .autores-main-author,
+[cambio="darkMode"] .autores-collaborator-card {
+	background: #182025;
+	border-color: var(--border);
+}
+
+[cambio="darkMode"] .autores-page .autores-profile-section__icon {
+	background-color: #202c35;
+	border-color: var(--author-line);
+}
+
+[cambio="darkMode"] .autores-page__hero-illustration {
+	background-image: var(--author-fondo-autores-dark);
+	opacity: .68;
+}
+
+[cambio="darkMode"] .autores-page .autores-profile-section-note,
+[cambio="darkMode"] .autores-button {
+	color: #dbe7f7;
+	border-color: transparent;
+	background-color: transparent;
+}
+
+[cambio="darkMode"] .autores-page .autores-profile-section-introduction,
+[cambio="darkMode"] .autores-main-author__summary,
+[cambio="darkMode"] .autores-collaborator-card__description {
+	color: #dbe7f7;
+}
+
+[cambio="darkMode"] .autores-tag {
+	border-color: #4c5d75;
+	color: #dbe7f7;
+	background-color: #202c35;
+}
+
+[cambio="darkMode"] .autores-tag--primary,
+[cambio="darkMode"] .autores-button--primary,
+[cambio="darkMode"] .autores-button:hover {
+	color: #ffffff;
+	background-color: #0646c8;
+}
+
+[cambio="darkMode"] .autores-main-author__metric--experiencia::before {
+	background-image: var(--author-icon-experiencia-dark);
+}
+
+[cambio="darkMode"] .autores-main-author__metric--enfoque::before {
+	background-image: var(--author-icon-enfoque-dark);
+}
+
+[cambio="darkMode"] .autores-main-author__metric--especialidad::before {
+	background-image: var(--author-icon-especialidad-dark);
+}
+
+[cambio="darkMode"] .autores-main-author__metric--interes::before {
+	background-image: var(--author-icon-interes-dark);
+}
+
+[cambio="darkMode"] .autores-button--curriculum::before {
+	background-image: var(--author-icon-ver-curriculum-dark);
+}
+
+[cambio="darkMode"] .autores-button--trayectoria::before {
+	background-image: var(--author-icon-trayectoria-dark);
+}
+
+[cambio="darkMode"] .autores-collaborators__icon {
+	background-image: var(--author-icon-autores-dark);
+}
+
+[cambio="darkMode"] .autores-collaborator-card__avatar {
+	background: radial-gradient(circle, #26384d 0%, #182025 100%);
+}
+
+/* CODEX: añadido para mantener legible el rediseño de autores en tablet y movil */
+@media only screen and (max-width: 1050px) {
+	.autores-page .autores-profile-section {
+		grid-template-columns: 4.4em minmax(0, 1fr);
+	}
+
+	.autores-page__hero-illustration {
+		display: none;
+	}
+
+	.autores-main-author,
+	.autores-collaborators__grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media only screen and (max-width: 720px) {
+	.autores-page {
+		padding-inline: 1em;
+	}
+
+	.autores-page .autores-profile-section,
+	.autores-main-author,
+	.autores-collaborator-card {
+		width: 100%;
+		grid-template-columns: 1fr;
+		text-align: center;
+	}
+
+	.autores-page .autores-profile-section__icon,
+	.autores-main-author__photo,
+	.autores-collaborator-card__photo,
+	.autores-collaborator-card__avatar {
+		justify-self: center;
+		max-width: 260px;
+	}
+
+	.autores-main-author__roles,
+	.autores-collaborator-card__roles,
+	.autores-main-author__actions {
+		justify-content: center;
+	}
+
+	.autores-main-author__metrics {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		text-align: left;
+	}
+
+	.autores-collaborator-card__content {
+		align-items: center;
+	}
+}
+
+@media only screen and (max-width: 430px) {
+	.autores-page .autores-profile-section,
+	.autores-main-author,
+	.autores-collaborator-card {
+		padding: 1.2em;
+	}
+
+	.autores-main-author__metrics {
+		grid-template-columns: 1fr;
+	}
+
+	.autores-main-author__metric {
+		border-right: 0;
+		border-bottom: 1px solid var(--author-line);
+		padding-bottom: .85em;
+	}
+
+	.autores-main-author__metric:last-child {
+		border-bottom: 0;
+	}
+
+	.autores-button {
+		width: 100%;
+	}
+}

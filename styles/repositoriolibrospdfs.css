@@ -620,7 +620,7 @@ MENU  BTN-DARKMODE
 
 /* Rediseño encapsulado del Repositorio de Libros */
 .books-repository {
-    width: min(95%, 1220px);
+   /* width: min(95%, 1220px);*/
     padding: 2em 0 6em;
     color: var(--color3);
     --books-icon-search: url("../img/botones/btns-repositorio-libros/btn-buscar.svg");

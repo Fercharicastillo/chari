@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Expandir" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 226.78 223.59">
+  <rect x="102.41" y="0" width="21.96" height="168.84" rx="10.98" ry="10.98"/>
+  <rect x="76.7" y="84.82" width="21.96" height="94.67" rx="10.98" ry="10.98" transform="translate(-67.77 100.71) rotate(-45)"/>
+  <rect x="128.12" y="84.82" width="21.96" height="94.67" rx="10.98" ry="10.98" transform="translate(144 323.96) rotate(-135)"/>
+  <rect x="102.41" y="102.35" width="21.96" height="220.52" transform="translate(-99.22 326) rotate(-90)"/>
+  <rect x="3.13" y="148.99" width="21.96" height="74.6" rx="6.37" ry="6.37" transform="translate(28.22 372.58) rotate(-180)"/>
+  <rect x="201.69" y="148.99" width="21.96" height="74.6" rx="6.37" ry="6.37" transform="translate(425.34 372.58) rotate(-180)"/>
+</svg>
