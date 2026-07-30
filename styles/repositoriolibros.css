@@ -6,6 +6,13 @@
     /*Imagenes de portada*/
     --img-mec-newtoniana: url(../img/portadas_libros/mecanica_newtoniana.png);
     --img-mec-clasica: url(../img/portadas_libros/Mecanica_Clasica_Libros.png);
+    --img-fisicamoderna: url(../img/portadas_libros/Galileo_Galilei.png);
+    --img-termodinamica: url(../img/portadas_libros/Nicolas-Carnot.png);
+    --img-electromagnetismo: url(../img/portadas_libros/james-clerk-maxwell.png);
+    --img-algebralineal: url(../img/portadas_libros/Gabriel-Crammer.png);
+    --img-matesdiscretas: url(../img/portadas_libros/george-boole.png);
+    --img-diferencial: url(../img/portadas_libros/gottfried-leibniz.png);
+    --btn-libros-go: url(../img/botones/btns-repositorio-libros/btn-trayectoria.svg);
 }
 [cambio = "darkMode"]{
     /* CODEX: modificado para conservar solo variables especificas de esta seccion */
@@ -15,6 +22,13 @@
     /*Imagenes de portada*/
     --img-mec-newtoniana: url(../img/portadas_libros/mecanica_newtoniana_darkmode.png);
     --img-mec-clasica: url(../img/portadas_libros/Mecanica_Clasica_Libros_white.png);
+    --img-fisicamoderna: url(../img/portadas_libros/Galileo_Galilei-dark.png);
+    --img-termodinamica: url(../img/portadas_libros/Nicolas-Carnot-dark.png);
+    --img-electromagnetismo: url(../img/portadas_libros/james-clerk-maxwell-dark.png);
+    --img-algebralineal: url(../img/portadas_libros/Gabriel-Crammer-dark.png);
+    --img-matesdiscretas: url(../img/portadas_libros/george-boole-dark.png);
+    --img-diferencial: url(../img/portadas_libros/gottfried-leibniz-dark.png);
+    --btn-libros-go: url(../img/botones/btns-repositorio-libros/btn-BN-trayectoria.svg);
 }
 
 .container__grid__sim{
@@ -379,7 +393,25 @@ MENU  BTN-DARKMODE
     flex-direction: column;
     align-items: center;
     background-color: var(--bG);
+
+    --author-ink: #071b5c; 
+	--author-line: #cfe0f7;
+    --author-shadow: 0 14px 30px rgba(7, 27, 92, .1);
+    --author-blue: #0646c8;
+
+    --author-section-size: 3.5em;
+	--author-section-weight: 400;
+
+	--btn-libros-fisica-subtitle: url(../img/botones/btns-repositorio-libros/btn-libros-fisica.svg);
+	--btn-libros-fisica-subtitle-dark: url(../img/botones/btns-repositorio-libros/btn-BN-libros-fisica.svg);
+    --btn-libros-header: url(../img/botones/btns-repositorio-libros/btn-libros.svg);
+    --btn-libros-header-dark: url(../img/botones/btns-repositorio-libros/btn-BN-libros.svg);
+    --btn-libros-math-subtitle: url(../img/botones/btns-repositorio-libros/btn-libros-math.svg);
+    --btn-libros-math-subtitle-dark: url(../img/botones/btns-repositorio-libros/btn-BN-libros-math.svg);
+    --author-fondo-libros: url(../img/botones/btns-repositorio-libros/fondo-libros.svg);
+    --author-fondo-libros-dark: url(../img/botones/btns-repositorio-libros/fondo-BN-libros.svg);
 }
+
 .main_ds{            
     grid-column: 1 / 3;
     grid-row: 2 / 3;
@@ -503,7 +535,6 @@ MENU  BTN-DARKMODE
 
 .main_s2_sim{
     width: 95%;
-    padding-top: 1em;
 }
 
 .home-toc-section strong{
@@ -545,17 +576,72 @@ MENU  BTN-DARKMODE
 }
 
 .img-toc-card_mec_clasica{
-    width: 22.91em;
+    width: 100%;
     height: 11.66em;
     background-image: var(--img-mec-clasica);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
 }
+
 .img-toc-card_mec_newtoniana{
-    width: 22.91em;
+    width: 100%;
     height: 11.66em;
     background-image: var(--img-mec-newtoniana);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.img-toc-card_fisicamoderna{
+    width: 100%;
+    height: 11.66em;
+    background-image: var(--img-fisicamoderna);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.img-toc-card_termodinamica{
+    width: 100%;
+    height: 11.66em;
+    background-image: var(--img-termodinamica);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.img-toc-card_electromagnetismo{
+    width: 100%;
+    height: 11.66em;
+    background-image: var(--img-electromagnetismo);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.img-toc-card_algebralineal{
+    width: 100%;
+    height: 11.66em;
+    background-image: var(--img-algebralineal);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.img-toc-card_matematicasdiscretas{
+    width: 100%;
+    height: 11.66em;
+    background-image: var(--img-matesdiscretas);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.img-toc-card_calculodiferencial{
+    width: 100%;
+    height: 11.66em;
+    background-image: var(--img-diferencial);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -564,12 +650,39 @@ MENU  BTN-DARKMODE
 .home-toc-chapter-name{
     width: 100%;
     height: 2.2em;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .35em;
     text-align: center;
-    line-height: 2.2em;
+    line-height: 1.1;
     font-size: 1.3em;
     border-top: 1px solid #d1d1d1;
     background-color: #5cafcd1f;
+    justify-content: space-between;
+    padding: 0 0.7em 0 0.7em;
+}
+
+.home-toc-chapter-name::after,
+.home-toc-chapter-name-go{
+    content: "";
+    width: 1.15em;
+    height: 1.15em;
+    flex: 0 0 1.15em;
+    display: inline-block;
+    opacity: 0.6;
+	background-image: var(--btn-libros-go);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+}
+
+.home-toc-chapter-name:hover{
+    background-color: #4d94ae40;
+}
+
+.home-toc-chapter-name:active{
+    transform: translateY(2px);
 }
 
 /*Edit-Texto-Introduccion*/
@@ -725,6 +838,10 @@ nav.menu_nav-libros .content__content a {
         height: 250vh;
     }
 
+	.autores-page__hero-illustration {
+		display: none;
+	}
+
     .header{
         grid-column: 1 / 3;
     }
@@ -812,4 +929,203 @@ nav.menu_nav-libros .content__content a {
         position: fixed;
     }*/
     
+}
+
+[cambio="darkMode"] .main {
+	--author-ink: #eaf2ff;
+	--author-line: #4c5d75;
+	--author-shadow: 0 14px 30px rgba(0, 0, 0, .24);
+	background: linear-gradient(135deg, #121617, #182025 100%);
+}
+
+.main .autores-profile-section {
+	width: 95%;
+	margin-top: 1em;
+	border: 1px solid var(--border);
+	padding: 1.5em 1.5em;
+	display: grid;
+	border-radius: 5px;
+	grid-template-columns: 5em minmax(0, 1fr) minmax(180px, 28%);
+	gap: 1.8em;
+	background: linear-gradient(120deg, rgba(255, 255, 255, .96), rgba(234, 245, 255, .82));
+	box-shadow: 0 12px 28px rgba(7, 27, 92, .08);
+	color: var(--author-ink);
+}
+
+[cambio="darkMode"] .main .autores-profile-section {
+	background: #182025;
+	border-color: var(--border);
+}
+
+.main .autores-profile-section__icon {
+	width: 5em;
+	height: 5em;
+	border: 1px solid var(--author-line);
+	border-radius: 50%;
+	background-color: rgba(255, 255, 255, .86);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 3em 3em;
+	box-shadow: var(--author-shadow);
+}
+
+[cambio="darkMode"] .main .autores-profile-section__icon {
+	background-color: #202c35;
+	border-color: var(--author-line);
+}
+
+.autores-profile-section__icon-autores {
+	background-image: var(--btn-libros-header);
+}
+
+[cambio="darkMode"] .autores-profile-section__icon-autores {
+	background-image: var(--btn-libros-header-dark);
+}
+
+.main .autores-profile-section-title {
+	margin: 0;
+	color: var(--author-ink);
+	font-size: var(--author-section-size);
+	font-weight: var(--author-section-weight);
+	line-height: 1.05;
+}
+
+.main .autores-profile-section-note {
+	margin: .8em 0 0;
+	padding: 0;
+	color: var(--author-blue);
+	font-size: 1.35em;
+	font-weight: 700;
+	line-height: 1.35;
+}
+
+[cambio="darkMode"] .main .autores-profile-section-note {
+	color: #dbe7f7;
+	border-color: transparent;
+	background-color: transparent;
+}
+
+
+.main .autores-profile-section-introduction {
+	max-width: 660px;
+	margin: 1.15em 0 0;
+	padding: 0;
+	color: #1a2c62;
+	font-size: 1.25em;
+	font-weight: 400;
+	line-height: 1.5;
+}
+
+[cambio="darkMode"] .main .autores-profile-section-introduction {
+	color: #dbe7f7;
+}
+
+.libros-subtitle__heading {
+	margin-top: 2em;
+	display: grid;
+	grid-template-columns: auto auto 1fr;
+	align-items: center;
+	gap: .8em;
+	color: var(--author-ink);
+}
+
+.libros-subtitle__heading::after {
+	content: "";
+	height: 1px;
+	background-color: var(--author-line);
+}
+
+.libros-subtitle__heading h2 {
+	margin: 0;
+	font-size: 1.9em;
+	font-weight: bolder;
+}
+
+.libros-subtitle__icon {
+	content: "";
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+}
+
+.libros-subtitle__icon {
+	width: 2.8em;
+	height: 2.8em;
+	background-image: var(--btn-libros-fisica-subtitle);
+}
+
+[cambio="darkMode"] .libros-subtitle__icon {
+	background-image: var(--btn-libros-fisica-subtitle-dark);
+}
+
+.libros-subtitle__icon-math{
+    content: "";
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+}
+
+.libros-subtitle__icon-math {
+	width: 2.8em;
+	height: 2.8em;
+	background-image: var(--btn-libros-math-subtitle);
+}
+
+[cambio="darkMode"] .libros-subtitle__icon-math {
+	background-image: var(--btn-libros-math-subtitle-dark);
+}
+
+.autores-page__hero-illustration {
+	width: 100%;
+	min-height: 11em;
+	opacity: .62;
+	background-image: var(--author-fondo-libros);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+}
+
+[cambio="darkMode"] .autores-page__hero-illustration {
+	background-image: var(--author-fondo-libros-dark);
+	opacity: .68;
+}
+
+.home-toc-card a img {
+    display: block;
+}
+
+@media only screen and (max-width: 1050px) {
+	.main .autores-profile-section {
+		grid-template-columns: 4.4em minmax(0, 1fr);
+	}
+
+	.autores-page__hero-illustration {
+		display: none;
+	}
+
+}
+
+@media only screen and (max-width: 720px) {
+	.main {
+		padding-inline: 1em;
+	}
+
+	.main .autores-profile-section {
+		width: 100%;
+		grid-template-columns: 1fr;
+		text-align: center;
+	}
+
+	.main .autores-profile-section__icon {
+		justify-self: center;
+		max-width: 260px;
+	}
+
+}
+
+@media only screen and (max-width: 430px) {
+	.main .autores-profile-section {
+		padding: 1.2em;
+	}
+
 }
