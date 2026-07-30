@@ -1,7 +1,6 @@
-// CODEX: modificado para usar recursosCapitulos como modelo unico de datos y permitir registro compartido de contadores
 var recursosCapitulos = [
     {
-        nombre: "Límites y Continuidad",
+        nombre: "Integrales Imediatas",
         carpeta: "",
         pdfGeneral: "",
         videoPlaylist: "",
@@ -19,7 +18,7 @@ var recursosCapitulos = [
         ]
     },
     {
-        nombre: "Derivadas",
+        nombre: "Sumas de Riemman",
         carpeta: "",
         pdfGeneral: "",
         videoPlaylist: "",
@@ -37,7 +36,7 @@ var recursosCapitulos = [
         ]
     },
     {
-        nombre: "Aplicaciones de la Derivadas",
+        nombre: "Aplicaciones de la Integrales",
         carpeta: "",
         pdfGeneral: "",
         videoPlaylist: "",
@@ -74,6 +73,6 @@ var recursosCapitulos = [
     }
 ];
 
-// CODEX: añadido para registrar este repositorio y permitir contadores automaticos en repositorio_planes.html
+// NECESARIO PARA QUE SE CUENTEN LOS RECURSOS DE ESTE CARD
 window.PhysikosRecursosPlanes = window.PhysikosRecursosPlanes || {};
-window.PhysikosRecursosPlanes["calculo-diferencial"] = recursosCapitulos;
+window.PhysikosRecursosPlanes["calculo-integral"] = recursosCapitulos;

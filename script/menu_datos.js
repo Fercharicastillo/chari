@@ -95,7 +95,7 @@ window.PhysikosMenuItems = [
   },
   {
     id: "repositorio-planes",
-    texto: "Repositorio de Planes de Clase",
+    texto: "Repositorio de Clases",
     clase: "menu-repositorio-planes",
     href: "contenido/repositorio_planes/repositorio_planes.html",
     // CODEX: añadido para reutilizar los subitems de Repositorio de Planes de Clase
@@ -114,7 +114,7 @@ window.PhysikosMenuItems = [
   },
   {
     id: "repositorio-libros",
-    texto: "Repositorio de Libros",
+    texto: "Repositorio de Documentos",
     clase: "menu-repositorio-libros",
     href: "contenido/repositorio_libros/repositorio_libros.html",
     // CODEX: añadido para reutilizar las categorias del Repositorio de Libros en sus paginas

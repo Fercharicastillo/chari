@@ -58,45 +58,41 @@
         </div>
 
         <div class="main" id="main-despleglabe">
-            <section class="main_s1">
-             <div class="manual-title">
-                        Universidad Central del Ecuador
+            <header class="autores-profile-section autores-page__hero">
+                    <span class="autores-profile-section__icon autores-profile-section__icon-autores" aria-hidden="true"></span>
+                    <div class="autores-page__hero-content">
+                        <h1 id="autores-page-title" class="autores-profile-section-title">Repositorio de Clases</h1>
+                        <p class="autores-profile-section-note">Clases, desarrollos teóricos y recursos audiovisuales para el aprendizaje libre..</p>
+                        <p class="autores-profile-section-introduction">Explora clases organizadas por área, acompañadas de apuntes, simulaciones y materiales complementarios.</p>
                     </div>
+                    <div class="autores-page__hero-illustration" aria-hidden="true"></div>
+            </header>
 
-                    <div class="manual-version">
-                        Facultad de Filosofía, Letras y Ciencias de la Educación
-                    </div>
-
-                    <div class="manual-html-title">
-                        Carrera de Pedagogía en las Ciencias Experimentales Matemática y Física
-                    </div>
-
-                    <div class="manual-mantenimiento">
-                        <span>Mantenida por:<a href="#" class="pepsi"> Chari Castillo Fernando Javier.</a></span>
-                    </div>
-
-                    <div class="manual-html-explanation">
-                        Repositorio de Planes de Clase
-                    </div>
-            </section>
-            <section class="main_s2_sim">
+            <!-- CODEX: modificado para aislar el nuevo estilo visual de las tarjetas del repositorio de planes -->
+            <section class="main_s2_sim repositorio-planes-cards">
                     <!--EdtidSection 1-->
                     <div class="home-toc-section">
-                        <strong>Física</strong>
+                        <div class="libros-subtitle__heading">
+                            <span class="libros-subtitle__icon" aria-hidden="true"></span>
+                            <h2 id="libros-subtitle-title">Física</h2>
+                        </div>
                         <div class="home-toc-container">
                             <div class="home-toc-card">
                                 <a href="rp_mecanica_newtoniana.html">
                                     <img class="img-toc-card" src="../../img/Mecanica_Newtoniana_Formulas.png">
                                     <span class="home-toc-chapter-name">
                                         Mecánica Newtoniana
+                                        <!-- CODEX: modificado para mostrar automaticamente el total de capitulos disponibles -->
+                                        <span class="clases__counter-resources" data-recursos-capitulos="mecanica-newtoniana">En Construcción</span>
                                     </span>
                                 </a>
                             </div>
-                            <!--<div class="home-toc-card">
+                            <div class="home-toc-card">
                                 <a href="#">
                                     <img class="img-toc-card" src="../../img/Ondas_Acustica.png" >
                                     <span class="home-toc-chapter-name">
                                         Ondas y Acústica 
+                                        <span class="clases__counter-resources" data-recursos-capitulos="ondas-acustica">En Construcción</span>
                                     </span>
                                 </a>
                             </div>
@@ -105,6 +101,7 @@
                                     <img class="img-toc-card" src="../../img/Termodinamica.png" >
                                     <span class="home-toc-chapter-name">
                                         Termodinámica
+                                        <span class="clases__counter-resources" data-recursos-capitulos="termodinamica">En Construcción</span>
                                     </span>
                                 </a>
                             </div>
@@ -113,14 +110,17 @@
                                     <img class="img-toc-card" src="../../img/Electromagnetismo.png" >
                                     <span class="home-toc-chapter-name">
                                         Electromagnetismo
+                                        <span class="clases__counter-resources" data-recursos-capitulos="electromagnetismo">En Construcción</span>
                                     </span>
                                 </a>
                             </div>
+                            <!--Si agrego una tarjeta con data-recursos-capitulos, debo cargar su archivo _data.js.-->
                             <div class="home-toc-card" id="g-1">
                                 <a href="#">
                                     <img class="img-toc-card" src="../../img/Optica.png" >
                                     <span class="home-toc-chapter-name">
                                         Óptica
+                                        <span class="clases__counter-resources" data-recursos-capitulos="optica">En Construcción</span>
                                     </span>
                                 </a>
                             </div>
@@ -129,28 +129,34 @@
                                     <img class="img-toc-card" src="../../img/Fisica_Moderna.png" >
                                     <span class="home-toc-chapter-name">
                                         Física Moderna
+                                        <span class="clases__counter-resources" data-recursos-capitulos="fisicamoderna">En Construcción</span>
                                     </span>
                                 </a>
-                            </div>-->
+                            </div>
                         </div>
                     </div>
                     <!--EdtidSection 2-->
                     <div class="home-toc-section">
-                        <strong>Matemática</strong>
+                        <div class="libros-subtitle__heading">
+                            <span class="libros-subtitle__icon-math" aria-hidden="true"></span>
+                            <h2 id="libros-subtitle-title">Matemática</h2>
+                        </div>
                         <div class="home-toc-container">
                             <div class="home-toc-card">
-                                <a href="#">
+                                <a href="rp_mecanica_cálculo diferencial.html">
                                     <img class="img-toc-card" src="../../img/Calculo_Diferencial.png">
                                     <span class="home-toc-chapter-name">
                                         Cálculo Diferencial
+                                        <span class="clases__counter-resources" data-recursos-capitulos="calculo-diferencial">En Construcción</span>
                                     </span>
                                 </a>
                             </div>
-                            <!--<div class="home-toc-card">
+                            <div class="home-toc-card">
                                 <a href="#">
                                     <img class="img-toc-card" src="../../img/Calculo_Integral.png">
                                     <span class="home-toc-chapter-name">
                                         Cálculo Integral
+                                        <span class="clases__counter-resources" data-recursos-capitulos="calculo-integral">En Construcción</span>
                                     </span>
                                 </a>
                             </div>
@@ -159,6 +165,7 @@
                                     <img class="img-toc-card" src="../../img/EDO.png">
                                     <span class="home-toc-chapter-name">
                                         Ecuaciones Diferenciales Ordinarias
+                                        <span class="clases__counter-resources" data-recursos-capitulos="edo">En Construcción</span>
                                     </span>
                                 </a>
                             </div>
@@ -167,6 +174,7 @@
                                     <img class="img-toc-card" src="../../img/EDP.png">
                                     <span class="home-toc-chapter-name">
                                         Ecuaciones Diferenciales Parciales
+                                        <span class="clases__counter-resources" data-recursos-capitulos="edps">En Construcción</span>
                                     </span>
                                 </a>
                             </div>
@@ -175,9 +183,10 @@
                                     <img class="img-toc-card" src="../../img/Geometria.png">
                                     <span class="home-toc-chapter-name">
                                         Geometría
+                                        <span class="clases__counter-resources" data-recursos-capitulos="geometria">En Construcción</span>
                                     </span>
                                 </a>
-                            </div>-->
+                            </div>
                         </div>
                     </div>
             </section>
@@ -206,6 +215,11 @@
     <script src="../../script/menu_datos.js" defer></script>
     <script src="../../script/menu_render.js" defer></script>
     <script src="../../script/menu.js" defer></script>
+    <!-- CODEX: añadido para contar capitulos disponibles en tarjetas del repositorio de planes -->
+    <script src="../../script/repositorio_planes/recursos/mecanica_newtoniana_data.js" defer></script>
+    <script src="../../script/repositorio_planes/recursos/calculo_data.js" defer></script>
+    <script src="../../script/repositorio_planes/recursos/calculo_integral_data.js" defer></script>
+    <script src="../../script/repositorio_planes/contador_recursos_planes.js" defer></script>
     <script src="../../script/flecha.js" defer></script>
 </body>
 

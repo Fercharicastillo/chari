@@ -1154,6 +1154,7 @@ nav.menu_nav-libros .content__content a {
 	gap: 1.8em;
 	color: var(--author-ink);
 	background: linear-gradient(135deg, rgba(244, 250, 255, .9), var(--bG) 42%);
+	margin-bottom: 1em;
 }
 
 /* CODEX: modificado para mantener el borde base de Physikos y mejorar el encabezado de autores */
@@ -1519,15 +1520,6 @@ nav.menu_nav-libros .content__content a {
 	min-height: 2.8em;
 	margin-top: auto;
 	padding-inline: 1.1em;
-}
-
-.autores-closing-message {
-	width: min(1180px, 95%);
-	margin: .2em 0 0;
-	color: var(--author-muted);
-	font-size: 1.05em;
-	font-style: italic;
-	text-align: center;
 }
 
 /* CODEX: añadido para adaptar la pagina principal de autores al DarkMode existente */

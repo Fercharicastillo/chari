@@ -7,8 +7,8 @@
 |--------------------------------------------------------------------------
 */
 
-// CODEX: modificado para organizar los recursos por capitulos y subtemas
-const recursosCapitulos = [
+// CODEX: modificado para organizar los recursos por capitulos y permitir registro compartido de contadores
+var recursosCapitulos = [
     {
         nombre: "Cinematica en 1 y 3 dimensiones",
         carpeta: "capitulo_1",
@@ -78,4 +78,8 @@ const recursosCapitulos = [
         subtemas: []
     }
 ];
+
+// CODEX: añadido para registrar este repositorio y permitir contadores automaticos en repositorio_planes.html
+window.PhysikosRecursosPlanes = window.PhysikosRecursosPlanes || {};
+window.PhysikosRecursosPlanes["mecanica-newtoniana"] = recursosCapitulos;
 

@@ -101,6 +101,147 @@ function crearTarjetaLibro(libro) {
     return divCard;
 }
 
+// Funcion creada para los datos de la vista tipo Lista
+function crearFilaLibro(libro) {
+  const fila = document.createElement("article");
+  fila.classList.add("books-list__row");
+  fila.dataset.bookId = libro.id;
+
+  // Construir la ruta del PDF
+  const pdfSrc = window.PhysikosRutasPdf
+    ? window.PhysikosRutasPdf.construirPdfLibro(
+        libro.carpeta,
+        libro.archivoPdf
+      )
+    : "";
+
+  // 1. Tipo de recurso
+  const recurso = document.createElement("div");
+  recurso.classList.add(
+    "books-list__cell",
+    "books-list__cell--resource"
+  );
+
+  const tipoRecurso = document.createElement("span");
+  tipoRecurso.classList.add("books-list__resource-type");
+  tipoRecurso.textContent = libro.tipo || "Libro";
+
+  recurso.appendChild(tipoRecurso); //anida tiporecurso en recurso
+
+  // 2. Información principal: título y autor
+  const informacion = document.createElement("div");
+  informacion.classList.add(
+    "books-list__cell",
+    "books-list__cell--information"
+  );
+
+  const titulo = document.createElement("h3");
+  titulo.classList.add("books-list__title");
+  
+  const enlaceTitulo = document.createElement("a");
+  enlaceTitulo.classList.add("books-list__title-link");
+  enlaceTitulo.href = pdfSrc || "#";
+  enlaceTitulo.textContent = libro.titulo;
+  enlaceTitulo.setAttribute(
+    "aria-label",
+    `Abrir ${libro.titulo}`
+  )
+
+  enlaceTitulo.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    if (pdfSrc) {
+        setPdfSrcAndRedirect(pdfSrc);
+        return;
+    }
+
+    console.error(`No se pudo construir la ruta del PDF para: ${libro.titulo}`)
+  })
+
+  titulo.appendChild(enlaceTitulo)
+
+  const autor = document.createElement("p");
+  autor.classList.add("books-list__author");
+  autor.textContent = libro.autor || "Autor no especificado";
+
+  informacion.append(titulo, autor); // anida titulo y autor en informacion
+
+  // 3. Categoría
+  const categoria = document.createElement("div");
+  categoria.classList.add(
+    "books-list__cell",
+    "books-list__cell--category"
+  );
+
+  const etiquetaCategoria = document.createElement("span");
+  etiquetaCategoria.classList.add("books-list__category-tag");
+  etiquetaCategoria.textContent =
+    libro.categoria || "Sin categoría";
+
+  categoria.appendChild(etiquetaCategoria); // anida etiquetacategoria en categoria
+
+  // 4. Formato
+  const formato = document.createElement("div");
+  formato.classList.add(
+    "books-list__cell",
+    "books-list__cell--format"
+  );
+
+  const etiquetaFormato = document.createElement("span");
+  etiquetaFormato.classList.add("books-list__format-tag");
+  etiquetaFormato.textContent = libro.formato || "PDF";
+
+  formato.appendChild(etiquetaFormato); // anida etiquetaformato en formato
+
+  // 5. Ultima Modificacion
+  const actualizacion = document.createElement("div");
+  actualizacion.classList.add(
+    "books-list__cell",
+    "books-list__cell--updated"
+  );
+
+  const fechaactulizacion = document.createElement("span");
+  fechaactulizacion.classList.add("books-list__updated-date");
+  fechaactulizacion.textContent = libro.actualizado || "Sin Fecha";
+
+  actualizacion.appendChild(fechaactulizacion);
+
+  // 6. Agregar las celdas a la fila
+  fila.append(
+    recurso,
+    informacion,
+    categoria,
+    formato,
+    actualizacion,
+  );
+
+  return fila;
+}
+
+// Crear el encabezado de la Lista
+
+function crearEncabezadoListaLibros() {
+    const encabezado = document.createElement("div");
+    encabezado.classList.add("books-list__header");
+
+    const columnas = [
+        "Tipo",
+        "Título",
+        "Categoría",
+        "Formato",
+        "Actualización"
+    ];
+
+    columnas.forEach((texto) => {
+        const celda = document.createElement("span");
+        celda.classList.add("books-list__header-cell");
+        celda.textContent = texto;
+        encabezado.appendChild(celda);
+    });
+
+    return encabezado;
+}
+
 function construirRutaPortada(libro) {
     if (!libro || !libro.carpeta || !libro.portada) {
         return '../../img/repositoriolibros/default.jpg';
@@ -162,6 +303,7 @@ function actualizarContador(cantidad) {
 }
 
 function renderizarLibros() {
+
     if (!contenedor) {
         return;
     }
@@ -180,9 +322,29 @@ function renderizarLibros() {
         return;
     }
 
+    contenedor.classList.toggle(
+        "books-container--list",
+        vistaActiva === "list"
+    );
+
+    contenedor.classList.toggle(
+        "books-container--grid",
+        vistaActiva !== "list"
+    );
+    
+    if (vistaActiva === "list") {
+        contenedor.appendChild(crearEncabezadoListaLibros());
+    }
+
     librosFiltrados.forEach((libro) => {
-        contenedor.appendChild(crearTarjetaLibro(libro));
+    const elementoLibro =
+        vistaActiva === "list"
+            ? crearFilaLibro(libro)
+            : crearTarjetaLibro(libro);
+
+        contenedor.appendChild(elementoLibro);
     });
+
     actualizarContador(librosFiltrados.length);
 }
 

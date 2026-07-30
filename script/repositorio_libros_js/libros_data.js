@@ -115,70 +115,84 @@
           titulo: "Estructura Atómica de la Carga Eléctrica",
           autor: "Chari Fernando",
           archivoPdf: "Clase_1_Estructura_Atomica_Carga_Electrica.pdf",
-          portada: "Clase_1_Estructura_Atomica_Carga_Electrica.jpg"
+          portada: "Clase_1_Estructura_Atomica_Carga_Electrica.jpg",
+          tipo: "Plan de clase",
+          actualizado: "10-07-2026"
         },
         {
           id: "Clase_2_Electrizacion_de_la_Materia",
           titulo: "Electrización de la Materia",
           autor: "Chari Fernando",
           archivoPdf: "Clase_2_Electrizacion_de_la_Materia.pdf",
-          portada: "Clase_2_Electrizacion_de_la_Materia.jpg"
+          portada: "Clase_2_Electrizacion_de_la_Materia.jpg",
+          tipo: "Ejercicios",
+          actualizado: "10-07-2026"
         },
         {
           id: "Clase_3_Fuerza_Electrica",
           titulo: "Fuerza Eléctrica",
           autor: "Chari Fernando",
           archivoPdf: "Clase_3_Fuerza_Electrica.pdf",
-          portada: "Clase_3_Fuerza_Electrica.jpg"
+          portada: "Clase_3_Fuerza_Electrica.jpg",
+          actualizado: "10-07-2026"
         },
         {
           id: "Clase_4_Campo_Electrico",
           titulo: "Campo Eléctrico",
           autor: "Chari Fernando",
           archivoPdf: "Clase_4_Campo_Electrico.pdf",
-          portada: "Clase_4_Campo_Electrico.jpg"
+          portada: "Clase_4_Campo_Electrico.jpg",
+          tipo: "Apuntes",
+          actualizado: "10-07-2026"
         },
         {
           id: "Clase_5_Potencial_de_cargas_puntuales",
           titulo: "Potencial de Cargas Puntuales",
           autor: "Chari Fernando",
           archivoPdf: "Clase_5_Potencial_de_cargas_puntuales.pdf",
-          portada: "Clase_5_Potencial_de_cargas_puntuales.jpg"
+          portada: "Clase_5_Potencial_de_cargas_puntuales.jpg",
+          tipo: "Ejercicios",
+          actualizado: "10-07-2026"
         },
         {
           id: "Clase_6_Energia_Potencial_Electroestatica",
           titulo: "Energía de Potencial de Cargas Puntuales",
           autor: "Chari Fernando",
           archivoPdf: "Clase_6_Energia_Potencial_Electroestatica.pdf",
-          portada: "Clase_6_Energia_Potencial_Electroestatica.jpg"
+          portada: "Clase_6_Energia_Potencial_Electroestatica.jpg",
+          actualizado: "10-07-2026"
         },
         {
           id: "Clase_7_Diferencial_Potencial_Electrico",
           titulo: "Diferencial de Potencial Eléctrico",
           autor: "Chari Fernando",
           archivoPdf: "Clase_7_Diferencial_Potencial_Electrico.pdf",
-          portada: "Clase_7_Diferencial_Potencial_Electrico.jpg"
+          portada: "Clase_7_Diferencial_Potencial_Electrico.jpg",
+          actualizado: "10-07-2026"
         },
         {
           id: "Clase_8_Voltaje_en_campos_Uniformes",
           titulo: "Voltaje en Campos Uniformes",
           autor: "Chari Fernando",
           archivoPdf: "Clase_8_Voltaje_en_campos_Uniformes.pdf",
-          portada: "Clase_8_Voltaje_en_campos_Uniformes.jpg"
+          portada: "Clase_8_Voltaje_en_campos_Uniformes.jpg",
+          actualizado: "10-07-2026"
         },
         {
           id: "Clase_9_Carga_de_un_conductor",
           titulo: "Carga de un Conductor",
           autor: "Chari Fernando",
           archivoPdf: "Clase_9_Carga_de_un_conductor.pdf",
-          portada: "Clase_9_Carga_de_un_conductor.jpg"
+          portada: "Clase_9_Carga_de_un_conductor.jpg",
+          actualizado: "10-07-2026"
         },
         {
           id: "Clase_10_Capacitor_o_condensador_electrico",
           titulo: "Capacitor o Condensador Eléctrico",
           autor: "Chari Fernando",
           archivoPdf: "Clase_10_Capacitor_o_condensador_electrico.pdf",
-          portada: "Clase_10_Capacitor_o_condensador_electrico.jpg"
+          portada: "Clase_10_Capacitor_o_condensador_electrico.jpg",
+          actualizado: "10-07-2026"
         }
       ]
     }
