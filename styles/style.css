@@ -58,6 +58,9 @@ body {
     --icon-settings: url(../img/botones/btn-bn-tools.svg);
 
     --icon-opacity: 1;
+
+    --size-categorias: 700;
+    --size-categorias-count: 600;
 }
 
 [cambio = "darkMode"]{
@@ -916,6 +919,351 @@ nav.menu_nav .content__content a {
     }
     .main_s3{
         padding-bottom: 1em;
+    }
+
+}
+
+
+.lesson-plans-repository {
+    width: 95%;
+    padding: 2em 0 1em;
+    --lesson-plans-icon-header: url("../img/botones/btns-repositorio-clases/btn-header-clases.svg");
+    --lesson-plans-icon-header-dark: url("../img/botones/btns-repositorio-clases/btn-BN-header-clases.svg");
+    --lesson-plans-icon-count: url("../img/botones/btns-repositorio-clases/btn-librosdisponibles.svg");
+    --lesson-plans-icon-count-dark: url("../img/botones/btns-repositorio-clases/btn-BN-librosdisponibles.svg");
+    --lesson-plans-icon-search: url("../img/botones/btns-repositorio-libros/btn-buscar.svg");
+    --lesson-plans-icon-search-dark: url("../img/botones/btns-repositorio-libros/btn-BN-buscar.svg");
+    --lesson-plans-icon-grid: url("../img/botones/btns-repositorio-libros/btn-BN-cuadricula.svg");
+    --lesson-plans-icon-grid-dark: url("../img/botones/btns-repositorio-libros/btn-cuadricula.svg");
+    --lesson-plans-icon-list: url("../img/botones/btns-repositorio-libros/btn-lista.svg");
+    --lesson-plans-icon-list-dark: url("../img/botones/btns-repositorio-libros/btn-BN-lista.svg");
+    --lesson-plans-icon-header-mecanicanewtoniana: url("../img/botones/btns-repositorio-clases/btn-header-mecanicanewtoniana.svg");
+    --lesson-plans-icon-header-mecanicanewtoniana-dark: url("../img/botones/btns-repositorio-clases/btn-BN-header-mecanicanewtoniana.svg");
+    --lesson-plans-icon-header-cdiferencial: url("../img/botones/btns-repositorio-clases/btn-header-cdiferencial.svg");
+    --lesson-plans-icon-header-cdiferencial-dark: url("../img/botones/btns-repositorio-clases/btn-BN-header-cdiferencial.svg");
+}
+
+.lesson-plans-repository__header {
+    width: 100%;
+    display: flex;
+    margin-bottom: 1.8em;
+    justify-content: space-between;
+    gap: 1.5em;
+}
+
+.lesson-plans-repository__title {
+    display: inline-flex;
+    align-items: center;
+    gap: .45em;
+}
+
+.lesson-plans-repository__heading h1 {
+    margin-top: .12em;
+    color: #071b5c;
+    font-size: 2.4em;
+    line-height: 1.1;
+}
+
+.lesson-plans-repository__summary {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
+.lesson-plans-repository__counter {
+    display: inline-flex;
+    align-items: center;
+    gap: .55em;
+    min-height: 2.8em;
+    padding: .65em 1em;
+    border: 1px solid #cfe0f7;
+    border-radius: 8px;
+    color: #0646c8;
+    background-color: #f7fbff;
+    font-size: 1em;
+    font-weight: var(--size-categorias);
+    white-space: nowrap;
+}
+
+.lesson-plans-repository__counter::before {
+    content: "";
+    width: 1.35em;
+    height: 1.35em;
+    flex: 0 0 1.35em;
+    background-image: var(--lesson-plans-icon-count);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.lesson-plans-repository__toolbar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+}
+
+.lesson-plans-repository__search {
+    flex: 1 1 18em;
+    min-width: min(100%, 18em);
+    position: relative;
+}
+
+.lesson-plans-repository__search::before {
+    content: "";
+    position: absolute;
+    left: 1em;
+    top: 50%;
+    width: 1.25em;
+    height: 1.25em;
+    pointer-events: none;
+    transform: translateY(-50%);
+    background-image: var(--lesson-plans-icon-search);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.lesson-plans-repository__view-button {
+    min-width: 6.8em;
+    min-height: 2.55em;
+    padding: 0 .8em;
+    border: 0;
+    border-radius: 6px;
+    color: #071b5c;
+    background-color: transparent;
+    cursor: pointer;
+    font: inherit;
+    font-weight: var(--size-categorias);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .45em;
+    transition: background-color .18s ease, color .18s ease;
+}
+
+.lesson-plans-repository__view-button::before {
+    content: "";
+    width: 1.15em;
+    height: 1.15em;
+    flex: 0 0 1.15em;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.lesson-plans-repository__view-button[data-view="grid"]::before {
+    background-image: var(--lesson-plans-icon-grid-dark);
+}
+
+.lesson-plans-repository__view-button[data-view="list"]::before {
+    background-image: var(--lesson-plans-icon-list-dark);
+}
+
+.lesson-plans-repository__search-input:focus,
+.lesson-plans-repository__view-button:focus-visible {
+    outline: 3px solid rgba(6, 70, 200, 0.28);
+    outline-offset: 2px;
+}
+
+.lesson-plans-repository__view-button:hover {
+    background-color: #eaf2ff;
+}
+
+.lesson-plans-repository__view-button.is-active {
+    color: #ffffff;
+    background-color: var(--bg-categorias);
+}
+
+.lesson-plans-repository__view-button[data-view="grid"].is-active::before {
+    background-image: var(--lesson-plans-icon-grid);
+}
+
+.lesson-plans-repository__view-button[data-view="list"].is-active::before {
+    background-image: var(--lesson-plans-icon-list);
+}
+
+.lesson-plans-repository__visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.lesson-plans-repository__search-input {
+    width: 100%;
+    min-height: 3.2em;
+    padding: 0 1em 0 3em;
+    border: 1px solid #cfe0f7;
+    border-radius: 8px;
+    color: #071b5c;
+    background-color: #ffffff;
+    font: inherit;
+}
+
+.lesson-plans-repository__search-input::placeholder {
+    color: #6f7f9e;
+}
+
+.lesson-plans-repository__view-options {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: .75em;
+}
+
+.lesson-plans-repository__sequence {
+    min-height: 3.2em;
+    padding: 0 1em;
+    border: 1px solid #cfe0f7;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    color: #52617d;
+    background-color: #ffffff;
+    font-weight: var(--size-categorias);
+    white-space: nowrap;
+}
+
+.lesson-plans-repository__view-toggle {
+    min-height: 3.2em;
+    padding: .25em;
+    border: 1px solid #cfe0f7;
+    border-radius: 8px;
+    display: inline-flex;
+    gap: .25em;
+    background-color: #ffffff;
+}
+
+.lesson-plans-repository__summary:empty,
+.lesson-plans-repository__counter:empty,
+.lesson-plans-repository__toolbar:empty {
+    display: none;
+}
+
+[cambio="darkMode"] .lesson-plans-repository__view-button {
+    color: #eaf2ff;
+}
+
+[cambio="darkMode"] .lesson-plans-repository__view-button[data-view="grid"]::before {
+    background-image: var(--lesson-plans-icon-grid);
+}
+
+[cambio="darkMode"] .lesson-plans-repository__view-button[data-view="list"]::before {
+    background-image: var(--lesson-plans-icon-list);
+}
+
+[cambio="darkMode"] .lesson-plans-repository__view-button:hover {
+    background-color: #202c35;
+}
+
+[cambio="darkMode"] .lesson-plans-repository__view-button.is-active {
+    color: #071b5c;
+    background-color: #79a8ff;
+}
+
+[cambio="darkMode"] .lesson-plans-repository__view-button[data-view="grid"].is-active::before {
+    background-image: var(--lesson-plans-icon-grid-dark);
+}
+
+[cambio="darkMode"] .lesson-plans-repository__view-button[data-view="list"].is-active::before {
+    background-image: var(--lesson-plans-icon-list-dark);
+}
+
+[cambio="darkMode"] .lesson-plans-repository__counter,
+[cambio="darkMode"] .lesson-plans-repository__search-input,
+[cambio="darkMode"] .lesson-plans-repository__sequence,
+[cambio="darkMode"] .lesson-plans-repository__view-toggle {
+    border-color: #4c5d75;
+    color: #eaf2ff;
+    background-color: #182025;
+}
+
+[cambio="darkMode"] .lesson-plans-repository__counter::before {
+    background-image: var(--lesson-plans-icon-count-dark);
+}
+
+[cambio="darkMode"] .lesson-plans-repository__heading h1 {
+    color: #eaf2ff;
+}
+
+[cambio="darkMode"] .lesson-plans-repository__search-input::placeholder {
+    color: #9fb1c9;
+}
+
+[cambio="darkMode"] .lesson-plans-repository__search::before {
+    background-image: var(--lesson-plans-icon-search-dark);
+}
+
+[cambio="darkMode"] .lesson-plans-repository__empty {
+    color: #c6d1e5;
+}
+
+.lesson-plans-repository__title::before {
+    content: "";
+    width: 1.45em;
+    height: 1.45em;
+    flex: 0 0 1.45em;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.lesson-plans-repository[data-plans-category="mecanica-newtoniana"] .lesson-plans-repository__title::before {
+    background-image: var(--lesson-plans-icon-header-mecanicanewtoniana);
+}
+
+[cambio="darkMode"] .lesson-plans-repository[data-plans-category="mecanica-newtoniana"] .lesson-plans-repository__title::before {
+    background-image: var(--lesson-plans-icon-header-mecanicanewtoniana-dark);
+}
+
+.lesson-plans-repository[data-plans-category="calculo-diferencial"] .lesson-plans-repository__title::before {
+    background-image: var(--lesson-plans-icon-header-cdiferencial);
+}
+
+[cambio="darkMode"] .lesson-plans-repository[data-plans-category="calculo-diferencial"] .lesson-plans-repository__title::before {
+    background-image: var(--lesson-plans-icon-header-cdiferencial-dark);
+}
+
+.lesson-plans-repository__description {
+    color: #52617d;
+    font-size: 1.15em;
+}
+
+[cambio="darkMode"] .lesson-plans-repository__description {
+    color: #c6d1e5;
+}
+
+@media only screen and (max-width: 430px){
+
+    .lesson-plans-repository__header,
+    .lesson-plans-repository__toolbar,
+    .lesson-plans-repository__view-options {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .lesson-plans-repository__summary {
+        justify-content: flex-start;
+    }
+
+    .lesson-plans-repository__search,
+    .lesson-plans-repository__sequence,
+    .lesson-plans-repository__view-toggle {
+        width: 100%;
+        flex: none;
+    }
+
+    .lesson-plans-repository__view-button {
+        flex: 1 1 0;
+        min-width: 0;
     }
 
 }

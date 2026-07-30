@@ -2226,3 +2226,39 @@ input[type=range] {
 }
 }
 
+/*RESPONSIVE DEL HEADER DE LA PAGINA REPOSITORIO DE CLASES */
+@media only screen and (max-width: 1050px) {
+	.main .autores-profile-section {
+		grid-template-columns: 4.4em minmax(0, 1fr);
+	}
+
+	.autores-page__hero-illustration {
+		display: none;
+	}
+
+}
+
+@media only screen and (max-width: 720px) {
+	.main {
+		padding-inline: 1em;
+	}
+
+	.main .autores-profile-section {
+		width: 100%;
+		grid-template-columns: 1fr;
+		text-align: center;
+	}
+
+	.main .autores-profile-section__icon {
+		justify-self: center;
+		max-width: 260px;
+	}
+
+}
+
+@media only screen and (max-width: 430px) {
+	.main .autores-profile-section {
+		padding: 1.2em;
+	}
+
+}
