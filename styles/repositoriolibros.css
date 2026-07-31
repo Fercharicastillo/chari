@@ -647,24 +647,8 @@ MENU  BTN-DARKMODE
     background-position: center;
 }
 
-.home-toc-chapter-name{
-    width: 100%;
-    height: 2.2em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: .35em;
-    text-align: center;
-    line-height: 1.1;
-    font-size: 1.3em;
-    border-top: 1px solid #d1d1d1;
-    background-color: #5cafcd1f;
-    justify-content: space-between;
-    padding: 0 0.7em 0 0.7em;
-}
-
 .home-toc-chapter-name::after,
-.home-toc-chapter-name-go{
+.home-toc-chapter-name-go {
     content: "";
     width: 1.15em;
     height: 1.15em;
@@ -1128,4 +1112,54 @@ nav.menu_nav-libros .content__content a {
 		padding: 1.2em;
 	}
 
+}
+
+/*Estilos para el tag de cada card contador de libros*/
+
+.libros__counter-resources{
+    font-size: 0.8em;
+    opacity: 0.8;
+    border-left: 1px solid var(--border);
+    padding-left: 0.3em;
+}
+
+.repositorio-libros-cards .libros__counter-resources {
+    grid-column: 1;
+    grid-row: 2;
+    padding-left: 0;
+    border-left: 0;
+    color: #7a7a7a;
+    opacity: 0.9;
+    font-size: .82em;
+}
+
+.repositorio-libros-cards .home-toc-chapter-name {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    min-height: 2.2em;
+    height: auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 2.6em;
+    grid-template-rows: auto auto;
+    align-content: center;
+    align-items: center;
+    gap: .2em .8em;
+    border-top: 1px solid #d1d1d1;
+    background-color: #5cafcd1f;
+    color: var(--text-color-hapter-name);
+    text-align: left;
+    padding: .3em 0.7em .3em 0.7em;
+    line-height: 1.1;
+    font-size: 1.3em;
+}
+
+.repositorio-libros-cards .home-toc-card a {
+    height: 15.96em;
+    display: flex;
+    flex-direction: column;
+}
+
+[cambio="darkMode"] .repositorio-libros-cards .libros__counter-resources {
+    color: #c6d1e5;
 }

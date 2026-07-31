@@ -29,6 +29,7 @@ body {
     --btn-menu-bg-color: rgb(29, 29, 29);
     --bg-img-toc-card: #ffff;
     --bg-menu: #ffffff;
+    --bg-h2-titulo: #dceafd;
     --btn-top: #0000004d;
     --btn-top-axis: #ffff;
     --menu-current-part: #66a8df41;
@@ -38,6 +39,7 @@ body {
 
     --hover-index: #0860a841;
     --hover-btn-menu: #a9aeb38c;
+    --bg-categorias: #0860a8;
     
     --btn-menu: url(../img/botones/btn-menuW.svg);
     --icon-logo-index: url(../img/namepageW.svg);
@@ -56,6 +58,12 @@ body {
     --icon-adobeapps: url(../img/botones/btn-bn-adobe.svg);
     --icon-operativesystem: url(../img/botones/btn-bn-system.svg);
     --icon-settings: url(../img/botones/btn-bn-tools.svg);
+    --icon-btnvideo:url(../img/botones/btns-repositorio-clases/btn-video.svg);
+    --btn-menu-evaluacion:url(../img/botones/btns-repositorio-clases/btn-evaluacion.svg);
+    --icon-class-pdf:url(../img/botones/btns-repositorio-clases/btn-pdf.svg);
+    --icon-class-simuldor:url(../img/botones/btns-repositorio-clases/btn-simulador.svg);
+    --icon-class-expandir:url(../img/botones/btns-repositorio-clases/btn-expandir.svg);
+    --icon-class-comprimir:url(../img/botones/btns-repositorio-clases/btn-comprimir.svg);
 
     --icon-opacity: 1;
 
@@ -81,6 +89,7 @@ body {
     --color-shdow-img: #5f5e5e; 
     --color-input-DM: #ffffff33; 
     --bg-img-toc-card: #dadada66;
+    --bg-h2-titulo:#9fadb2;
     --bg-menu: #000000;
     --btn-top: #cbc6c64d;
     --btn-top-axis: #ffff;
@@ -109,6 +118,12 @@ body {
     --icon-adobeapps: url(../img/botones/btn-wh-adobe.svg);
     --icon-operativesystem: url(../img/botones/btn-wh-system.svg);
     --icon-settings: url(../img/botones/btn-wh-tools.svg);
+    --icon-btnvideo:url(../img/botones/btns-repositorio-clases/btn-BN-video.svg);
+    --btn-menu-evaluacion:url(../img/botones/btns-repositorio-clases/btn-BN-evaluacion.svg);
+    --icon-class-pdf:url(../img/botones/btns-repositorio-clases/btn-BN-pdf.svg);
+    --icon-class-simuldor:url(../img/botones/btns-repositorio-clases/btn-BN-simulador.svg);
+    --icon-class-expandir:url(../img/botones/btns-repositorio-clases/btn-BN-expandir.svg);
+    --icon-class-comprimir:url(../img/botones/btns-repositorio-clases/btn-BN-comprimir.svg);
 }
 
 .container__grid{
@@ -937,6 +952,8 @@ nav.menu_nav .content__content a {
     --lesson-plans-icon-grid-dark: url("../img/botones/btns-repositorio-libros/btn-cuadricula.svg");
     --lesson-plans-icon-list: url("../img/botones/btns-repositorio-libros/btn-lista.svg");
     --lesson-plans-icon-list-dark: url("../img/botones/btns-repositorio-libros/btn-BN-lista.svg");
+    --lesson-plans-icon-simulator: url("../img/botones/btn_simuladores.svg");
+    --lesson-plans-icon-simulator-dark: url("../img/botones/btn_BN_simuladores.svg");
     --lesson-plans-icon-header-mecanicanewtoniana: url("../img/botones/btns-repositorio-clases/btn-header-mecanicanewtoniana.svg");
     --lesson-plans-icon-header-mecanicanewtoniana-dark: url("../img/botones/btns-repositorio-clases/btn-BN-header-mecanicanewtoniana.svg");
     --lesson-plans-icon-header-cdiferencial: url("../img/botones/btns-repositorio-clases/btn-header-cdiferencial.svg");
@@ -1026,6 +1043,16 @@ nav.menu_nav .content__content a {
     background-size: contain;
 }
 
+.books-repository__view-button.is-active {
+    color: #ffffff;
+    background-color: var(--bg-categorias);
+}
+
+[cambio="darkMode"] .books-repository__view-button.is-active {
+    color: #071b5c;
+    background-color: #79a8ff;
+}
+
 .lesson-plans-repository__view-button {
     min-width: 6.8em;
     min-height: 2.55em;
@@ -1068,7 +1095,7 @@ nav.menu_nav .content__content a {
     outline-offset: 2px;
 }
 
-.lesson-plans-repository__view-button:hover {
+.lesson-plans-repository__view-button:hover,.lesson-plans-repository__sequence:hover {
     background-color: #eaf2ff;
 }
 
@@ -1126,10 +1153,28 @@ nav.menu_nav .content__content a {
     border-radius: 8px;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
+    gap: .45em;
     color: #52617d;
     background-color: #ffffff;
     font-weight: var(--size-categorias);
     white-space: nowrap;
+    cursor: pointer;
+}
+
+.lesson-plans-repository__sequence::before {
+    background-image: var(--icon-class-expandir);
+    content: "";
+    width: 1.15em;
+    height: 1.15em;
+    flex: 0 0 1.15em;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.lesson-plans-repository__sequence.is-expanded::before {
+  background-image: var(--icon-class-comprimir); 
 }
 
 .lesson-plans-repository__view-toggle {
@@ -1241,6 +1286,210 @@ nav.menu_nav .content__content a {
     color: #c6d1e5;
 }
 
+.lesson-plans-list {
+    width: 95%;
+    margin: 1em 0 2em;
+    border: 1px solid #cfe0f7;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #ffffff;
+    box-shadow: 0 10px 24px rgba(7, 27, 92, 0.08);
+}
+
+.lesson-plans-list__header,
+.lesson-plans-list__row {
+    display: grid;
+    grid-template-columns: 1.35fr 1.6fr .85fr 1.65fr;
+    align-items: center;
+    gap: 1em;
+}
+
+.lesson-plans-list__header {
+    min-height: 3.2em;
+    padding: 0.78em 1.15em;
+    color: #071b5c;
+    background-color:var(--bg-h2-titulo);
+    font-weight: var(--size-categorias);
+}
+
+.lesson-plans-list__header-cell{
+    min-width: 0; 
+    border-right: 1px solid #878787;
+    letter-spacing: 0;
+    white-space: nowrap;
+    font-size: 0.92em;
+}
+
+
+
+.lesson-plans-list__row {
+    padding: .85em 1em;
+}
+
+.lesson-plans-list__row {
+    min-height: 4.2em;
+    border-top: 1px solid #dce7f7;
+    color: #071b5c;
+    background-color: #ffff;
+    transition: background-color .18s ease, box-shadow .18s ease;
+}
+
+.lesson-plans-list__row:hover {
+    background-color: #f7fbff;
+    box-shadow: inset 4px 0 0 #0860a8;
+}
+
+[cambio="darkMode"] .lesson-plans-list__row:hover {
+    background-color: #202c35;
+    box-shadow: inset 4px 0 0 #79a8ff;
+}
+
+.lesson-plans-list__cell--chapter {
+    font-weight: var(--size-categorias);
+    min-width: 0;
+    color: #0069B4;
+    text-decoration: none;
+}
+
+[cambio="darkMode"] .lesson-plans-list__cell--chapter {
+    color: #9fc5ff;
+}
+
+.lesson-plans-list__cell--chapternumber{
+    margin-top: .25em;
+    color: #5a6782;
+    font-size: .9em;
+    line-height: 1.25;
+    font-weight: normal;
+}
+
+[cambio="darkMode"] .lesson-plans-list__cell--chapternumber {
+    color: #c6d1e5;
+}
+
+.lesson-plans-list__cell--class, .lesson-plans-list__cell--updated {
+    max-width: max-content; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: .35em .7em;
+    border-radius: 999px;
+    font-size: .9em;
+    font-weight: var(--size-categorias);
+}
+
+.lesson-plans-list__cell--class {
+    color: #0f6633;
+    background-color: #e7f7ee;
+}
+
+.lesson-plans-list__cell--updated {
+    color: #52617d;
+    background-color: #f2f6fb;
+}
+
+.lesson-plans-list__cell--actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .45em;
+}
+
+.lesson-plans-list__action {
+    min-height: 2.4em;
+    padding: 0 .75em;
+    border: 1px solid #cfe0f7;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: .45em;
+    color: #0646c8;
+    background-color: #ffffff;
+    font: inherit;
+    font-weight: var(--size-categorias);
+    cursor: pointer;
+}
+
+.lesson-plans-list__action::before {
+    content: "";
+    width: 1.1em;
+    height: 1.1em;
+    flex: 0 0 1.1em;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.lesson-plans-list__action--video::before {
+    background-image: var(--icon-btnvideo);
+}
+
+.lesson-plans-list__action--evaluation::before {
+    background-image: var(--btn-menu-evaluacion);
+}
+
+.lesson-plans-list__action--pdf::before {
+    background-image: var(--icon-class-pdf);
+}
+
+.lesson-plans-list__action--simulator::before {
+    background-image: var(--icon-class-simuldor);
+}
+
+.lesson-plans-list__action:hover:not(:disabled) {
+    border-color: #0860a8;
+    background-color: #eaf2ff;
+}
+
+.lesson-plans-list__action:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+[cambio="darkMode"] .lesson-plans-list {
+    border-color: #4c5d75;
+    background-color: #121617;
+    box-shadow: none;
+}
+
+[cambio="darkMode"] .lesson-plans-list__header {
+    color: #eaf2ff;
+    background: linear-gradient(90deg, #202c35, #2b3d4c)
+}
+
+[cambio="darkMode"] .lesson-plans-list__row {
+    border-top-color: #4c5d75;
+    color: #eaf2ff;
+    background-color: #182025;
+}
+
+[cambio="darkMode"] .lesson-plans-list__row:hover {
+    background-color: #182025;
+}
+
+[cambio="darkMode"] .lesson-plans-list__cell--class {
+    color: #dff8e8;
+    background-color: #214333;
+}
+
+[cambio="darkMode"] .lesson-plans-list__cell--updated {
+    color: #ffffff;
+    background-color: #202c35;
+}
+
+[cambio="darkMode"] .lesson-plans-list__action {
+    border-color: #4c5d75;
+    color: #eaf2ff;
+    background-color: #182025;
+}
+
+[cambio="darkMode"] .lesson-plans-list__action:hover:not(:disabled) {
+    border-color: #79a8ff;
+    background-color: #202c35;
+}
+
+[cambio="darkMode"] .lesson-plans-list__action--simulator::before {
+    background-image: var(--lesson-plans-icon-simulator-dark);
+}
+
 @media only screen and (max-width: 430px){
 
     .lesson-plans-repository__header,
@@ -1264,6 +1513,40 @@ nav.menu_nav .content__content a {
     .lesson-plans-repository__view-button {
         flex: 1 1 0;
         min-width: 0;
+    }
+
+    .lesson-plans-list__header {
+        display: none;
+    }
+
+    .lesson-plans-list__row {
+        grid-template-columns: 1fr;
+        gap: .35em;
+        padding: .85em;
+    }
+
+    .lesson-plans-list__cell {
+        padding: .15em 0;
+    }
+
+    .lesson-plans-list__cell::before {
+        content: attr(data-label) ": ";
+        display: inline;
+        color: #52617d;
+        font-weight: var(--size-categorias);
+    }
+
+    .lesson-plans-list__cell--actions {
+        padding-top: .5em;
+    }
+
+    .lesson-plans-list__cell--actions::before {
+        display: none;
+    }
+
+    .lesson-plans-list__action {
+        flex: 1 1 calc(50% - .45em);
+        justify-content: center;
     }
 
 }

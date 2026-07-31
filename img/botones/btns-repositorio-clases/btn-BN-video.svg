@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="btndowninput" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 157.9 175.07">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <path class="cls-1" d="M148.25,104.37L28.26,172.93c-12.77,7.3-28.65-1.92-28.65-16.63V19.18c0-14.7,15.88-23.92,28.65-16.63l119.99,68.56c12.87,7.35,12.87,25.9,0,33.25Z"/>
+</svg>
