@@ -272,7 +272,7 @@ nav.menu_nav .content__content > p.current-part:hover {
 .menu p a{
     display: block;
     /* width: 100%; Se sobresale del borde del menu*/
-    height: 2em;
+    height: 2.3em;
     line-height: 2em;
     text-decoration: none;
     font-weight: 600;
@@ -645,6 +645,14 @@ nav.menu_nav .content__content > p.current-part:hover {
 }
 
 .home-toc-container{
+    --img-termodinamica: url(../img/portadas_libros/Nicolas-Carnot.png);
+    --img-termodinamica-dark: url(../img/portadas_libros/Nicolas-Carnot-dark.png);
+    --img-electromagnetismo: url(../img/portadas_libros/james-clerk-maxwell.png);
+    --img-electromagnetismo-dark: url(../img/portadas_libros/james-clerk-maxwell-dark.png);
+    --img-algebralineal: url(../img/portadas_libros/Gabriel-Crammer.png);
+    --img-algebralineal-dark: url(../img/portadas_libros/Gabriel-Crammer-dark.png);
+    --img-matesdiscretas: url(../img/portadas_libros/george-boole.png);
+    --img-matesdiscretas-dark: url(../img/portadas_libros/george-boole-dark.png);
     margin-bottom: 2em;
     display: flex;
     flex-wrap: wrap;
@@ -711,16 +719,6 @@ nav.menu_nav .content__content > p.current-part:hover {
     font-size: .95em;
     text-align: justify;
 
-}
-
-.intro-Firma{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.intro-Firma p:nth-child(1){
-    font-size: 1.5em;
 }
 
 /*FOOTER */
@@ -1785,6 +1783,7 @@ nav.menu_nav .content__content a {
 @media only screen and (max-width: 1100px) {
     .index-profile-section {
         grid-template-columns: 5.5em minmax(0, 1fr);
+        width: 95%;
     }
 
     .index-page__hero-illustration {
@@ -1794,7 +1793,7 @@ nav.menu_nav .content__content a {
 
 @media only screen and (max-width: 720px) {
     .index-profile-section {
-        width: 100%;
+        width: 95%;
         grid-template-columns: 1fr;
         gap: 1.2em;
         text-align: center;
@@ -1824,15 +1823,407 @@ nav.menu_nav .content__content a {
     }
 }
 
+.main-versiones {
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--bG);
+}
+
+.actual-version {
+    font-size: 1.5em;
+    line-height: 1.05;
+}
+
+.actual-version-text{
+    display: flex;
+    align-items: flex-end;
+}
+
+.version-page {
+    color: var(--color3);
+}
+
+.version-history {
+    display: grid;
+    gap: 1em;
+    margin-top: 1.5em;
+}
+
+.version-card {
+    padding: 1em;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background-color: var(--bG);
+}
+
+.version-card h2 {
+    margin: 0;
+    color: var(--color3);
+}
+
+.version-card__meta {
+    margin: .55em 0;
+    color: #0646c8;
+    font-weight: 700;
+}
+
+.version-card ul {
+    margin: .8em 0 0 1.2em;
+    color: var(--color3);
+}
+
+[cambio="darkMode"] .version-card__meta {
+    color: #79a8ff;
+}
+
+.main_s3-title-versiones {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: .5em;
+    margin-bottom: 3em;
+    margin-top: 3em;
+}
 
 .main_s3-title {
     display: flex;
     justify-content: center;
     align-items: flex-end;
     gap: .5em;
+    margin-bottom: 3em;
+    margin-top: 1em;
+}
+
+.main_s3-title-versiones h3 {
+    opacity: 0.5;
+    font-weight: 500;
 }
 
 .main_s3-title h3 {
     opacity: 0.5;
     font-weight: 500;
+}
+
+/*Estilos para la tarjeta del resumen del Index*/
+
+.index-summary-strip {
+    --index-summary-icon-simulators: url(../img/botones/index/header-simuladores-left.svg);
+    --index-summary-icon-simulators-dark: url(../img/botones/index/header-BN-simuladores-left.svg);
+    --index-summary-icon-classes: url(../img/botones/index/btn-header-clases.svg);
+    --index-summary-icon-classes-dark: url(../img/botones/index/btn-BN-header-clases.svg);
+    --index-summary-icon-documents: url(../img/botones/index/btn-libros.svg);
+    --index-summary-icon-documents-dark: url(../img/botones/index/btn-BN-libros.svg);
+    --index-summary-icon-authors: url(../img/botones/index/btn-autores.svg);
+    --index-summary-icon-authors-dark: url(../img/botones/index/btn-BN-autores.svg);
+
+    width: 95%;
+    margin-top: 1em;
+    padding: .9em 1.2em;
+    border: 1ox solid #cfe0f7;
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    background-color: #ffffff;
+    box-shadow: 0 8px 22px rgba( 7, 27, 92, .08);
+}
+.index-summary-strip__item {
+    min-width: 0;
+    padding: 25me 1.2em;
+    display: grid;
+    grid-template-columns: 3.8em minmax(0, 1fr);
+    align-items: center;
+    gap: .8em;
+    color: #071b5c;
+    text-decoration: none;
+}
+
+.index-summary-strip__icon + .index-summary-strip__item {
+    border-left: 1px solid #cfe0f7;
+}
+
+.index-summary-strip__icon {
+    width: 3.5em;
+    height: 3.5em;
+    border-radius: 50%;
+    background-color: #edf5ff;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 2em 2em;
+}
+
+.index-summary-strip__icon--simuladores {
+    background-image: var(--index-summary-icon-simulators);
+}
+
+.index-summary-strip__icon--clases {
+    background-image: var(--index-summary-icon-classes);
+}
+
+.index-summary-strip__icon--documentos {
+    background-image: var(--index-summary-icon-documents);
+}
+
+.index-summary-strip__icon--autores {
+    background-image: var(--index-summary-icon-authors);
+}
+
+.index-summary-strip__content {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .15em;
+    padding-right: 1em;
+}
+
+.index-summary-strip__title {
+    color: #071b5c;
+    font-size: 1em;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.index-summary-strip__count {
+    color: #0646c8;
+    font-size: .9em;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.index-summary-strip__description {
+    color: #31456f;
+    font-size: .9em;
+    line-height: 1.25;
+}
+
+/*Hover Index Menu*/
+.index-summary-strip_item:hover {
+    background-color: #f7fbff;
+}
+
+.index-summary-strip__item:hover .index-summary-strip__title {
+    color: #0646c8;
+}
+
+/*Responsive index menu*/
+
+@media only screen and (max-width: 900px) {
+    .index-summary-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .index-summary-strip__item + .index-summary-strip__item {
+        border-left: 0;
+    }
+
+    .index-summary-strip__item:nth-child(even) {
+        border-left: 1px solid #cfe0f7;
+        padding-left: 1em;
+    }
+
+    .index-summary-strip__item:nth-child(n + 3) {
+        border-top: 1px solid #cfe0f7;
+        padding-top: .9em;
+        margin-top: .65em;
+    }
+
+    .index-summary-strip__content {
+        overflow-wrap: break-word;
+    }
+}
+
+@media only screen and (max-width: 520px) {
+    .index-summary-strip {
+        grid-template-columns: 1fr;
+        padding: .4em;
+    }
+
+    .index-summary-strip__item{
+        padding: .85em;
+    }
+
+    .index-summary-strip__item,
+    .index-summary-strip__item:nth-child(even) {
+        border-left: 0;
+    }
+    .index-summary-strip__item + .index-summary-strip__item {
+        border-top: 1px solid #cfe0f7;
+    }
+
+}
+
+/*Darkmode para el menu*/
+
+[cambio="darkMode"] .index-summary-strip {
+    background-color: #182025;
+    border-color: #4c5d75;
+    box-shadow: none;
+}
+
+[cambio="darkMode"] .index-summary-strip__item {
+    color: #eaf2ff;
+}
+
+[cambio="darkMode"] .index-summary-strip__item + .index-summary-strip__item {
+    border-color: #4c5d75;
+}
+
+[cambio="darkMode"] .index-summary-strip__icon {
+    background-color: #202c35;
+}
+
+[cambio="darkMode"] .index-summary-strip__title {
+    color: #eaf2ff;
+}
+
+[cambio="darkMode"] .index-summary-strip__count {
+    color: #c6d1e5;
+}
+
+[cambio="darkMode"] .index-summary-strip__description {
+    color: #c6d1e5;
+}
+
+[cambio="darkMode"] .index-summary-strip__item:hover {
+    background-color: #202c35;
+}
+
+[cambio="darkMode"] .index-summary-strip__icon--simuladores {
+    background-image: var(--index-summary-icon-simulators-dark);
+}
+
+[cambio="darkMode"] .index-summary-strip__icon--clases {
+    background-image: var(--index-summary-icon-classes-dark);
+}
+
+[cambio="darkMode"] .index-summary-strip__icon--documentos {
+    background-image: var(--index-summary-icon-documents-dark);
+}
+
+[cambio="darkMode"] .index-summary-strip__icon--autores {
+    background-image: var(--index-summary-icon-authors-dark);
+}
+
+.etiqueta-name {
+    padding: .07em .14em;
+    margin: 0;
+    font-size: 85%;
+    background-color: hsl(240, 100%, 97%);
+    border: 1px solid hsl(240, 100%, 94%);
+}
+
+[cambio="darkMode"] .etiqueta-name {
+    background-color: #79a8ff;
+    color: black;
+}
+
+.index-introduction-subtitle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: .5em;
+    margin-top: 1em;
+}
+
+.index-introduction-subtitle h2 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: .3em;
+    align-items: center;
+    font-size: 1.5em;
+    margin-left: 0;
+    line-height: .92;
+    font-weight: 760;
+    text-align: left;
+}
+
+.index-introduction-subtitle p {
+    margin-top: 1em;
+    font-size: .95em;
+    text-align: justify;
+}
+
+.physikos-name {
+    display: flex;
+}
+
+.logo-phi {
+    font-size: 1.5em;
+    margin-right: 2px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.isikos-name{
+    font-size: 0.75em;
+    letter-spacing: 1px;
+    transform: translateY(14px);
+    height: min-content;
+    margin-left: -3px;
+}
+
+.s-tall {
+    font-size: 1.3em;
+    font-weight: 600;
+    transform: translateY(7px);
+    margin-left: -2px;
+}
+
+.img-toc-card_termodinamica {
+    width: 100%;
+    height: 11.66em;
+    background-image: var(--img-termodinamica);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+[cambio="darkMode"] .img-toc-card_termodinamica {
+    background-image: var(--img-termodinamica-dark);
+}
+
+.img-toc-card_electromagnetismo {
+    width: 100%;
+    height: 11.66em;
+    background-image: var(--img-electromagnetismo);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+[cambio="darkMode"] .img-toc-card_electromagnetismo {
+    background-image: var(--img-electromagnetismo-dark);
+}
+
+.img-toc-card_algebralineal {
+    width: 100%;
+    height: 11.66em;
+    background-image: var(--img-algebralineal);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+[cambio="darkMode"] .img-toc-card_algebralineal {
+    background-image: var(--img-algebralineal-dark);
+}
+
+.img-toc-card_matematicasdiscretas {
+    width: 100%;
+    height: 11.66em;
+    background-image: var(--img-matesdiscretas);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+[cambio="darkMode"] .img-toc-card_matematicasdiscretas {
+    background-image: var(--img-matesdiscretas-dark);
 }

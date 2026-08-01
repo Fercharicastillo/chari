@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physikós | Versiones</title>
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/overlay.css">
+    <link rel="stylesheet" href="../styles/menu_icons.css">
+    <link rel="icon" href="../img/iconHeadW.svg" class="iconhead">
+</head>
+
+<body>
+    <div class="container__grid">
+        <div class="header">
+            <div class="header_content-namePage">
+                <a href="../index.html">
+                    <div class="imgname"></div>
+                </a>
+            </div>
+            <div class="topactions">
+                <div class="content__DarkMode">
+                    <label class="darmode-btn-content" for="click-DarkMode">
+                        <i class="btn-sun"></i>
+                        <label for="click-DarkMode"></label>
+                        <input type="checkbox" id="click-DarkMode">
+                        <i class="btn-moon"></i>
+                    </label>
+                </div>
+                <div class="header_content-img"><a href="https://www.uce.edu.ec/" target="_BLANK"><img src="https://aka-cdn.uce.edu.ec/ares/tmp/logo3.png" alt="El servidor ha fallado."></a></div>
+            </div>
+        </div>
+
+        <div class="main-versiones">
+            <div class="contenido">
+                <section class="main_s3 version-page" aria-labelledby="version-page-title">
+                    <span class="main_s3-title-versiones">
+                        <h2 id="version-page-title">Historial de Versiones</h2>
+                        <h3 class="actual-version-text">v<span data-physikos-version class="actual-version">Versión</span></h3>
+                    </span>
+                    <p>Consulta los cambios principales de <span class="etiqueta-name">Physikós</span> y el avance de sus secciones.</p>
+                    <div class="version-history" data-physikos-version-history></div>
+                </section>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-left">
+                <a href="#">Licencia</a>
+                <a href="https://github.com/Fercharicastillo/chari">| Git Hub</a> 
+                <a href="../../contenido/versiones.html">| Versiones</a> 
+            </div>
+            <div class="footer-right"></div>
+        </div>
+        <div class="indicador_container">
+            <div class="indicador_scroll"></div>
+        </div>
+        <div id="btn-top" class="ocultar" title="Subir">
+            <i class="btn-up"></i>
+        </div>
+    </div>
+    <script src="../script/ui/overlay.js" defer></script>
+    <script src="../script/menu_datos.js" defer></script>
+    <script src="../script/menu_render.js" defer></script>
+    <script src="../script/menu.js" defer></script>
+    <script src="../script/flecha.js" defer></script>
+    <script src="../script/versiones/physikos_version.js" defer></script>
+</body>
+
+</html>
