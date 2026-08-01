@@ -500,7 +500,7 @@ MENU  BTN-LENGUAJE
 	background: linear-gradient(135deg, #121617, #182025 100%);
 }
 
-.main .autores-profile-section {
+.main .simulators-profile-section {
 	width: 95%;
 	margin-top: 1em;
 	border: 1px solid var(--border);
@@ -512,14 +512,18 @@ MENU  BTN-LENGUAJE
 	background: linear-gradient(120deg, rgba(255, 255, 255, .96), rgba(234, 245, 255, .82));
 	box-shadow: 0 12px 28px rgba(7, 27, 92, .08);
 	color: var(--author-ink);
+	--simulators-icon-header-left: url(../img/botones/btns-simuladores/header-simuladores-left.svg);
+	--simulators-icon-header-left-dark: url(../img/botones/btns-simuladores/header-BN-simuladores-left.svg);
+	--simulators-icon-header-right: url(../img/botones/btns-simuladores/header-simuladores-right.svg);
+	--simulators-icon-header-right-dark: url(../img/botones/btns-simuladores/header-BN-simuladores-right.svg);
 }
 
-[cambio="darkMode"] .main .autores-profile-section {
+[cambio="darkMode"] .main .simulators-profile-section {
 	background: #182025;
 	border-color: var(--border);
 }
 
-.main .autores-profile-section__icon {
+.main .simulators-profile-section__icon {
 	width: 5em;
 	height: 5em;
 	border: 1px solid var(--author-line);
@@ -528,23 +532,17 @@ MENU  BTN-LENGUAJE
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 3em 3em;
+	background-image: var(--simulators-icon-header-left);
 	box-shadow: var(--author-shadow);
 }
 
-[cambio="darkMode"] .main .autores-profile-section__icon {
+[cambio="darkMode"] .main .simulators-profile-section__icon {
 	background-color: #202c35;
 	border-color: var(--author-line);
+	background-image: var(--simulators-icon-header-left-dark);
 }
 
-.autores-profile-section__icon-autores {
-	background-image: var(--btn-clases-header);
-}
-
-[cambio="darkMode"] .autores-profile-section__icon-autores {
-	background-image: var(--btn-clases-header-dark);
-}
-
-.main .autores-profile-section-title {
+.main .simulators-profile-section__title {
 	margin: 0;
 	color: var(--author-ink);
 	font-size: var(--author-section-size);
@@ -552,7 +550,7 @@ MENU  BTN-LENGUAJE
 	line-height: 1.05;
 }
 
-.main .autores-profile-section-note {
+.main .simulators-profile-section__note {
 	margin: .8em 0 0;
 	padding: 0;
 	color: var(--author-blue);
@@ -561,14 +559,14 @@ MENU  BTN-LENGUAJE
 	line-height: 1.35;
 }
 
-[cambio="darkMode"] .main .autores-profile-section-note {
+[cambio="darkMode"] .main .simulators-profile-section__note {
 	color: #dbe7f7;
 	border-color: transparent;
 	background-color: transparent;
 }
 
 
-.main .autores-profile-section-introduction {
+.main .simulators-profile-section__introduction {
 	max-width: 660px;
 	margin: 1.15em 0 0;
 	padding: 0;
@@ -578,22 +576,116 @@ MENU  BTN-LENGUAJE
 	line-height: 1.5;
 }
 
-[cambio="darkMode"] .main .autores-profile-section-introduction {
+[cambio="darkMode"] .main .simulators-profile-section__introduction {
 	color: #dbe7f7;
 }
 
-.autores-page__hero-illustration {
+.simulators-page__hero-illustration {
 	width: 100%;
 	min-height: 11em;
 	opacity: .72;
-	background-image: var(--author-fondo-clases);
+	background-image: var(--simulators-icon-header-right);
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
 }
 
-[cambio="darkMode"] .autores-page__hero-illustration {
-	background-image: var(--author-fondo-clases-dark);
+[cambio="darkMode"] .simulators-page__hero-illustration {
+	background-image: var(--simulators-icon-header-right-dark);
+	opacity: .68;
+}
+
+.main .class-profile-section {
+	width: 95%;
+	margin-top: 1em;
+	border: 1px solid var(--border);
+	padding: 1.5em 1.5em;
+	display: grid;
+	border-radius: 5px;
+	grid-template-columns: 5em minmax(0, 1fr) minmax(180px, 28%);
+	gap: 1.8em;
+	background: linear-gradient(120deg, rgba(255, 255, 255, .96), rgba(234, 245, 255, .82));
+	box-shadow: 0 12px 28px rgba(7, 27, 92, .08);
+	color: var(--author-ink);
+	--class-icon-header-left: url(../img/botones/btns-repositorio-clases/btn-header-clases.svg);
+	--class-icon-header-left-dark: url(../img/botones/btns-repositorio-clases/btn-BN-header-clases.svg);
+	--class-icon-header-right: url(../img/botones/btns-repositorio-clases/fondo-right.svg);
+	--class-icon-header-right-dark: url(../img/botones/btns-repositorio-clases/fondo-BN-right.svg);
+}
+
+[cambio="darkMode"] .main .class-profile-section {
+	background: #182025;
+	border-color: var(--border);
+}
+
+.main .class-profile-section__icon {
+	width: 5em;
+	height: 5em;
+	border: 1px solid var(--author-line);
+	border-radius: 50%;
+	background-color: rgba(255, 255, 255, .86);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 3em 3em;
+	background-image: var(--class-icon-header-left);
+	box-shadow: var(--author-shadow);
+}
+
+[cambio="darkMode"] .main .class-profile-section__icon {
+	background-color: #202c35;
+	border-color: var(--author-line);
+	background-image: var(--class-icon-header-left-dark);
+}
+
+.main .class-profile-section__title {
+	margin: 0;
+	color: var(--author-ink);
+	font-size: var(--author-section-size);
+	font-weight: var(--author-section-weight);
+	line-height: 1.05;
+}
+
+.main .class-profile-section__note {
+	margin: .8em 0 0;
+	padding: 0;
+	color: var(--author-blue);
+	font-size: 1.35em;
+	font-weight: 700;
+	line-height: 1.35;
+}
+
+[cambio="darkMode"] .main .class-profile-section__note {
+	color: #dbe7f7;
+	border-color: transparent;
+	background-color: transparent;
+}
+
+.main .class-profile-section__introduction {
+	max-width: 660px;
+	margin: 1.15em 0 0;
+	padding: 0;
+	color: #1a2c62;
+	font-size: 1.25em;
+	font-weight: 400;
+	line-height: 1.5;
+}
+
+[cambio="darkMode"] .main .class-profile-section__introduction {
+	color: #dbe7f7;
+}
+
+.class-page__hero-illustration {
+	width: 100%;
+	min-height: 11em;
+	opacity: .72;
+	background-image: var(--class-icon-header-right);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+}
+
+[cambio="darkMode"] .class-page__hero-illustration {
+	background-image: var(--class-icon-header-right-dark);
 	opacity: .68;
 }
 
@@ -2222,13 +2314,15 @@ input[type=range] {
 }
 }
 
-/*RESPONSIVE DEL HEADER DE LA PAGINA REPOSITORIO DE CLASES */
+/*RESPONSIVE DEL HEADER DE LA PAGINA SIMULADORES */
 @media only screen and (max-width: 1050px) {
-	.main .autores-profile-section {
+	.main .simulators-profile-section,
+	.main .class-profile-section {
 		grid-template-columns: 4.4em minmax(0, 1fr);
 	}
 
-	.autores-page__hero-illustration {
+	.simulators-page__hero-illustration,
+	.class-page__hero-illustration {
 		display: none;
 	}
 
@@ -2239,13 +2333,15 @@ input[type=range] {
 		padding-inline: 1em;
 	}
 
-	.main .autores-profile-section {
+	.main .simulators-profile-section,
+	.main .class-profile-section {
 		width: 100%;
 		grid-template-columns: 1fr;
 		text-align: center;
 	}
 
-	.main .autores-profile-section__icon {
+	.main .simulators-profile-section__icon,
+	.main .class-profile-section__icon {
 		justify-self: center;
 		max-width: 260px;
 	}
@@ -2253,7 +2349,8 @@ input[type=range] {
 }
 
 @media only screen and (max-width: 430px) {
-	.main .autores-profile-section {
+	.main .simulators-profile-section,
+	.main .class-profile-section {
 		padding: 1.2em;
 	}
 
