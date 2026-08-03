@@ -1,6 +1,18 @@
 (function () {
     const versiones = [
         {
+            numero: "0.1.1",
+            fecha: "2026-08-02",
+            titulo: "Mejoras y correcciones en el sistema de evaluaciones",
+            cambios: [
+                "Función de disponibilidad de cards.",
+                "Ajuste de colores del modo oscuro para el bloque main_s2_evaluaciones del sistema de evaluaciones.",
+                "Ubicación del botón de finalizar intento a la derecha de 'Anterior' en dispositivos móviles.",
+                "Ajuste del loader page para que ocupe toda la pantalla y no solo el espacio restante del menú principal.",
+                "Corrección del botón (quiz-floating-nav-btn) para abrir el panel flotante de preguntas en dispositivos móviles."
+            ]
+        },
+        {
             numero: "0.0.9",
             fecha: "2026-08-01",
             titulo: "Creacion de controlador de versiones",
