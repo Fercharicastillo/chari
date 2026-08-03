@@ -453,6 +453,9 @@
   }
 
   .quiz-floating-nav-btn::before {
+    -webkit-appearance: none; /* Safari y Chrome */
+    -moz-appearance: none; /* Firefox */
+    appearance: none; /* estándar CSS moderno */
     content: "";
     position: fixed;
     right: 12px;
@@ -463,7 +466,8 @@
     padding: 0;
     border: none;
     background: var(--btn-top);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.24);
+    -webkit-box-shadow: 0 4px 14px rgba(0, 0, 0, 0.24);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.24);
     cursor: pointer;
     background-image: var(--img-floating-nav);
     background-size: 1.5em 1.5em;
