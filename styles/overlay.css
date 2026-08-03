@@ -2,7 +2,7 @@
 .ui-overlay {
     position: fixed;
     inset: 0;
-    z-index: 900;
+    z-index: 2;
     background: var(--backgroundmenu);
     opacity: 0;
     pointer-events: none;
@@ -24,7 +24,7 @@
 
 .ui-overlay.ui-overlay--content {
     position: absolute;
-    z-index: 20;
+    z-index: 2;
 }
 
 body.ui-overlay-open {

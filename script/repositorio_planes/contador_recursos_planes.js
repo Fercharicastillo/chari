@@ -25,8 +25,29 @@
     document.querySelectorAll("[data-recursos-capitulos]").forEach(function (contador) {
       const repositorioId = contador.dataset.recursosCapitulos;
       const capitulos = obtenerCapitulosPorId(repositorioId);
+      const totalcapitulos = contarCapitulos(capitulos);
 
-      contador.textContent = obtenerEtiquetaCapitulos(contarCapitulos(capitulos));
+      contador.textContent = obtenerEtiquetaCapitulos(totalcapitulos);
+
+      if (totalcapitulos > 0) {
+        return;
+      }
+
+      const card = contador.closest(".home-toc-card");
+    
+      if (!card) {
+        return;
+      }
+
+      card.classList.add("is-unavailable");
+    
+      if (!card.querySelector(".home-toc-card__availability")) {
+        const availabilityCard = document.createElement("span");
+        availabilityCard.classList.add("home-toc-card__availability");
+        availabilityCard.textContent = "No disponible";
+        card.appendChild(availabilityCard);
+      }
+
     });
   }
 

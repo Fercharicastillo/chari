@@ -1,6 +1,16 @@
 (function () {
     const versiones = [
         {
+            numero: "0.0.9",
+            fecha: "2026-08-01",
+            titulo: "Creacion de controlador de versiones",
+            cambios: [
+                "Rediseño del bloque de introducción en la pagina index.",
+                "Creacion de la logica para controlar las versiones de Physikos",
+                "Incorporación de las versiones en el footer"
+            ]
+        },
+        {
             numero: "0.0.8",
             fecha: "2026-08-01",
             titulo: "Actualización visual del inicio",

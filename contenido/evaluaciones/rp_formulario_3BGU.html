@@ -134,6 +134,7 @@
             <div class="botones_preguntas">
                     <button id="btnAnterior" type="button" onclick="preguntaAnterior()">Anterior</button>
                     <button id="btnSiguiente" type="button" onclick="preguntaSiguiente()">Siguiente</button>
+                    <button id="btnFinalizar" class="quiz-confirm-submit" type="button">Finalizar</button>
             </div>
 
             <div id="resultadoQuizFinal"></div>
@@ -169,8 +170,8 @@
             <!-- CODEX: añadido para confirmar la finalización del intento con un modal interno -->
             <div class="quiz-confirm-overlay" id="quizConfirmModal" hidden aria-hidden="true">
                 <div class="quiz-confirm-modal" role="dialog" aria-modal="true" aria-labelledby="quizConfirmTitle" aria-describedby="quizConfirmText">
-                    <h3 id="quizConfirmTitle">&iquest;Desea finalizar el intento?</h3>
-                    <p id="quizConfirmText">Una vez finalizado, se mostrar&aacute;n las respuestas y la retroalimentaci&oacute;n.</p>
+                    <h3 id="quizConfirmTitle">¿Desea finalizar el intento?</h3>
+                    <p id="quizConfirmText">Una vez finalizado, se mostrarán las respuestas y la retroalimentación.</p>
                     <div class="quiz-confirm-actions">
                         <button class="quiz-confirm-cancel" type="button">Cancelar</button>
                         <button class="quiz-confirm-submit" type="button">Finalizar intento</button>
@@ -194,11 +195,7 @@
         </div>
 
         <!-- CODEX: añadido para abrir la navegación del cuestionario desde un botón flotante móvil -->
-        <button class="quiz-floating-nav-btn ocultar" data-floating-scroll type="button" aria-controls="quizNavigationPanel" aria-expanded="false" aria-label="Abrir navegación del cuestionario">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
+        <button class="quiz-floating-nav-btn ocultar" data-floating-scroll type="button" aria-controls="quizNavigationPanel" aria-expanded="false" aria-label="Abrir navegación del cuestionario"></button>
         <div id="btn-top" class="ocultar" title="Subir">
             <i class="btn-up"></i>
         </div>

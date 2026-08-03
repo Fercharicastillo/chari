@@ -17,6 +17,7 @@
     --icon-btnstartclock: url(../img/botones/btn-start-clock.svg);
     --icon-btnstopclock: url(../img/botones/btn-stop-clock.svg);
     --btn-libros-go: url(../img/botones/btns-repositorio-libros/btn-trayectoria.svg);
+    --img-sim-mru: url(../img/simuladores/portadas/portada-sim-mru.png);
 }
 
 [cambio = "darkMode"]{
@@ -25,6 +26,7 @@
     --bg-menu-canvas: #f3f3f3;
 
     --btn-libros-go: url(../img/botones/btns-repositorio-libros/btn-BN-trayectoria.svg);
+    --img-sim-mru: url(../img/simuladores/portadas/portada-sim-mru-dark.png);
 }
 
 .container__grid__sim{
@@ -872,6 +874,7 @@ MENU  BTN-LENGUAJE
     margin-right: 1em;
     border: 1px solid var(--border);
 }
+
 .home-toc-card:hover{
     transform: scale(.99);
 }
@@ -884,6 +887,7 @@ MENU  BTN-LENGUAJE
     color: var(--color2);
     background-color: var(--bg-img-toc-card);
 }
+
 .home-toc-card a:hover{
     background-color: #5cafcd1f;
 }
@@ -891,6 +895,15 @@ MENU  BTN-LENGUAJE
 .img-toc-card {
     width: 22.91em;
     height: 11.66em;
+}
+
+.img-toc-card__mru {
+    width: 100%;
+    height: 11.66em;
+    background-image: var(--img-sim-mru);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 /*Edit-Texto-Introduccion*/
@@ -935,7 +948,7 @@ MENU  BTN-LENGUAJE
     grid-row: 3 / 4;
     width: 100%;
     height: 3.5em;
-    z-index: 3;
+    z-index: 902;
     position: fixed;
     bottom: 0;
     border-top: 1px solid var(--border);
@@ -1204,7 +1217,7 @@ nav.menu_nav-libros .content__content a {
 /*INICIA LOS ESTILOS DEL MENU DE SIMULADORES*/
 /*Cargando*/
 .loader-page {
-    grid-column: 2 / 3;
+    grid-column: 1 / 3;
     grid-row: 2 / 3;
     align-self: stretch;
     justify-self: stretch;
@@ -2191,6 +2204,9 @@ canvas{
     grid-column: 2 / 3;
     grid-row: 4 / 5;
 }
+.loader-page{
+    background-size: 28em 15em;
+}
 }
 
 @media only screen and (max-width: 430px) {
@@ -2355,3 +2371,5 @@ input[type=range] {
 	}
 
 }
+
+

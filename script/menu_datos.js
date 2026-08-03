@@ -148,7 +148,7 @@ window.PhysikosMenuItems = [
   },
   {
     id: "hoja-vida",
-    texto: "Hoja de vida",
+    texto: "Autores",
     clase: "menu-hoja-vida",
     href: "contenido/autores/autores.html",
     // CODEX: añadido para reutilizar los subitems de Hoja de vida en sus paginas

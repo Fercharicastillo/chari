@@ -84,8 +84,46 @@
                     <div class="index-page__hero-illustration" aria-hidden="true"></div>
             </header>
 
+            <section class="index-summary-strip" aria-label="Resumen de secciones principales">
+                <a class="index-summary-strip__item" href="contenido/simuladores/simuladores.html" data-summary-key="simuladores">
+                    <span class="index-summary-strip__icon index-summary-strip__icon--simuladores" aria-hidden="true"></span>
+                    <span class="index-summary-strip__content">
+                    <strong class="index-summary-strip__title">Simuladores</strong>
+                    <span class="index-summary-strip__count" data-summary-count>0 simuladores</span>
+                    <span class="index-summary-strip__description">Interactivos y educativos</span>
+                    </span>
+                </a>
 
-            <section class="main_s2">
+                <a class="index-summary-strip__item" href="contenido/repositorio_planes/repositorio_planes.html" data-summary-key="clases">
+                    <span class="index-summary-strip__icon index-summary-strip__icon--clases" aria-hidden="true"></span>
+                    <span class="index-summary-strip__content">
+                    <strong class="index-summary-strip__title">Repositorio de Clases</strong>
+                    <span class="index-summary-strip__count" data-summary-count>0 áreas temáticas</span>
+                    <span class="index-summary-strip__description">Clases, apuntes y materiales</span>
+                    </span>
+                </a>
+
+                <a class="index-summary-strip__item" href="contenido/repositorio_libros/repositorio_libros.html" data-summary-key="documentos">
+                    <span class="index-summary-strip__icon index-summary-strip__icon--documentos" aria-hidden="true"></span>
+                    <span class="index-summary-strip__content">
+                    <strong class="index-summary-strip__title">Repositorio de Documentos</strong>
+                    <span class="index-summary-strip__count" data-summary-count>0 documentos</span>
+                    <span class="index-summary-strip__description">Libros, guías y artículos</span>
+                    </span>
+                </a>
+
+                <a class="index-summary-strip__item" href="contenido/autores/autores.html" data-summary-key="autores">
+                    <span class="index-summary-strip__icon index-summary-strip__icon--autores" aria-hidden="true"></span>
+                    <span class="index-summary-strip__content">
+                    <strong class="index-summary-strip__title">Autores y Trayectorias</strong>
+                    <span class="index-summary-strip__count" data-summary-count>0 autores</span>
+                    <span class="index-summary-strip__description">Docentes e investigadores</span>
+                    </span>
+                </a>
+            </section>
+
+
+            <section class="main_s2 index-cards">
                     <!--EdtidSection 1-->
                     <div class="home-toc-section">
                         <div class="index-subtitle__heading-simulador">
@@ -97,31 +135,34 @@
                                 <a href="./contenido/simuladores/pendulo_simple.html">
                                     <img class="img-toc-card" src="./img/Pendulo Simple.png" alt="El servidor ha fallado.">
                                     <span class="home-toc-chapter-name">
-                                        Mecánica Clásica: Péndulo Simple
+                                        Mecánica Clásica:
+                                        <span class="home-toc-chapter-name-subchapter">Péndulo Simple</span>
                                     </span>
                                 </a>
                             </div>
-                            <div class="home-toc-card">
-                                <a href="#">
+                            <div class="home-toc-card" data-available ="false">
+                                <a>
                                     <img class="img-toc-card" src="./img/Pendulo Doble.png" alt="El servidor ha fallado.">
                                     <span class="home-toc-chapter-name">
-                                        Mecánica Clásica: Péndulo Doble
+                                        Mecánica Clásica:
+                                        <span class="home-toc-chapter-name-subchapter">Péndulo Doble</span>
                                     </span>
                                 </a>
                             </div>
                             <div class="home-toc-card" id="g-1">
-                                <a href="#">
-                                    <img class="img-toc-card" src="./img/Pendulo Triple.png" alt="El servidor ha fallado.">
+                                <a href="contenido/simuladores/sim_mru.html">
+                                    <img class="img-toc-card__mru">
                                     <span class="home-toc-chapter-name">
-                                        Mecánica Clásica: Péndulo Triple
+                                        Mecánica Newtoniana:
+                                        <span class="home-toc-chapter-name-subchapter">Movimienro Rectilíneo Uniforme</span>
                                     </span>
                                 </a>
                             </div>
-                            <div class="home-toc-card" id="g-1">
-                                <a href="#">
-                                    <img class="img-toc-card" src="../../img/Geometria_angulos1.png" >
+                            <div class="home-toc-card" data-available ="false">
+                                <a>
+                                    <img class="img-toc-card" src="./img/Geometria_angulos1.png" >
                                     <span class="home-toc-chapter-name">
-                                        Geometría 4:
+                                        Geometría: 
                                         <span class="home-toc-chapter-name-subchapter">Propiedades de ángulos</span>
                                     </span>
                                 </a>
@@ -139,7 +180,8 @@
                                 <a href="https://graficarferchari.shinyapps.io/graficador_app" target="_BLANK">
                                     <img class="img-toc-card" src="./img/Creciente.png" alt="El servidor ha fallado.">
                                     <span class="home-toc-chapter-name">
-                                        Graficador: Función Creciente
+                                        Graficador:
+                                        <span class="home-toc-chapter-name-subchapter">Función Creciente</span>
                                     </span>
                                 </a>
                             </div>
@@ -147,7 +189,8 @@
                                 <a href="https://graficarferchari.shinyapps.io/graficador_app1">
                                     <img class="img-toc-card" src="./img/Creciente.png" alt="El servidor ha fallado.">
                                     <span class="home-toc-chapter-name">
-                                        Graficador: Función Decreciente
+                                        Graficador:
+                                        <span class="home-toc-chapter-name-subchapter">Función Decreciente</span>
                                     </span>
                                 </a>
                             </div>
@@ -155,7 +198,8 @@
                                 <a href="https://graficarferchari.shinyapps.io/graficador_app2">
                                      <img class="img-toc-card" src="./img/Lineal.png" alt="El servidor ha fallado.">
                                     <span class="home-toc-chapter-name">
-                                        Graficador: Función Lineal
+                                        Graficador:
+                                        <span class="home-toc-chapter-name-subchapter">Función Lineal</span>
                                     </span>
                                 </a>
                             </div>
@@ -173,32 +217,36 @@
                                 <a href="./contenido/proyectos/tesis.html">
                                     <img class="img-toc-card" src="./img/Tesis.png" alt="El servidor ha fallado.">
                                     <span class="home-toc-chapter-name">
-                                        Proyecto: Tesis 
+                                        Proyecto:
+                                        <span class="home-toc-chapter-name-subchapter">Tesis </span>
                                     </span>
                                 </a>
                             </div>
 
                             <div class="home-toc-card">
-                                <a href="#">
+                                <a href="contenido/proyectos/sitemas_caoticos.html">
                                     <img class="img-toc-card" src="./img/Articulo.png" alt="El servidor ha fallado.">
                                     <span class="home-toc-chapter-name">
-                                        Artículo: Sistemas Caóticos
+                                        Artículo:
+                                        <span class="home-toc-chapter-name-subchapter">Sistemas Caóticos</span>
                                     </span>
                                 </a>
                             </div>
                             <div class="home-toc-card">
-                                <a href="#">
+                                <a href="contenido/proyectos/examenes_aleatorios.html">
                                     <img class="img-toc-card" src="./img/Examenes Aleatorios.png" alt="El servidor ha fallado.">
                                     <span class="home-toc-chapter-name">
-                                        Artículo: Examenes Aleatorios
+                                        Artículo:
+                                        <span class="home-toc-chapter-name-subchapter">Examenes Aleatorios</span>
                                     </span>
                                 </a>
                             </div>
                             <div class="home-toc-card">
-                                <a href="#">
-                                    <img class="img-toc-card" src="../../img/Series_de_Balmer.png">
+                                <a href="contenido/proyectos/series_de_balmer.html">
+                                    <img class="img-toc-card" src="./img/Series_de_Balmer.png">
                                     <span class="home-toc-chapter-name">
-                                        Artículo: Series de Balmer
+                                        Artículo: 
+                                        <span class="home-toc-chapter-name-subchapter">Series de Balmer</span>
                                     </span>
                                 </a>
                             </div>
@@ -207,39 +255,41 @@
 
                     <div class="home-toc-section">
                         <div class="index-subtitle__heading-proyecto">
-                            <span class="index-subtitle__icon-proyecto" aria-hidden="true"></span>
+                            <span class="index-subtitle__icon-clases" aria-hidden="true"></span>
                             <h2 id="index-subtitle-title-proyecto">Clases</h2>
                         </div>
                         <div class="home-toc-container">
                             <div class="home-toc-card">
-                                <a href="rp_mecanica_cálculo diferencial.html">
-                                    <img class="img-toc-card" src="../../img/Calculo_Diferencial.png">
+                                <a href="contenido/repositorio_planes/rp_mecanica_cálculo diferencial.html">
+                                    <img class="img-toc-card" src="./img/Calculo_Diferencial.png">
                                     <span class="home-toc-chapter-name">
                                         Cálculo Diferencial
                                     </span>
                                 </a>
                             </div>
                             <div class="home-toc-card">
-                                <a href="#">
-                                    <img class="img-toc-card" src="../../img/Calculo_Integral.png">
+                                <a href="contenido/repositorio_planes/rp_mecanica_newtoniana.html">
+                                    <img class="img-toc-card" src="../../img/Mecanica_Newtoniana_Formulas.png">
                                     <span class="home-toc-chapter-name">
-                                        Cálculo Integral
+                                        Mecánica Newtoniana
                                     </span>
                                 </a>
                             </div>
-                            <div class="home-toc-card">
-                                <a href="#">
-                                    <img class="img-toc-card" src="../../img/EDO.png">
+                            <div class="home-toc-card" data-available ="false">
+                                <a>
+                                    <img class="img-toc-card" src="./img/EDO.png">
                                     <span class="home-toc-chapter-name">
                                         Ecuaciones Diferenciales Ordinarias
+                                        <span class="home-toc-chapter-name-subchapter"></span>
                                     </span>
                                 </a>
                             </div>
-                            <div class="home-toc-card">
-                                <a href="#">
-                                    <img class="img-toc-card" src="../../img/EDP.png">
+                            <div class="home-toc-card" data-available ="false">
+                                <a>
+                                    <img class="img-toc-card" src="./img/EDP.png">
                                     <span class="home-toc-chapter-name">
                                         Ecuaciones Diferenciales Parciales
+                                        <span class="home-toc-chapter-name-subchapter"></span>
                                     </span>
                                 </a>
                             </div>
@@ -248,7 +298,7 @@
 
                     <div class="home-toc-section">
                         <div class="index-subtitle__heading-proyecto">
-                            <span class="index-subtitle__icon-proyecto" aria-hidden="true"></span>
+                            <span class="index-subtitle__icon-documentos" aria-hidden="true"></span>
                             <h2 id="index-subtitle-title-proyecto">Documentos</h2>
                         </div>
                         <div class="home-toc-container">
@@ -374,6 +424,8 @@
     <script src="script/menu_render.js" defer></script>
     <script src="script/menu.js" defer></script>
     <script src="script/flecha.js" defer></script>
+    <script src="script/index/indexsummary.js" defer></script>
     <script src="script/versiones/physikos_version.js" defer></script>
+    <script src="script/cards_disponibilidad.js" defer></script>
 </body>
 </html>

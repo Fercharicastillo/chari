@@ -714,7 +714,7 @@ MENU  BTN-DARKMODE
     grid-row: 3 / 4;
     width: 100%;
     height: 3.5em;
-    z-index: 3;
+    z-index: 902;
     position: fixed;
     bottom: 0;
     border-top: 1px solid var(--border);

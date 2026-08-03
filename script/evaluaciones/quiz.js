@@ -51,6 +51,7 @@
     const preguntas = obtenerPreguntas();
     const btnAnterior = document.getElementById("btnAnterior");
     const btnSiguiente = document.getElementById("btnSiguiente");
+    const btnFinalizar = document.getElementById("btnFinalizar");
 
     if (!btnAnterior || !btnSiguiente || preguntas.length === 0) return;
 
@@ -65,9 +66,13 @@
     if (preguntaActual === preguntas.length - 1) {
       btnSiguiente.classList.add("oculto");
       btnSiguiente.classList.remove("visible");
+      btnFinalizar.classList.add("visible");
+      btnFinalizar.classList.remove("oculto");
     } else {
       btnSiguiente.classList.add("visible");
       btnSiguiente.classList.remove("oculto");
+      btnFinalizar.classList.add("oculto");
+      btnFinalizar.classList.remove("visible");
     }
   }
 

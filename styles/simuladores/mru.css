@@ -1065,7 +1065,7 @@ input[type="range"]::-webkit-slider-thumb { /*linea del deslizador
 /*CARGANDO LA PAGINA*/
 .loader-page {
     /* CODEX: modificado para cubrir toda el area main del simulador sin tapar menu ni header */
-    grid-column: 2 / 3;
+    grid-column: 1 / 3;
     grid-row: 2 / 3;
     align-self: stretch;
     justify-self: stretch;
@@ -1183,6 +1183,10 @@ input[type="range"]::-webkit-slider-thumb { /*linea del deslizador
 
   .mru-info-card-img {
     flex-basis: 100%;
+  }
+
+  .loader-page {
+    background-size: 28em 15em;
   }
 }
 
