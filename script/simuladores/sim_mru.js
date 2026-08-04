@@ -121,14 +121,54 @@
     return coincidencia ? coincidencia[1] : "";
   }
 
-  function cargarImagen(src) {
-    return new Promise((resolve, reject) => {
-      const imagen = new Image();
-      imagen.onload = () => resolve(imagen);
-      imagen.onerror = reject;
-      imagen.src = src;
-    });
+  // Obtener las urls del HTML mru y no del CSS porque en Safiri no se procesa igual el CSS
+  function obtenerUrlDesdeCanvas(nombre) {
+    const ruta = elementos.canvas.dataset[nombre];
+
+    if (!ruta) {
+      console.error(`No se encontró data-${nombre} en el canvas.`);
+      return "";
+    }
+
+    return new URL(ruta, document.baseURI).href;
   }
+
+  // verificacion de subida correcta de fondo y carro
+  function resolverUrlAsset(src) {
+    if (!src) {
+      return "";
+    }
+
+    try {
+      return new URL(src, document.baseURI).href;
+    } catch (error) {
+      console.error("No se pudo resolver la URL del asset:", src, error);
+      return "";
+    }
+  }
+
+  // Cambios para cargar correctamente el fondo y el carro
+  function cargarImagen(url) {
+  return new Promise((resolve, reject) => {
+    if (!url) {
+      reject(new Error("La URL de la imagen está vacía."));
+      return;
+    }
+
+    const imagen = new Image();
+
+    imagen.onload = () => {
+      console.log("Imagen cargada:", url);
+      resolve(imagen);
+    };
+
+    imagen.onerror = () => {
+      reject(new Error(`No se pudo cargar la imagen: ${url}`));
+    };
+
+    imagen.src = url;
+  });
+}
 
   // CODEX: modificado para pintar el tiempo propio del cronometro visual independiente del MRU
   function actualizarCronometroVisual(segundos) {
@@ -1241,22 +1281,37 @@
     dibujarTodo();
   };
 
-  async function iniciarSimulador() {
-    try {
-      const [fondo, carro] = await Promise.all([
-        cargarImagen(obtenerUrlCss("--img-mru-fondo")),
-        cargarImagen(obtenerUrlCss("--img-mru-carro"))
-      ]);
-      imagenes.fondo = fondo;
-      imagenes.carro = carro;
-    } catch (error) {
-      console.error("No se pudieron cargar todas las imagenes del simulador MRU.", error);
-    }
 
-    registrarEventos();
-    habilitarArrastreCronometro();
-    reiniciarSimuladorCompleto();
+  // Verificacion si esta cargando correctamente el fondo y el carro
+  async function iniciarSimulador() {
+  const urlFondo = obtenerUrlDesdeCanvas("fondo");
+  const urlCarro = obtenerUrlDesdeCanvas("carro");
+
+  console.log("URL fondo:", urlFondo);
+  console.log("URL carro:", urlCarro);
+
+  try {
+    const [fondo, carro] = await Promise.all([
+      cargarImagen(urlFondo),
+      cargarImagen(urlCarro)
+    ]);
+
+    imagenes.fondo = fondo;
+    imagenes.carro = carro;
+
+    // Obliga a regenerar el cache con la imagen ya cargada.
+    fondoCacheEstado.listo = false;
+  } catch (error) {
+    console.error(
+      "No se pudieron cargar todas las imágenes del simulador MRU.",
+      error
+    );
   }
+
+  registrarEventos();
+  habilitarArrastreCronometro();
+  reiniciarSimuladorCompleto();
+}
 
   iniciarSimulador();
   
