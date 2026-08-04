@@ -452,28 +452,34 @@
     display: none;
   }
 
-  .quiz-floating-nav-btn::before {
+  .quiz-floating-nav-btn {
     -webkit-appearance: none; /* Safari y Chrome */
     -moz-appearance: none; /* Firefox */
     appearance: none; /* estándar CSS moderno */
-    content: "";
     position: fixed;
     right: 12px;
-    bottom: calc(2.5em + 56px);
+    bottom: calc(2.5em + 60px);
     z-index: 999;
-    width: 2.5em;
-    height: 2.7em;
-    padding: 0;
-    border: none;
+    width: 2.8em;
+    height: 3em;
     background: var(--btn-top);
-    -webkit-box-shadow: 0 4px 14px rgba(0, 0, 0, 0.24);
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.24);
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .quiz-floating-nav-btn-img {
+    width: 1.2em;
+    height: 1.2em;
+    padding: 1px;
     background-image: var(--img-floating-nav);
     background-size: 1.5em 1.5em;
     background-repeat: no-repeat;
     background-position: center;
   }
+
 }
 
 /* CODEX: añadido para mostrar un modal interno al finalizar el intento */

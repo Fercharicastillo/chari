@@ -634,9 +634,21 @@ MENU  BTN-DARKMODE
     align-items: center;
 }
 
-#btn-top:hover {
-    cursor: pointer;
-    transform: scale(1.1);
+
+#btn-top, 
+.quiz-floating-nav-btn {
+    transition:
+        transform 120ms ease,
+        box-shadow 120ms ease,
+        background-color 120ms ease;
+}
+
+#btn-top:active,
+.quiz-floating-nav-btn:active {
+    transform:
+        scale(.9);
+    box-shadow:
+        0 2px 6px rgba(0,0,0,.25);
 }
 
 .btn-up{
