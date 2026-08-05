@@ -74,7 +74,7 @@ window.PhysikosMenuItems = [
       {
         id: "examenes-aleatorios",
         texto: "Examenes Aleatorios",
-        href: "contenido/proyectos/examenes_aleatorios.html"
+        href: "https://fercharicastillo.github.io/generador-examenes-physikos/"
       },
       {
         id: "redaccion-libros",
