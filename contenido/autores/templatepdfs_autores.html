@@ -43,8 +43,8 @@
         <div class="menu menu_dsm">
             <nav class="menu_nav-libros">
                 <!--<div class="content__search"></div>-->
-                <!-- CODEX: modificado para renderizar el menu lateral del visor de curriculums de autores desde datos reutilizables -->
-                <div class="content__content" data-menu-render data-menu-base="../../" data-menu-current="hoja-vida" data-menu-submenus="true"></div>
+                <!-- CODEX: modificado para renderizar el menú del visor de documentos de autores desde datos reutilizables -->
+                <div class="content__content" data-menu-render data-menu-base="../../" data-menu-current="hoja-vida" data-menu-submenus="true" data-menu-subcurrent="chari-fernando"></div>
                 <!--<div class="content__Lenguaje-libros">
                     <span>Lenguaje</span>
                     <label class="lenguaje-btn-content" for="click-lenguaje">
@@ -82,13 +82,17 @@
 <script src="../../script/menu.js" defer></script>
 <script src="../../script/flecha.js" defer></script>
 <script defer type="text/javascript">
-                // CODEX: modificado para cargar el curriculum PDF activo y avisar si no existe una ruta guardada
+                // CODEX: modificado para cargar currículums o publicaciones con un título accesible
                 document.addEventListener("DOMContentLoaded", function() {
                     var pdfSrc = sessionStorage.getItem('pdfSrc');
+                    var pdfTitulo = sessionStorage.getItem('pdfTitulo') || 'Documento de autor';
                     if (pdfSrc) {
-                    document.getElementById('pdfViewer').src = pdfSrc;
+                    var visor = document.getElementById('pdfViewer');
+                    visor.src = pdfSrc;
+                    visor.title = 'Visor de PDF: ' + pdfTitulo;
+                    document.title = pdfTitulo + ' | Physikós';
                     } else {
-                    console.error("No se encontro pdfSrc para mostrar el curriculum. Abre esta pagina desde un boton de autores.");
+                    console.error("No se encontró pdfSrc. Abre esta página desde un documento de autores.");
                     }
                 });
 </script>

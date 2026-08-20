@@ -55,7 +55,16 @@
         </div>
 
         <div class="main" id="main-despleglabe">
-            <section class="author-profile" aria-labelledby="author-profile-title">
+            <!-- CODEX: añadido para reunir el perfil y las publicaciones del autor sin crear nuevas categorías principales -->
+            <nav class="author-tabs" aria-label="Secciones de Chari Fernando">
+                <div class="author-tabs__list" role="tablist" aria-label="Contenido del autor">
+                    <button class="author-tabs__tab is-active" id="author-tab-perfil" type="button" role="tab" aria-selected="true" aria-controls="author-panel-perfil" data-author-tab="perfil">Perfil</button>
+                    <button class="author-tabs__tab" id="author-tab-articulos" type="button" role="tab" aria-selected="false" aria-controls="author-panel-articulos" tabindex="-1" data-author-tab="articulos">Artículos</button>
+                    <button class="author-tabs__tab" id="author-tab-libros" type="button" role="tab" aria-selected="false" aria-controls="author-panel-libros" tabindex="-1" data-author-tab="libros">Libros</button>
+                </div>
+            </nav>
+
+            <section class="author-profile author-tabs__panel" id="author-panel-perfil" role="tabpanel" aria-labelledby="author-tab-perfil" data-author-panel="perfil">
                 <main class="author-profile__main">
                     <section class="author-profile__section author-profile__section--timeline" aria-labelledby="author-work-title">
                         <header class="author-profile__section-header author-profile__section-header--work">
@@ -250,6 +259,80 @@
 
                 </aside>
             </section>
+
+            <!-- CODEX: añadido para presentar los artículos como obras del autor y conservar su búsqueda por tema -->
+            <section class="author-works author-tabs__panel" id="author-panel-articulos" role="tabpanel" aria-labelledby="author-tab-articulos" data-author-panel="articulos" hidden>
+                <header class="author-works__header">
+                    <p class="author-profile__eyebrow">Publicaciones de Chari Fernando</p>
+                    <h1>Artículos</h1>
+                    <p>Trabajos académicos y publicaciones relacionados con Matemática, Física y educación.</p>
+                </header>
+                <label class="author-works__search">
+                    <span>Buscar artículos</span>
+                    <input type="search" placeholder="Buscar por título o tema" autocomplete="off" data-author-work-search="articulos">
+                </label>
+                <div class="author-works__grid" data-author-work-list="articulos">
+                    <article class="author-work-card" data-author-work="tesis investigacion educacion fisica movimiento rectilineo uniforme r sweave">
+                        <span class="author-work-card__type">Tesis</span>
+                        <h2>Influencia de un Software Programado en R-Sweave</h2>
+                        <p>Trabajo de investigación sobre representación de datos experimentales en Movimiento Rectilíneo Uniforme.</p>
+                        <a href="templatepdfs_autores.html" data-publicacion-pdf="tesis-r-sweave">Abrir tesis en PDF</a>
+                    </article>
+                    <article class="author-work-card" data-author-work="sistemas caoticos matematica fisica dinamica">
+                        <span class="author-work-card__type">Artículo</span>
+                        <h2>Sistemas Caóticos</h2>
+                        <p>Estudio académico sobre sistemas dinámicos y comportamiento caótico.</p>
+                        <a href="templatepdfs_autores.html" data-publicacion-pdf="sistemas-caoticos">Abrir artículo en PDF</a>
+                    </article>
+                    <article class="author-work-card" data-author-work="series de balmer fisica moderna espectroscopia">
+                        <span class="author-work-card__type">Artículo</span>
+                        <h2>Series de Balmer</h2>
+                        <p>Trabajo relacionado con espectros atómicos y Física Moderna.</p>
+                        <a href="templatepdfs_autores.html" data-publicacion-pdf="series-balmer">Abrir artículo en PDF</a>
+                    </article>
+                    <article class="author-work-card" data-author-work="generacion examenes aleatorios educacion evaluacion r latex">
+                        <span class="author-work-card__type">Artículo</span>
+                        <h2>Generación de Exámenes Aleatorios</h2>
+                        <p>Publicación académica asociada al desarrollo de evaluaciones individualizadas.</p>
+                        <span class="author-work-card__status">PDF pendiente</span>
+                    </article>
+                    <article class="author-work-card" data-author-work="software graficacion articulo matematica r visualizacion">
+                        <span class="author-work-card__type">Artículo</span>
+                        <h2>Software de Graficación</h2>
+                        <p>Artículo sobre herramientas de representación y visualización matemática.</p>
+                        <span class="author-work-card__status">PDF pendiente</span>
+                    </article>
+                </div>
+                <p class="author-works__empty" data-author-work-empty="articulos" hidden>No se encontraron artículos con ese criterio.</p>
+            </section>
+
+            <!-- CODEX: añadido para reunir libros y proyectos editoriales del autor -->
+            <section class="author-works author-tabs__panel" id="author-panel-libros" role="tabpanel" aria-labelledby="author-tab-libros" data-author-panel="libros" hidden>
+                <header class="author-works__header">
+                    <p class="author-profile__eyebrow">Obras y materiales de Chari Fernando</p>
+                    <h1>Libros</h1>
+                    <p>Obras extensas con indexación editorial o proyectadas para una futura publicación editorial.</p>
+                </header>
+                <label class="author-works__search">
+                    <span>Buscar libros</span>
+                    <input type="search" placeholder="Buscar por título o tema" autocomplete="off" data-author-work-search="libros">
+                </label>
+                <div class="author-works__grid" data-author-work-list="libros">
+                    <article class="author-work-card" data-author-work="algebra superior libro matematica proyecto editorial">
+                        <span class="author-work-card__type">Proyecto editorial</span>
+                        <h2>Álgebra Superior</h2>
+                        <p>Proyecto de redacción y desarrollo de un libro de Matemática.</p>
+                        <a href="templatepdfs_autores.html" data-publicacion-pdf="algebra-superior">Abrir libro en PDF</a>
+                    </article>
+                    <article class="author-work-card" data-author-work="software graficacion libro matematica visualizacion r">
+                        <span class="author-work-card__type">Libro</span>
+                        <h2>Software de Graficación</h2>
+                        <p>Obra vinculada al uso de software para representar y analizar información matemática.</p>
+                        <a href="templatepdfs_autores.html" data-publicacion-pdf="software-graficacion-libro">Abrir libro en PDF</a>
+                    </article>
+                </div>
+                <p class="author-works__empty" data-author-work-empty="libros" hidden>No se encontraron libros con ese criterio.</p>
+            </section>
         </div>
 
         <div class="footer">
@@ -276,6 +359,12 @@
     <script src="../../script/menu_datos.js" defer></script>
     <script src="../../script/menu_render.js" defer></script>
     <script src="../../script/menu.js" defer></script>
+    <!-- CODEX: añadido para controlar las pestañas y búsquedas del perfil del autor -->
+    <script src="../../script/autores/perfil_tabs.js" defer></script>
+    <!-- CODEX: añadido para construir y abrir las publicaciones con el visor PDF.js público -->
+    <script src="../../script/helpers/rutas_pdf.js" defer></script>
+    <script src="../../script/autores/publicaciones_data.js" defer></script>
+    <script src="../../script/autores/publicacionespdf.js" defer></script>
     <script src="../../script/flecha.js" defer></script>
     <script src="../../script/versiones/physikos_version.js" defer></script>
 </body>

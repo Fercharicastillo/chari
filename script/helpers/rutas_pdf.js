@@ -8,6 +8,7 @@
     librosAlgebraLineal: "pdfs_repositorio_libros/algebra_lineal/",
     librosRepositorio: "pdfs_repositorio_libros/",
     libroselectromagnetismo: "pdfs_repositorio_libros/electromagnetismo/",
+    publicacionesAutores: "pdfs_proyectos/",
   };
 
   function limpiarSegmento(segmento) {
@@ -53,6 +54,15 @@
     );
   }
 
+  // CODEX: añadido para abrir tesis, artículos y libros editoriales con el visor público de Physikos
+  function construirPdfPublicacionAutor(archivo) {
+    if (!archivo) return "";
+
+    return construirUrlViewerPdf(
+      unirSegmentos([RUTAS_PDF.publicacionesAutores, archivo])
+    );
+  }
+
   window.PhysikosRutasPdf = {
     BASE_PUBLICA,
     RUTA_VISOR_PDF,
@@ -60,6 +70,7 @@
     construirUrlViewerPdf,
     construirPdfPlanesMecanica,
     construirPdfLibroAlgebraLineal,
-    construirPdfLibro
+    construirPdfLibro,
+    construirPdfPublicacionAutor
   };
 })(window);

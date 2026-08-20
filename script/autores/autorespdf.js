@@ -49,6 +49,8 @@
         }
 
         sessionStorage.setItem("pdfSrc", pdfSrc);
+        sessionStorage.setItem("pdfTitulo", `Currículum de ${autor.nombre}`);
+        sessionStorage.setItem("pdfTipo", "Currículum");
         sessionStorage.setItem("autorPdfActivo", autor.id);
         window.location.href = boton.getAttribute("href") || RUTA_TEMPLATE_AUTORES;
     }

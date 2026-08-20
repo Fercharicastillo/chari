@@ -3,7 +3,6 @@
   function inicializarSubmenusMenu() {
     const seccionesConSubmenu = [
       "menu-simuladores",
-      "menu-graficadores",
       "menu-proyectos",
       "menu-repositorio-planes",
       "menu-repositorio-libros",

@@ -26,12 +26,17 @@ window.PhysikosMenuItems = [
     ]
   },
   {
-    id: "graficadores",
-    texto: "Graficadores",
-    clase: "menu-graficadores",
-    href: "contenido/graficadores/graficadores.html",
-    // CODEX: añadido para reutilizar los subitems externos de Graficadores
+    id: "proyectos",
+    texto: "Aplicaciones",
+    clase: "menu-proyectos",
+    href: "contenido/proyectos/proyectos.html",
+    // CODEX: modificado para reunir las aplicaciones actuales y futuras de Physikos
     subitems: [
+      {
+        id: "examenes-aleatorios",
+        texto: "Generador de Exámenes",
+        href: "https://fercharicastillo.github.io/generador-examenes-physikos/"
+      },
       {
         id: "funcion-creciente",
         texto: "Función Creciente",
@@ -46,50 +51,6 @@ window.PhysikosMenuItems = [
         id: "funcion-lineal",
         texto: "Función Lineal",
         href: "https://graficarferchari.shinyapps.io/graficador_app2/"
-      }
-    ]
-  },
-  {
-    id: "proyectos",
-    texto: "Proyectos",
-    clase: "menu-proyectos",
-    href: "contenido/proyectos/proyectos.html",
-    // CODEX: añadido para reutilizar los subitems de Proyectos en todas sus paginas
-    subitems: [
-      {
-        id: "tesis",
-        texto: "Tesis",
-        href: "contenido/proyectos/tesis.html"
-      },
-      {
-        id: "sistemas-caoticos",
-        texto: "Sistemas Caóticos",
-        href: "contenido/proyectos/sitemas_caoticos.html"
-      },
-      {
-        id: "series-balmer",
-        texto: "Series de Balmer",
-        href: "contenido/proyectos/series_de_balmer.html"
-      },
-      {
-        id: "examenes-aleatorios",
-        texto: "Examenes Aleatorios",
-        href: "https://fercharicastillo.github.io/generador-examenes-physikos/"
-      },
-      {
-        id: "redaccion-libros",
-        texto: "Redacción de Libros",
-        href: "contenido/proyectos/algebra_superior.html"
-      },
-      {
-        id: "software-libro",
-        texto: "Software de Graficación (Libro)",
-        href: "contenido/proyectos/software_libro.html"
-      },
-      {
-        id: "software-articulo",
-        texto: "Software de Graficación (Artículo)",
-        href: "contenido/proyectos/software_articulo.html"
       }
     ]
   },
@@ -117,7 +78,7 @@ window.PhysikosMenuItems = [
     texto: "Repositorio de Documentos",
     clase: "menu-repositorio-libros",
     href: "contenido/repositorio_libros/repositorio_libros.html",
-    // CODEX: añadido para reutilizar las categorias del Repositorio de Libros en sus paginas
+    // CODEX: restaurado para mantener los documentos breves separados de los libros editoriales
     subitems: [
       {
         id: "algebra-lineal",
