@@ -1,0 +1,16 @@
+{
+  "name": "@physikos/simuladores",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "simulator-ui",
+    "simulador-mruv",
+    "simulador-caida-libre"
+  ],
+  "scripts": {
+    "dev:mruv": "npm run dev -w @physikos/simulador-mruv",
+    "dev:caida-libre": "npm run dev -w @physikos/simulador-caida-libre",
+    "build:embed:mruv": "npm run build:embed -w @physikos/simulador-mruv",
+    "build:embed:caida-libre": "npm run build:embed -w @physikos/simulador-caida-libre"
+  }
+}

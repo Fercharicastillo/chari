@@ -1,0 +1,21 @@
+{
+  "name": "@physikos/simulator-ui",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./styles.css": "./src/simulator-ui.css",
+    "./assets/timer44.svg": "./src/assets/timer44.svg"
+  },
+  "peerDependencies": {
+    "katex": "^0.18.4",
+    "react": "^19.2.8"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.18",
+    "katex": "^0.18.4",
+    "react": "^19.2.8",
+    "typescript": "^7.0.2"
+  }
+}
