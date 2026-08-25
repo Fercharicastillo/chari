@@ -4,27 +4,186 @@
   --sim-physika: url("./physics/btn-libros-fisica.svg");
 }
 
+.mruv-stage {
+  display: grid;
+  min-width: 0;
+  gap: 8px;
+  container-type: inline-size;
+}
+
+.mruv-experiment-panel {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  container-type: inline-size;
+}
+
+.mruv-zoom-toolbar {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+  color: #38547e;
+  font-size: 0.76rem;
+  font-weight: 750;
+}
+
+.mruv-zoom-toolbar__label {
+  margin-right: 2px;
+}
+
+.mruv-zoom-button,
+.mruv-zoom-focus {
+  display: inline-grid;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 9px;
+  place-items: center;
+  border: 1px solid #b9c9df;
+  border-radius: 7px;
+  color: #123a7c;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(9, 36, 95, 0.12);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+}
+
+.mruv-zoom-button {
+  padding: 0;
+  font-size: 1.05rem;
+}
+
+.mruv-zoom-button:hover:not(:disabled),
+.mruv-zoom-focus:hover:not(:disabled) {
+  border-color: #4b8de8;
+  background: #f0f6ff;
+}
+
+.mruv-zoom-button:focus-visible,
+.mruv-zoom-focus:focus-visible,
+.mruv-scene-viewport--zoomed:focus-visible {
+  outline: 3px solid #ffbf47;
+  outline-offset: 2px;
+}
+
+.mruv-zoom-button:disabled,
+.mruv-zoom-focus:disabled {
+  cursor: not-allowed;
+  opacity: 0.42;
+}
+
+.mruv-zoom-value {
+  min-width: 47px;
+  padding: 6px 4px;
+  border-radius: 6px;
+  color: #09245f;
+  background: #edf4fd;
+  text-align: center;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+}
+
+.mruv-zoom-toolbar__separator {
+  width: 1px;
+  height: 22px;
+  margin-inline: 3px;
+  background: #ccd8e8;
+}
+
+.mruv-zoom-focus--active {
+  border-color: #075dde;
+  color: #fff;
+  background: #0021b4;
+  box-shadow: 0 2px 6px rgba(7, 93, 222, 0.24);
+}
+
+.mruv-zoom-focus--active:hover:not(:disabled) {
+  background: #0751c5;
+}
+
+.mruv-scene-viewport {
+  width: 100%;
+  min-width: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 1px solid #d5e0ef;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.mruv-scene-viewport--zoomed {
+  max-height: clamp(340px, 48vw, 560px);
+  scrollbar-gutter: stable;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.mruv-scene-viewport--panning {
+  cursor: grabbing;
+}
+
+.mruv-zoom-canvas {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  background: #fff;
+}
+
 .track-panel {
   position: relative;
   container-type: inline-size;
-  min-height: 620px;
+  box-sizing: border-box;
+  min-height: 480px;
   padding: 18px;
   overflow: hidden;
+  transform-origin: top left;
 }
 
 .instrument-header {
   position: relative;
-  z-index: 3;
+  z-index: 5;
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 16px;
+}
+
+.timer44-drag {
+  position: absolute;
+  z-index: 4;
+  width: clamp(180px, 30%, 200px);
+  border-radius: 8px;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.timer44-drag:hover,
+.timer44-drag--dragging {
+  outline: 2px dashed rgba(7, 93, 222, 0.58);
+  outline-offset: 4px;
+}
+
+.timer44-drag--dragging {
+  z-index: 6;
+  cursor: grabbing;
+}
+
+.timer44-drag:focus-visible {
+  outline: 3px solid #ffbf47;
+  outline-offset: 4px;
+}
+
+.timer44-drag button {
+  cursor: pointer;
 }
 
 .timer44 {
   position: relative;
-  width: min(420px, 68%);
-  flex: 0 1 420px;
+  width: 100%;
   container-type: inline-size;
 }
 
@@ -51,7 +210,7 @@
 
 .timer44-overlay-button {
   position: absolute;
-  width: clamp(30px, 8.2%, 44px);
+  width: max(8.2%, 22px);
   aspect-ratio: 1;
   transform: translate(-50%, -50%);
   padding: 0;
@@ -129,7 +288,7 @@
 
 .scene-background {
   position: absolute;
-  inset: 0 0 175px;
+  inset: 0 0 130px;
   overflow: hidden;
   background-color: #dcecff;
   pointer-events: none;
@@ -144,21 +303,42 @@
   object-position: center bottom;
 }
 
+.track-worktable {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 130px;
+  border-top: 1px solid #c6ccd4;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), #f2f4f7), #fff;
+  box-shadow: inset 0 7px 12px rgba(30, 52, 82, 0.05);
+  pointer-events: none;
+}
+
 .track {
   position: absolute;
   z-index: 2;
   left: 13%;
   right: 7%;
-  bottom: 173px;
-  height: 150px;
+  bottom: 130px;
+  height: 130px;
   border-bottom: 4px solid #17202e;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.track img {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
 }
 
 .track::after {
   content: "x (m)";
   position: absolute;
-  right: -8px;
-  bottom: -54px;
+  right: -50px;
+  bottom: 0px;
   font-weight: 700;
 }
 
@@ -245,8 +425,8 @@
   position: absolute;
   bottom: 0;
   box-sizing: content-box;
-  width: 38px;
-  height: 116px;
+  width: 58px;
+  height: 136px;
   padding-inline: 10px;
   transform: translateX(-50%);
   user-select: none;
@@ -361,6 +541,16 @@
   line-height: 1;
 }
 
+.sensor-inline-control button img {
+  display: block;
+  width: 9px;
+  height: 12px;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
 .sensor-inline-control button:disabled {
   opacity: 0.42;
 }
@@ -446,15 +636,16 @@
 }
 
 .track-toolbar {
-  position: absolute;
+  position: relative;
   z-index: 3;
-  left: 18px;
-  right: 18px;
-  bottom: 12px;
+  left: auto;
+  right: auto;
+  bottom: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 8px;
+  margin-top: 10px;
 }
 
 .view-options {
@@ -636,6 +827,23 @@
 
 /* El menú lateral reduce el ancho disponible sin cambiar el viewport. */
 @container (max-width: 540px) {
+  .mruv-zoom-toolbar {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .mruv-zoom-toolbar__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+  }
+
+  .mruv-scene-viewport--zoomed {
+    max-height: 380px;
+  }
+
   .track-toolbar {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 52px;
@@ -656,114 +864,17 @@
     grid-column: 2;
     grid-row: 2;
   }
-
-  .instrument-header {
-    flex-direction: column-reverse;
-    gap: 8px;
-  }
-
-  .timer44 {
-    width: min(100%, 320px);
-    flex-basis: auto;
-  }
-
-  .track {
-    left: 16%;
-    right: 10%;
-    bottom: 205px;
-  }
-
-  .sensor-inline-control {
-    top: -40px;
-    width: 94px;
-    height: 27px;
-    gap: 2px;
-    padding: 2px;
-  }
-
-  .sensor--control-staggered .sensor-inline-control {
-    top: -72px;
-  }
-
-  .scene-background {
-    bottom: 230px;
-  }
-
-  .equipment-status {
-    max-width: 145px;
-    align-self: flex-end;
-  }
-}
-
-@media (max-width: 850px) {
-  .track-panel {
-    min-height: 620px;
-  }
 }
 
 @media (max-width: 520px) {
-  .track-panel {
-    min-height: 620px;
-    padding: 12px;
-  }
-
-  .instrument-header {
-    flex-direction: column-reverse;
-    gap: 8px;
-  }
-
-  .timer44 {
-    width: min(100%, 320px);
-    flex-basis: auto;
-  }
-
-  .track {
-    left: 16%;
-    right: 10%;
-    bottom: 205px;
-  }
-
-  .sensor-inline-control {
-    top: -40px;
-    width: 94px;
-    height: 27px;
-    gap: 2px;
-    padding: 2px;
-  }
-
-  .sensor--control-staggered .sensor-inline-control {
-    top: -72px;
-  }
-
-  .sensor-number {
-    flex-basis: 20px;
-    font-size: 0.7rem;
-  }
-
-  .sensor-inline-control button {
-    flex-basis: 18px;
-    width: 18px;
-    height: 21px;
-    font-size: 0.58rem;
-  }
-
-  .sensor-inline-control output {
-    font-size: 0.59rem;
-  }
-
-  .scene-background {
-    bottom: 230px;
-  }
-
-  .equipment-status {
-    max-width: 145px;
-    align-self: flex-end;
+  .mruv-experiment-panel {
+    padding: 8px;
   }
 
   .track-toolbar {
     display: grid;
-    left: 12px;
-    right: 12px;
+    left: auto;
+    right: auto;
     grid-template-columns: minmax(0, 1fr) 48px;
     gap: 9px;
   }

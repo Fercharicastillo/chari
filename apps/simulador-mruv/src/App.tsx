@@ -13,6 +13,8 @@ import {
   type CondicionesMovimiento,
 } from "./physics/movimiento";
 import carroMruv from "./physics/carro-mruv.svg";
+import iconoInputIzquierda from "./physics/btn-input-left.svg";
+import iconoInputDerecha from "./physics/btn-input-right.svg";
 import fondoSimulador from "./physics/fondo_sim_mruv.svg";
 import sensorMruv from "./physics/sensor-mruv.svg";
 import Timer44 from "./components/Timer44";
@@ -80,6 +82,10 @@ const PASO_POSICION_INICIAL = 0.01;
 const PASO_TIEMPO = 0.01;
 const INTERVALO_RASTRO_MINIMO = 0.01;
 const CANTIDAD_MAXIMA_MARCAS_RASTRO = 24;
+const PASO_TIMER_TECLADO = 1.5;
+const POSICION_TIMER_INICIAL = { left: 69.3274, top: 71.8594 };
+const NIVELES_ZOOM = [1, 1.5, 2] as const;
+const ALTO_ESCENA_INICIAL = 480;
 const VELOCIDADES_REPRODUCCION: VelocidadReproduccion[] = [1, 0.5, 0.25];
 const ETIQUETAS_VISUALIZACION: Record<keyof OpcionesVisualizacion, string> = {
   contador: "Timer 4-4",
@@ -99,6 +105,22 @@ const configuracionInicial: Configuracion = {
   aceleracion: 0.5,
   posicionesSensores: [0.4, 0.8, 1.2, 1.6],
 };
+
+interface ArrastreTimer {
+  pointerId: number;
+  desfaseX: number;
+  desfaseY: number;
+}
+
+type FocoZoom = "carrito" | "timer";
+
+interface ArrastreVisor {
+  pointerId: number;
+  clientX: number;
+  clientY: number;
+  scrollLeft: number;
+  scrollTop: number;
+}
 
 function crearRegistrosSensores(): RegistroSensor[] {
   return Array.from({ length: 4 }, () => ({
@@ -196,10 +218,7 @@ function App({ integrado = false, recursos }: AppProps) {
   const guiaLaboratorioUrl = useMemo(() => {
     if (!recursos?.guiaPdfUrl) return undefined;
 
-    const archivoPdfUrl = new URL(
-      recursos.guiaPdfUrl,
-      document.baseURI,
-    ).href;
+    const archivoPdfUrl = new URL(recursos.guiaPdfUrl, document.baseURI).href;
 
     if (!recursos?.visorPdfUrl) return archivoPdfUrl;
 
@@ -211,10 +230,22 @@ function App({ integrado = false, recursos }: AppProps) {
   const [marcasRastro, setMarcasRastro] = useState<number[]>([]);
   const [instruccionesAbiertas, setInstruccionesAbiertas] = useState(false);
   const [pantallaCompleta, setPantallaCompleta] = useState(false);
+  const [arrastrandoTimer, setArrastrandoTimer] = useState(false);
+  const [posicionTimer, setPosicionTimer] = useState(POSICION_TIMER_INICIAL);
+  const [indiceZoom, setIndiceZoom] = useState(0);
+  const [focoZoom, setFocoZoom] = useState<FocoZoom>("carrito");
+  const [desplazandoVisor, setDesplazandoVisor] = useState(false);
+  const [altoEscena, setAltoEscena] = useState(ALTO_ESCENA_INICIAL);
+  const zoom = NIVELES_ZOOM[indiceZoom];
 
   const cuadroAnimacion = useRef<number | null>(null);
   const simuladorRef = useRef<HTMLElement | null>(null);
   const dialogoInstruccionesRef = useRef<HTMLDialogElement | null>(null);
+  const panelPistaRef = useRef<HTMLElement | null>(null);
+  const visorPistaRef = useRef<HTMLDivElement | null>(null);
+  const mesaTrabajoRef = useRef<HTMLDivElement | null>(null);
+  const barraControlesRef = useRef<HTMLDivElement | null>(null);
+  const timerRef = useRef<HTMLDivElement | null>(null);
   const pistaRef = useRef<HTMLDivElement | null>(null);
   const carritoRef = useRef<HTMLDivElement | null>(null);
   const inicioTramo = useRef(0);
@@ -236,6 +267,8 @@ function App({ integrado = false, recursos }: AppProps) {
     indice: number;
     pointerId: number;
   } | null>(null);
+  const arrastreTimerRef = useRef<ArrastreTimer | null>(null);
+  const arrastreVisorRef = useRef<ArrastreVisor | null>(null);
 
   const configuracionBloqueada = estado !== "preparada";
   const movimientoPosible =
@@ -354,8 +387,260 @@ function App({ integrado = false, recursos }: AppProps) {
     const desplazamientoHastaMarcadorDelantero =
       carrito.offsetWidth * CENTRO_MARCADOR_DELANTERO;
 
-    carrito.style.transform = `translate3d(${posicionReferencia - desplazamientoHastaMarcadorDelantero}px, 0, 0)`;
+    carrito.style.transform = `translate3d(${posicionReferencia - desplazamientoHastaMarcadorDelantero}px, 5px, 0)`;
   }
+
+  function enfocarZona(
+    foco: FocoZoom,
+    comportamiento: ScrollBehavior = "smooth",
+  ) {
+    const visor = visorPistaRef.current;
+    const objetivo = foco === "timer" ? timerRef.current : carritoRef.current;
+    if (!visor || !objetivo) return;
+
+    const limitesVisor = visor.getBoundingClientRect();
+    const limitesObjetivo = objetivo.getBoundingClientRect();
+    const centroX =
+      limitesObjetivo.left -
+      limitesVisor.left +
+      visor.scrollLeft +
+      limitesObjetivo.width / 2;
+    const centroY =
+      limitesObjetivo.top -
+      limitesVisor.top +
+      visor.scrollTop +
+      limitesObjetivo.height / 2;
+
+    visor.scrollTo({
+      left: centroX - visor.clientWidth / 2,
+      top: centroY - visor.clientHeight / 2,
+      behavior: comportamiento,
+    });
+  }
+
+  function seleccionarFocoZoom(foco: FocoZoom) {
+    setFocoZoom(foco);
+    requestAnimationFrame(() => enfocarZona(foco));
+  }
+
+  function elementoControlaSuPropioArrastre(elemento: EventTarget | null) {
+    if (!(elemento instanceof Element)) return false;
+
+    return Boolean(
+      elemento.closest(
+        "button, input, label, .timer44-drag, .cart--draggable, .sensor-drag-area",
+      ),
+    );
+  }
+
+  function iniciarDesplazamientoVisor(
+    evento: ReactPointerEvent<HTMLDivElement>,
+  ) {
+    if (
+      zoom === 1 ||
+      (evento.pointerType === "mouse" && evento.button !== 0) ||
+      elementoControlaSuPropioArrastre(evento.target)
+    ) {
+      return;
+    }
+
+    const visor = evento.currentTarget;
+    arrastreVisorRef.current = {
+      pointerId: evento.pointerId,
+      clientX: evento.clientX,
+      clientY: evento.clientY,
+      scrollLeft: visor.scrollLeft,
+      scrollTop: visor.scrollTop,
+    };
+    visor.setPointerCapture(evento.pointerId);
+    setDesplazandoVisor(true);
+    evento.preventDefault();
+  }
+
+  function desplazarVisor(evento: ReactPointerEvent<HTMLDivElement>) {
+    const inicio = arrastreVisorRef.current;
+    if (!inicio || inicio.pointerId !== evento.pointerId) return;
+
+    evento.currentTarget.scrollLeft =
+      inicio.scrollLeft - (evento.clientX - inicio.clientX);
+    evento.currentTarget.scrollTop =
+      inicio.scrollTop - (evento.clientY - inicio.clientY);
+    evento.preventDefault();
+  }
+
+  function finalizarDesplazamientoVisor(
+    evento: ReactPointerEvent<HTMLDivElement>,
+  ) {
+    const inicio = arrastreVisorRef.current;
+    if (!inicio || inicio.pointerId !== evento.pointerId) return;
+
+    if (evento.currentTarget.hasPointerCapture(evento.pointerId)) {
+      evento.currentTarget.releasePointerCapture(evento.pointerId);
+    }
+    arrastreVisorRef.current = null;
+    setDesplazandoVisor(false);
+  }
+
+  useEffect(() => {
+    const cuadro = requestAnimationFrame(() => enfocarZona(focoZoom, "auto"));
+    return () => cancelAnimationFrame(cuadro);
+  }, [indiceZoom, focoZoom]);
+
+  useEffect(() => {
+    if (!visualizacion.contador && focoZoom === "timer") {
+      setFocoZoom("carrito");
+    }
+  }, [visualizacion.contador, focoZoom]);
+
+  function limitarPosicionTimer(
+    left: number,
+    top: number,
+    elementoTimer: HTMLDivElement,
+  ) {
+    const panel = panelPistaRef.current;
+    const mesa = mesaTrabajoRef.current;
+    if (!panel || !mesa) return { left, top };
+
+    const limitesPanel = panel.getBoundingClientRect();
+    const limitesMesa = mesa.getBoundingClientRect();
+    const limitesControles = barraControlesRef.current?.getBoundingClientRect();
+    const limitesTimer = elementoTimer.getBoundingClientRect();
+    const margenSeguridad = 8;
+
+    // LÍMITES HORIZONTALES (Eje X)
+    const minimoLeftPx = limitesMesa.left - limitesPanel.left + margenSeguridad;
+    const maximoLeftPx =
+      limitesMesa.right -
+      limitesPanel.left -
+      limitesTimer.width -
+      margenSeguridad;
+
+    // La posición vertical se define por la base del Timer. Su base puede
+    // recorrer la mesa desde el borde superior hasta antes de los controles.
+    const minimoTopPx =
+      limitesMesa.top - limitesPanel.top - limitesTimer.height;
+    const limiteInferiorBase = limitesControles
+      ? Math.min(limitesMesa.bottom, limitesControles.top - margenSeguridad)
+      : limitesMesa.bottom - margenSeguridad;
+    const maximoTopPx = Math.max(
+      minimoTopPx,
+      limiteInferiorBase - limitesPanel.top - limitesTimer.height,
+    );
+
+    return {
+      left: limitar(
+        left,
+        (minimoLeftPx / limitesPanel.width) * 100,
+        (Math.max(minimoLeftPx, maximoLeftPx) / limitesPanel.width) * 100,
+      ),
+      top: limitar(
+        top,
+        (minimoTopPx / limitesPanel.height) * 100,
+        (maximoTopPx / limitesPanel.height) * 100,
+      ),
+    };
+  }
+
+  function iniciarArrastreTimer(evento: ReactPointerEvent<HTMLDivElement>) {
+    if (
+      (evento.pointerType === "mouse" && evento.button !== 0) ||
+      (evento.target instanceof Element && evento.target.closest("button"))
+    ) {
+      return;
+    }
+
+    const limitesTimer = evento.currentTarget.getBoundingClientRect();
+    arrastreTimerRef.current = {
+      pointerId: evento.pointerId,
+      desfaseX: evento.clientX - limitesTimer.left,
+      desfaseY: evento.clientY - limitesTimer.top,
+    };
+    evento.currentTarget.setPointerCapture(evento.pointerId);
+    setArrastrandoTimer(true);
+    evento.preventDefault();
+  }
+
+  function moverTimer(evento: ReactPointerEvent<HTMLDivElement>) {
+    const panel = panelPistaRef.current;
+    const arrastre = arrastreTimerRef.current;
+    if (!panel || !arrastre || arrastre.pointerId !== evento.pointerId) return;
+
+    const elementoTimer = evento.currentTarget;
+    const limitesPanel = panel.getBoundingClientRect();
+    const left =
+      ((evento.clientX - limitesPanel.left - arrastre.desfaseX) /
+        limitesPanel.width) *
+      100;
+    const top =
+      ((evento.clientY - limitesPanel.top - arrastre.desfaseY) /
+        limitesPanel.height) *
+      100;
+    setPosicionTimer(limitarPosicionTimer(left, top, elementoTimer));
+    evento.preventDefault();
+  }
+
+  function finalizarArrastreTimer(evento: ReactPointerEvent<HTMLDivElement>) {
+    if (arrastreTimerRef.current?.pointerId !== evento.pointerId) return;
+
+    if (evento.currentTarget.hasPointerCapture(evento.pointerId)) {
+      evento.currentTarget.releasePointerCapture(evento.pointerId);
+    }
+    arrastreTimerRef.current = null;
+    setArrastrandoTimer(false);
+  }
+
+  function moverTimerConTeclado(evento: KeyboardEvent<HTMLDivElement>) {
+    if (
+      evento.target !== evento.currentTarget ||
+      !["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(evento.key)
+    ) {
+      return;
+    }
+
+    evento.preventDefault();
+    const elementoTimer = evento.currentTarget;
+    const desplazamientoX =
+      evento.key === "ArrowLeft"
+        ? -PASO_TIMER_TECLADO
+        : evento.key === "ArrowRight"
+          ? PASO_TIMER_TECLADO
+          : 0;
+    const desplazamientoY =
+      evento.key === "ArrowUp"
+        ? -PASO_TIMER_TECLADO
+        : evento.key === "ArrowDown"
+          ? PASO_TIMER_TECLADO
+          : 0;
+    setPosicionTimer((actual) =>
+      limitarPosicionTimer(
+        actual.left + desplazamientoX,
+        actual.top + desplazamientoY,
+        elementoTimer,
+      ),
+    );
+  }
+
+  useEffect(() => {
+    const panel = panelPistaRef.current;
+    if (!panel || typeof ResizeObserver === "undefined") return;
+
+    const observador = new ResizeObserver(() => {
+      setAltoEscena(panel.offsetHeight);
+      const timer = timerRef.current;
+      if (!timer) return;
+
+      setPosicionTimer((actual) =>
+        limitarPosicionTimer(actual.left, actual.top, timer),
+      );
+    });
+    setAltoEscena(panel.offsetHeight);
+    observador.observe(panel);
+    if (mesaTrabajoRef.current) observador.observe(mesaTrabajoRef.current);
+    if (barraControlesRef.current)
+      observador.observe(barraControlesRef.current);
+
+    return () => observador.disconnect();
+  }, []);
 
   function limitarPosicionInicial(valor: number) {
     const posicionAjustada =
@@ -375,10 +660,10 @@ function App({ integrado = false, recursos }: AppProps) {
     const posicionIzquierdaCarrito =
       posicionHorizontal - limitesPista.left - desfaseArrastreCarrito.current;
     const desplazamientoHastaMarcadorDelantero =
-      carrito.offsetWidth * CENTRO_MARCADOR_DELANTERO;
+      carrito.getBoundingClientRect().width * CENTRO_MARCADOR_DELANTERO;
     const posicionEnMetros =
       ((posicionIzquierdaCarrito + desplazamientoHastaMarcadorDelantero) /
-        pista.clientWidth) *
+        limitesPista.width) *
       LIMITE_PISTA;
 
     setConfiguracion((actual) => ({
@@ -915,8 +1200,24 @@ function App({ integrado = false, recursos }: AppProps) {
     setVisualizacion({ ...visualizacionInicial });
     punteroCarritoActivo.current = null;
     punteroSensorActivo.current = null;
+    arrastreTimerRef.current = null;
     setCarritoArrastrado(false);
     setSensorArrastrado(null);
+    setArrastrandoTimer(false);
+    arrastreVisorRef.current = null;
+    setDesplazandoVisor(false);
+    setIndiceZoom(0);
+    setFocoZoom("carrito");
+    setPosicionTimer(() => {
+      const timer = timerRef.current;
+      return timer
+        ? limitarPosicionTimer(
+            POSICION_TIMER_INICIAL.left,
+            POSICION_TIMER_INICIAL.top,
+            timer,
+          )
+        : POSICION_TIMER_INICIAL;
+    });
   }
 
   return (
@@ -979,208 +1280,343 @@ function App({ integrado = false, recursos }: AppProps) {
 
         <section className="workspace" aria-label="Simulador MRUV">
           <div className="column-left">
-            <section className="track-panel simulator-card">
-              <div className="instrument-header">
-                {visualizacion.contador && (
-                  <Timer44
-                    lecturas={registrosSensores.map((_, indice) =>
-                      obtenerTiempoContador(indice),
-                    )}
-                    fases={registrosSensores.map((registro) => registro.fase)}
-                    modo={modoContador}
-                    modoDeshabilitado={configuracionBloqueada}
-                    onReiniciarContadores={reiniciarContadoresTimer}
-                    onCambiarModo={alternarModoDesdeTimer}
+            <section className="mruv-experiment-panel simulator-card">
+              <div className="mruv-stage">
+                <div
+                  className="mruv-zoom-toolbar"
+                  aria-label="Controles de ampliación"
+                >
+                  <span className="mruv-zoom-toolbar__label">Zoom</span>
+                  <button
+                    type="button"
+                    className="mruv-zoom-button"
+                    aria-label="Reducir zoom"
+                    disabled={indiceZoom === 0}
+                    onClick={() =>
+                      setIndiceZoom((actual) => Math.max(0, actual - 1))
+                    }
+                  >
+                    −
+                  </button>
+                  <output className="mruv-zoom-value" aria-live="polite">
+                    {Math.round(zoom * 100)}%
+                  </output>
+                  <button
+                    type="button"
+                    className="mruv-zoom-button"
+                    aria-label="Aumentar zoom"
+                    disabled={indiceZoom === NIVELES_ZOOM.length - 1}
+                    onClick={() =>
+                      setIndiceZoom((actual) =>
+                        Math.min(NIVELES_ZOOM.length - 1, actual + 1),
+                      )
+                    }
+                  >
+                    +
+                  </button>
+                  <span
+                    className="mruv-zoom-toolbar__separator"
+                    aria-hidden="true"
                   />
-                )}
+                  <button
+                    type="button"
+                    className={`mruv-zoom-focus${focoZoom === "carrito" ? " mruv-zoom-focus--active" : ""}`}
+                    aria-pressed={focoZoom === "carrito"}
+                    onClick={() => seleccionarFocoZoom("carrito")}
+                  >
+                    Carrito
+                  </button>
+                  <button
+                    type="button"
+                    className={`mruv-zoom-focus${focoZoom === "timer" ? " mruv-zoom-focus--active" : ""}`}
+                    aria-pressed={focoZoom === "timer"}
+                    disabled={!visualizacion.contador}
+                    onClick={() => seleccionarFocoZoom("timer")}
+                  >
+                    Timer 4-4
+                  </button>
+                </div>
 
                 <div
-                  className={`equipment-status equipment-status--${estado}`}
-                  aria-live="polite"
+                  ref={visorPistaRef}
+                  className={`mruv-scene-viewport${zoom > 1 ? " mruv-scene-viewport--zoomed" : ""}${desplazandoVisor ? " mruv-scene-viewport--panning" : ""}`}
+                  tabIndex={zoom > 1 ? 0 : -1}
+                  aria-label={
+                    zoom > 1
+                      ? "Vista ampliada del simulador; arrastra el fondo para desplazarte"
+                      : "Vista general del simulador"
+                  }
+                  onPointerDown={iniciarDesplazamientoVisor}
+                  onPointerMove={desplazarVisor}
+                  onPointerUp={finalizarDesplazamientoVisor}
+                  onPointerCancel={finalizarDesplazamientoVisor}
+                  onLostPointerCapture={finalizarDesplazamientoVisor}
                 >
-                  <i aria-hidden="true" />
-                  <span>{estadoEquipo}</span>
-                </div>
-              </div>
-
-              <div
-                className="scene-background"
-                aria-hidden="true"
-              >
-                <img
-                  src={fondoSimulador}
-                  alt=""
-                  draggable={false}
-                />
-              </div>
-
-              <div
-                ref={pistaRef}
-                className="track"
-                aria-label="Pista de dos metros"
-              >
-                {visualizacion.rastro && marcasRastro.length > 0 && (
-                  <div className="motion-trail" aria-hidden="true">
-                    {marcasRastro.map((posicion, indice) => (
-                      <i
-                        key={`${indice}-${posicion}`}
-                        style={{ left: `${(posicion / LIMITE_PISTA) * 100}%` }}
-                      />
-                    ))}
-                  </div>
-                )}
-
-                {visualizacion.sensores &&
-                  configuracion.posicionesSensores.map(
-                    (posicionSensor, indice) => {
-                      const faseVisual = obtenerFaseVisualSensor(
-                        posicionSensor,
-                        indice,
-                      );
-                      const { minimo, maximo } = obtenerLimitesSensor(
-                        indice,
-                        configuracion.posicionesSensores,
-                      );
-                      const posicionVisual = limitar(
-                        (posicionSensor / LIMITE_PISTA) * 100,
-                        0,
-                        100,
-                      );
-
-                      return (
+                  <div
+                    className="mruv-zoom-canvas"
+                    style={{
+                      width: `max(${zoom * 100}%, ${760 * zoom}px)`,
+                      height: `${altoEscena * zoom}px`,
+                    }}
+                  >
+                    <section
+                      ref={panelPistaRef}
+                      className="track-panel"
+                      style={{
+                        width: `${100 / zoom}%`,
+                        transform: `scale(${zoom})`,
+                      }}
+                    >
+                      <div className="instrument-header">
                         <div
-                          key={indice}
-                          className={`sensor sensor--${faseVisual}${indice % 2 === 1 ? " sensor--control-staggered" : ""}${sensorArrastrado === indice ? " sensor--dragging" : ""}`}
-                          style={{ left: `${posicionVisual}%` }}
+                          className={`equipment-status equipment-status--${estado}`}
+                          aria-live="polite"
                         >
-                          <div
-                            className="sensor-inline-control"
-                            aria-label={`Posición del sensor ${indice + 1}`}
-                          >
-                            <strong className="sensor-number">
-                              {indice + 1}
-                            </strong>
-                            <button
-                              type="button"
-                              aria-label={`Mover sensor ${indice + 1} hacia la izquierda`}
-                              disabled={
-                                configuracionBloqueada ||
-                                posicionSensor <= minimo
-                              }
-                              onPointerDown={(evento) =>
-                                evento.stopPropagation()
-                              }
-                              onClick={() =>
-                                cambiarPosicionSensor(
-                                  indice,
-                                  posicionSensor - PASO_SENSOR,
-                                )
-                              }
-                            >
-                              <span aria-hidden="true">◀</span>
-                            </button>
-                            <output aria-live="polite">
-                              {posicionSensor.toFixed(2)} m
-                            </output>
-                            <button
-                              type="button"
-                              aria-label={`Mover sensor ${indice + 1} hacia la derecha`}
-                              disabled={
-                                configuracionBloqueada ||
-                                posicionSensor >= maximo
-                              }
-                              onPointerDown={(evento) =>
-                                evento.stopPropagation()
-                              }
-                              onClick={() =>
-                                cambiarPosicionSensor(
-                                  indice,
-                                  posicionSensor + PASO_SENSOR,
-                                )
-                              }
-                            >
-                              <span aria-hidden="true">▶</span>
-                            </button>
-                          </div>
-                          <div
-                            className="sensor-drag-area"
-                            role="slider"
-                            tabIndex={configuracionBloqueada ? -1 : 0}
-                            aria-valuemin={minimo}
-                            aria-valuemax={maximo}
-                            aria-valuenow={posicionSensor}
-                            aria-valuetext={`${posicionSensor.toFixed(2)} metros`}
-                            aria-disabled={configuracionBloqueada}
-                            aria-label={`Sensor ${indice + 1} en ${posicionSensor.toFixed(2)} metros. ${descripcionFaseSensor[faseVisual]}`}
-                            onPointerDown={(evento) =>
-                              comenzarArrastreSensor(indice, evento)
-                            }
-                            onPointerUp={terminarArrastreSensor}
-                            onPointerCancel={terminarArrastreSensor}
-                            onKeyDown={(evento) =>
-                              moverSensorConTeclado(indice, evento)
-                            }
-                          >
-                            <img src={sensorMruv} alt="" draggable="false" />
-                          </div>
+                          <i aria-hidden="true" />
+                          <span>{estadoEquipo}</span>
                         </div>
-                      );
-                    },
-                  )}
+                      </div>
 
-                <div
-                  ref={carritoRef}
-                  className={`cart${configuracionBloqueada ? "" : " cart--draggable"}${carritoArrastrado ? " cart--dragging" : ""}`}
-                  style={{ width: `${ANCHO_CARRITO_PORCENTAJE}%` }}
-                  role="slider"
-                  tabIndex={configuracionBloqueada ? -1 : 0}
-                  aria-label="Posición inicial del frente del carrito"
-                  aria-valuemin={0}
-                  aria-valuemax={maximaPosicionInicial}
-                  aria-valuenow={configuracion.posicionInicial}
-                  aria-valuetext={`${configuracion.posicionInicial.toFixed(2)} metros`}
-                  aria-disabled={configuracionBloqueada}
-                  onPointerDown={comenzarArrastreCarrito}
-                  onPointerUp={terminarArrastreCarrito}
-                  onPointerCancel={terminarArrastreCarrito}
-                  onKeyDown={moverCarritoConTeclado}
-                >
-                  <span
-                    className="cart-marker cart-marker--rear"
-                    style={{ left: `${CENTRO_MARCADOR_TRASERO * 100}%` }}
-                    aria-hidden="true"
-                  >
-                    fin
-                  </span>
-                  <span
-                    className="cart-marker cart-marker--front"
-                    style={{ left: `${CENTRO_MARCADOR_DELANTERO * 100}%` }}
-                    aria-hidden="true"
-                  >
-                    {estado === "preparada" ? "x₀" : "x(t)"}
-                  </span>
-                  <img
-                    src={carroMruv}
-                    alt="Carrito sobre la pista neumática"
-                    draggable="false"
-                  />
-                </div>
+                      {visualizacion.contador && (
+                        <div
+                          ref={timerRef}
+                          className={`timer44-drag${arrastrandoTimer ? " timer44-drag--dragging" : ""}`}
+                          style={{
+                            left: `${posicionTimer.left}%`,
+                            top: `${posicionTimer.top}%`,
+                          }}
+                          role="group"
+                          tabIndex={0}
+                          aria-label="Timer 4-4 móvil sobre la mesa de trabajo"
+                          title="Arrastra el Timer 4-4 dentro de la mesa de trabajo"
+                          onPointerDown={iniciarArrastreTimer}
+                          onPointerMove={moverTimer}
+                          onPointerUp={finalizarArrastreTimer}
+                          onPointerCancel={finalizarArrastreTimer}
+                          onLostPointerCapture={finalizarArrastreTimer}
+                          onKeyDown={moverTimerConTeclado}
+                        >
+                          <Timer44
+                            lecturas={registrosSensores.map((_, indice) =>
+                              obtenerTiempoContador(indice),
+                            )}
+                            fases={registrosSensores.map(
+                              (registro) => registro.fase,
+                            )}
+                            modo={modoContador}
+                            modoDeshabilitado={configuracionBloqueada}
+                            onReiniciarContadores={reiniciarContadoresTimer}
+                            onCambiarModo={alternarModoDesdeTimer}
+                          />
+                        </div>
+                      )}
 
-                {visualizacion.ejes && (
-                  <div className="axis">
-                    {[0, 0.5, 1, 1.5, 2].map((marca) => (
-                      <span
-                        key={marca}
-                        style={{ left: `${(marca / LIMITE_PISTA) * 100}%` }}
+                      <div className="scene-background" aria-hidden="true">
+                        <img src={fondoSimulador} alt="" draggable={false} />
+                      </div>
+
+                      <div
+                        ref={mesaTrabajoRef}
+                        className="track-worktable"
+                        aria-hidden="true"
+                      />
+
+                      <div
+                        ref={pistaRef}
+                        className="track"
+                        aria-label="Pista de dos metros"
                       >
-                        {marca.toFixed(1)}
-                      </span>
-                    ))}
+                        {visualizacion.rastro && marcasRastro.length > 0 && (
+                          <div className="motion-trail" aria-hidden="true">
+                            {marcasRastro.map((posicion, indice) => (
+                              <i
+                                key={`${indice}-${posicion}`}
+                                style={{
+                                  left: `${(posicion / LIMITE_PISTA) * 100}%`,
+                                }}
+                              />
+                            ))}
+                          </div>
+                        )}
+
+                        {visualizacion.sensores &&
+                          configuracion.posicionesSensores.map(
+                            (posicionSensor, indice) => {
+                              const faseVisual = obtenerFaseVisualSensor(
+                                posicionSensor,
+                                indice,
+                              );
+                              const { minimo, maximo } = obtenerLimitesSensor(
+                                indice,
+                                configuracion.posicionesSensores,
+                              );
+                              const posicionVisual = limitar(
+                                (posicionSensor / LIMITE_PISTA) * 100,
+                                0,
+                                100,
+                              );
+
+                              return (
+                                <div
+                                  key={indice}
+                                  className={`sensor sensor--${faseVisual}${indice % 2 === 1 ? " sensor--control-staggered" : ""}${sensorArrastrado === indice ? " sensor--dragging" : ""}`}
+                                  style={{ left: `${posicionVisual}%` }}
+                                >
+                                  <div
+                                    className="sensor-inline-control"
+                                    aria-label={`Posición del sensor ${indice + 1}`}
+                                  >
+                                    <strong className="sensor-number">
+                                      {indice + 1}
+                                    </strong>
+                                    <button
+                                      type="button"
+                                      aria-label={`Mover sensor ${indice + 1} hacia la izquierda`}
+                                      disabled={
+                                        configuracionBloqueada ||
+                                        posicionSensor <= minimo
+                                      }
+                                      onPointerDown={(evento) =>
+                                        evento.stopPropagation()
+                                      }
+                                      onClick={() =>
+                                        cambiarPosicionSensor(
+                                          indice,
+                                          posicionSensor - PASO_SENSOR,
+                                        )
+                                      }
+                                    >
+                                      <img
+                                        src={iconoInputIzquierda}
+                                        alt=""
+                                        aria-hidden="true"
+                                        draggable="false"
+                                      />
+                                    </button>
+                                    <output aria-live="polite">
+                                      {posicionSensor.toFixed(2)} m
+                                    </output>
+                                    <button
+                                      type="button"
+                                      aria-label={`Mover sensor ${indice + 1} hacia la derecha`}
+                                      disabled={
+                                        configuracionBloqueada ||
+                                        posicionSensor >= maximo
+                                      }
+                                      onPointerDown={(evento) =>
+                                        evento.stopPropagation()
+                                      }
+                                      onClick={() =>
+                                        cambiarPosicionSensor(
+                                          indice,
+                                          posicionSensor + PASO_SENSOR,
+                                        )
+                                      }
+                                    >
+                                      <img
+                                        src={iconoInputDerecha}
+                                        alt=""
+                                        aria-hidden="true"
+                                        draggable="false"
+                                      />
+                                    </button>
+                                  </div>
+                                  <div
+                                    className="sensor-drag-area"
+                                    role="slider"
+                                    tabIndex={configuracionBloqueada ? -1 : 0}
+                                    aria-valuemin={minimo}
+                                    aria-valuemax={maximo}
+                                    aria-valuenow={posicionSensor}
+                                    aria-valuetext={`${posicionSensor.toFixed(2)} metros`}
+                                    aria-disabled={configuracionBloqueada}
+                                    aria-label={`Sensor ${indice + 1} en ${posicionSensor.toFixed(2)} metros. ${descripcionFaseSensor[faseVisual]}`}
+                                    onPointerDown={(evento) =>
+                                      comenzarArrastreSensor(indice, evento)
+                                    }
+                                    onPointerUp={terminarArrastreSensor}
+                                    onPointerCancel={terminarArrastreSensor}
+                                    onKeyDown={(evento) =>
+                                      moverSensorConTeclado(indice, evento)
+                                    }
+                                  >
+                                    <img
+                                      src={sensorMruv}
+                                      alt=""
+                                      draggable="false"
+                                    />
+                                  </div>
+                                </div>
+                              );
+                            },
+                          )}
+
+                        <div
+                          ref={carritoRef}
+                          className={`cart${configuracionBloqueada ? "" : " cart--draggable"}${carritoArrastrado ? " cart--dragging" : ""}`}
+                          style={{ width: `${ANCHO_CARRITO_PORCENTAJE}%` }}
+                          role="slider"
+                          tabIndex={configuracionBloqueada ? -1 : 0}
+                          aria-label="Posición inicial del frente del carrito"
+                          aria-valuemin={0}
+                          aria-valuemax={maximaPosicionInicial}
+                          aria-valuenow={configuracion.posicionInicial}
+                          aria-valuetext={`${configuracion.posicionInicial.toFixed(2)} metros`}
+                          aria-disabled={configuracionBloqueada}
+                          onPointerDown={comenzarArrastreCarrito}
+                          onPointerUp={terminarArrastreCarrito}
+                          onPointerCancel={terminarArrastreCarrito}
+                          onKeyDown={moverCarritoConTeclado}
+                        >
+                          <span
+                            className="cart-marker cart-marker--rear"
+                            style={{
+                              left: `${CENTRO_MARCADOR_TRASERO * 100}%`,
+                            }}
+                            aria-hidden="true"
+                          >
+                            fin
+                          </span>
+                          <span
+                            className="cart-marker cart-marker--front"
+                            style={{
+                              left: `${CENTRO_MARCADOR_DELANTERO * 100}%`,
+                            }}
+                            aria-hidden="true"
+                          >
+                            {estado === "preparada" ? "x₀" : "x(t)"}
+                          </span>
+                          <img
+                            src={carroMruv}
+                            alt="Carrito sobre la pista neumática"
+                            draggable="false"
+                          />
+                        </div>
+
+                        {visualizacion.ejes && (
+                          <div className="axis">
+                            {[0, 0.5, 1, 1.5, 2].map((marca) => (
+                              <span
+                                key={marca}
+                                style={{
+                                  left: `${(marca / LIMITE_PISTA) * 100}%`,
+                                }}
+                              >
+                                {marca.toFixed(1)}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </section>
                   </div>
-                )}
+                </div>
               </div>
 
-              <div className="track-toolbar">
+              <div
+                ref={barraControlesRef}
+                className="track-toolbar transport-controls"
+              >
                 <fieldset className="view-options">
                   <legend>Mostrar</legend>
                   {(
@@ -1516,6 +1952,14 @@ function App({ integrado = false, recursos }: AppProps) {
                 <span>
                   Consulta las cuatro pantallas y realiza por tu cuenta los
                   cálculos solicitados por el docente.
+                </span>
+              </li>
+              <li>
+                <strong>Amplía el carrito o el Timer.</strong>
+                <span>
+                  Selecciona un nivel de zoom y usa Carrito o Timer 4-4 para
+                  centrar la vista. Con la imagen ampliada, arrastra el fondo
+                  para recorrer el simulador.
                 </span>
               </li>
               <li>

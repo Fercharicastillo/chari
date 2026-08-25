@@ -34,6 +34,7 @@ function Timer44({
         className="timer44-image"
         src={timer44Mruv}
         alt="Timer 4-4 con cuatro pantallas para los sensores"
+        draggable="false"
       />
 
       <div className="timer44-display-layer" aria-hidden="true">
