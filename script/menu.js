@@ -5,6 +5,9 @@
   const menu = document.querySelector(".menu");
   const main = document.querySelector(".main");
   const menuMovilMedia = window.matchMedia("(max-width: 430px)");
+  const iniciarMenuCerrado = document.documentElement.hasAttribute(
+    "data-menu-inicial-cerrado"
+  );
 
   // CODEX: añadido para cargar modulos hermanos sin repetir etiquetas script en cada pagina
   function cargarModuloMenu(nombreArchivo) {
@@ -49,6 +52,16 @@
 
   // CODEX: modificado para restaurar temprano el menu movil abierto despues de navegar
   function restaurarEstadoMenuMovil() {
+    if (iniciarMenuCerrado) {
+      // En escritorio la clase menu_ds cierra el menu; en movil lo abre.
+      aplicarEstadoMenu(!menuMovilMedia.matches, false);
+      document.documentElement.classList.remove(
+        "menu-escritorio-inicial-cerrado",
+        "menu-movil-inicial-abierto"
+      );
+      return;
+    }
+
     if (!menuMovilMedia.matches) {
       return;
     }
@@ -65,6 +78,12 @@
   clickBtn.addEventListener("click", () => {
     aplicarEstadoMenu(!menu.classList.contains("menu_ds"));
   });
+
+  if (iniciarMenuCerrado) {
+    menuMovilMedia.addEventListener("change", (evento) => {
+      aplicarEstadoMenu(!evento.matches, false);
+    });
+  }
 
   menu.addEventListener("mouseenter", () => {
     menu.classList.add("overflow-visible");

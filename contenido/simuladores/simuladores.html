@@ -1,51 +1,62 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Physikós | Simuladores</title>
     <!-- CODEX: añadido para restaurar el estado visual del menu movil antes del primer render -->
     <script src="../../script/menu_estado_inicial.js"></script>
     <!-- CODEX: añadido para cargar estilos base comunes antes del CSS especifico -->
-    <link rel="stylesheet" href="../../styles/style.css">
+    <link rel="stylesheet" href="../../styles/style.css" />
     <!-- CODEX: añadido para cargar el overlay global reutilizable -->
-    <link rel="stylesheet" href="../../styles/overlay.css">
-    <link rel="stylesheet" href="../../styles/simuladores.css">
-    <link rel="stylesheet" href="../../styles/menu_icons.css">
-    <link rel="icon" href="../../img/iconHeadW.svg">
-</head>
+    <link rel="stylesheet" href="../../styles/overlay.css" />
+    <link rel="stylesheet" href="../../styles/simuladores.css" />
+    <link rel="stylesheet" href="../../styles/menu_icons.css" />
+    <link rel="icon" href="../../img/iconHeadW.svg" />
+  </head>
 
-<body >
+  <body>
     <div class="container__grid__sim">
-        <div class="header" id="header">
-            <div class="header_content-namePage">
-                <a href="../../index.html">
-                    <div class="imgname"></div>
-                </a>
-                <div id="btn_menu" class="btn-menu" title=""></div>
-            </div>
-            <div class="topactions">
-                <div class="content__DarkMode">
-                    <label class="darmode-btn-content" for="click-DarkMode">
-                        <i class="btn-sun"></i>
-                        <label for="click-DarkMode"></label>
-                        <input type="checkbox" id="click-DarkMode">
-                        <i class="btn-moon"></i>
-                    </label>
-                </div>
-                <div class="header_content-img"><a href="https://www.uce.edu.ec/" target="_BLANK"><img src="https://aka-cdn.uce.edu.ec/ares/tmp/logo3.png" alt="El servidor ha fallado."></a></div>
-            </div>
+      <div class="header" id="header">
+        <div class="header_content-namePage">
+          <a href="../../index.html">
+            <div class="imgname"></div>
+          </a>
+          <div id="btn_menu" class="btn-menu" title=""></div>
         </div>
+        <div class="topactions">
+          <div class="content__DarkMode">
+            <label class="darmode-btn-content" for="click-DarkMode">
+              <i class="btn-sun"></i>
+              <label for="click-DarkMode"></label>
+              <input type="checkbox" id="click-DarkMode" />
+              <i class="btn-moon"></i>
+            </label>
+          </div>
+          <div class="header_content-img">
+            <a href="https://www.uce.edu.ec/" target="_BLANK"
+              ><img
+                src="https://aka-cdn.uce.edu.ec/ares/tmp/logo3.png"
+                alt="El servidor ha fallado."
+            /></a>
+          </div>
+        </div>
+      </div>
 
-        <div class="menu menu_dsm">
-            <nav class="menu_nav">
-                <!--<div class="content__search"></div>-->
-                <!-- CODEX: modificado para renderizar el menu lateral y sus subitems desde datos reutilizables -->
-                <div class="content__content" data-menu-render data-menu-base="../../" data-menu-current="simuladores" data-menu-submenus="true"></div>
-        
-                <!--<div class="content__Lenguaje">
+      <div class="menu menu_dsm">
+        <nav class="menu_nav">
+          <!--<div class="content__search"></div>-->
+          <!-- CODEX: modificado para renderizar el menu lateral y sus subitems desde datos reutilizables -->
+          <div
+            class="content__content"
+            data-menu-render
+            data-menu-base="../../"
+            data-menu-current="simuladores"
+            data-menu-submenus="true"
+          ></div>
+
+          <!--<div class="content__Lenguaje">
                     <span>Lenguaje</span>
                     <label class="lenguaje-btn-content" for="click-lenguaje">
                         <span class="before">EN</span>
@@ -53,131 +64,212 @@
                         <span class="before">ES</span>
                     </label>
                 </span></div>-->
-                
-            </nav>
-        </div>
+        </nav>
+      </div>
 
-        <div class="main" id="main-despleglabe">
-            <header class="simulators-profile-section simulators-page__hero">
-                    <span class="simulators-profile-section__icon" aria-hidden="true"></span>
-                    <div class="simulators-page__hero-content">
-                        <h1 id="simulators-page-title" class="simulators-profile-section__title">Simuladores</h1>
-                        <p class="simulators-profile-section__note">Simuladores, y recursos audiovisuales para el aprendizaje libre ...</p>
-                        <p class="simulators-profile-section__introduction">En esta sección encontrarás una variedad de simuladores para el área de Física, que abarca desde Mecánica y Ondas hasta Termodinámica, Electromagnetismo y Física Moderna. Además, se incluyen guías de laboratorio correspondientes a cada simulador. También encontrarás recursos para el área de Matemáticas, que incluye Álgebra, Geometría, Cálculo, Ecuaciones Diferenciales y Matemáticas Discretas. Además de eso, se proporcionan descargas de archivos de simuladores desarrollados en MatLab y R, junto con sus respectivas guías de instalación.</p>
-                    </div>
-                    <div class="simulators-page__hero-illustration" aria-hidden="true"></div>
-            </header>
-            <!--Clases antiguas manual-title manual-version manual-html-title manual-mantenimiento manual-html-explanation manual-authorship-explanation-->
+      <div class="main" id="main-despleglabe">
+        <header class="simulators-profile-section simulators-page__hero">
+          <span
+            class="simulators-profile-section__icon"
+            aria-hidden="true"
+          ></span>
+          <div class="simulators-page__hero-content">
+            <h1
+              id="simulators-page-title"
+              class="simulators-profile-section__title"
+            >
+              Simuladores
+            </h1>
+            <p class="simulators-profile-section__note">
+              Simuladores, y recursos audiovisuales para el aprendizaje libre
+              ...
+            </p>
+            <p class="simulators-profile-section__introduction">
+              En esta sección encontrarás una variedad de simuladores para el
+              área de Física, que abarca desde Mecánica y Ondas hasta
+              Termodinámica, Electromagnetismo y Física Moderna. Además, se
+              incluyen guías de laboratorio correspondientes a cada simulador.
+              También encontrarás recursos para el área de Matemáticas, que
+              incluye Álgebra, Geometría, Cálculo, Ecuaciones Diferenciales y
+              Matemáticas Discretas. Además de eso, se proporcionan descargas de
+              archivos de simuladores desarrollados en MatLab y R, junto con sus
+              respectivas guías de instalación.
+            </p>
+          </div>
+          <div
+            class="simulators-page__hero-illustration"
+            aria-hidden="true"
+          ></div>
+        </header>
+        <!--Clases antiguas manual-title manual-version manual-html-title manual-mantenimiento manual-html-explanation manual-authorship-explanation-->
 
-            <section class="main_s2_sim repositorio-simuladores-cards">
-                    <!--EdtidSection 1-->
-                    <div class="home-toc-section">
-                        <div class="libros-subtitle__heading">
-                            <span class="libros-subtitle__icon" aria-hidden="true"></span>
-                            <h2 id="libros-subtitle-title">Física</h2>
-                        </div>
-                        <div class="home-toc-container">
-                            <div class="home-toc-card">
-                                <a href="./pendulo_simple.html">
-                                    <img class="img-toc-card" src="../../img/Pendulo Simple.png">
-                                    <span class="home-toc-chapter-name">
-                                        Mecánica Clásica:
-                                        <span class="home-toc-chapter-name-subchapter">Péndulo Simple</span>
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="home-toc-card" data-available ="false">
-                                <a href="#">
-                                    <img class="img-toc-card" src="../../img/Pendulo Doble.png" >
-                                    <span class="home-toc-chapter-name">
-                                        Mecánica Clásica:
-                                        <span class="home-toc-chapter-name-subchapter">Péndulo Doble</span>
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="home-toc-card" data-available ="false">
-                                <a href="#">
-                                    <img class="img-toc-card" src="../../img/Pendulo Triple.png" >
-                                    <span class="home-toc-chapter-name">
-                                        Mecánica Clásica:
-                                        <span class="home-toc-chapter-name-subchapter">Péndulo Triple</span>
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="home-toc-card" id="g-1">
-                                <a href="./sim_mru.html">
-                                    <img class="img-toc-card__mru">
-                                    <span class="home-toc-chapter-name">
-                                        Mecánica Newtoniana:
-                                        <span class="home-toc-chapter-name-subchapter">Movimienro Rectilíneo Uniforme</span>
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--EdtidSection 2-->
-                    <div class="home-toc-section">
-                        <div class="libros-subtitle__heading">
-                            <span class="libros-subtitle__icon-math" aria-hidden="true"></span>
-                            <h2 id="libros-subtitle-title">Matemática</h2>
-                        </div>
-                        <div class="home-toc-container">
-                            <div class="home-toc-card" data-available ="false">
-                                <a href="#">
-                                    <img class="img-toc-card" src="../../img/Suma de Riemann.png">
-                                    <span class="home-toc-chapter-name">
-                                        Cálculo Integral:
-                                        <span class="home-toc-chapter-name-subchapter">Suma de Riemann</span>
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="home-toc-card" data-available ="false">
-                                <a href="#">
-                                    <img class="img-toc-card" src="../../img/Integral Doble.png" >
-                                    <span class="home-toc-chapter-name">
-                                        Cálculo Integral:
-                                        <span class="home-toc-chapter-name-subchapter">Integral Doble</span>
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="home-toc-card" data-available ="false">
-                                <a href="#">
-                                    <img class="img-toc-card" src="../../img/solido_revolucion.png" >
-                                    <span class="home-toc-chapter-name">
-                                        Cálculo Integral:
-                                        <span class="home-toc-chapter-name-subchapter">Sólido en Revolución</span>
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="home-toc-card" data-available ="false">
-                                <a href="#">
-                                    <img class="img-toc-card" src="../../img/Geometria_angulos1.png" >
-                                    <span class="home-toc-chapter-name">
-                                        Geometría:
-                                        <span class="home-toc-chapter-name-subchapter">Propiedades de ángulos</span>
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-            </section>
-        </div>
-        <div class="footer">
-            <div class="footer-left">
-                <a href="#">Licencia</a>
-                <a href="https://github.com/Fercharicastillo/chari">| Git Hub</a> 
-                <a href="../../contenido/versiones.html">| Versiones</a>  
+        <section class="main_s2_sim repositorio-simuladores-cards">
+          <!--EdtidSection 1-->
+          <div class="home-toc-section">
+            <div class="libros-subtitle__heading">
+              <span class="libros-subtitle__icon" aria-hidden="true"></span>
+              <h2 id="libros-subtitle-title">Física</h2>
             </div>
-            <div class="footer-right">
+            <div class="home-toc-container">
+              <div class="home-toc-card">
+                <a href="./pendulo_simple.html">
+                  <img
+                    class="img-toc-card"
+                    src="../../img/Pendulo Simple.png"
+                  />
+                  <span class="home-toc-chapter-name">
+                    Mecánica Clásica:
+                    <span class="home-toc-chapter-name-subchapter"
+                      >Péndulo Simple</span
+                    >
+                  </span>
+                </a>
+              </div>
+              <div class="home-toc-card" data-available="false">
+                <a href="#">
+                  <img class="img-toc-card" src="../../img/Pendulo Doble.png" />
+                  <span class="home-toc-chapter-name">
+                    Mecánica Clásica:
+                    <span class="home-toc-chapter-name-subchapter"
+                      >Péndulo Doble</span
+                    >
+                  </span>
+                </a>
+              </div>
+              <div class="home-toc-card" data-available="false">
+                <a href="#">
+                  <img
+                    class="img-toc-card"
+                    src="../../img/Pendulo Triple.png"
+                  />
+                  <span class="home-toc-chapter-name">
+                    Mecánica Clásica:
+                    <span class="home-toc-chapter-name-subchapter"
+                      >Péndulo Triple</span
+                    >
+                  </span>
+                </a>
+              </div>
+              <div class="home-toc-card" id="g-1">
+                <a href="./sim_mru.html">
+                  <img class="img-toc-card__mru" />
+                  <span class="home-toc-chapter-name">
+                    Mecánica Newtoniana:
+                    <span class="home-toc-chapter-name-subchapter"
+                      >Movimienro Rectilíneo Uniforme</span
+                    >
+                  </span>
+                </a>
+              </div>
+              <div class="home-toc-card" id="g-1">
+                <a href="./sim_mruv.html">
+                  <img class="img-toc-card__mruv" />
+                  <span class="home-toc-chapter-name">
+                    Mecánica Newtoniana:
+                    <span class="home-toc-chapter-name-subchapter"
+                      >Movimienro Rectilíneo Uniforme Variado</span
+                    >
+                  </span>
+                </a>
+              </div>
+              <div class="home-toc-card">
+                <a href="./sim_caida_libre.html">
+                  <img class="img-toc-card__caida-libre" />
+                  <span class="home-toc-chapter-name">
+                    Mecánica Newtoniana:
+                    <span class="home-toc-chapter-name-subchapter"
+                      >Caída Libre</span
+                    >
+                  </span>
+                </a>
+              </div>
             </div>
+          </div>
+
+          <!--EdtidSection 2-->
+          <div class="home-toc-section">
+            <div class="libros-subtitle__heading">
+              <span
+                class="libros-subtitle__icon-math"
+                aria-hidden="true"
+              ></span>
+              <h2 id="libros-subtitle-title">Matemática</h2>
+            </div>
+            <div class="home-toc-container">
+              <div class="home-toc-card" data-available="false">
+                <a href="#">
+                  <img
+                    class="img-toc-card"
+                    src="../../img/Suma de Riemann.png"
+                  />
+                  <span class="home-toc-chapter-name">
+                    Cálculo Integral:
+                    <span class="home-toc-chapter-name-subchapter"
+                      >Suma de Riemann</span
+                    >
+                  </span>
+                </a>
+              </div>
+              <div class="home-toc-card" data-available="false">
+                <a href="#">
+                  <img
+                    class="img-toc-card"
+                    src="../../img/Integral Doble.png"
+                  />
+                  <span class="home-toc-chapter-name">
+                    Cálculo Integral:
+                    <span class="home-toc-chapter-name-subchapter"
+                      >Integral Doble</span
+                    >
+                  </span>
+                </a>
+              </div>
+              <div class="home-toc-card" data-available="false">
+                <a href="#">
+                  <img
+                    class="img-toc-card"
+                    src="../../img/solido_revolucion.png"
+                  />
+                  <span class="home-toc-chapter-name">
+                    Cálculo Integral:
+                    <span class="home-toc-chapter-name-subchapter"
+                      >Sólido en Revolución</span
+                    >
+                  </span>
+                </a>
+              </div>
+              <div class="home-toc-card" data-available="false">
+                <a href="#">
+                  <img
+                    class="img-toc-card"
+                    src="../../img/Geometria_angulos1.png"
+                  />
+                  <span class="home-toc-chapter-name">
+                    Geometría:
+                    <span class="home-toc-chapter-name-subchapter"
+                      >Propiedades de ángulos</span
+                    >
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="footer">
+        <div class="footer-left">
+          <a href="#">Licencia</a>
+          <a href="https://github.com/Fercharicastillo/chari">| Git Hub</a>
+          <a href="../../contenido/versiones.html">| Versiones</a>
         </div>
-        <div class="indicador_container">
-            <div class="indicador_scroll"></div>
-        </div>
-        <div id="btn-top" class="ocultar" title="Subir">
-            <i class="btn-up"></i>
-        </div>   
+        <div class="footer-right"></div>
+      </div>
+      <div class="indicador_container">
+        <div class="indicador_scroll"></div>
+      </div>
+      <div id="btn-top" class="ocultar" title="Subir">
+        <i class="btn-up"></i>
+      </div>
     </div>
     <!--<script src="script/search.js"></script>
     <script src="script/langEn.js"></script>-->
@@ -190,5 +282,5 @@
     <script src="../../script/flecha.js" defer></script>
     <script src="../../script/versiones/physikos_version.js" defer></script>
     <script src="../../script/cards_disponibilidad.js" defer></script>
-</body>
+  </body>
 </html>
