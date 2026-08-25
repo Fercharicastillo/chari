@@ -5,6 +5,11 @@ import {
   type KeyboardEvent,
   type PointerEvent,
 } from "react";
+import {
+  SimulatorLabStage,
+  SimulatorSceneViewport,
+  SimulatorZoomToolbar,
+} from "@physikos/simulator-ui";
 import disparadorEsfera from "../physics/assets/disparador-esfera.svg";
 import esferaPrueba from "../physics/assets/esfera-cuerpo-prueba.svg";
 import fondoCaidaLibre from "../physics/assets/fondo-caida-libre.svg";
@@ -532,55 +537,28 @@ function LaboratorioEstatico({
   }
 
   return (
-    <div className="lab-stage">
-      <div className="lab-zoom-toolbar" aria-label="Controles de ampliación">
-        <span className="lab-zoom-toolbar__label">Zoom</span>
-        <button
-          type="button"
-          className="lab-zoom-button"
-          aria-label="Reducir zoom"
-          disabled={indiceZoom === 0}
-          onClick={() => setIndiceZoom((actual) => Math.max(0, actual - 1))}
-        >
-          −
-        </button>
-        <output className="lab-zoom-value" aria-live="polite">
-          {Math.round(zoom * 100)}%
-        </output>
-        <button
-          type="button"
-          className="lab-zoom-button"
-          aria-label="Aumentar zoom"
-          disabled={indiceZoom === NIVELES_ZOOM.length - 1}
-          onClick={() =>
-            setIndiceZoom((actual) =>
-              Math.min(NIVELES_ZOOM.length - 1, actual + 1),
-            )
-          }
-        >
-          +
-        </button>
-        <span className="lab-zoom-toolbar__separator" aria-hidden="true" />
-        <button
-          type="button"
-          className={`lab-zoom-focus${focoZoom === "montaje" ? " lab-zoom-focus--active" : ""}`}
-          aria-pressed={focoZoom === "montaje"}
-          onClick={() => seleccionarFoco("montaje")}
-        >
-          Montaje
-        </button>
-        <button
-          type="button"
-          className={`lab-zoom-focus${focoZoom === "timer" ? " lab-zoom-focus--active" : ""}`}
-          aria-pressed={focoZoom === "timer"}
-          disabled={!mostrarTimer}
-          onClick={() => seleccionarFoco("timer")}
-        >
-          Timer 4-4
-        </button>
-      </div>
+    <SimulatorLabStage>
+      <SimulatorZoomToolbar<FocoZoom>
+        zoom={zoom}
+        canDecrease={indiceZoom > 0}
+        canIncrease={indiceZoom < NIVELES_ZOOM.length - 1}
+        onDecrease={() =>
+          setIndiceZoom((actual) => Math.max(0, actual - 1))
+        }
+        onIncrease={() =>
+          setIndiceZoom((actual) =>
+            Math.min(NIVELES_ZOOM.length - 1, actual + 1),
+          )
+        }
+        activeFocus={focoZoom}
+        focusOptions={[
+          { id: "montaje", label: "Montaje" },
+          { id: "timer", label: "Timer 4-4", disabled: !mostrarTimer },
+        ]}
+        onFocusChange={seleccionarFoco}
+      />
 
-      <div
+      <SimulatorSceneViewport
         ref={visorRef}
         className={`lab-scene-viewport${zoom > 1 ? " lab-scene-viewport--zoomed" : ""}${desplazandoVisor ? " lab-scene-viewport--panning" : ""}`}
         tabIndex={zoom > 1 ? 0 : -1}
@@ -795,8 +773,8 @@ function LaboratorioEstatico({
             onKeyDown={controlarInferiorConTeclado}
           />
         </div>
-      </div>
-    </div>
+      </SimulatorSceneViewport>
+    </SimulatorLabStage>
   );
 }
 

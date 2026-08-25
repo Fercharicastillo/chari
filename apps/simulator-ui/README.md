@@ -25,6 +25,16 @@ estado, pero comparte estructura, accesibilidad y estilos.
 `SimulatorParameter` admite la propiedad opcional `decimals` para adaptar la
 precisión visible de la salida sin modificar el paso matemático del control.
 
+`SimulatorZoomToolbar` comparte los botones para aumentar o reducir el zoom,
+el porcentaje visible y los focos configurables de cada escena. El escalado,
+el paneo y el centrado continúan bajo responsabilidad de cada simulador.
+
+`SimulatorExperimentPanel`, `SimulatorLabStage`, `SimulatorSceneViewport` y
+`SimulatorExperimentTransport` forman el armazón común de los laboratorios:
+tarjeta exterior, escenario, visor desplazable y barra inferior. El montaje,
+la mesa de trabajo y sus interacciones continúan siendo específicos de cada
+experimento.
+
 `SimulatorResources` genera los enlaces globales asociados a cada simulador.
 Incluye iconos predeterminados para recursos de tipo `clase` y `guia`, aunque
 permite reemplazarlos cuando una aplicación necesite una variante propia.

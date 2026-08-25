@@ -13,5 +13,13 @@ export { default as SimulatorResources } from "./SimulatorResources";
 export { default as SimulatorLoaderReady } from "./SimulatorLoaderReady";
 export { default as SimulatorVisibilityOptions } from "./SimulatorVisibilityOptions";
 export type { SimulatorVisibilityOption } from "./SimulatorVisibilityOptions";
+export { default as SimulatorZoomToolbar } from "./SimulatorZoomToolbar";
+export type { SimulatorZoomFocusOption } from "./SimulatorZoomToolbar";
+export {
+  SimulatorExperimentPanel,
+  SimulatorExperimentTransport,
+  SimulatorLabStage,
+  SimulatorSceneViewport,
+} from "./SimulatorExperimentLayout";
 export type { RecursoSimulador } from "./SimulatorResources";
 export type { RecursosSimulador } from "./types";

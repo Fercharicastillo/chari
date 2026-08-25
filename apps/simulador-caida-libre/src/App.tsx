@@ -3,6 +3,8 @@ import {
   Latex,
   SIMULATOR_CAMERA_SPEED,
   SimulatorCameraMode,
+  SimulatorExperimentPanel,
+  SimulatorExperimentTransport,
   SimulatorIconButton,
   SimulatorParameter,
   SimulatorResources,
@@ -360,7 +362,7 @@ function App({ integrado = false, recursos }: AppProps) {
 
         <section className="workspace" aria-label="Laboratorio de caída libre">
           <div className="column-left">
-            <section className="experiment-panel simulator-card">
+            <SimulatorExperimentPanel>
               <LaboratorioEstatico
                 lecturaSuperior={lecturaSuperior}
                 lecturaInferior={lecturaInferior}
@@ -386,9 +388,9 @@ function App({ integrado = false, recursos }: AppProps) {
                   )
                 }
               />
-              <div className="free-fall-transport transport-controls">
+              <SimulatorExperimentTransport>
                 <SimulatorVisibilityOptions
-                  className="experiment-status"
+                  className="experiment-status simulator-experiment-visibility"
                   options={[
                     {
                       id: "timer",
@@ -462,12 +464,11 @@ function App({ integrado = false, recursos }: AppProps) {
                   shape="round"
                   onClick={reiniciarSimulador}
                 />
-              </div>
-            </section>
+              </SimulatorExperimentTransport>
+            </SimulatorExperimentPanel>
           </div>
           <div>
             <aside className="settings-panel simulator-card">
-              <h2>Parámetros del experimento</h2>
               <SimulatorParameter
                 id="altura-caida"
                 label="Altura de caída"
@@ -501,11 +502,7 @@ function App({ integrado = false, recursos }: AppProps) {
                 disabled={estado !== "preparada"}
                 onChange={setErrorPorcentualMaximo}
               />
-              <p className="measurement-uncertainty-note">
-                Cada ensayo aplica al Timer una desviación aleatoria entre −
-                {errorPorcentualMaximo.toFixed(0)} % y +
-                {errorPorcentualMaximo.toFixed(0)} %.
-              </p>
+
               <SimulatorCameraMode
                 value={modoCamara}
                 onChange={cambiarModoCamara}
@@ -633,8 +630,9 @@ function App({ integrado = false, recursos }: AppProps) {
                 <strong>Simula la incertidumbre experimental.</strong>
                 <span>
                   El porcentaje seleccionado define el error máximo del Timer.
-                  Cada nueva liberación sortea una desviación distinta dentro
-                  del intervalo positivo y negativo configurado.
+                  Cada ensayo aplica al Timer una desviación aleatoria entre −
+                  {errorPorcentualMaximo.toFixed(0)} % y +
+                  {errorPorcentualMaximo.toFixed(0)} %.
                 </span>
               </li>
               <li>

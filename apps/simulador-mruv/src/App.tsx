@@ -12,6 +12,10 @@ import {
   calcularTiempoEnPosicion,
   type CondicionesMovimiento,
 } from "./physics/movimiento";
+import {
+  aplicarErrorRelativo,
+  generarErrorRelativo,
+} from "./physics/incertidumbre";
 import carroMruv from "./physics/carro-mruv.svg";
 import iconoInputIzquierda from "./physics/btn-input-left.svg";
 import iconoInputDerecha from "./physics/btn-input-right.svg";
@@ -20,11 +24,19 @@ import sensorMruv from "./physics/sensor-mruv.svg";
 import Timer44 from "./components/Timer44";
 import {
   Latex,
+  SIMULATOR_CAMERA_SPEED,
+  SimulatorCameraMode,
   SimulatorCheckbox,
+  SimulatorExperimentPanel,
+  SimulatorExperimentTransport,
   SimulatorIconButton,
+  SimulatorLabStage,
   SimulatorParameter,
   SimulatorResources,
+  SimulatorSceneViewport,
+  SimulatorZoomToolbar,
   type RecursosSimulador,
+  type SimulatorCameraModeValue,
 } from "@physikos/simulator-ui";
 import iconoReiniciarpoco from "../../../img/botones/sim_mru/btn-new-start-simulation-mru-01.svg";
 import iconoIniciar from "../../../img/botones/sim_mru/btn-start-simulation-mru.svg";
@@ -40,7 +52,6 @@ import iconoGuiaPdf from "./physics/btn-pdf.svg";
 type EstadoSimulacion = "preparada" | "ejecutando" | "pausada" | "finalizada";
 type FaseSensor = "esperando" | "midiendo" | "registrado";
 type ModoContador = "paso" | "recorrido";
-type VelocidadReproduccion = 0.25 | 0.5 | 1;
 
 interface Configuracion extends CondicionesMovimiento {
   posicionesSensores: number[];
@@ -80,13 +91,15 @@ const SEPARACION_MINIMA_SENSORES = 0.1;
 const POSICION_INICIAL_MAXIMA = LIMITE_PISTA;
 const PASO_POSICION_INICIAL = 0.01;
 const PASO_TIEMPO = 0.01;
+const ERROR_PORCENTUAL_MINIMO = 0;
+const ERROR_PORCENTUAL_MAXIMO = 15;
+const PASO_ERROR_PORCENTUAL = 1;
 const INTERVALO_RASTRO_MINIMO = 0.01;
 const CANTIDAD_MAXIMA_MARCAS_RASTRO = 24;
 const PASO_TIMER_TECLADO = 1.5;
 const POSICION_TIMER_INICIAL = { left: 69.3274, top: 71.8594 };
 const NIVELES_ZOOM = [1, 1.5, 2] as const;
 const ALTO_ESCENA_INICIAL = 480;
-const VELOCIDADES_REPRODUCCION: VelocidadReproduccion[] = [1, 0.5, 0.25];
 const ETIQUETAS_VISUALIZACION: Record<keyof OpcionesVisualizacion, string> = {
   contador: "Timer 4-4",
   sensores: "Sensores",
@@ -131,6 +144,12 @@ function crearRegistrosSensores(): RegistroSensor[] {
 
 function crearSensoresDescartados(): boolean[] {
   return Array.from({ length: 4 }, () => false);
+}
+
+function crearErroresRelativos(porcentajeMaximo: number): number[] {
+  return Array.from({ length: 4 }, () =>
+    generarErrorRelativo(porcentajeMaximo),
+  );
 }
 
 function calcularMedicionSensor(
@@ -205,8 +224,9 @@ function App({ integrado = false, recursos }: AppProps) {
   const [configuracion, setConfiguracion] = useState(configuracionInicial);
   const [estado, setEstado] = useState<EstadoSimulacion>("preparada");
   const [modoContador, setModoContador] = useState<ModoContador>("paso");
-  const [velocidadReproduccion, setVelocidadReproduccion] =
-    useState<VelocidadReproduccion>(1);
+  const [modoCamara, setModoCamara] =
+    useState<SimulatorCameraModeValue>("normal");
+  const [errorPorcentualMaximo, setErrorPorcentualMaximo] = useState(0);
   const [tiempo, setTiempo] = useState(0);
   const [visualizacion, setVisualizacion] =
     useState<OpcionesVisualizacion>(visualizacionInicial);
@@ -251,7 +271,7 @@ function App({ integrado = false, recursos }: AppProps) {
   const inicioTramo = useRef(0);
   const tiempoAcumulado = useRef(0);
   const tiempoActualRef = useRef(0);
-  const velocidadReproduccionRef = useRef<VelocidadReproduccion>(1);
+  const velocidadReproduccionRef = useRef(SIMULATOR_CAMERA_SPEED.normal);
   const ultimaActualizacionReloj = useRef(0);
   const intervaloRastro = useRef(INTERVALO_RASTRO_MINIMO);
   const siguienteMarcaRastro = useRef(INTERVALO_RASTRO_MINIMO);
@@ -259,6 +279,9 @@ function App({ integrado = false, recursos }: AppProps) {
     crearRegistrosSensores(),
   );
   const sensoresDescartadosRef = useRef<boolean[]>(crearSensoresDescartados());
+  const erroresRelativosSensoresRef = useRef<number[]>(
+    crearErroresRelativos(0),
+  );
   const origenTiempoContadorRef = useRef(0);
   const configuracionEnsayo = useRef<Configuracion>(configuracionInicial);
   const desfaseArrastreCarrito = useRef(0);
@@ -339,9 +362,15 @@ function App({ integrado = false, recursos }: AppProps) {
     ) {
       return 0;
     }
-    if (registro.fase === "registrado") return registro.lectura ?? 0;
+    const lecturaIdeal =
+      registro.fase === "registrado"
+        ? (registro.lectura ?? 0)
+        : limitar(tiempo - medicion.inicio, 0, medicion.lectura);
 
-    return limitar(tiempo - medicion.inicio, 0, medicion.lectura);
+    return aplicarErrorRelativo(
+      lecturaIdeal,
+      erroresRelativosSensoresRef.current[indice] ?? 0,
+    );
   }
 
   function obtenerFaseVisualSensor(
@@ -1015,20 +1044,23 @@ function App({ integrado = false, recursos }: AppProps) {
     const registrosIniciales = crearRegistrosSensores();
     sensoresDescartadosRef.current = crearSensoresDescartados();
     origenTiempoContadorRef.current = 0;
+    erroresRelativosSensoresRef.current = crearErroresRelativos(
+      errorPorcentualMaximo,
+    );
     registrosSensoresRef.current = registrosIniciales;
     setRegistrosSensores(registrosIniciales);
     setTiempo(0);
     setModoContador(modo);
   }
 
-  function cambiarVelocidadReproduccion(valor: VelocidadReproduccion) {
+  function cambiarModoCamara(valor: SimulatorCameraModeValue) {
     if (estado === "ejecutando") {
       tiempoAcumulado.current = tiempoActualRef.current;
       inicioTramo.current = 0;
     }
 
-    velocidadReproduccionRef.current = valor;
-    setVelocidadReproduccion(valor);
+    velocidadReproduccionRef.current = SIMULATOR_CAMERA_SPEED[valor];
+    setModoCamara(valor);
   }
 
   function alternarVisualizacion(opcion: keyof OpcionesVisualizacion) {
@@ -1055,6 +1087,9 @@ function App({ integrado = false, recursos }: AppProps) {
     );
     siguienteMarcaRastro.current = intervaloRastro.current;
     setMarcasRastro([condiciones.posicionInicial]);
+    erroresRelativosSensoresRef.current = crearErroresRelativos(
+      errorPorcentualMaximo,
+    );
 
     const registrosIniciales = crearRegistrosSensores();
     sensoresDescartadosRef.current = crearSensoresDescartados();
@@ -1078,6 +1113,9 @@ function App({ integrado = false, recursos }: AppProps) {
     configuracionEnsayo.current = condiciones;
     setTiempo(0);
     setMarcasRastro([]);
+    erroresRelativosSensoresRef.current = crearErroresRelativos(
+      errorPorcentualMaximo,
+    );
 
     const registrosIniciales = crearRegistrosSensores();
     sensoresDescartadosRef.current = crearSensoresDescartados();
@@ -1161,6 +1199,9 @@ function App({ integrado = false, recursos }: AppProps) {
     );
     origenTiempoContadorRef.current =
       modoContador === "recorrido" ? tiempoReinicio : 0;
+    erroresRelativosSensoresRef.current = crearErroresRelativos(
+      errorPorcentualMaximo,
+    );
 
     const registrosIniciales = crearRegistrosSensores();
     registrosSensoresRef.current = registrosIniciales;
@@ -1195,8 +1236,10 @@ function App({ integrado = false, recursos }: AppProps) {
     restablecerEnsayo(configuracionRestaurada);
     setConfiguracion(configuracionRestaurada);
     setModoContador("paso");
-    velocidadReproduccionRef.current = 1;
-    setVelocidadReproduccion(1);
+    setErrorPorcentualMaximo(0);
+    erroresRelativosSensoresRef.current = crearErroresRelativos(0);
+    velocidadReproduccionRef.current = SIMULATOR_CAMERA_SPEED.normal;
+    setModoCamara("normal");
     setVisualizacion({ ...visualizacionInicial });
     punteroCarritoActivo.current = null;
     punteroSensorActivo.current = null;
@@ -1280,64 +1323,33 @@ function App({ integrado = false, recursos }: AppProps) {
 
         <section className="workspace" aria-label="Simulador MRUV">
           <div className="column-left">
-            <section className="mruv-experiment-panel simulator-card">
-              <div className="mruv-stage">
-                <div
-                  className="mruv-zoom-toolbar"
-                  aria-label="Controles de ampliación"
-                >
-                  <span className="mruv-zoom-toolbar__label">Zoom</span>
-                  <button
-                    type="button"
-                    className="mruv-zoom-button"
-                    aria-label="Reducir zoom"
-                    disabled={indiceZoom === 0}
-                    onClick={() =>
-                      setIndiceZoom((actual) => Math.max(0, actual - 1))
-                    }
-                  >
-                    −
-                  </button>
-                  <output className="mruv-zoom-value" aria-live="polite">
-                    {Math.round(zoom * 100)}%
-                  </output>
-                  <button
-                    type="button"
-                    className="mruv-zoom-button"
-                    aria-label="Aumentar zoom"
-                    disabled={indiceZoom === NIVELES_ZOOM.length - 1}
-                    onClick={() =>
-                      setIndiceZoom((actual) =>
-                        Math.min(NIVELES_ZOOM.length - 1, actual + 1),
-                      )
-                    }
-                  >
-                    +
-                  </button>
-                  <span
-                    className="mruv-zoom-toolbar__separator"
-                    aria-hidden="true"
-                  />
-                  <button
-                    type="button"
-                    className={`mruv-zoom-focus${focoZoom === "carrito" ? " mruv-zoom-focus--active" : ""}`}
-                    aria-pressed={focoZoom === "carrito"}
-                    onClick={() => seleccionarFocoZoom("carrito")}
-                  >
-                    Carrito
-                  </button>
-                  <button
-                    type="button"
-                    className={`mruv-zoom-focus${focoZoom === "timer" ? " mruv-zoom-focus--active" : ""}`}
-                    aria-pressed={focoZoom === "timer"}
-                    disabled={!visualizacion.contador}
-                    onClick={() => seleccionarFocoZoom("timer")}
-                  >
-                    Timer 4-4
-                  </button>
-                </div>
+            <SimulatorExperimentPanel>
+              <SimulatorLabStage>
+                <SimulatorZoomToolbar<FocoZoom>
+                  zoom={zoom}
+                  canDecrease={indiceZoom > 0}
+                  canIncrease={indiceZoom < NIVELES_ZOOM.length - 1}
+                  onDecrease={() =>
+                    setIndiceZoom((actual) => Math.max(0, actual - 1))
+                  }
+                  onIncrease={() =>
+                    setIndiceZoom((actual) =>
+                      Math.min(NIVELES_ZOOM.length - 1, actual + 1),
+                    )
+                  }
+                  activeFocus={focoZoom}
+                  focusOptions={[
+                    { id: "carrito", label: "Carrito" },
+                    {
+                      id: "timer",
+                      label: "Timer 4-4",
+                      disabled: !visualizacion.contador,
+                    },
+                  ]}
+                  onFocusChange={seleccionarFocoZoom}
+                />
 
-                <div
+                <SimulatorSceneViewport
                   ref={visorPistaRef}
                   className={`mruv-scene-viewport${zoom > 1 ? " mruv-scene-viewport--zoomed" : ""}${desplazandoVisor ? " mruv-scene-viewport--panning" : ""}`}
                   tabIndex={zoom > 1 ? 0 : -1}
@@ -1557,7 +1569,7 @@ function App({ integrado = false, recursos }: AppProps) {
                           style={{ width: `${ANCHO_CARRITO_PORCENTAJE}%` }}
                           role="slider"
                           tabIndex={configuracionBloqueada ? -1 : 0}
-                          aria-label="Posición inicial del frente del carrito"
+                          aria-label="Posición inicial del carrito"
                           aria-valuemin={0}
                           aria-valuemax={maximaPosicionInicial}
                           aria-valuenow={configuracion.posicionInicial}
@@ -1610,14 +1622,11 @@ function App({ integrado = false, recursos }: AppProps) {
                       </div>
                     </section>
                   </div>
-                </div>
-              </div>
+                </SimulatorSceneViewport>
+              </SimulatorLabStage>
 
-              <div
-                ref={barraControlesRef}
-                className="track-toolbar transport-controls"
-              >
-                <fieldset className="view-options">
+              <SimulatorExperimentTransport ref={barraControlesRef}>
+                <fieldset className="view-options simulator-experiment-visibility">
                   <legend>Mostrar</legend>
                   {(
                     Object.keys(visualizacion) as Array<
@@ -1689,8 +1698,8 @@ function App({ integrado = false, recursos }: AppProps) {
                   shape="round"
                   onClick={reiniciarSimulador}
                 />
-              </div>
-            </section>
+              </SimulatorExperimentTransport>
+            </SimulatorExperimentPanel>
 
             <section className="simulator-page__description">
               <article className="simulator-page-info-card">
@@ -1749,24 +1758,10 @@ function App({ integrado = false, recursos }: AppProps) {
                 </span>
               </label>
             </fieldset>
-            <fieldset className="playback-speed">
-              <legend>Velocidad de reproducción</legend>
-              <div>
-                {VELOCIDADES_REPRODUCCION.map((velocidad) => (
-                  <button
-                    key={velocidad}
-                    type="button"
-                    aria-pressed={velocidadReproduccion === velocidad}
-                    onClick={() => cambiarVelocidadReproduccion(velocidad)}
-                  >
-                    {String(velocidad).replace(".", ",")}×
-                  </button>
-                ))}
-              </div>
-            </fieldset>
+
             <SimulatorParameter
               id="posicion-inicial"
-              label="Posición inicial del frente del carrito"
+              label="Posición inicial del carrito"
               symbol="x₀"
               unit="m"
               min={0}
@@ -1806,6 +1801,20 @@ function App({ integrado = false, recursos }: AppProps) {
               disabled={configuracionBloqueada}
               onChange={(valor) => cambiarParametro("aceleracion", valor)}
             />
+            <SimulatorParameter
+              id="incertidumbre-medicion"
+              label="Incertidumbre máxima"
+              symbol="ε"
+              unit="%"
+              min={ERROR_PORCENTUAL_MINIMO}
+              max={ERROR_PORCENTUAL_MAXIMO}
+              step={PASO_ERROR_PORCENTUAL}
+              value={errorPorcentualMaximo}
+              decimals={0}
+              disabled={configuracionBloqueada}
+              onChange={setErrorPorcentualMaximo}
+            />
+
             <div className="sensor-readings" aria-live="polite">
               {registrosSensores.map((registro, indice) => (
                 <div
@@ -1820,12 +1829,15 @@ function App({ integrado = false, recursos }: AppProps) {
                         ? "Carrito detectado"
                         : "Cronómetro activo")}
                     {registro.fase === "registrado" &&
-                      `${(registro.lectura ?? 0).toFixed(3)} s`}
+                      `${obtenerTiempoContador(indice).toFixed(3)} s`}
                   </strong>
                 </div>
               ))}
             </div>
-
+            <SimulatorCameraMode
+              value={modoCamara}
+              onChange={cambiarModoCamara}
+            />
             {!movimientoPosible && (
               <p className="validation-message">
                 La velocidad inicial y la aceleración no pueden ser cero al
@@ -1960,6 +1972,15 @@ function App({ integrado = false, recursos }: AppProps) {
                   Selecciona un nivel de zoom y usa Carrito o Timer 4-4 para
                   centrar la vista. Con la imagen ampliada, arrastra el fondo
                   para recorrer el simulador.
+                </span>
+              </li>
+              <li>
+                <strong>Simula la incertidumbre experimental.</strong>
+                <span>
+                  El porcentaje seleccionado define el error máximo en los
+                  cuatro canales del Timer. Cada nueva liberación sortea una
+                  desviación distinta entre −{errorPorcentualMaximo.toFixed(0)}{" "}
+                  % y +{errorPorcentualMaximo.toFixed(0)} %.
                 </span>
               </li>
               <li>
