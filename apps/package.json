@@ -5,12 +5,15 @@
   "workspaces": [
     "simulator-ui",
     "simulador-mruv",
-    "simulador-caida-libre"
+    "simulador-caida-libre",
+    "simulador-movimiento-parabolico"
   ],
   "scripts": {
     "dev:mruv": "npm run dev -w @physikos/simulador-mruv",
     "dev:caida-libre": "npm run dev -w @physikos/simulador-caida-libre",
+    "dev:movimiento-parabolico": "npm run dev -w @physikos/simulador-movimiento-parabolico",
     "build:embed:mruv": "npm run build:embed -w @physikos/simulador-mruv",
-    "build:embed:caida-libre": "npm run build:embed -w @physikos/simulador-caida-libre"
+    "build:embed:caida-libre": "npm run build:embed -w @physikos/simulador-caida-libre",
+    "build:embed:movimiento-parabolico": "npm run build:embed -w @physikos/simulador-movimiento-parabolico"
   }
 }

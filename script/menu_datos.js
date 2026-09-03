@@ -33,6 +33,11 @@ window.PhysikosMenuItems = [
         texto: "Caída Libre",
         href: "contenido/simuladores/sim_caida_libre.html",
       },
+      {
+        id: "sim-movimiento-parabolico",
+        texto: "Movimiento Parabólico",
+        href: "contenido/simuladores/sim_movimiento_parabolico.html",
+      },
     ],
   },
   {

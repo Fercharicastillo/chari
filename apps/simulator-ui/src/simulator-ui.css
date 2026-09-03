@@ -164,6 +164,7 @@ button:disabled {
 .header-action-button {
   min-height: 48px;
   display: inline-flex;
+  justify-content: center;
   align-items: center;
   gap: 10px;
   padding: 9px 14px;
@@ -203,6 +204,61 @@ button:disabled {
   overflow: auto;
   padding: clamp(14px, 2vw, 30px);
   background: #f4f7fc;
+}
+
+.simulator-fullscreen-notice {
+  position: fixed;
+  z-index: 90;
+  top: 76px;
+  left: 50%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: min(430px, calc(100vw - 24px));
+  padding: 12px 14px;
+  border: 1px solid rgba(123, 157, 204, 0.82);
+  border-radius: 12px;
+  color: #0d2a61;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 8px 24px rgba(13, 42, 97, 0.22);
+  backdrop-filter: blur(8px);
+  transform: translateX(-50%);
+}
+
+.simulator-fullscreen-notice > div {
+  display: grid;
+  gap: 3px;
+}
+
+.simulator-fullscreen-notice strong {
+  font-size: 0.88rem;
+}
+
+.simulator-fullscreen-notice span {
+  font-size: 0.76rem;
+  line-height: 1.35;
+}
+
+.simulator-fullscreen-notice button {
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  margin: -4px -6px 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  color: #355b88;
+  background: transparent;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.simulator-fullscreen-notice button:hover,
+.simulator-fullscreen-notice button:focus-visible {
+  background: #edf4ff;
+  outline: none;
 }
 
 .instructions-dialog {
@@ -632,6 +688,105 @@ button:disabled {
 .parameter-step-button:focus-visible {
   outline: 3px solid #ffbf47;
   outline-offset: 3px;
+}
+
+.simulator-timer44 {
+  position: relative;
+  width: 100%;
+  container-type: inline-size;
+  filter: drop-shadow(0 7px 9px rgba(0, 42, 104, 0.2));
+}
+
+.simulator-timer44__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.simulator-timer44__screens {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.simulator-timer44__screen {
+  position: absolute;
+  display: grid;
+  box-sizing: border-box;
+  place-items: center;
+}
+
+.simulator-timer44__screen span {
+  color: #ff193d;
+  font-family: "Courier New", monospace;
+  font-size: 4.35cqw;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 4px rgba(255, 25, 61, 0.9);
+}
+
+.simulator-timer44__screen--esperando span,
+.simulator-timer44__screen--pausado span {
+  opacity: 0.78;
+}
+
+.simulator-timer44__screen--midiendo span {
+  text-shadow:
+    0 0 4px rgba(255, 25, 61, 1),
+    0 0 8px rgba(255, 25, 61, 0.75);
+}
+
+.simulator-timer44__reset {
+  position: absolute;
+  z-index: 3;
+  top: 67.77%;
+  left: 12.91%;
+  width: max(8.2%, 22px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.01);
+  box-shadow: none;
+  cursor: pointer;
+  transition:
+    border-color 120ms ease,
+    background-color 120ms ease,
+    box-shadow 120ms ease,
+    transform 100ms ease;
+}
+
+.simulator-timer44__reset:hover {
+  border-color: rgba(7, 93, 222, 0.72);
+  background: rgba(110, 176, 255, 0.14);
+  box-shadow: 0 0 0 3px rgba(7, 93, 222, 0.1);
+}
+
+.simulator-timer44__reset:active {
+  transform: translate(-50%, -50%) scale(0.9);
+  background: rgba(7, 93, 222, 0.22);
+}
+
+.simulator-timer44__reset:focus-visible {
+  outline: 3px solid #ffbf47;
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .settings-panel {

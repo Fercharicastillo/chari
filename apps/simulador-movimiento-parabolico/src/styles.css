@@ -1,0 +1,968 @@
+:root {
+  --projectile-accent: #075dde;
+  --projectile-scene-floor: 22.4%;
+}
+
+.settings-panel__heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.parameters-panel-toggle {
+  display: none;
+}
+
+.settings-panel__content {
+  min-height: 0;
+}
+
+.fullscreen-brand {
+  display: none;
+}
+
+/* Distribución inmersiva, activada únicamente mientras el simulador es fullscreen. */
+.projectile-simulator.is-fullscreen {
+  --fullscreen-overlay-width: clamp(300px, 24vw, 380px);
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #eaf0f8;
+}
+
+.projectile-simulator.is-fullscreen > .page-header {
+  position: fixed;
+  z-index: 60;
+  top: 16px;
+  right: 16px;
+  margin: 0;
+}
+
+.projectile-simulator.is-fullscreen > .page-header > .page-icon,
+.projectile-simulator.is-fullscreen
+  > .page-header
+  > div:not(.page-header-actions) {
+  display: none;
+}
+
+.projectile-simulator.is-fullscreen .page-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.projectile-simulator.is-fullscreen .page-header-actions .header-action-button {
+  width: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  padding: 3px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 14px rgba(13, 42, 97, 0.2);
+  backdrop-filter: blur(8px);
+}
+
+.projectile-simulator.is-fullscreen
+  .page-header-actions
+  .header-action-button:active {
+  transform: scale(0.97) translateY(1px);
+}
+
+.projectile-simulator.is-fullscreen
+  .page-header-actions
+  .parameters-panel-toggle {
+  display: grid;
+  place-items: center;
+}
+
+.projectile-simulator.is-fullscreen .parameters-panel-toggle img {
+  width: 1.1em;
+  height: 1.1em;
+}
+
+.projectile-simulator.is-fullscreen
+  .page-header-actions
+  .header-action-button
+  span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.projectile-simulator.is-fullscreen > .workspace {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.projectile-simulator.is-fullscreen .column-left {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+
+.projectile-simulator.is-fullscreen .simulator-page__description,
+.projectile-simulator.is-fullscreen > .learning-note {
+  display: none;
+}
+
+.projectile-simulator.is-fullscreen .simulator-experiment-panel {
+  position: relative;
+  flex: 1 1 auto;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.projectile-simulator.is-fullscreen .simulator-lab-stage {
+  position: relative;
+  display: block;
+  height: 100%;
+  min-height: 0;
+}
+
+.projectile-simulator.is-fullscreen .fullscreen-brand {
+  position: absolute;
+  z-index: 37;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  width: 168px;
+  height: 52px;
+  padding: 7px 10px;
+  border: 1px solid rgba(167, 190, 221, 0.78);
+  border-radius: 10px;
+  background: rgba(248, 251, 255, 0.9);
+  box-shadow: 0 5px 16px rgba(13, 42, 97, 0.16);
+  backdrop-filter: blur(8px);
+  pointer-events: none;
+}
+
+.projectile-simulator.is-fullscreen .fullscreen-brand img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.projectile-simulator.is-fullscreen .simulator-zoom-toolbar {
+  position: absolute;
+  z-index: 35;
+  top: 16px;
+  left: 50%;
+  justify-content: flex-start;
+  max-width: calc(100% - 24px);
+  padding: 7px;
+  border: 1px solid rgba(167, 190, 221, 0.78);
+  border-radius: 10px;
+  background: rgba(248, 251, 255, 0.88);
+  box-shadow: 0 5px 16px rgba(13, 42, 97, 0.16);
+  backdrop-filter: blur(8px);
+  transform: translateX(-50%);
+}
+
+.projectile-simulator.is-fullscreen .simulator-scene-viewport {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  border: 0;
+  border-radius: 0;
+  background: #f9fcff;
+}
+
+.projectile-simulator.is-fullscreen .simulator-scene-viewport::after {
+  position: absolute;
+  z-index: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: max(0px, calc((100% - 41.6667vw) / 2 + 2px));
+  background: linear-gradient(180deg, #e8eef5, #d8dadd);
+  content: "";
+  pointer-events: none;
+}
+
+.projectile-simulator.is-fullscreen .projectile-scene {
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  max-width: none;
+  flex: 0 0 auto;
+  aspect-ratio: 12 / 5;
+}
+
+.projectile-simulator.is-fullscreen .simulator-experiment-transport {
+  position: absolute;
+  z-index: 36;
+  inset: 0;
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  pointer-events: none;
+}
+
+.projectile-simulator.is-fullscreen
+  .simulator-experiment-transport
+  > .simulator-experiment-visibility {
+  display: flex;
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0;
+  padding: 8px 10px;
+  border: 1px solid rgba(167, 190, 221, 0.82);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 6px 18px rgba(13, 42, 97, 0.17);
+  backdrop-filter: blur(8px);
+  pointer-events: auto;
+}
+
+.projectile-simulator.is-fullscreen
+  .simulator-experiment-transport
+  > .transport-controls__main {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  margin: 0;
+  padding: 7px;
+  border: 1px solid rgba(167, 190, 221, 0.82);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 6px 18px rgba(13, 42, 97, 0.17);
+  backdrop-filter: blur(8px);
+  transform: translateX(-50%);
+  pointer-events: auto;
+}
+
+.projectile-simulator.is-fullscreen
+  .simulator-experiment-transport
+  > .simulator-icon-button--round {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  margin: 0;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 6px 18px rgba(13, 42, 97, 0.2);
+  backdrop-filter: blur(8px);
+  pointer-events: auto;
+}
+
+.projectile-simulator.is-fullscreen .simulator-icon-button {
+  width: 44px;
+  height: 42px;
+  padding: 4px;
+}
+
+.projectile-simulator.is-fullscreen .simulator-icon-button img {
+  width: 31px;
+  height: 31px;
+}
+
+.projectile-simulator.is-fullscreen .simulator-icon-button--round {
+  width: 44px;
+  height: 44px;
+}
+
+.projectile-simulator.is-fullscreen .parameters-overlay {
+  position: absolute;
+  z-index: 45;
+  top: 76px;
+  right: 16px;
+  width: var(--fullscreen-overlay-width);
+  max-height: calc(100% - 92px);
+  pointer-events: none;
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease,
+    visibility 180ms ease;
+}
+
+.projectile-simulator.is-fullscreen .settings-panel {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: calc(100vh - 92px);
+  min-height: 0;
+  padding: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(167, 190, 221, 0.82);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 10px 30px rgba(13, 42, 97, 0.22);
+  backdrop-filter: blur(8px);
+  pointer-events: auto;
+}
+
+.projectile-simulator.is-fullscreen .settings-panel > h2 {
+  margin: 0 0 14px;
+  font-size: 1rem;
+}
+
+.projectile-simulator.is-fullscreen .settings-panel__content {
+  margin-top: 0;
+  padding-right: 3px;
+  padding-left: 3px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+.projectile-simulator.is-fullscreen .parameters-overlay--collapsed {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+.projectile-simulator.is-fullscreen .settings-panel .simulator-parameter {
+  margin-bottom: 15px;
+}
+
+.projectile-simulator.is-fullscreen
+  .settings-panel
+  .simulator-parameter__header {
+  margin-bottom: 4px;
+}
+
+.projectile-simulator.is-fullscreen .settings-panel .simulator-camera-mode {
+  position: static;
+  display: grid;
+  width: auto;
+  margin-top: 12px;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: none;
+}
+
+.projectile-simulator.is-fullscreen
+  .settings-panel
+  .simulator-camera-mode__option {
+  gap: 6px;
+  font-size: 0.78rem;
+}
+
+.projectile-simulator.is-fullscreen
+  .settings-panel
+  .simulator-camera-mode__mark {
+  width: 16px;
+  height: 16px;
+}
+
+@media (max-width: 1150px), (max-height: 680px) {
+  .projectile-simulator.is-fullscreen {
+    --fullscreen-overlay-width: clamp(260px, 28vw, 320px);
+  }
+
+  .projectile-simulator.is-fullscreen .fullscreen-brand {
+    width: 112px;
+  }
+
+  .projectile-simulator.is-fullscreen .settings-panel {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 850px) {
+  .projectile-simulator.is-fullscreen {
+    --fullscreen-overlay-width: min(310px, calc(100vw - 16px));
+  }
+
+  .projectile-simulator.is-fullscreen > .page-header {
+    top: 8px;
+    right: 8px;
+  }
+
+  .projectile-simulator.is-fullscreen .page-header-actions {
+    gap: 6px;
+  }
+
+  .projectile-simulator.is-fullscreen
+    .page-header-actions
+    .header-action-button {
+    width: 36px;
+    min-width: 36px;
+    min-height: 36px;
+  }
+
+  .projectile-simulator.is-fullscreen .fullscreen-brand {
+    top: 8px;
+    left: 8px;
+    width: 96px;
+    padding: 7px 9px;
+  }
+
+  .projectile-simulator.is-fullscreen .simulator-zoom-toolbar {
+    top: 54px;
+    right: 8px;
+    left: 8px;
+    max-width: none;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    transform: none;
+    scrollbar-width: thin;
+  }
+
+  .projectile-simulator.is-fullscreen .parameters-overlay {
+    top: 108px;
+    right: 8px;
+    max-height: calc(100% - 180px);
+  }
+
+  .projectile-simulator.is-fullscreen .settings-panel {
+    max-height: calc(100vh - 180px);
+    padding: 10px;
+  }
+
+  .projectile-simulator.is-fullscreen
+    .simulator-experiment-transport
+    > .simulator-experiment-visibility {
+    right: 8px;
+    bottom: 62px;
+    left: 8px;
+    box-sizing: border-box;
+    width: calc(100% - 16px);
+    max-width: none;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+  }
+
+  .projectile-simulator.is-fullscreen
+    .simulator-experiment-transport
+    > .transport-controls__main {
+    bottom: 8px;
+  }
+
+  .projectile-simulator.is-fullscreen
+    .simulator-experiment-transport
+    > .simulator-icon-button--round {
+    right: 8px;
+    bottom: 8px;
+  }
+
+  .simulator-fullscreen-notice {
+    top: 108px;
+    width: calc(100vw - 16px);
+    padding: 10px 12px;
+  }
+}
+
+@media (max-width: 520px) {
+  .projectile-simulator.is-fullscreen .fullscreen-brand {
+    width: 82px;
+  }
+
+  .projectile-simulator.is-fullscreen .settings-panel > h2 {
+    margin-bottom: 9px;
+    font-size: 0.9rem;
+  }
+
+  .projectile-simulator.is-fullscreen .settings-panel .simulator-parameter {
+    margin-bottom: 10px;
+  }
+}
+
+.projectile-simulator .simulator-zoom-toolbar {
+  flex-wrap: wrap;
+}
+
+.projectile-scene-viewport--zoomed {
+  max-height: clamp(340px, 48vw, 570px);
+  scrollbar-gutter: stable;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.projectile-scene-viewport--panning {
+  cursor: grabbing;
+}
+
+.projectile-scene-viewport--zoomed:focus-visible {
+  outline: 3px solid #ffbf47;
+  outline-offset: 2px;
+}
+
+.projectile-scene-viewport--panning .projectile-scene {
+  pointer-events: none;
+}
+
+.projectile-scene {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  aspect-ratio: 12 / 5;
+  overflow: hidden;
+  background: #f9fcff;
+  isolation: isolate;
+}
+
+.projectile-scene__background {
+  position: absolute;
+  z-index: 0;
+  inset: 0 0 var(--projectile-scene-floor);
+  display: block;
+  width: 100%;
+  height: calc(100% - var(--projectile-scene-floor));
+  object-fit: fill;
+  transform: scaleX(1.15);
+  transform-origin: center center;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.projectile-scene__worktable {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: var(--projectile-scene-floor);
+  border-top: 2px solid #c1c9d4;
+  background: #e8eef5;
+  box-shadow:
+    inset 0 7px 12px rgba(30, 52, 82, 0.06),
+    0 -2px 5px rgba(44, 61, 83, 0.05);
+}
+
+.projectile-scene__trail {
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+  pointer-events: none;
+}
+
+.projectile-scene__trail i {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(7, 93, 222, 0.34);
+  border-radius: 50%;
+  background: rgba(190, 220, 255, 0.3);
+  box-shadow: 0 0 0 2px rgba(7, 93, 222, 0.045);
+}
+
+.projectile-scene__instrument {
+  position: absolute;
+  display: block;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.projectile-scene__ballistic-support {
+  filter: drop-shadow(0 7px 7px rgba(18, 43, 79, 0.2));
+}
+
+.projectile-scene__protractor {
+  filter: drop-shadow(0 3px 4px rgba(18, 43, 79, 0.16));
+  transition: top 180ms ease;
+}
+
+.projectile-scene__ballistic-carriage {
+  display: contents;
+}
+
+.projectile-scene__ballistic-device {
+  position: absolute;
+  container-type: inline-size;
+  transform: rotate(var(--device-rotation));
+  transform-origin: var(--device-origin-x) var(--device-origin-y);
+  pointer-events: none;
+  user-select: none;
+  transition:
+    top 180ms ease,
+    transform 180ms ease;
+}
+
+.projectile-scene__ballistic-device--adjusting {
+  transition: none;
+}
+
+.projectile-scene__device-angle-drag {
+  position: absolute;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 2px dashed transparent;
+  border-radius: 7px;
+  background: transparent;
+  box-shadow: none;
+  cursor: grab;
+  touch-action: none;
+}
+
+.projectile-scene__device-angle-drag:hover:not(:disabled),
+.projectile-scene__device-angle-drag:focus-visible,
+.projectile-scene__device-angle-drag--active {
+  border-color: rgba(255, 102, 31, 0.78);
+  background: rgba(255, 138, 70, 0.09);
+  outline: none;
+}
+
+.projectile-scene__device-angle-drag--active {
+  cursor: grabbing;
+}
+
+.projectile-scene__device-angle-drag:disabled {
+  cursor: not-allowed;
+}
+
+.projectile-scene__ballistic-device-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 4px 4px rgba(17, 35, 58, 0.28));
+  -webkit-user-drag: none;
+}
+
+.projectile-scene__projectile {
+  position: absolute;
+  z-index: 6;
+  top: 37.2%;
+  left: 73.15%;
+  width: 8.5%;
+  height: auto;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 3px 4px rgba(18, 43, 99, 0.3));
+  -webkit-user-drag: none;
+}
+
+.projectile-scene__animated-projectile {
+  position: absolute;
+  z-index: 11;
+  display: block;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  transform: translate(-50%, -50%);
+  transform-origin: center center;
+  filter: drop-shadow(0 3px 4px rgba(18, 43, 99, 0.3));
+  pointer-events: none;
+  user-select: none;
+  will-change: left, top;
+  -webkit-user-drag: none;
+}
+
+.projectile-scene__speed-display {
+  position: absolute;
+  z-index: 6;
+  top: 13%;
+  left: 42.5%;
+  width: 37%;
+  overflow: hidden;
+  color: #ff263d;
+  text-align: center;
+  text-shadow: 0 0 5px rgba(255, 38, 61, 0.72);
+  font-family: "Courier New", monospace;
+  font-size: clamp(0.3rem, 6cqw, 1rem);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  white-space: nowrap;
+  transform: rotate(var(--speed-display-correction));
+  transform-origin: center;
+}
+
+.projectile-scene__impact-table {
+  filter: drop-shadow(0 6px 6px rgba(30, 52, 82, 0.18));
+  transition: top 180ms ease;
+}
+
+.projectile-scene__impact-table-legs {
+  filter: drop-shadow(0 5px 5px rgba(30, 52, 82, 0.16));
+}
+
+.projectile-scene__table-drag {
+  position: absolute;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 2px dashed transparent;
+  border-radius: 5px;
+  background: transparent;
+  box-shadow: none;
+  cursor: grab;
+  touch-action: none;
+}
+
+.projectile-scene__table-drag:hover:not(:disabled),
+.projectile-scene__table-drag:focus-visible,
+.projectile-scene__table-drag--active {
+  border-color: rgba(7, 93, 222, 0.58);
+  background: rgba(110, 176, 255, 0.08);
+  outline: none;
+}
+
+.projectile-scene__table-drag--active {
+  cursor: grabbing;
+}
+
+.projectile-scene__table-drag:disabled {
+  cursor: not-allowed;
+}
+
+.projectile-scene__ballistic-drag {
+  position: absolute;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 2px dashed transparent;
+  border-radius: 8px;
+  background: transparent;
+  box-shadow: none;
+  cursor: grab;
+  touch-action: none;
+}
+
+.projectile-scene__ballistic-drag:hover:not(:disabled),
+.projectile-scene__ballistic-drag:focus-visible,
+.projectile-scene__ballistic-drag--active {
+  border-color: rgba(7, 93, 222, 0.58);
+  background: rgba(110, 176, 255, 0.06);
+  outline: none;
+}
+
+.projectile-scene__ballistic-drag--active {
+  cursor: grabbing;
+}
+
+.projectile-scene__ballistic-drag:disabled {
+  cursor: not-allowed;
+}
+
+.projectile-scene__vertical-rule {
+  filter: drop-shadow(0 3px 3px rgba(24, 49, 80, 0.18));
+}
+
+.projectile-scene__vertical-rule-drag {
+  position: absolute;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 2px dashed transparent;
+  border-radius: 5px;
+  background: transparent;
+  box-shadow: none;
+  cursor: grab;
+  touch-action: none;
+}
+
+.projectile-scene__vertical-rule-drag:hover:not(:disabled),
+.projectile-scene__vertical-rule-drag:focus-visible,
+.projectile-scene__vertical-rule-drag--active {
+  border-color: rgba(7, 93, 222, 0.58);
+  background: rgba(110, 176, 255, 0.08);
+  outline: none;
+}
+
+.projectile-scene__vertical-rule-drag--active {
+  cursor: grabbing;
+}
+
+.projectile-scene__vertical-rule-drag:disabled {
+  cursor: not-allowed;
+}
+
+.projectile-scene__rule-pointer-drag {
+  position: absolute;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 2px dashed transparent;
+  border-radius: 5px;
+  background: transparent;
+  box-shadow: none;
+  cursor: ns-resize;
+  touch-action: none;
+}
+
+.projectile-scene__rule-pointer-drag:hover:not(:disabled),
+.projectile-scene__rule-pointer-drag:focus-visible,
+.projectile-scene__rule-pointer-drag--active {
+  border-color: rgba(255, 102, 31, 0.7);
+  background: rgba(255, 138, 70, 0.1);
+  outline: none;
+}
+
+.projectile-scene__rule-pointer-drag:disabled {
+  cursor: not-allowed;
+}
+
+.projectile-scene__horizontal-rule {
+  filter: drop-shadow(0 2px 2px rgba(24, 49, 80, 0.16));
+}
+
+.projectile-scene__horizontal-rule-drag {
+  position: absolute;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 2px dashed transparent;
+  border-radius: 4px;
+  background: transparent;
+  box-shadow: none;
+  cursor: grab;
+  touch-action: none;
+}
+
+.projectile-scene__horizontal-rule-drag:hover:not(:disabled),
+.projectile-scene__horizontal-rule-drag:focus-visible,
+.projectile-scene__horizontal-rule-drag--active {
+  border-color: rgba(7, 93, 222, 0.58);
+  background: rgba(110, 176, 255, 0.08);
+  outline: none;
+}
+
+.projectile-scene__horizontal-rule-drag--active {
+  cursor: grabbing;
+}
+
+.projectile-scene__horizontal-rule-drag:disabled {
+  cursor: not-allowed;
+}
+
+.projectile-scene__rule-pointer {
+  filter: drop-shadow(0 2px 3px rgba(91, 47, 18, 0.2));
+  transition: top 180ms ease;
+}
+
+.projectile-scene__rule-reading {
+  position: absolute;
+  z-index: 9;
+  left: 48.5%;
+  min-width: 112px;
+  padding: 4px 7px;
+  border: 1px solid #8ab5eb;
+  border-radius: 7px;
+  color: #12356a;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 2px 5px rgba(18, 53, 106, 0.14);
+  font-size: 0.69rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+  white-space: nowrap;
+  transition: top 180ms ease;
+}
+
+.projectile-scene__rule-reading--launch {
+  transform: translateY(calc(-100% - 3px));
+  border-color: #ed8b55;
+}
+
+.projectile-scene__rule-reading--table {
+  transform: translateY(3px);
+}
+
+.projectile-scene__impact-mark {
+  position: absolute;
+  z-index: 9;
+  width: 13px;
+  height: 13px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.projectile-scene__impact-mark--mesa {
+  box-sizing: border-box;
+  border-width: 1px;
+  border-color: #fff;
+  background: #e34f28;
+  box-shadow:
+    0 0 0 0.75px rgba(141, 45, 18, 0.72),
+    0 1px 2px rgba(51, 30, 22, 0.22);
+}
+
+.projectile-scene__impact-mark--piso {
+  border-color: #fff;
+  background: #1d56a3;
+  box-shadow: 0 0 0 2px rgba(14, 54, 112, 0.62);
+}
+
+.projectile-scene__phase {
+  position: absolute;
+  z-index: 8;
+  top: 14px;
+  right: 14px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: #355b88;
+  background: rgba(255, 255, 255, 0.88);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.projectile-scene__timer44-drag {
+  position: absolute;
+  border-radius: 5px;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.projectile-scene__timer44-drag:hover,
+.projectile-scene__timer44-drag:focus-visible,
+.projectile-scene__timer44-drag--active {
+  outline: 2px dashed rgba(7, 93, 222, 0.58);
+  outline-offset: 3px;
+}
+
+.projectile-scene__timer44-drag--active {
+  cursor: grabbing;
+}
+
+.projectile-scene__timer44 {
+  position: relative;
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projectile-scene__ballistic-device {
+    transition: none;
+  }
+
+  .projectile-scene__protractor,
+  .projectile-scene__impact-table,
+  .projectile-scene__horizontal-rule,
+  .projectile-scene__rule-pointer,
+  .projectile-scene__rule-reading {
+    transition: none;
+  }
+}

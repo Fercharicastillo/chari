@@ -7,7 +7,9 @@ biblioteca visual compartida.
 
 - `simulator-ui`: componentes, tipos y estilos comunes.
 - `simulador-mruv`: laboratorio de MRUV en pista neumática.
-- `simulador-caida-libre`: laboratorio de caída libre en construcción.
+- `simulador-caida-libre`: laboratorio de caída libre.
+- `simulador-movimiento-parabolico`: laboratorio de lanzamiento parabólico en
+  construcción.
 
 ## Instalación del workspace
 
@@ -18,6 +20,7 @@ local con ambos simuladores:
 npm.cmd install
 ```
 
-Después se puede iniciar cada aplicación con `npm.cmd run dev:mruv` o
-`npm.cmd run dev:caida-libre`. Los bundles integrados continúan siendo tareas
-separadas para que cada simulador se publique de manera independiente.
+Después se puede iniciar cada aplicación con `npm.cmd run dev:mruv`,
+`npm.cmd run dev:caida-libre` o `npm.cmd run dev:movimiento-parabolico`. Los
+bundles integrados continúan siendo tareas separadas para que cada simulador se
+publique de manera independiente.
