@@ -1,6 +1,21 @@
 (function () {
   const versiones = [
     {
+      numero: "0.2.1",
+      fecha: "2026-09-03",
+      titulo: "Nuevo laboratorio de movimiento parabólico",
+      cambios: [
+        "Incorporación del simulador de movimiento parabólico al catálogo público de Physikós.",
+        "Nuevo montaje experimental interactivo con dispositivo balístico, mesa de impacto, reglas horizontal y vertical, señaladores y Timer 4-4.",
+        "Implementación de lanzamientos configurables por ángulo, velocidad inicial, altura de la mesa y nivel de incertidumbre experimental.",
+        "Registro visual persistente de impactos, rastro del proyectil y medición directa del alcance y el desnivel con instrumentos arrastrables.",
+        "Incorporación de zoom al 100 %, 200 % y 300 %, desplazamiento del lienzo y enfoques por zonas del laboratorio.",
+        "Nueva interfaz de pantalla completa con controles flotantes, panel de parámetros plegable y aviso de compatibilidad para dispositivos móviles.",
+        "Modularización compartida del modo pantalla completa, reproducción de simulaciones, elementos arrastrables y navegación con zoom.",
+        "Integración de la guía de laboratorio, página pública, portada y acceso desde el menú de simuladores.",
+      ],
+    },
+    {
       numero: "0.2.0",
       fecha: "2026-08-24",
       titulo: "Nueva plataforma de simuladores interactivos",
